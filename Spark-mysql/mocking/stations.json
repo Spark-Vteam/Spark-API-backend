@@ -1,0 +1,7201 @@
+[
+    {
+        "AdvertisedLocationName": "Alingsås",
+        "Geometry": {
+            "WGS84": "POINT (12.53218546120595 57.92690516993427)"
+        },
+        "LocationSignature": "A",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Avesta centrum",
+        "Geometry": {
+            "WGS84": "POINT (16.17060693896951 60.1472930337373)"
+        },
+        "LocationSignature": "Acm",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Arbrå",
+        "Geometry": {
+            "WGS84": "POINT (16.37983461815908 61.47103479246544)"
+        },
+        "LocationSignature": "Ab",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Anneberg",
+        "Geometry": {
+            "WGS84": "POINT (12.10077643689166 57.538628927780955)"
+        },
+        "LocationSignature": "Ag",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Abisko turiststation",
+        "Geometry": {
+            "WGS84": "POINT (18.78326035226819 68.35731624140332)"
+        },
+        "LocationSignature": "Akt",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Arvidsjaur",
+        "Geometry": {
+            "WGS84": "POINT (19.168451956162333 65.58870575519173)"
+        },
+        "LocationSignature": "Ajr",
+        "PlatformLine": [
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Abisko Östra",
+        "Geometry": {
+            "WGS84": "POINT (18.830346214296274 68.3486410812835)"
+        },
+        "LocationSignature": "Ak",
+        "PlatformLine": [
+            "1",
+            "5",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Astrid Lindgrens värld",
+        "Geometry": {
+            "WGS84": "POINT (15.840063951305682 57.67270729523255)"
+        },
+        "LocationSignature": "Alv",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Assberg",
+        "Geometry": {
+            "WGS84": "POINT (12.668601530814378 57.49435172146559)"
+        },
+        "LocationSignature": "Asb",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Arlanda S",
+        "Geometry": {
+            "WGS84": "POINT (17.92832852166955 59.646820357358884)"
+        },
+        "LocationSignature": "Arns",
+        "PlatformLine": [
+            "4",
+            "5"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Boden C",
+        "Geometry": {
+            "WGS84": "POINT (21.708053326414298 65.82880233547093)"
+        },
+        "LocationSignature": "Bdn",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Avaviken",
+        "Geometry": {
+            "WGS84": "POINT (18.65092372526849 65.60511983140147)"
+        },
+        "LocationSignature": "Ava"
+    },
+    {
+        "AdvertisedLocationName": "Aspen",
+        "Geometry": {
+            "WGS84": "POINT (12.240512241673448 57.75442205677955)"
+        },
+        "LocationSignature": "Apn",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Arboga",
+        "Geometry": {
+            "WGS84": "POINT (15.840525578708135 59.39718938751229)"
+        },
+        "LocationSignature": "Arb",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Aspedalen",
+        "Geometry": {
+            "WGS84": "POINT (12.258478364737194 57.76247806662745)"
+        },
+        "LocationSignature": "Asd",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Avesta Krylbo",
+        "Geometry": {
+            "WGS84": "POINT (16.216147851939283 60.12953324348506)"
+        },
+        "LocationSignature": "Avky",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Arvika",
+        "Geometry": {
+            "WGS84": "POINT (12.59080337767365 59.65363416376943)"
+        },
+        "LocationSignature": "Ar",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Bredaryd",
+        "Geometry": {
+            "WGS84": "POINT (13.737651016592572 57.17653675673727)"
+        },
+        "LocationSignature": "Bdy",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Bengtsfors",
+        "Geometry": {
+            "WGS84": "POINT (12.234869527899678 59.02890400421548)"
+        },
+        "LocationSignature": "Bef"
+    },
+    {
+        "AdvertisedLocationName": "Aneby",
+        "Geometry": {
+            "WGS84": "POINT (14.81189626871035 57.837434576066045)"
+        },
+        "LocationSignature": "Any",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Bodafors",
+        "Geometry": {
+            "WGS84": "POINT (14.694780136411504 57.506100139535356)"
+        },
+        "LocationSignature": "Bdf",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Arlanda C",
+        "Geometry": {
+            "WGS84": "POINT (17.928489392445165 59.64907212086778)"
+        },
+        "LocationSignature": "Arnc",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Arlanda N",
+        "Geometry": {
+            "WGS84": "POINT (17.929839291864006 59.651521946991636)"
+        },
+        "LocationSignature": "Arnn",
+        "PlatformLine": [
+            "6",
+            "7"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Axmar Bruk",
+        "Geometry": {
+            "WGS84": "POINT (17.133398856743455 61.04975303693471)"
+        },
+        "LocationSignature": "Ax.br"
+    },
+    {
+        "AdvertisedLocationName": "Alvesta",
+        "Geometry": {
+            "WGS84": "POINT (14.556191772126336 56.89802192941306)"
+        },
+        "LocationSignature": "Av",
+        "PlatformLine": [
+            "1a",
+            "1b",
+            "2",
+            "3a",
+            "3b",
+            "4a",
+            "4b"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Barkåkra",
+        "Geometry": {
+            "WGS84": "POINT (12.82463192214527 56.29365574765699)"
+        },
+        "LocationSignature": "Baa",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Auktsjaur",
+        "Geometry": {
+            "WGS84": "POINT (19.39392891939268 65.73868142148088)"
+        },
+        "LocationSignature": "Auk"
+    },
+    {
+        "AdvertisedLocationName": "Brunflo",
+        "Geometry": {
+            "WGS84": "POINT (14.83258392961194 63.07597329456922)"
+        },
+        "LocationSignature": "Bf",
+        "PlatformLine": [
+            "1",
+            "2",
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Billeberga",
+        "Geometry": {
+            "WGS84": "POINT (12.995848263441582 55.883760199238544)"
+        },
+        "LocationSignature": "Bib",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Björketorp",
+        "Geometry": {
+            "WGS84": "POINT (12.523944501737624 57.42792596794638)"
+        },
+        "LocationSignature": "Bjo",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Borlänge C",
+        "Geometry": {
+            "WGS84": "POINT (15.42547212652746 60.48294313492728)"
+        },
+        "LocationSignature": "Blg",
+        "PlatformLine": [
+            "2",
+            "3",
+            "4",
+            "5",
+            "2a",
+            "2b"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Basthagen",
+        "Geometry": {
+            "WGS84": "POINT (15.974171193251644 58.20549848298768)"
+        },
+        "LocationSignature": "Bth",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Blomberg",
+        "Geometry": {
+            "WGS84": "POINT (13.32052028569632 58.54015271258101)"
+        },
+        "LocationSignature": "Bmb",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Bollnäs",
+        "Geometry": {
+            "WGS84": "POINT (16.391720410683643 61.349484744524425)"
+        },
+        "LocationSignature": "Bn",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Brinellskolan",
+        "Geometry": {
+            "WGS84": "POINT (14.700936325969137 57.66942027446127)"
+        },
+        "LocationSignature": "Brin",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Boxholm",
+        "Geometry": {
+            "WGS84": "POINT (15.053630708431465 58.19291890976195)"
+        },
+        "LocationSignature": "Bx",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Bjärnum",
+        "Geometry": {
+            "WGS84": "POINT (13.704058721808993 56.29292688043267)"
+        },
+        "LocationSignature": "Bjm",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Bromölla",
+        "Geometry": {
+            "WGS84": "POINT (14.48161953808914 56.06716458747122)"
+        },
+        "LocationSignature": "Bml",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Blattnicksele",
+        "Geometry": {
+            "WGS84": "POINT (17.589835935876906 65.34475583583315)"
+        },
+        "LocationSignature": "Bnk",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Bastuträsk",
+        "Geometry": {
+            "WGS84": "POINT (20.041511423083406 64.78903850483329)"
+        },
+        "LocationSignature": "Bst",
+        "PlatformLine": [
+            "2",
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Burlöv",
+        "Geometry": {
+            "WGS84": "POINT (13.080395596992465 55.640918231225484)"
+        },
+        "LocationSignature": "Blv",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Buterud",
+        "Geometry": {
+            "WGS84": "POINT (12.400256256684678 58.85311314783119)"
+        },
+        "LocationSignature": "But"
+    },
+    {
+        "AdvertisedLocationName": "Berghem",
+        "Geometry": {
+            "WGS84": "POINT (12.598364454832875 57.467036793064715)"
+        },
+        "LocationSignature": "Bgm",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Björkliden",
+        "Geometry": {
+            "WGS84": "POINT (18.686353433375523 68.4083872371577)"
+        },
+        "LocationSignature": "Bln",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Bro",
+        "Geometry": {
+            "WGS84": "POINT (17.63295834870672 59.51230001368409)"
+        },
+        "LocationSignature": "Bro",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Bankeryd",
+        "Geometry": {
+            "WGS84": "POINT (14.128233659324156 57.860359884866135)"
+        },
+        "LocationSignature": "Bry",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Barkarby",
+        "Geometry": {
+            "WGS84": "POINT (17.86367834371055 59.4054464125127)"
+        },
+        "LocationSignature": "Bkb",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Ballingslöv",
+        "Geometry": {
+            "WGS84": "POINT (13.848391969821044 56.21403392444775)"
+        },
+        "LocationSignature": "Bl",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Blomstermåla",
+        "Geometry": {
+            "WGS84": "POINT (16.332114010417143 56.98071116533791)"
+        },
+        "LocationSignature": "Bma",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Bredsjö",
+        "Geometry": {
+            "WGS84": "POINT (14.726917964388218 59.83203417649348)"
+        },
+        "LocationSignature": "Brö",
+        "PlatformLine": [
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Bräkne-Hoby",
+        "Geometry": {
+            "WGS84": "POINT (15.116058353150356 56.231370135773936)"
+        },
+        "LocationSignature": "Bhb",
+        "PlatformLine": [
+            "2",
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Billingsfors",
+        "Geometry": {
+            "WGS84": "POINT (12.249669582513393 58.98196437736831)"
+        },
+        "LocationSignature": "Bfo"
+    },
+    {
+        "AdvertisedLocationName": "Bjørnfjell",
+        "Geometry": {
+            "WGS84": "POINT (18.071086739827635 68.43214638196257)"
+        },
+        "LocationSignature": "Bjf",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Bjuv",
+        "Geometry": {
+            "WGS84": "POINT (12.911074025042494 56.08256743731184)"
+        },
+        "LocationSignature": "Bjuv",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Buresjön",
+        "Geometry": {
+            "WGS84": "POINT (17.85301760854898 65.55365738014117)"
+        },
+        "LocationSignature": "Bur",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Bohus",
+        "Geometry": {
+            "WGS84": "POINT (12.01956438502742 57.86400556610953)"
+        },
+        "LocationSignature": "Bhs",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Bollebygd",
+        "Geometry": {
+            "WGS84": "POINT (12.570010936961378 57.66753050378058)"
+        },
+        "LocationSignature": "Boy",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Berga",
+        "Geometry": {
+            "WGS84": "POINT (16.033442979973792 57.21653280773408)"
+        },
+        "LocationSignature": "Bg",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Björköby",
+        "Geometry": {
+            "WGS84": "POINT (14.910562163614289 57.5210524686644)"
+        },
+        "LocationSignature": "Bjy",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Borgstena",
+        "Geometry": {
+            "WGS84": "POINT (13.014832928384235 57.882975231064876)"
+        },
+        "LocationSignature": "Boa",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Bor",
+        "Geometry": {
+            "WGS84": "POINT (14.168643533803387 57.11613155753609)"
+        },
+        "LocationSignature": "Bor",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Bratteborg",
+        "Geometry": {
+            "WGS84": "POINT (14.12535619399881 57.57761215306066)"
+        },
+        "LocationSignature": "Btg"
+    },
+    {
+        "AdvertisedLocationName": "Bergåsa",
+        "Geometry": {
+            "WGS84": "POINT (15.600635395304282 56.18181708915532)"
+        },
+        "LocationSignature": "Båa",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Enafors",
+        "Geometry": {
+            "WGS84": "POINT (12.337325380480964 63.28977888246751)"
+        },
+        "LocationSignature": "Ens",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Bräcke",
+        "Geometry": {
+            "WGS84": "POINT (15.417618065421234 62.75000390773784)"
+        },
+        "LocationSignature": "Bä",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Hamburg",
+        "Geometry": {
+            "WGS84": "POINT (15.993679018678007 53.551082635921276)"
+        },
+        "LocationSignature": "De.ham"
+    },
+    {
+        "AdvertisedLocationName": "Österport",
+        "Geometry": {
+            "WGS84": "POINT (12.700128437886463 55.600231403463866)"
+        },
+        "LocationSignature": "Dk.kk"
+    },
+    {
+        "AdvertisedLocationName": "Dingle",
+        "Geometry": {
+            "WGS84": "POINT (11.579114455639367 58.529574092963166)"
+        },
+        "LocationSignature": "Dl",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Derome",
+        "Geometry": {
+            "WGS84": "POINT (12.320145360130217 57.23055867486589)"
+        },
+        "LocationSignature": "Dre",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Dingtuna",
+        "Geometry": {
+            "WGS84": "POINT (16.389779014511614 59.57156442671425)"
+        },
+        "LocationSignature": "Dt",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Ed",
+        "Geometry": {
+            "WGS84": "POINT (11.932872334363978 58.91348999950911)"
+        },
+        "LocationSignature": "Ed",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Falköping C",
+        "Geometry": {
+            "WGS84": "POINT (13.552006182330869 58.175743838976565)"
+        },
+        "LocationSignature": "F",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "1a",
+            "1b"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Karlskrona C",
+        "Geometry": {
+            "WGS84": "POINT (15.585251349670157 56.16705684627342)"
+        },
+        "LocationSignature": "Ck",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "6"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Tårnby",
+        "Geometry": {
+            "WGS84": "POINT (12.599996951760893 55.633330413220996)"
+        },
+        "LocationSignature": "Dk.tåt"
+    },
+    {
+        "AdvertisedLocationName": "Berlin",
+        "Geometry": {
+            "WGS84": "POINT (13.408053276651962 52.5186101055932)"
+        },
+        "LocationSignature": "De.ber"
+    },
+    {
+        "AdvertisedLocationName": "Bålsta",
+        "Geometry": {
+            "WGS84": "POINT (17.531884549633357 59.56943227548269)"
+        },
+        "LocationSignature": "Bål",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Stockholm C",
+        "Geometry": {
+            "WGS84": "POINT (18.057267018575825 59.329970842872264)"
+        },
+        "LocationSignature": "Cst",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "10",
+            "11",
+            "12",
+            "12a",
+            "12b",
+            "13",
+            "13a",
+            "13b",
+            "14",
+            "14a",
+            "14b",
+            "15",
+            "15a",
+            "15b",
+            "16",
+            "16a",
+            "16b",
+            "17",
+            "17a",
+            "17b",
+            "18",
+            "18a",
+            "18b",
+            "19",
+            "19a",
+            "19b"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Ringsted",
+        "Geometry": {
+            "WGS84": "POINT (17.78890644854053 55.444898506915564)"
+        },
+        "LocationSignature": "Dk.rin"
+    },
+    {
+        "AdvertisedLocationName": "Dorotea",
+        "Geometry": {
+            "WGS84": "POINT (16.40589652947879 64.2581772034087)"
+        },
+        "LocationSignature": "Dta"
+    },
+    {
+        "AdvertisedLocationName": "Eskilstuna C",
+        "Geometry": {
+            "WGS84": "POINT (16.505455902288542 59.36938759161493)"
+        },
+        "LocationSignature": "Et",
+        "PlatformLine": [
+            "1",
+            "1v",
+            "1ö",
+            "2",
+            "3",
+            "4",
+            "2v",
+            "2ö",
+            "3v",
+            "3ö"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Charlottenberg",
+        "Geometry": {
+            "WGS84": "POINT (12.29926408738461 59.8831304389512)"
+        },
+        "LocationSignature": "Cg",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Kristianstad C",
+        "Geometry": {
+            "WGS84": "POINT (14.150831275057898 56.03222164074742)"
+        },
+        "LocationSignature": "Cr",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "1a",
+            "1b",
+            "2a",
+            "2b",
+            "3a",
+            "3b"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Höje Taastrup",
+        "Geometry": {
+            "WGS84": "POINT (18.297928018816638 55.646015186923115)"
+        },
+        "LocationSignature": "Dk.höj"
+    },
+    {
+        "AdvertisedLocationName": "Enköping",
+        "Geometry": {
+            "WGS84": "POINT (17.088656482917344 59.64457984560813)"
+        },
+        "LocationSignature": "Ep",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Köpenhamn H",
+        "Geometry": {
+            "WGS84": "POINT (12.568332091787717 55.67611154768882)"
+        },
+        "LocationSignature": "Dk.kh"
+    },
+    {
+        "AdvertisedLocationName": "Dösjebro",
+        "Geometry": {
+            "WGS84": "POINT (13.0328995389856 55.822984922965325)"
+        },
+        "LocationSignature": "Dös",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Erikslund",
+        "Geometry": {
+            "WGS84": "POINT (15.912559695218755 62.5273896737415)"
+        },
+        "LocationSignature": "Ei",
+        "PlatformLine": [
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Edane",
+        "Geometry": {
+            "WGS84": "POINT (12.829341349582482 59.62680902459878)"
+        },
+        "LocationSignature": "En",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Båstad",
+        "Geometry": {
+            "WGS84": "POINT (12.90521282050196 56.43083500323259)"
+        },
+        "LocationSignature": "Bån",
+        "PlatformLine": [
+            "1",
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Degerfors",
+        "Geometry": {
+            "WGS84": "POINT (14.440355348694279 59.22887627953472)"
+        },
+        "LocationSignature": "Dg",
+        "PlatformLine": [
+            "3",
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Helsingör",
+        "Geometry": {
+            "WGS84": "POINT (12.600007547221239 56.03333697104826)"
+        },
+        "LocationSignature": "Dk.hg"
+    },
+    {
+        "AdvertisedLocationName": "Duved",
+        "Geometry": {
+            "WGS84": "POINT (12.91748796979737 63.38976512101647)"
+        },
+        "LocationSignature": "Du",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Eslöv",
+        "Geometry": {
+            "WGS84": "POINT (13.305373334593368 55.83768138425141)"
+        },
+        "LocationSignature": "E",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Copenhagen Airport",
+        "Geometry": {
+            "WGS84": "POINT (12.646945195249197 55.628613606316236)"
+        },
+        "LocationSignature": "Dk.cph"
+    },
+    {
+        "AdvertisedLocationName": "Bäckebron",
+        "Geometry": {
+            "WGS84": "POINT (13.166164371563617 59.66103813249547)"
+        },
+        "LocationSignature": "Bäb",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Ekenässjön",
+        "Geometry": {
+            "WGS84": "POINT (15.018916911499558 57.490505417101765)"
+        },
+        "LocationSignature": "Esn",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Diö",
+        "Geometry": {
+            "WGS84": "POINT (14.214230624461944 56.63308576093105)"
+        },
+        "LocationSignature": "Dis",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Örestad",
+        "Geometry": {
+            "WGS84": "POINT (12.576662812506168 55.628332371047975)"
+        },
+        "LocationSignature": "Dk.øre"
+    },
+    {
+        "AdvertisedLocationName": "Djurås",
+        "Geometry": {
+            "WGS84": "POINT (15.138550072374871 60.56008289353142)"
+        },
+        "LocationSignature": "Då",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Dorotea camping",
+        "Geometry": {
+            "WGS84": "POINT (16.390056697411868 64.25634507080142)"
+        },
+        "LocationSignature": "Dtc",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Eksjö",
+        "Geometry": {
+            "WGS84": "POINT (14.97542837041476 57.66375298049744)"
+        },
+        "LocationSignature": "Ek",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Emmaboda",
+        "Geometry": {
+            "WGS84": "POINT (15.534935513798624 56.629789589946874)"
+        },
+        "LocationSignature": "Em",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Fagerås",
+        "Geometry": {
+            "WGS84": "POINT (13.218175056020563 59.5197774491083)"
+        },
+        "LocationSignature": "Fgå",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Floda",
+        "Geometry": {
+            "WGS84": "POINT (12.361481828587378 57.81000255630886)"
+        },
+        "LocationSignature": "Fd",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Fågelsjö",
+        "Geometry": {
+            "WGS84": "POINT (14.682078466488159 61.80160457201157)"
+        },
+        "LocationSignature": "Feö",
+        "PlatformLine": [
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Floby",
+        "Geometry": {
+            "WGS84": "POINT (13.332227221530667 58.13874361406276)"
+        },
+        "LocationSignature": "Fby",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Farsta strand",
+        "Geometry": {
+            "WGS84": "POINT (18.104137121732695 59.23670496034276)"
+        },
+        "LocationSignature": "Fas",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Fagersta C",
+        "Geometry": {
+            "WGS84": "POINT (15.815465855713567 59.990548754843736)"
+        },
+        "LocationSignature": "Fgc",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Framnäs city",
+        "Geometry": {
+            "WGS84": "POINT (13.147312245825955 58.50771209626946)"
+        },
+        "LocationSignature": "Fc",
+        "PlatformLine": [
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Falerum",
+        "Geometry": {
+            "WGS84": "POINT (16.207194185243125 58.14363842076243)"
+        },
+        "LocationSignature": "Fal",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Fagersta Norra",
+        "Geometry": {
+            "WGS84": "POINT (15.775344885430442 60.00864199153848)"
+        },
+        "LocationSignature": "Fgn",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Falkenberg",
+        "Geometry": {
+            "WGS84": "POINT (12.508724315820682 56.91950664179583)"
+        },
+        "LocationSignature": "Fabp",
+        "PlatformLine": [
+            "1",
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Forshem",
+        "Geometry": {
+            "WGS84": "POINT (13.49182635604396 58.61808317519236)"
+        },
+        "LocationSignature": "Fhm",
+        "PlatformLine": [
+            "4",
+            "5"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Flemingsberg",
+        "Geometry": {
+            "WGS84": "POINT (17.947841798445623 59.21926148988484)"
+        },
+        "LocationSignature": "Flb",
+        "PlatformLine": [
+            "2",
+            "2a",
+            "2b",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Flen",
+        "Geometry": {
+            "WGS84": "POINT (16.58527823224592 59.056946593019575)"
+        },
+        "LocationSignature": "Fle",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Fritsla",
+        "Geometry": {
+            "WGS84": "POINT (12.789767544953259 57.557743030698056)"
+        },
+        "LocationSignature": "Frl",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Gårdsjö",
+        "Geometry": {
+            "WGS84": "POINT (14.333802396998625 58.872130487582865)"
+        },
+        "LocationSignature": "Gdö",
+        "PlatformLine": [
+            "3",
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Grängesberg",
+        "Geometry": {
+            "WGS84": "POINT (15.003432099602906 60.075037517036044)"
+        },
+        "LocationSignature": "Gg",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Forsheda",
+        "Geometry": {
+            "WGS84": "POINT (13.832917516042627 57.163272965327344)"
+        },
+        "LocationSignature": "Fod",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Fristad",
+        "Geometry": {
+            "WGS84": "POINT (13.008626149200433 57.827424983928175)"
+        },
+        "LocationSignature": "Fra",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Frövi",
+        "Geometry": {
+            "WGS84": "POINT (15.363694373556891 59.46761996907322)"
+        },
+        "LocationSignature": "Fv",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Furuvik",
+        "Geometry": {
+            "WGS84": "POINT (17.329682449998796 60.65141639541498)"
+        },
+        "LocationSignature": "Fvk",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Gantofta",
+        "Geometry": {
+            "WGS84": "POINT (12.809001260660173 55.98904561073578)"
+        },
+        "LocationSignature": "Gan",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Glumslöv",
+        "Geometry": {
+            "WGS84": "POINT (12.814172051479417 55.944011512306396)"
+        },
+        "LocationSignature": "Glv",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Filsbäck",
+        "Geometry": {
+            "WGS84": "POINT (13.247201112574858 58.49316981651637)"
+        },
+        "LocationSignature": "Fiä",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Fjällåsen",
+        "Geometry": {
+            "WGS84": "POINT (20.09370320790869 67.51935696998564)"
+        },
+        "LocationSignature": "Fjå",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Grythyttan",
+        "Geometry": {
+            "WGS84": "POINT (14.530485448013597 59.70384228044989)"
+        },
+        "LocationSignature": "Ghy",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Gnesta",
+        "Geometry": {
+            "WGS84": "POINT (17.312841134340005 59.04854927680454)"
+        },
+        "LocationSignature": "Gn",
+        "PlatformLine": [
+            "1",
+            "2",
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Göteborg C",
+        "Geometry": {
+            "WGS84": "POINT (11.973894352578421 57.70890077552247)"
+        },
+        "LocationSignature": "G",
+        "PlatformLine": [
+            "1",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Gunnesbo",
+        "Geometry": {
+            "WGS84": "POINT (13.168516659784945 55.72575550055752)"
+        },
+        "LocationSignature": "Gnb",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Frykåsen",
+        "Geometry": {
+            "WGS84": "POINT (13.184790839941465 59.62645623035352)"
+        },
+        "LocationSignature": "Frå",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Furulund",
+        "Geometry": {
+            "WGS84": "POINT (13.097179205268668 55.77508872467578)"
+        },
+        "LocationSignature": "Fud",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Geogr. Polcirkeln",
+        "Geometry": {
+            "WGS84": "POINT (19.91226157994108 66.55331600928857)"
+        },
+        "LocationSignature": "Gpc",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Gärsnäs",
+        "Geometry": {
+            "WGS84": "POINT (14.181556623063974 55.546497528179785)"
+        },
+        "LocationSignature": "Gss",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Forserum",
+        "Geometry": {
+            "WGS84": "POINT (14.474112547817956 57.69785663130731)"
+        },
+        "LocationSignature": "Fm",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Förslöv",
+        "Geometry": {
+            "WGS84": "POINT (12.801364209710243 56.355434840273475)"
+        },
+        "LocationSignature": "För",
+        "PlatformLine": [
+            "1",
+            "3",
+            "5"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Gagnef",
+        "Geometry": {
+            "WGS84": "POINT (15.081034651318967 60.59875555885544)"
+        },
+        "LocationSignature": "Gnf",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Friluftsgården",
+        "Geometry": {
+            "WGS84": "POINT (12.251632094858746 58.95078133646354)"
+        },
+        "LocationSignature": "Flgd"
+    },
+    {
+        "AdvertisedLocationName": "Falun C",
+        "Geometry": {
+            "WGS84": "POINT (15.641726698028318 60.603247307025484)"
+        },
+        "LocationSignature": "Fln",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "1a",
+            "1b"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Gemla",
+        "Geometry": {
+            "WGS84": "POINT (14.646249049504545 56.87076516795602)"
+        },
+        "LocationSignature": "Gm",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Fåker",
+        "Geometry": {
+            "WGS84": "POINT (14.5743926077072 62.99320059694873)"
+        },
+        "LocationSignature": "Fkr",
+        "PlatformLine": [
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Fors",
+        "Geometry": {
+            "WGS84": "POINT (16.311520708368544 60.206499483429354)"
+        },
+        "LocationSignature": "Fs",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Gamlestaden",
+        "Geometry": {
+            "WGS84": "POINT (12.004010744486573 57.72687400606088)"
+        },
+        "LocationSignature": "Gas",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Gnarp",
+        "Geometry": {
+            "WGS84": "POINT (17.242918328115653 62.055350730775736)"
+        },
+        "LocationSignature": "Gnp",
+        "PlatformLine": [
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Gamleby",
+        "Geometry": {
+            "WGS84": "POINT (16.40963701133929 57.89699350080666)"
+        },
+        "LocationSignature": "Gal",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Gröndalsviken",
+        "Geometry": {
+            "WGS84": "POINT (17.931729038968886 58.89925320225162)"
+        },
+        "LocationSignature": "Gdv",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Gnosjö",
+        "Geometry": {
+            "WGS84": "POINT (13.734999980662558 57.35851714517695)"
+        },
+        "LocationSignature": "Gnö",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Grums",
+        "Geometry": {
+            "WGS84": "POINT (13.113764769946908 59.35300150793408)"
+        },
+        "LocationSignature": "Gms",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Grästorp",
+        "Geometry": {
+            "WGS84": "POINT (12.685777460021194 58.334593433452206)"
+        },
+        "LocationSignature": "Gop",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Filipstad",
+        "Geometry": {
+            "WGS84": "POINT (14.159470306207027 59.70834942046663)"
+        },
+        "LocationSignature": "Fid"
+    },
+    {
+        "AdvertisedLocationName": "Fjälkinge",
+        "Geometry": {
+            "WGS84": "POINT (14.298079224161043 56.04144049573795)"
+        },
+        "LocationSignature": "Fki",
+        "PlatformLine": [
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Fränsta",
+        "Geometry": {
+            "WGS84": "POINT (16.167448853511388 62.49601260341061)"
+        },
+        "LocationSignature": "Ft",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Tåghallen",
+        "Geometry": {
+            "WGS84": "POINT (17.15175003854908 60.67608613345503)"
+        },
+        "LocationSignature": "Gä.f"
+    },
+    {
+        "AdvertisedLocationName": "Gasklockorna",
+        "Geometry": {
+            "WGS84": "POINT (17.15175003854908 60.67608613345503)"
+        },
+        "LocationSignature": "Gä.g"
+    },
+    {
+        "AdvertisedLocationName": "Helenelund",
+        "Geometry": {
+            "WGS84": "POINT (17.956751377736484 59.41756747147486)"
+        },
+        "LocationSignature": "Hel",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Hallstahammar",
+        "Geometry": {
+            "WGS84": "POINT (16.220194436890022 59.61465592812777)"
+        },
+        "LocationSignature": "Hh",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Gällö",
+        "Geometry": {
+            "WGS84": "POINT (15.229499500583367 62.91123382377774)"
+        },
+        "LocationSignature": "Gö",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Helsingborg C",
+        "Geometry": {
+            "WGS84": "POINT (12.695170384465698 56.043537688378294)"
+        },
+        "LocationSignature": "Hb",
+        "PlatformLine": [
+            "1",
+            "1a",
+            "1b",
+            "2",
+            "2a",
+            "2b",
+            "3",
+            "3a",
+            "3b",
+            "4",
+            "4a",
+            "4b"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Hultsfred",
+        "Geometry": {
+            "WGS84": "POINT (15.847113344881812 57.485911214421485)"
+        },
+        "LocationSignature": "Hf",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Gällivare",
+        "Geometry": {
+            "WGS84": "POINT (20.65107450057759 67.13332488572043)"
+        },
+        "LocationSignature": "Gv",
+        "PlatformLine": [
+            "1",
+            "1a",
+            "1b"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Gävle C",
+        "Geometry": {
+            "WGS84": "POINT (17.15175003854908 60.67608613345503)"
+        },
+        "LocationSignature": "Gä",
+        "PlatformLine": [
+            "1",
+            "3",
+            "4",
+            "5",
+            "2n",
+            "2",
+            "2s",
+            "3n",
+            "3s",
+            "4n",
+            "4s"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Hällefors",
+        "Geometry": {
+            "WGS84": "POINT (14.51805003042553 59.77774567193047)"
+        },
+        "LocationSignature": "Hlf",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Hemfosa",
+        "Geometry": {
+            "WGS84": "POINT (17.976580294148828 59.06878868253162)"
+        },
+        "LocationSignature": "Hfa",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Häggvik",
+        "Geometry": {
+            "WGS84": "POINT (17.933708229792504 59.443229737156024)"
+        },
+        "LocationSignature": "Hgv",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Hudiksvall",
+        "Geometry": {
+            "WGS84": "POINT (17.109181613113915 61.724663725804646)"
+        },
+        "LocationSignature": "Hkl",
+        "PlatformLine": [
+            "3",
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Högboda",
+        "Geometry": {
+            "WGS84": "POINT (13.051155006569576 59.55751992948036)"
+        },
+        "LocationSignature": "Hbd",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Hällnäs",
+        "Geometry": {
+            "WGS84": "POINT (19.625887590833766 64.30547419760393)"
+        },
+        "LocationSignature": "Hls",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Järnvägsmuseum",
+        "Geometry": {
+            "WGS84": "POINT (17.15175003854908 60.67608613345503)"
+        },
+        "LocationSignature": "Gä.j"
+    },
+    {
+        "AdvertisedLocationName": "Ramlösa",
+        "Geometry": {
+            "WGS84": "POINT (12.72190928115989 56.02711985824322)"
+        },
+        "LocationSignature": "Hbgb",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Hestra",
+        "Geometry": {
+            "WGS84": "POINT (13.59575379990811 57.443107911165725)"
+        },
+        "LocationSignature": "Het",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Hofors",
+        "Geometry": {
+            "WGS84": "POINT (16.266177340357707 60.56958253355308)"
+        },
+        "LocationSignature": "Hfr",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Hyllie",
+        "Geometry": {
+            "WGS84": "POINT (12.976334321741824 55.563147971625746)"
+        },
+        "LocationSignature": "Hie",
+        "PlatformLine": [
+            "1",
+            "1a",
+            "1b",
+            "2",
+            "2a",
+            "2b",
+            "3",
+            "3a",
+            "3b",
+            "4",
+            "4a",
+            "4b"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Häggenås",
+        "Geometry": {
+            "WGS84": "POINT (14.879218440596285 63.38587369620883)"
+        },
+        "LocationSignature": "Hgs",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Holmsveden",
+        "Geometry": {
+            "WGS84": "POINT (16.719091859105532 61.11970885732857)"
+        },
+        "LocationSignature": "Hdn",
+        "PlatformLine": [
+            "1",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Hackås",
+        "Geometry": {
+            "WGS84": "POINT (14.522167638926167 62.92420050886644)"
+        },
+        "LocationSignature": "Hks",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Hällekis",
+        "Geometry": {
+            "WGS84": "POINT (13.433023594898264 58.630054794438095)"
+        },
+        "LocationSignature": "Hlk",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Halmstad C",
+        "Geometry": {
+            "WGS84": "POINT (12.864818980582479 56.66960291358604)"
+        },
+        "LocationSignature": "Hd",
+        "PlatformLine": [
+            "1",
+            "1a",
+            "1b",
+            "2",
+            "3",
+            "4",
+            "4a",
+            "4b"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Hedemora",
+        "Geometry": {
+            "WGS84": "POINT (15.980235493393721 60.274104352676964)"
+        },
+        "LocationSignature": "Hdm",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Hjärup",
+        "Geometry": {
+            "WGS84": "POINT (13.136180346678703 55.673808781669145)"
+        },
+        "LocationSignature": "Hjp",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Gävle hamn",
+        "Geometry": {
+            "WGS84": "POINT (17.15175003854908 60.67608613345503)"
+        },
+        "LocationSignature": "Gä.h"
+    },
+    {
+        "AdvertisedLocationName": "Huskvarna",
+        "Geometry": {
+            "WGS84": "POINT (14.264765068323074 57.78236557293537)"
+        },
+        "LocationSignature": "Hka",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Horndals Bruk",
+        "Geometry": {
+            "WGS84": "POINT (16.413462325466064 60.29611740417893)"
+        },
+        "LocationSignature": "Hlr",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Horred",
+        "Geometry": {
+            "WGS84": "POINT (12.477653813819135 57.35372200414021)"
+        },
+        "LocationSignature": "Hre",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Hästveda",
+        "Geometry": {
+            "WGS84": "POINT (13.934798054448995 56.28856744170602)"
+        },
+        "LocationSignature": "Hv",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Hova",
+        "Geometry": {
+            "WGS84": "POINT (14.215176192920854 58.854777417969984)"
+        },
+        "LocationSignature": "Hova",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Håverud",
+        "Geometry": {
+            "WGS84": "POINT (12.412909610909477 58.824596941853684)"
+        },
+        "LocationSignature": "Hvr"
+    },
+    {
+        "AdvertisedLocationName": "Habo",
+        "Geometry": {
+            "WGS84": "POINT (14.07695059451763 57.90639312655905)"
+        },
+        "LocationSignature": "Ho",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Härnösand C",
+        "Geometry": {
+            "WGS84": "POINT (17.928386206800027 62.635273037522474)"
+        },
+        "LocationSignature": "Hsd",
+        "PlatformLine": [
+            "1",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Hässleholm",
+        "Geometry": {
+            "WGS84": "POINT (13.76320718304113 56.15790593929379)"
+        },
+        "LocationSignature": "Hm",
+        "PlatformLine": [
+            "1",
+            "1a",
+            "1b",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "6a",
+            "6b",
+            "7",
+            "7a",
+            "7b",
+            "8",
+            "8a",
+            "8b"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Handen",
+        "Geometry": {
+            "WGS84": "POINT (18.134083407444244 59.16628512713939)"
+        },
+        "LocationSignature": "Hnd",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Hallsberg",
+        "Geometry": {
+            "WGS84": "POINT (15.111247817253778 59.06710905898814)"
+        },
+        "LocationSignature": "Hpbg",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "5a",
+            "5b"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Husum",
+        "Geometry": {
+            "WGS84": "POINT (19.156712114729547 63.34436390236012)"
+        },
+        "LocationSignature": "Hum",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Hok",
+        "Geometry": {
+            "WGS84": "POINT (14.274726052387866 57.514131758823424)"
+        },
+        "LocationSignature": "Hok",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Holmsjö",
+        "Geometry": {
+            "WGS84": "POINT (15.542248211571938 56.42223781610486)"
+        },
+        "LocationSignature": "Hmö",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Haparanda",
+        "Geometry": {
+            "WGS84": "POINT (24.131132904589016 65.82811132917702)"
+        },
+        "LocationSignature": "Hp",
+        "PlatformLine": [
+            "8"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Huddinge",
+        "Geometry": {
+            "WGS84": "POINT (17.978043145418106 59.23574545252347)"
+        },
+        "LocationSignature": "Hu",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Hovslätt",
+        "Geometry": {
+            "WGS84": "POINT (14.123948495898295 57.73488563402116)"
+        },
+        "LocationSignature": "Hvs",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Herrljunga",
+        "Geometry": {
+            "WGS84": "POINT (13.02094869281716 58.07905700496917)"
+        },
+        "LocationSignature": "Hr",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Hällevadsholm",
+        "Geometry": {
+            "WGS84": "POINT (11.535223797959048 58.58000967062267)"
+        },
+        "LocationSignature": "Hlv",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Hälleforsnäs",
+        "Geometry": {
+            "WGS84": "POINT (16.50255929862843 59.16199646274857)"
+        },
+        "LocationSignature": "Hnä",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Hovmantorp",
+        "Geometry": {
+            "WGS84": "POINT (15.139584184013192 56.78621973567994)"
+        },
+        "LocationSignature": "Hvp",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Hasslerör",
+        "Geometry": {
+            "WGS84": "POINT (13.93953951212381 58.75019368983026)"
+        },
+        "LocationSignature": "Hsr",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Hoting",
+        "Geometry": {
+            "WGS84": "POINT (16.19910961846013 64.11559302950539)"
+        },
+        "LocationSignature": "Htg",
+        "PlatformLine": [
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Heby",
+        "Geometry": {
+            "WGS84": "POINT (16.853164760744242 59.94043449604126)"
+        },
+        "LocationSignature": "Hy",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Jordbro",
+        "Geometry": {
+            "WGS84": "POINT (18.126627633514342 59.14233539839546)"
+        },
+        "LocationSignature": "Jbo",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Hindås",
+        "Geometry": {
+            "WGS84": "POINT (12.450955810908908 57.70442998342633)"
+        },
+        "LocationSignature": "Hås",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Häljarp",
+        "Geometry": {
+            "WGS84": "POINT (12.912557712645304 55.86082407095729)"
+        },
+        "LocationSignature": "Häp",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Iggesund",
+        "Geometry": {
+            "WGS84": "POINT (17.08136443313033 61.64478751337991)"
+        },
+        "LocationSignature": "Id",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Bolzano",
+        "Geometry": {
+            "WGS84": "POINT (11.256706733550708 46.51639110712813)"
+        },
+        "LocationSignature": "It.bol"
+    },
+    {
+        "AdvertisedLocationName": "Hörnefors",
+        "Geometry": {
+            "WGS84": "POINT (19.91234286770667 63.63300132951182)"
+        },
+        "LocationSignature": "Höf",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Insjön",
+        "Geometry": {
+            "WGS84": "POINT (15.094405490730756 60.67551212386021)"
+        },
+        "LocationSignature": "In",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Venedig",
+        "Geometry": {
+            "WGS84": "POINT (12.323499057612219 45.44496302123378)"
+        },
+        "LocationSignature": "It.ven"
+    },
+    {
+        "AdvertisedLocationName": "Håkantorp",
+        "Geometry": {
+            "WGS84": "POINT (12.907646836085119 58.30666392985773)"
+        },
+        "LocationSignature": "Håp",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Jamtli",
+        "Geometry": {
+            "WGS84": "POINT (14.631637648178222 63.1869490920272)"
+        },
+        "LocationSignature": "Jli"
+    },
+    {
+        "AdvertisedLocationName": "Höör",
+        "Geometry": {
+            "WGS84": "POINT (13.543109047891285 55.93751670416943)"
+        },
+        "LocationSignature": "Hö",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Högsby",
+        "Geometry": {
+            "WGS84": "POINT (16.02746458305682 57.16585029054388)"
+        },
+        "LocationSignature": "Höy",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Jokkmokk",
+        "Geometry": {
+            "WGS84": "POINT (19.84009503767736 66.60709505802845)"
+        },
+        "LocationSignature": "Jk",
+        "PlatformLine": [
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Jakobsberg",
+        "Geometry": {
+            "WGS84": "POINT (17.833119618641522 59.42380587742837)"
+        },
+        "LocationSignature": "Jkb",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Järna",
+        "Geometry": {
+            "WGS84": "POINT (17.568388900751486 59.09381755899731)"
+        },
+        "LocationSignature": "Jn",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Kode",
+        "Geometry": {
+            "WGS84": "POINT (11.850915983954362 57.944463550966404)"
+        },
+        "LocationSignature": "Kde",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Kisa",
+        "Geometry": {
+            "WGS84": "POINT (15.63410216947283 57.984630824753395)"
+        },
+        "LocationSignature": "Kisa",
+        "PlatformLine": [
+            "3",
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Källby",
+        "Geometry": {
+            "WGS84": "POINT (13.301883886978413 58.51056882811847)"
+        },
+        "LocationSignature": "Kll",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Kilafors",
+        "Geometry": {
+            "WGS84": "POINT (16.57039880748239 61.230689785956244)"
+        },
+        "LocationSignature": "Kls",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Knalleland",
+        "Geometry": {
+            "WGS84": "POINT (12.942554118371053 57.7340598314687)"
+        },
+        "LocationSignature": "Knl",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Krigslida",
+        "Geometry": {
+            "WGS84": "POINT (18.0655526617058 59.108906680414336)"
+        },
+        "LocationSignature": "Kda",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Kävlinge",
+        "Geometry": {
+            "WGS84": "POINT (13.111371846927003 55.794495009726425)"
+        },
+        "LocationSignature": "Kg",
+        "PlatformLine": [
+            "2",
+            "3",
+            "4",
+            "1",
+            "5"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Karlshamn",
+        "Geometry": {
+            "WGS84": "POINT (14.866386893161888 56.17713901903182)"
+        },
+        "LocationSignature": "Kh",
+        "PlatformLine": [
+            "6",
+            "7"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Kattarp",
+        "Geometry": {
+            "WGS84": "POINT (12.778340418711485 56.14492227526384)"
+        },
+        "LocationSignature": "Ka",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Järpås",
+        "Geometry": {
+            "WGS84": "POINT (12.969950503573184 58.378983944947926)"
+        },
+        "LocationSignature": "Jps",
+        "PlatformLine": [
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Jonsered",
+        "Geometry": {
+            "WGS84": "POINT (12.173623419786706 57.74984613398525)"
+        },
+        "LocationSignature": "Jv",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Kalmar C",
+        "Geometry": {
+            "WGS84": "POINT (16.36032521757645 56.66131381287639)"
+        },
+        "LocationSignature": "Kac",
+        "PlatformLine": [
+            "1",
+            "1a",
+            "1b",
+            "2",
+            "2a",
+            "2b",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Kungsbacka",
+        "Geometry": {
+            "WGS84": "POINT (12.079871831568406 57.489505442452156)"
+        },
+        "LocationSignature": "Kb",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Kumla",
+        "Geometry": {
+            "WGS84": "POINT (15.140951223316394 59.12754604268638)"
+        },
+        "LocationSignature": "Kla",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Kimstad",
+        "Geometry": {
+            "WGS84": "POINT (15.96884942551882 58.53626912152928)"
+        },
+        "LocationSignature": "Kms",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Kallhäll",
+        "Geometry": {
+            "WGS84": "POINT (17.8072890439651 59.45234417653789)"
+        },
+        "LocationSignature": "Khä",
+        "PlatformLine": [
+            "2",
+            "3",
+            "4",
+            "5"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Kinna",
+        "Geometry": {
+            "WGS84": "POINT (12.697446501345638 57.50564669962769)"
+        },
+        "LocationSignature": "Kin",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Järpen",
+        "Geometry": {
+            "WGS84": "POINT (13.472155593714973 63.34240277581487)"
+        },
+        "LocationSignature": "Jpn",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Jönköping C",
+        "Geometry": {
+            "WGS84": "POINT (14.164573803237401 57.784457724561484)"
+        },
+        "LocationSignature": "Jö",
+        "PlatformLine": [
+            "1",
+            "2",
+            "2a",
+            "2b"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Kiruna",
+        "Geometry": {
+            "WGS84": "POINT (20.1992306127494 67.8682632052675)"
+        },
+        "LocationSignature": "Kmb",
+        "PlatformLine": [
+            "11"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Kolbäck",
+        "Geometry": {
+            "WGS84": "POINT (16.233449467265874 59.56427506937709)"
+        },
+        "LocationSignature": "Kbä",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Katterjåkk",
+        "Geometry": {
+            "WGS84": "POINT (18.1608491256631 68.42015762596341)"
+        },
+        "LocationSignature": "Kjå",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Knivsta",
+        "Geometry": {
+            "WGS84": "POINT (17.78709920918859 59.725408895627695)"
+        },
+        "LocationSignature": "Kn",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Kinnared",
+        "Geometry": {
+            "WGS84": "POINT (13.107056287205646 57.025220921838944)"
+        },
+        "LocationSignature": "Kid",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Katrineholm C",
+        "Geometry": {
+            "WGS84": "POINT (16.20918364756429 58.996511678685145)"
+        },
+        "LocationSignature": "K",
+        "PlatformLine": [
+            "1",
+            "3",
+            "4",
+            "5"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Jämtlands Sikås",
+        "Geometry": {
+            "WGS84": "POINT (15.206458423813126 63.626198194100404)"
+        },
+        "LocationSignature": "Js",
+        "PlatformLine": [
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Kalix Västra",
+        "Geometry": {
+            "WGS84": "POINT (23.143068826107232 65.86487408658917)"
+        },
+        "LocationSignature": "Klxv",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Järvsö",
+        "Geometry": {
+            "WGS84": "POINT (16.172093563786927 61.71569443229966)"
+        },
+        "LocationSignature": "Jr",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Karbenning",
+        "Geometry": {
+            "WGS84": "POINT (16.073212686173147 60.0368385747705)"
+        },
+        "LocationSignature": "Kbn",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Karlberg",
+        "Geometry": {
+            "WGS84": "POINT (18.028410943790742 59.34026923540147)"
+        },
+        "LocationSignature": "Ke",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Kil",
+        "Geometry": {
+            "WGS84": "POINT (13.315881692526037 59.50474299102514)"
+        },
+        "LocationSignature": "Kil",
+        "PlatformLine": [
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Jörn",
+        "Geometry": {
+            "WGS84": "POINT (20.029360452861017 65.05332358161681)"
+        },
+        "LocationSignature": "Jrn",
+        "PlatformLine": [
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Hede",
+        "Geometry": {
+            "WGS84": "POINT (12.08436754492456 57.51411892022103)"
+        },
+        "LocationSignature": "Khe",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Kristinehamn",
+        "Geometry": {
+            "WGS84": "POINT (14.107122447815602 59.31739872869066)"
+        },
+        "LocationSignature": "Khn",
+        "PlatformLine": [
+            "1",
+            "2",
+            "4",
+            "7",
+            "8"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Klippan",
+        "Geometry": {
+            "WGS84": "POINT (13.130034381042627 56.13068834739418)"
+        },
+        "LocationSignature": "Kl",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Ludvika",
+        "Geometry": {
+            "WGS84": "POINT (15.182493903383179 60.14987846259443)"
+        },
+        "LocationSignature": "La",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Laholm",
+        "Geometry": {
+            "WGS84": "POINT (12.999365652360769 56.50268971625489)"
+        },
+        "LocationSignature": "Laov",
+        "PlatformLine": [
+            "1",
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Kungsör",
+        "Geometry": {
+            "WGS84": "POINT (16.103102241021354 59.427798914452396)"
+        },
+        "LocationSignature": "Kör",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Lingbo",
+        "Geometry": {
+            "WGS84": "POINT (16.67279774440863 61.044939674824505)"
+        },
+        "LocationSignature": "Lb",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Lit",
+        "Geometry": {
+            "WGS84": "POINT (14.85672673894211 63.31839791239978)"
+        },
+        "LocationSignature": "Lit",
+        "PlatformLine": [
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Ljungaverk",
+        "Geometry": {
+            "WGS84": "POINT (16.067429944561987 62.49558304542039)"
+        },
+        "LocationSignature": "Ljv",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Köping",
+        "Geometry": {
+            "WGS84": "POINT (16.006600833998384 59.50621623962454)"
+        },
+        "LocationSignature": "Kp",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Luleå",
+        "Geometry": {
+            "WGS84": "POINT (22.165607454087375 65.584085923056)"
+        },
+        "LocationSignature": "Le",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "1n"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Linghem",
+        "Geometry": {
+            "WGS84": "POINT (15.785130833051785 58.43628121931304)"
+        },
+        "LocationSignature": "Lgm",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Ljungskile",
+        "Geometry": {
+            "WGS84": "POINT (11.921011541713993 58.22476363859184)"
+        },
+        "LocationSignature": "Lj",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Kolmården",
+        "Geometry": {
+            "WGS84": "POINT (16.362527356141097 58.674698187520086)"
+        },
+        "LocationSignature": "Kon",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Krokom",
+        "Geometry": {
+            "WGS84": "POINT (14.447974669029959 63.32597269349099)"
+        },
+        "LocationSignature": "Krm",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Kvicksund",
+        "Geometry": {
+            "WGS84": "POINT (16.320647961765943 59.450774679861105)"
+        },
+        "LocationSignature": "Ksus",
+        "PlatformLine": [
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Lomma",
+        "Geometry": {
+            "WGS84": "POINT (13.074390729351423 55.67099445875928)"
+        },
+        "LocationSignature": "Lma",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Kållered",
+        "Geometry": {
+            "WGS84": "POINT (12.046219106252126 57.61547580195989)"
+        },
+        "LocationSignature": "Krd",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Välsviken",
+        "Geometry": {
+            "WGS84": "POINT (13.582080627872887 59.391133638116976)"
+        },
+        "LocationSignature": "Kvä",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Lugnås",
+        "Geometry": {
+            "WGS84": "POINT (13.701910366621059 58.64430358614937)"
+        },
+        "LocationSignature": "Lnå",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Lödöse Södra",
+        "Geometry": {
+            "WGS84": "POINT (12.164954942020112 58.01461620158086)"
+        },
+        "LocationSignature": "Les",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Kramfors",
+        "Geometry": {
+            "WGS84": "POINT (17.778236851831927 62.92901612571947)"
+        },
+        "LocationSignature": "Krf",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Köpingebro",
+        "Geometry": {
+            "WGS84": "POINT (13.885748407455768 55.46936305649391)"
+        },
+        "LocationSignature": "Köp",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Kolsnäs",
+        "Geometry": {
+            "WGS84": "POINT (13.140935206771791 59.82578001912943)"
+        },
+        "LocationSignature": "Kns",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Kaitum",
+        "Geometry": {
+            "WGS84": "POINT (20.103269081398903 67.54257739184348)"
+        },
+        "LocationSignature": "Ktm",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Lene",
+        "Geometry": {
+            "WGS84": "POINT (13.120728427445593 59.54409389930647)"
+        },
+        "LocationSignature": "Len"
+    },
+    {
+        "AdvertisedLocationName": "Lammhult",
+        "Geometry": {
+            "WGS84": "POINT (14.585611240196648 57.17185120494095)"
+        },
+        "LocationSignature": "Lh",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Kåbdalis",
+        "Geometry": {
+            "WGS84": "POINT (19.988721994748417 66.15278823403678)"
+        },
+        "LocationSignature": "Kåb",
+        "PlatformLine": [
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Långbron",
+        "Geometry": {
+            "WGS84": "POINT (12.279924112504045 58.93645459757097)"
+        },
+        "LocationSignature": "Lgb"
+    },
+    {
+        "AdvertisedLocationName": "Ljung",
+        "Geometry": {
+            "WGS84": "POINT (13.053311259954258 57.986451559040695)"
+        },
+        "LocationSignature": "Lju",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Kvarnsjö",
+        "Geometry": {
+            "WGS84": "POINT (14.37248290236932 62.56592387535783)"
+        },
+        "LocationSignature": "Kvö",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Kungsängen",
+        "Geometry": {
+            "WGS84": "POINT (17.752825186759477 59.47812275142195)"
+        },
+        "LocationSignature": "Kän",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Lillhamra",
+        "Geometry": {
+            "WGS84": "POINT (14.795872653513184 61.64161764211106)"
+        },
+        "LocationSignature": "Lhr",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Lidköping",
+        "Geometry": {
+            "WGS84": "POINT (13.165097294639642 58.50439218701964)"
+        },
+        "LocationSignature": "Lkp",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Killeberg",
+        "Geometry": {
+            "WGS84": "POINT (14.098457574008762 56.474837457314464)"
+        },
+        "LocationSignature": "Kr",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Kopparberg",
+        "Geometry": {
+            "WGS84": "POINT (14.986890985813389 59.87263454722176)"
+        },
+        "LocationSignature": "Kpg",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Klevshult",
+        "Geometry": {
+            "WGS84": "POINT (14.09731711542775 57.35156606171029)"
+        },
+        "LocationSignature": "Kvh",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Kvidinge",
+        "Geometry": {
+            "WGS84": "POINT (13.046139823249574 56.137208176824466)"
+        },
+        "LocationSignature": "Kvi",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Lindesberg",
+        "Geometry": {
+            "WGS84": "POINT (15.228644833766962 59.59451622006108)"
+        },
+        "LocationSignature": "Ld",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Lindome",
+        "Geometry": {
+            "WGS84": "POINT (12.078728825970762 57.57603023678457)"
+        },
+        "LocationSignature": "Ldo",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Karlsvik",
+        "Geometry": {
+            "WGS84": "POINT (22.03196550004581 65.59741712420798)"
+        },
+        "LocationSignature": "Le.k"
+    },
+    {
+        "AdvertisedLocationName": "Läggesta",
+        "Geometry": {
+            "WGS84": "POINT (17.169099180406807 59.24754847952218)"
+        },
+        "LocationSignature": "Lg",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Liseberg",
+        "Geometry": {
+            "WGS84": "POINT (11.996703861193009 57.69950383014116)"
+        },
+        "LocationSignature": "Lis",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Landskrona",
+        "Geometry": {
+            "WGS84": "POINT (12.857361724508854 55.87909039272977)"
+        },
+        "LocationSignature": "Lkö",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Limmared",
+        "Geometry": {
+            "WGS84": "POINT (13.353545134666659 57.53398234056574)"
+        },
+        "LocationSignature": "Lme",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Mellerud",
+        "Geometry": {
+            "WGS84": "POINT (12.464787660936478 58.701830658869376)"
+        },
+        "LocationSignature": "Ml",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Marsvinsholm",
+        "Geometry": {
+            "WGS84": "POINT (13.694029878198478 55.464295506045836)"
+        },
+        "LocationSignature": "Mrh"
+    },
+    {
+        "AdvertisedLocationName": "Moheda",
+        "Geometry": {
+            "WGS84": "POINT (14.576590184629076 57.00312065683874)"
+        },
+        "LocationSignature": "Mo",
+        "PlatformLine": [
+            "1",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Mora lasarett",
+        "Geometry": {
+            "WGS84": "POINT (14.58108177023721 61.01605454979477)"
+        },
+        "LocationSignature": "Mrl"
+    },
+    {
+        "AdvertisedLocationName": "Munkflohögen",
+        "Geometry": {
+            "WGS84": "POINT (14.948973113312919 63.56008736688588)"
+        },
+        "LocationSignature": "Mfn"
+    },
+    {
+        "AdvertisedLocationName": "Låktatjåkka",
+        "Geometry": {
+            "WGS84": "POINT (18.324742210763095 68.42368660501461)"
+        },
+        "LocationSignature": "Låk",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Maria",
+        "Geometry": {
+            "WGS84": "POINT (12.71059765487515 56.07556905669264)"
+        },
+        "LocationSignature": "Mia",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Motala C",
+        "Geometry": {
+            "WGS84": "POINT (15.048178636126666 58.537506804953296)"
+        },
+        "LocationSignature": "Mot",
+        "PlatformLine": [
+            "1",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Märsta",
+        "Geometry": {
+            "WGS84": "POINT (17.861556068154965 59.627719092214846)"
+        },
+        "LocationSignature": "Mr",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "7"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Ljusne",
+        "Geometry": {
+            "WGS84": "POINT (17.111846833114104 61.212611848468164)"
+        },
+        "LocationSignature": "Lse",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Ljusdal",
+        "Geometry": {
+            "WGS84": "POINT (16.096509755425156 61.82680948980172)"
+        },
+        "LocationSignature": "Ls",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "2a",
+            "2b"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Meselefors",
+        "Geometry": {
+            "WGS84": "POINT (16.816720395920665 64.44300746313709)"
+        },
+        "LocationSignature": "Mlf",
+        "PlatformLine": [
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Lunnarp",
+        "Geometry": {
+            "WGS84": "POINT (14.042069931219482 55.5410833838634)"
+        },
+        "LocationSignature": "Lup",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Lysekil",
+        "Geometry": {
+            "WGS84": "POINT (11.441354460692812 58.27578865693086)"
+        },
+        "LocationSignature": "Lys"
+    },
+    {
+        "AdvertisedLocationName": "Lovene",
+        "Geometry": {
+            "WGS84": "POINT (13.046556427646616 58.440223450417044)"
+        },
+        "LocationSignature": "Lve",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Mehedeby",
+        "Geometry": {
+            "WGS84": "POINT (17.40069752324232 60.45069394886442)"
+        },
+        "LocationSignature": "Meh",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Moskosel",
+        "Geometry": {
+            "WGS84": "POINT (19.42657862259086 65.88241661989609)"
+        },
+        "LocationSignature": "Mos",
+        "PlatformLine": [
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Lund C",
+        "Geometry": {
+            "WGS84": "POINT (13.186572717507945 55.70724958024215)"
+        },
+        "LocationSignature": "Lu",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Malmö C",
+        "Geometry": {
+            "WGS84": "POINT (13.000229772341523 55.609718195959864)"
+        },
+        "LocationSignature": "M",
+        "PlatformLine": [
+            "1",
+            "1a",
+            "1b",
+            "2",
+            "2a",
+            "2b",
+            "3",
+            "3a",
+            "3b",
+            "4",
+            "4a",
+            "4b",
+            "5",
+            "5a",
+            "5b",
+            "6",
+            "6a",
+            "6b",
+            "7",
+            "7a",
+            "7b",
+            "8",
+            "8a",
+            "8b",
+            "9",
+            "9a",
+            "9b",
+            "10",
+            "10a",
+            "10b"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Murjek",
+        "Geometry": {
+            "WGS84": "POINT (20.880749813051352 66.48412917099675)"
+        },
+        "LocationSignature": "Mk",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Mollaryd",
+        "Geometry": {
+            "WGS84": "POINT (13.022665314312638 57.90621466640094)"
+        },
+        "LocationSignature": "Moy",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Lessebo",
+        "Geometry": {
+            "WGS84": "POINT (15.25852918518695 56.750561692930205)"
+        },
+        "LocationSignature": "Lo",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Landeryd",
+        "Geometry": {
+            "WGS84": "POINT (13.265593771416139 57.076728966504604)"
+        },
+        "LocationSignature": "Lrd",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Lycksele",
+        "Geometry": {
+            "WGS84": "POINT (18.668774252566916 64.59426717315466)"
+        },
+        "LocationSignature": "Ly",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Lövberga",
+        "Geometry": {
+            "WGS84": "POINT (15.852410668022923 63.96127509535417)"
+        },
+        "LocationSignature": "Löb"
+    },
+    {
+        "AdvertisedLocationName": "Marieholm",
+        "Geometry": {
+            "WGS84": "POINT (13.155793036541002 55.86480001866541)"
+        },
+        "LocationSignature": "Mar",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Mörsil",
+        "Geometry": {
+            "WGS84": "POINT (13.657733740685659 63.308534568220175)"
+        },
+        "LocationSignature": "Mi",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Morastrand",
+        "Geometry": {
+            "WGS84": "POINT (14.542635673903574 61.004877758995875)"
+        },
+        "LocationSignature": "Mras",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Marma",
+        "Geometry": {
+            "WGS84": "POINT (17.43086205757493 60.49150378138229)"
+        },
+        "LocationSignature": "Maa",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Munkedal",
+        "Geometry": {
+            "WGS84": "POINT (11.674984460366113 58.46688501241287)"
+        },
+        "LocationSignature": "Mkl",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Persborg",
+        "Geometry": {
+            "WGS84": "POINT (13.029363554491523 55.58063014112111)"
+        },
+        "LocationSignature": "Mpb",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Linköping C",
+        "Geometry": {
+            "WGS84": "POINT (15.624342206193218 58.41703698401011)"
+        },
+        "LocationSignature": "Lp",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "3b",
+            "3a"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Lerum",
+        "Geometry": {
+            "WGS84": "POINT (12.272803985862398 57.769401630605834)"
+        },
+        "LocationSignature": "Lr",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Lövliden",
+        "Geometry": {
+            "WGS84": "POINT (16.612365054050933 64.65448629938518)"
+        },
+        "LocationSignature": "Lvd"
+    },
+    {
+        "AdvertisedLocationName": "Leksand",
+        "Geometry": {
+            "WGS84": "POINT (15.003007122656749 60.73403002584899)"
+        },
+        "LocationSignature": "Lsd",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Lysvik",
+        "Geometry": {
+            "WGS84": "POINT (13.13778300680481 60.01595053795713)"
+        },
+        "LocationSignature": "Lyv",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Malmbäck",
+        "Geometry": {
+            "WGS84": "POINT (14.460424902962865 57.577996215266744)"
+        },
+        "LocationSignature": "Mbä",
+        "PlatformLine": [
+            "2",
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Markaryd",
+        "Geometry": {
+            "WGS84": "POINT (13.593922735903572 56.45961821495866)"
+        },
+        "LocationSignature": "Mrd",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Lyrestad",
+        "Geometry": {
+            "WGS84": "POINT (14.05657579837766 58.80493833797479)"
+        },
+        "LocationSignature": "Lyd",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Laxå",
+        "Geometry": {
+            "WGS84": "POINT (14.614602720877377 58.9889191110449)"
+        },
+        "LocationSignature": "Lå",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Mölndal",
+        "Geometry": {
+            "WGS84": "POINT (12.01666374798342 57.663387110687026)"
+        },
+        "LocationSignature": "Mdn",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Axhult",
+        "Geometry": {
+            "WGS84": "POINT (13.692607159687721 56.516835950095555)"
+        },
+        "LocationSignature": "Mrd.ax"
+    },
+    {
+        "AdvertisedLocationName": "Mörrum",
+        "Geometry": {
+            "WGS84": "POINT (14.742953091127111 56.18685415895982)"
+        },
+        "LocationSignature": "Mru",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Mantorp",
+        "Geometry": {
+            "WGS84": "POINT (15.288154576706267 58.347988802692036)"
+        },
+        "LocationSignature": "Mt",
+        "PlatformLine": [
+            "1",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Narvik",
+        "Geometry": {
+            "WGS84": "POINT (17.386687780396514 68.43669216907497)"
+        },
+        "LocationSignature": "No.nk"
+    },
+    {
+        "AdvertisedLocationName": "Mjölby",
+        "Geometry": {
+            "WGS84": "POINT (15.132101007286456 58.32274619735859)"
+        },
+        "LocationSignature": "My",
+        "PlatformLine": [
+            "1b",
+            "2",
+            "21",
+            "2a",
+            "2b",
+            "3a",
+            "3b",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Norrviken",
+        "Geometry": {
+            "WGS84": "POINT (17.924356611552174 59.459362194827804)"
+        },
+        "LocationSignature": "Nvk",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Mölnbo",
+        "Geometry": {
+            "WGS84": "POINT (17.418288054007117 59.04736118461918)"
+        },
+        "LocationSignature": "Mö",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Nässundet",
+        "Geometry": {
+            "WGS84": "POINT (14.234599410872281 59.438503614815104)"
+        },
+        "LocationSignature": "Nd",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Njurundabommen",
+        "Geometry": {
+            "WGS84": "POINT (17.377428460750508 62.267506874647914)"
+        },
+        "LocationSignature": "Njb",
+        "PlatformLine": [
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Oslo",
+        "Geometry": {
+            "WGS84": "POINT (10.736695251219352 59.91799725372251)"
+        },
+        "LocationSignature": "No.osl"
+    },
+    {
+        "AdvertisedLocationName": "Rombak",
+        "Geometry": {
+            "WGS84": "POINT (17.790981037982274 68.40461174157639)"
+        },
+        "LocationSignature": "No.rom",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Norsesund",
+        "Geometry": {
+            "WGS84": "POINT (12.438839362739925 57.861336648362105)"
+        },
+        "LocationSignature": "Ns",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Nynäsgård",
+        "Geometry": {
+            "WGS84": "POINT (17.942529489313543 58.913736221868994)"
+        },
+        "LocationSignature": "Ngd",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Mörarp",
+        "Geometry": {
+            "WGS84": "POINT (12.873598118115169 56.05535238111414)"
+        },
+        "LocationSignature": "Mör",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Norrköping C",
+        "Geometry": {
+            "WGS84": "POINT (16.181679029700245 58.596266416740335)"
+        },
+        "LocationSignature": "Nr",
+        "PlatformLine": [
+            "1",
+            "2a",
+            "2b",
+            "3a",
+            "3b",
+            "6a",
+            "6b",
+            "7",
+            "7a",
+            "3",
+            "6",
+            "7b"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Notviken",
+        "Geometry": {
+            "WGS84": "POINT (22.118734555128196 65.61065686153327)"
+        },
+        "LocationSignature": "Nvn",
+        "PlatformLine": [
+            "4",
+            "5"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Mullsjö",
+        "Geometry": {
+            "WGS84": "POINT (13.881370834582835 57.91503506588997)"
+        },
+        "LocationSignature": "Mu",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Norrahammar",
+        "Geometry": {
+            "WGS84": "POINT (14.115808987171052 57.704350055838454)"
+        },
+        "LocationSignature": "Nhr",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Nykvarn",
+        "Geometry": {
+            "WGS84": "POINT (17.432080395575703 59.1787322753928)"
+        },
+        "LocationSignature": "Nkv",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Lilleström",
+        "Geometry": {
+            "WGS84": "POINT (11.050513104916602 59.95638189788172)"
+        },
+        "LocationSignature": "No.lil"
+    },
+    {
+        "AdvertisedLocationName": "Nybro",
+        "Geometry": {
+            "WGS84": "POINT (15.908953378445108 56.742404761426506)"
+        },
+        "LocationSignature": "Nyb",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Mölnlycke",
+        "Geometry": {
+            "WGS84": "POINT (12.11866199151482 57.65702612606875)"
+        },
+        "LocationSignature": "Myk",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Halden",
+        "Geometry": {
+            "WGS84": "POINT (11.391237978408311 59.12617923870987)"
+        },
+        "LocationSignature": "No.hld"
+    },
+    {
+        "AdvertisedLocationName": "Katterat",
+        "Geometry": {
+            "WGS84": "POINT (17.96585545435336 68.39792796062905)"
+        },
+        "LocationSignature": "No.kat",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Lilleström",
+        "Geometry": {
+            "WGS84": "POINT (11.050513104916602 59.95638189788172)"
+        },
+        "LocationSignature": "No.lls"
+    },
+    {
+        "AdvertisedLocationName": "Sarpsborg",
+        "Geometry": {
+            "WGS84": "POINT (11.112626070011519 59.26482811739439)"
+        },
+        "LocationSignature": "No.sbo"
+    },
+    {
+        "AdvertisedLocationName": "Straumsnes",
+        "Geometry": {
+            "WGS84": "POINT (15.202738110952263 67.30222325344515)"
+        },
+        "LocationSignature": "No.sms",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Mariestad",
+        "Geometry": {
+            "WGS84": "POINT (13.825665890319714 58.7112583423946)"
+        },
+        "LocationSignature": "Mst",
+        "PlatformLine": [
+            "5",
+            "6"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Månsarp",
+        "Geometry": {
+            "WGS84": "POINT (14.07105156879612 57.65400314888071)"
+        },
+        "LocationSignature": "Måp",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Nässjö C",
+        "Geometry": {
+            "WGS84": "POINT (14.694734601983976 57.65135943530492)"
+        },
+        "LocationSignature": "N",
+        "PlatformLine": [
+            "10",
+            "1",
+            "1a",
+            "1b",
+            "2",
+            "2a",
+            "2b",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "9a",
+            "9b",
+            "10a",
+            "10b"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Nyköping C",
+        "Geometry": {
+            "WGS84": "POINT (16.997084943083745 58.75661275367473)"
+        },
+        "LocationSignature": "Nk",
+        "PlatformLine": [
+            "5",
+            "6"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Sösterbekk",
+        "Geometry": {
+            "WGS84": "POINT (18.002447553369333 68.44614089246615)"
+        },
+        "LocationSignature": "No.sös"
+    },
+    {
+        "AdvertisedLocationName": "Nol",
+        "Geometry": {
+            "WGS84": "POINT (12.06061767215043 57.917647392219116)"
+        },
+        "LocationSignature": "Nol",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Trondheim",
+        "Geometry": {
+            "WGS84": "POINT (10.922988176949668 63.45729648117318)"
+        },
+        "LocationSignature": "No.tnd"
+    },
+    {
+        "AdvertisedLocationName": "Morgongåva",
+        "Geometry": {
+            "WGS84": "POINT (16.96136180078778 59.9329057877021)"
+        },
+        "LocationSignature": "Må",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Nykroppa",
+        "Geometry": {
+            "WGS84": "POINT (14.308436065558167 59.622480175289546)"
+        },
+        "LocationSignature": "Nka",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Nattavaara",
+        "Geometry": {
+            "WGS84": "POINT (20.950092892795404 66.75427981037849)"
+        },
+        "LocationSignature": "Ntv",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Kongsvinger",
+        "Geometry": {
+            "WGS84": "POINT (12.02248806430466 60.26679920006539)"
+        },
+        "LocationSignature": "No.kvg"
+    },
+    {
+        "AdvertisedLocationName": "Nordmaling",
+        "Geometry": {
+            "WGS84": "POINT (19.48231846543507 63.5784029799022)"
+        },
+        "LocationSignature": "Nog",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Nälden",
+        "Geometry": {
+            "WGS84": "POINT (14.26305806813868 63.35060903954359)"
+        },
+        "LocationSignature": "Nä",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Osby",
+        "Geometry": {
+            "WGS84": "POINT (13.995681778357715 56.381181281226006)"
+        },
+        "LocationSignature": "O",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Orsa",
+        "Geometry": {
+            "WGS84": "POINT (14.621142303134159 61.11908685869698)"
+        },
+        "LocationSignature": "Ors",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Porjus",
+        "Geometry": {
+            "WGS84": "POINT (19.829651910179116 66.96614637805786)"
+        },
+        "LocationSignature": "Pj",
+        "PlatformLine": [
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Rydsgård",
+        "Geometry": {
+            "WGS84": "POINT (13.588473166758456 55.47423125962734)"
+        },
+        "LocationSignature": "Rdg",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Oskarström",
+        "Geometry": {
+            "WGS84": "POINT (12.9719841578046 56.80650084935297)"
+        },
+        "LocationSignature": "Om",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Ronneby",
+        "Geometry": {
+            "WGS84": "POINT (15.283598683023076 56.206445652391736)"
+        },
+        "LocationSignature": "Rb",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Ramnäs",
+        "Geometry": {
+            "WGS84": "POINT (16.207883205469344 59.76977622087099)"
+        },
+        "LocationSignature": "Rmn",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Ockelbo",
+        "Geometry": {
+            "WGS84": "POINT (16.720896069102906 60.89116170166613)"
+        },
+        "LocationSignature": "Ob",
+        "PlatformLine": [
+            "2",
+            "3",
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Riksgränsen",
+        "Geometry": {
+            "WGS84": "POINT (18.11869690003302 68.42719824233153)"
+        },
+        "LocationSignature": "Rgn",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Partille",
+        "Geometry": {
+            "WGS84": "POINT (12.102643921452882 57.74071029713566)"
+        },
+        "LocationSignature": "P",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Rabbalshede",
+        "Geometry": {
+            "WGS84": "POINT (11.470711607633103 58.61010066120599)"
+        },
+        "LocationSignature": "Rbh",
+        "PlatformLine": [
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Oleby",
+        "Geometry": {
+            "WGS84": "POINT (13.03855609180535 60.12986766666605)"
+        },
+        "LocationSignature": "Ol",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Oxie",
+        "Geometry": {
+            "WGS84": "POINT (13.096284054069896 55.5416490616957)"
+        },
+        "LocationSignature": "Ox",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Påarp",
+        "Geometry": {
+            "WGS84": "POINT (12.81718764853875 56.02926556671496)"
+        },
+        "LocationSignature": "Påa",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Rävlanda",
+        "Geometry": {
+            "WGS84": "POINT (12.500280228730583 57.65442643450085)"
+        },
+        "LocationSignature": "Rd",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Rosersberg",
+        "Geometry": {
+            "WGS84": "POINT (17.879821813887027 59.58435991542243)"
+        },
+        "LocationSignature": "Rs",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Råbäck",
+        "Geometry": {
+            "WGS84": "POINT (13.376620125855242 58.610608209345884)"
+        },
+        "LocationSignature": "Rbk",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Rosengård",
+        "Geometry": {
+            "WGS84": "POINT (13.030834150865605 55.58896718684582)"
+        },
+        "LocationSignature": "Rog",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Ransta",
+        "Geometry": {
+            "WGS84": "POINT (16.63995226743637 59.81019146076976)"
+        },
+        "LocationSignature": "Rt",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Rottneros",
+        "Geometry": {
+            "WGS84": "POINT (13.128730817596281 59.79496980518692)"
+        },
+        "LocationSignature": "Rts",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Nynäshamn",
+        "Geometry": {
+            "WGS84": "POINT (17.949664205892567 58.90022886342229)"
+        },
+        "LocationSignature": "Nyc",
+        "PlatformLine": [
+            "1",
+            "1a",
+            "1b",
+            "2",
+            "2a",
+            "2b",
+            "3",
+            "3a",
+            "3b"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Oskarshamn",
+        "Geometry": {
+            "WGS84": "POINT (16.457553172333 57.262908730722145)"
+        },
+        "LocationSignature": "Oh",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Rimforsa",
+        "Geometry": {
+            "WGS84": "POINT (15.681679282269746 58.13530453556956)"
+        },
+        "LocationSignature": "Rf",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Röjan",
+        "Geometry": {
+            "WGS84": "POINT (14.359231439773422 62.47920736813055)"
+        },
+        "LocationSignature": "Rjn",
+        "PlatformLine": [
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Nödinge",
+        "Geometry": {
+            "WGS84": "POINT (12.042947479417407 57.892440825736806)"
+        },
+        "LocationSignature": "Nöe",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Rotebro",
+        "Geometry": {
+            "WGS84": "POINT (17.915298260190166 59.475514234039295)"
+        },
+        "LocationSignature": "R",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Reftele",
+        "Geometry": {
+            "WGS84": "POINT (13.593496728976955 57.175920515622714)"
+        },
+        "LocationSignature": "Rft",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Ormaryd",
+        "Geometry": {
+            "WGS84": "POINT (14.83142566464959 57.6656372007004)"
+        },
+        "LocationSignature": "Ory",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Ottebol",
+        "Geometry": {
+            "WGS84": "POINT (12.461594101865348 59.69797590203506)"
+        },
+        "LocationSignature": "Ot",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Pilgrimstad",
+        "Geometry": {
+            "WGS84": "POINT (15.040389875520408 62.95497212761036)"
+        },
+        "LocationSignature": "Pl",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Perstorp",
+        "Geometry": {
+            "WGS84": "POINT (13.398581628274538 56.13640272456923)"
+        },
+        "LocationSignature": "Pt",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Rocksjön",
+        "Geometry": {
+            "WGS84": "POINT (14.198182496319422 57.7750362469798)"
+        },
+        "LocationSignature": "Rkö",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Sveg",
+        "Geometry": {
+            "WGS84": "POINT (14.352013954814712 62.034465796261614)"
+        },
+        "LocationSignature": "S",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Rättvik",
+        "Geometry": {
+            "WGS84": "POINT (15.11569266851374 60.88469674996119)"
+        },
+        "LocationSignature": "Rv",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Stockholm City",
+        "Geometry": {
+            "WGS84": "POINT (18.06485202220192 59.332371652020754)"
+        },
+        "LocationSignature": "Sci",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Sandared",
+        "Geometry": {
+            "WGS84": "POINT (12.79249209172293 57.709536517615255)"
+        },
+        "LocationSignature": "Sae",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Sannarp",
+        "Geometry": {
+            "WGS84": "POINT (12.893372380138683 56.686435547151994)"
+        },
+        "LocationSignature": "Sarp",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Rörstorp",
+        "Geometry": {
+            "WGS84": "POINT (14.064114622877709 57.17230722990742)"
+        },
+        "LocationSignature": "Röp",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Rydaholm",
+        "Geometry": {
+            "WGS84": "POINT (14.31146313164322 56.986401280809616)"
+        },
+        "LocationSignature": "Rym",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Rönninge",
+        "Geometry": {
+            "WGS84": "POINT (17.75222820335924 59.19351266247038)"
+        },
+        "LocationSignature": "Rön",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Strömsnäsbruk",
+        "Geometry": {
+            "WGS84": "POINT (13.732615703503818 56.55013570323237)"
+        },
+        "LocationSignature": "Sbu"
+    },
+    {
+        "AdvertisedLocationName": "Rydebäck",
+        "Geometry": {
+            "WGS84": "POINT (12.783556727555347 55.96577142443263)"
+        },
+        "LocationSignature": "Ryä",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Skee",
+        "Geometry": {
+            "WGS84": "POINT (11.262054500281476 58.92340879359357)"
+        },
+        "LocationSignature": "Ske",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Säffle",
+        "Geometry": {
+            "WGS84": "POINT (12.916233752704398 59.13235023011816)"
+        },
+        "LocationSignature": "Sfl",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Strängnäs",
+        "Geometry": {
+            "WGS84": "POINT (17.028206598634636 59.3702999656302)"
+        },
+        "LocationSignature": "Sgs",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Sjisjka",
+        "Geometry": {
+            "WGS84": "POINT (20.234529083666388 67.6258895982425)"
+        },
+        "LocationSignature": "Sjka",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Skogås",
+        "Geometry": {
+            "WGS84": "POINT (18.15357186741919 59.219356858542994)"
+        },
+        "LocationSignature": "Skg",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Smålandsstenar",
+        "Geometry": {
+            "WGS84": "POINT (13.414984120812575 57.16143907046352)"
+        },
+        "LocationSignature": "Sdr",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Slagnäs",
+        "Geometry": {
+            "WGS84": "POINT (18.15790291390821 65.58590556818578)"
+        },
+        "LocationSignature": "Sgä",
+        "PlatformLine": [
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Stehag",
+        "Geometry": {
+            "WGS84": "POINT (13.393432999610381 55.900294268863576)"
+        },
+        "LocationSignature": "Sg",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Sikfors",
+        "Geometry": {
+            "WGS84": "POINT (14.583740202151063 59.80701024371624)"
+        },
+        "LocationSignature": "Sif",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Smedby",
+        "Geometry": {
+            "WGS84": "POINT (16.233273816065285 56.67759311683166)"
+        },
+        "LocationSignature": "Sdy",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Skinnskatteberg",
+        "Geometry": {
+            "WGS84": "POINT (15.6915987074977 59.83261999016361)"
+        },
+        "LocationSignature": "Skb",
+        "PlatformLine": [
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Skene",
+        "Geometry": {
+            "WGS84": "POINT (12.649438952203928 57.488433688435435)"
+        },
+        "LocationSignature": "See",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Simrishamn",
+        "Geometry": {
+            "WGS84": "POINT (14.351074101494959 55.55363173275493)"
+        },
+        "LocationSignature": "Si",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Surahammar",
+        "Geometry": {
+            "WGS84": "POINT (16.21962848329636 59.70657891121106)"
+        },
+        "LocationSignature": "Shr",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Skövde C",
+        "Geometry": {
+            "WGS84": "POINT (13.85185993588994 58.38903712692206)"
+        },
+        "LocationSignature": "Sk",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "3a",
+            "3b"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Sandsjönäs",
+        "Geometry": {
+            "WGS84": "POINT (17.663578350756822 65.24325085379625)"
+        },
+        "LocationSignature": "Sdnä",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Silverdalen",
+        "Geometry": {
+            "WGS84": "POINT (15.742764090382453 57.542676980528654)"
+        },
+        "LocationSignature": "Sic",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Svedala",
+        "Geometry": {
+            "WGS84": "POINT (13.23204454303852 55.506880996857916)"
+        },
+        "LocationSignature": "Sea",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Söderhamn",
+        "Geometry": {
+            "WGS84": "POINT (17.03489122366434 61.29941060831739)"
+        },
+        "LocationSignature": "Shv",
+        "PlatformLine": [
+            "3",
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Storfors",
+        "Geometry": {
+            "WGS84": "POINT (14.271725919543863 59.533027211130175)"
+        },
+        "LocationSignature": "Sf",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Skänninge",
+        "Geometry": {
+            "WGS84": "POINT (15.092523585317286 58.39263945340202)"
+        },
+        "LocationSignature": "Skn",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Stenstorp",
+        "Geometry": {
+            "WGS84": "POINT (13.712659768978105 58.27291618463623)"
+        },
+        "LocationSignature": "Ss",
+        "PlatformLine": [
+            "1",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Stuvsta",
+        "Geometry": {
+            "WGS84": "POINT (17.997188639671837 59.25466170156521)"
+        },
+        "LocationSignature": "Sta",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Smedstorp",
+        "Geometry": {
+            "WGS84": "POINT (14.11755176953013 55.549539915968204)"
+        },
+        "LocationSignature": "Smp",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Skållerud",
+        "Geometry": {
+            "WGS84": "POINT (12.418609413146058 58.78080067349001)"
+        },
+        "LocationSignature": "Skru"
+    },
+    {
+        "AdvertisedLocationName": "Smedjebacken",
+        "Geometry": {
+            "WGS84": "POINT (15.40561681482803 60.13650713866027)"
+        },
+        "LocationSignature": "Smj",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Storå",
+        "Geometry": {
+            "WGS84": "POINT (15.140746230592448 59.718883901339424)"
+        },
+        "LocationSignature": "Sr",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Söderbärke",
+        "Geometry": {
+            "WGS84": "POINT (15.537110664376323 60.072492580553146)"
+        },
+        "LocationSignature": "Sre",
+        "PlatformLine": [
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Stenungsund",
+        "Geometry": {
+            "WGS84": "POINT (11.824676822456842 58.07270857331496)"
+        },
+        "LocationSignature": "Snu",
+        "PlatformLine": [
+            "1b",
+            "2",
+            "1a"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Svågertorp",
+        "Geometry": {
+            "WGS84": "POINT (12.99327317320076 55.54725788846203)"
+        },
+        "LocationSignature": "Stp",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Säter",
+        "Geometry": {
+            "WGS84": "POINT (15.75707875341139 60.34658945633742)"
+        },
+        "LocationSignature": "St",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Stångby",
+        "Geometry": {
+            "WGS84": "POINT (13.199201061644683 55.74965620244009)"
+        },
+        "LocationSignature": "Stb",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Solna",
+        "Geometry": {
+            "WGS84": "POINT (18.010330020813157 59.365525934131234)"
+        },
+        "LocationSignature": "So",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Sorsele",
+        "Geometry": {
+            "WGS84": "POINT (17.542801304424216 65.5350377770453)"
+        },
+        "LocationSignature": "Srs",
+        "PlatformLine": [
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Stjerneskolan",
+        "Geometry": {
+            "WGS84": "POINT (13.011138231141132 60.139069155249075)"
+        },
+        "LocationSignature": "Stje"
+    },
+    {
+        "AdvertisedLocationName": "Sala",
+        "Geometry": {
+            "WGS84": "POINT (16.60451664044467 59.925695407493045)"
+        },
+        "LocationSignature": "Sl",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Skurup",
+        "Geometry": {
+            "WGS84": "POINT (13.498125673867094 55.48021075529136)"
+        },
+        "LocationSignature": "Srp",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Svarte",
+        "Geometry": {
+            "WGS84": "POINT (13.717903263237991 55.42854773824731)"
+        },
+        "LocationSignature": "Ste",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Strömstad",
+        "Geometry": {
+            "WGS84": "POINT (11.1733627688164 58.93653560517534)"
+        },
+        "LocationSignature": "Smd",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Spånga",
+        "Geometry": {
+            "WGS84": "POINT (17.897261239158393 59.384100766747025)"
+        },
+        "LocationSignature": "Spå",
+        "PlatformLine": [
+            "3",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Ställdalen",
+        "Geometry": {
+            "WGS84": "POINT (14.941722782907375 59.93441852108295)"
+        },
+        "LocationSignature": "Stl",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Stenkullen",
+        "Geometry": {
+            "WGS84": "POINT (12.314619869123824 57.79173715329077)"
+        },
+        "LocationSignature": "Sn",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Sandviken",
+        "Geometry": {
+            "WGS84": "POINT (16.77758839061764 60.614229442263586)"
+        },
+        "LocationSignature": "Snv",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Sörtjärn",
+        "Geometry": {
+            "WGS84": "POINT (14.629719298049542 62.342743935781115)"
+        },
+        "LocationSignature": "Srn",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Stockholms S",
+        "Geometry": {
+            "WGS84": "POINT (18.060508539616663 59.313422739013326)"
+        },
+        "LocationSignature": "Sst",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Stora Höga",
+        "Geometry": {
+            "WGS84": "POINT (11.835770406511925 58.01867922191185)"
+        },
+        "LocationSignature": "Sth",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Sandhem",
+        "Geometry": {
+            "WGS84": "POINT (13.772749414804583 57.988321871987225)"
+        },
+        "LocationSignature": "Sm",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Stensjön",
+        "Geometry": {
+            "WGS84": "POINT (14.823732604032834 57.58252860021629)"
+        },
+        "LocationSignature": "Snö",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Sollentuna",
+        "Geometry": {
+            "WGS84": "POINT (17.947466949712663 59.42940516998738)"
+        },
+        "LocationSignature": "Sol",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Stöde",
+        "Geometry": {
+            "WGS84": "POINT (16.59912484713559 62.41978682271702)"
+        },
+        "LocationSignature": "Std",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Stockholm Odenplan",
+        "Geometry": {
+            "WGS84": "POINT (18.04514491266581 59.34444415196133)"
+        },
+        "LocationSignature": "Sod",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Storvreta",
+        "Geometry": {
+            "WGS84": "POINT (17.70624373515717 59.95630278535516)"
+        },
+        "LocationSignature": "Srv",
+        "PlatformLine": [
+            "1",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Segersäng",
+        "Geometry": {
+            "WGS84": "POINT (17.927110595566532 59.029504897567406)"
+        },
+        "LocationSignature": "Ssä",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Stora Levene",
+        "Geometry": {
+            "WGS84": "POINT (12.925755809778781 58.32592468992109)"
+        },
+        "LocationSignature": "Stlv",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Sunne",
+        "Geometry": {
+            "WGS84": "POINT (13.14917141651931 59.835524624821204)"
+        },
+        "LocationSignature": "Sun",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Södertälje Syd",
+        "Geometry": {
+            "WGS84": "POINT (17.647961677699406 59.163297667082155)"
+        },
+        "LocationSignature": "Söö",
+        "PlatformLine": [
+            "5",
+            "6",
+            "7",
+            "8"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Taberg",
+        "Geometry": {
+            "WGS84": "POINT (14.086971324390367 57.678678622316184)"
+        },
+        "LocationSignature": "Tag",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Tandsbyn",
+        "Geometry": {
+            "WGS84": "POINT (14.74403140627081 62.99873430320563)"
+        },
+        "LocationSignature": "Tby",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Tanum",
+        "Geometry": {
+            "WGS84": "POINT (11.295587334864106 58.713577029133404)"
+        },
+        "LocationSignature": "Tnu",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Torup",
+        "Geometry": {
+            "WGS84": "POINT (13.079549912332952 56.95761701729362)"
+        },
+        "LocationSignature": "Tou",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Sävsjö",
+        "Geometry": {
+            "WGS84": "POINT (14.665566693279215 57.40292039779345)"
+        },
+        "LocationSignature": "Sä",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Surte",
+        "Geometry": {
+            "WGS84": "POINT (12.013395423210866 57.824899347663006)"
+        },
+        "LocationSignature": "Sue",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Trollhättan",
+        "Geometry": {
+            "WGS84": "POINT (12.298873391406515 58.28761287752628)"
+        },
+        "LocationSignature": "Thn",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Torpshammar",
+        "Geometry": {
+            "WGS84": "POINT (16.33540081744031 62.4727105744491)"
+        },
+        "LocationSignature": "To",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Torsby",
+        "Geometry": {
+            "WGS84": "POINT (13.002740109219932 60.13649071411862)"
+        },
+        "LocationSignature": "Toy",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Teckomatorp",
+        "Geometry": {
+            "WGS84": "POINT (13.082523880380096 55.87052818699065)"
+        },
+        "LocationSignature": "Tp",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Storuman",
+        "Geometry": {
+            "WGS84": "POINT (17.109871461011323 65.09595270191313)"
+        },
+        "LocationSignature": "Sum",
+        "PlatformLine": [
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Sunderby sjukhus",
+        "Geometry": {
+            "WGS84": "POINT (21.93540803550396 65.6732855914292)"
+        },
+        "LocationSignature": "Sus",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Svenshögen",
+        "Geometry": {
+            "WGS84": "POINT (11.936140778928644 58.1447165547658)"
+        },
+        "LocationSignature": "Svg",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Södertälje Centrum",
+        "Geometry": {
+            "WGS84": "POINT (17.628350245585395 59.19114492012457)"
+        },
+        "LocationSignature": "Söc",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "1a",
+            "1b",
+            "2a",
+            "2b",
+            "3a",
+            "3b",
+            "4a",
+            "4b"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Södertälje Syd (SL)",
+        "Geometry": {
+            "WGS84": "POINT (17.645486487135074 59.163419995708246)"
+        },
+        "LocationSignature": "Söu",
+        "PlatformLine": [
+            "3",
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Töreboda",
+        "Geometry": {
+            "WGS84": "POINT (14.127171288759493 58.704573123619056)"
+        },
+        "LocationSignature": "T",
+        "PlatformLine": [
+            "1",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Tannefors",
+        "Geometry": {
+            "WGS84": "POINT (15.660269524864816 58.400411375265186)"
+        },
+        "LocationSignature": "Tn",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Trekanten",
+        "Geometry": {
+            "WGS84": "POINT (16.113449667032402 56.70294806718645)"
+        },
+        "LocationSignature": "Tre",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Stavre",
+        "Geometry": {
+            "WGS84": "POINT (15.311813908268146 62.8261046063748)"
+        },
+        "LocationSignature": "Stv",
+        "PlatformLine": [
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Tjustskolan",
+        "Geometry": {
+            "WGS84": "POINT (16.630536157017342 57.75293422614994)"
+        },
+        "LocationSignature": "Tjsk",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Skyttorp",
+        "Geometry": {
+            "WGS84": "POINT (17.7369006258753 60.079384892487)"
+        },
+        "LocationSignature": "Syt",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Tjugonde slussen",
+        "Geometry": {
+            "WGS84": "POINT (12.245792469506286 59.00261153183182)"
+        },
+        "LocationSignature": "Tjs"
+    },
+    {
+        "AdvertisedLocationName": "Tällberg",
+        "Geometry": {
+            "WGS84": "POINT (15.02040678081707 60.81875585328287)"
+        },
+        "LocationSignature": "Tlg",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Torpåkra",
+        "Geometry": {
+            "WGS84": "POINT (13.029488485657703 57.94065041052178)"
+        },
+        "LocationSignature": "Top",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Sundsvall C",
+        "Geometry": {
+            "WGS84": "POINT (17.3148892715914 62.38657417781709)"
+        },
+        "LocationSignature": "Suc",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Skutskär",
+        "Geometry": {
+            "WGS84": "POINT (17.404550712054245 60.62603692023139)"
+        },
+        "LocationSignature": "Sur",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Sävenäs",
+        "Geometry": {
+            "WGS84": "POINT (12.025185985883473 57.724740151675235)"
+        },
+        "LocationSignature": "Säv",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Tobo",
+        "Geometry": {
+            "WGS84": "POINT (17.6337596120473 60.259036019685695)"
+        },
+        "LocationSignature": "Tbo",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Tierp",
+        "Geometry": {
+            "WGS84": "POINT (17.513066776528493 60.34578295707297)"
+        },
+        "LocationSignature": "Tip",
+        "PlatformLine": [
+            "1",
+            "3",
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Tomelilla",
+        "Geometry": {
+            "WGS84": "POINT (13.949663134726764 55.54583465207257)"
+        },
+        "LocationSignature": "Tli",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Sundsvall V",
+        "Geometry": {
+            "WGS84": "POINT (17.293346549612117 62.389481062371765)"
+        },
+        "LocationSignature": "Suv",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Sundbyberg",
+        "Geometry": {
+            "WGS84": "POINT (17.971824561472314 59.360838317032425)"
+        },
+        "LocationSignature": "Sub",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Södertälje hamn",
+        "Geometry": {
+            "WGS84": "POINT (17.64721545709819 59.17763490847209)"
+        },
+        "LocationSignature": "Söd",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Sösdala",
+        "Geometry": {
+            "WGS84": "POINT (13.680791457830793 56.03643863264241)"
+        },
+        "LocationSignature": "Söla",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Tranås",
+        "Geometry": {
+            "WGS84": "POINT (14.97512128865337 58.038088925601144)"
+        },
+        "LocationSignature": "Tns",
+        "PlatformLine": [
+            "1",
+            "11",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Skillingaryd",
+        "Geometry": {
+            "WGS84": "POINT (14.090712832002865 57.42842541794301)"
+        },
+        "LocationSignature": "Syd",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Tågarp",
+        "Geometry": {
+            "WGS84": "POINT (12.947381489347032 55.927403258121785)"
+        },
+        "LocationSignature": "Tgp",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Timsfors",
+        "Geometry": {
+            "WGS84": "POINT (13.610699283769161 56.48417519937704)"
+        },
+        "LocationSignature": "Tim"
+    },
+    {
+        "AdvertisedLocationName": "Storvik",
+        "Geometry": {
+            "WGS84": "POINT (16.53429590414158 60.5818777468156)"
+        },
+        "LocationSignature": "Sv",
+        "PlatformLine": [
+            "4",
+            "5"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Stockaryd",
+        "Geometry": {
+            "WGS84": "POINT (14.591878829462207 57.30984525247945)"
+        },
+        "LocationSignature": "Sy",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Tolita",
+        "Geometry": {
+            "WGS84": "POINT (13.240058028329964 59.5777826994211)"
+        },
+        "LocationSignature": "Tlt",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Svenstavik centrum",
+        "Geometry": {
+            "WGS84": "POINT (14.435763743165415 62.76729090201955)"
+        },
+        "LocationSignature": "Svc",
+        "PlatformLine": [
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Tenhult",
+        "Geometry": {
+            "WGS84": "POINT (14.326605469367479 57.70521548903799)"
+        },
+        "LocationSignature": "Th",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Tofta",
+        "Geometry": {
+            "WGS84": "POINT (12.300448183722388 57.17332785659042)"
+        },
+        "LocationSignature": "Tof",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Sölvesborg",
+        "Geometry": {
+            "WGS84": "POINT (14.583113661977116 56.04944439042681)"
+        },
+        "LocationSignature": "Sög",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Storlien",
+        "Geometry": {
+            "WGS84": "POINT (12.100571617339952 63.315944076714366)"
+        },
+        "LocationSignature": "Str",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Tyringe",
+        "Geometry": {
+            "WGS84": "POINT (13.598412201416835 56.159642334609906)"
+        },
+        "LocationSignature": "Ty",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Torsåker",
+        "Geometry": {
+            "WGS84": "POINT (16.490255793861195 60.51458534848631)"
+        },
+        "LocationSignature": "Tså",
+        "PlatformLine": [
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Trångsund",
+        "Geometry": {
+            "WGS84": "POINT (18.13066308690351 59.2278010926431)"
+        },
+        "LocationSignature": "Tåd",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Västra Bodarne",
+        "Geometry": {
+            "WGS84": "POINT (12.474109701084204 57.887564065583405)"
+        },
+        "LocationSignature": "Vbd",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Veddige",
+        "Geometry": {
+            "WGS84": "POINT (12.336845403258469 57.26668289387274)"
+        },
+        "LocationSignature": "Vdi",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Vindeln",
+        "Geometry": {
+            "WGS84": "POINT (19.713976874034127 64.20409934111386)"
+        },
+        "LocationSignature": "Vdn",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Tumba",
+        "Geometry": {
+            "WGS84": "POINT (17.83838552404354 59.199494369094495)"
+        },
+        "LocationSignature": "Tu",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Upplands Väsby",
+        "Geometry": {
+            "WGS84": "POINT (17.899233873234227 59.52048495324485)"
+        },
+        "LocationSignature": "Upv",
+        "PlatformLine": [
+            "2",
+            "32a",
+            "4",
+            "31a",
+            "31b",
+            "32b",
+            "31",
+            "32"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Vimmerby",
+        "Geometry": {
+            "WGS84": "POINT (15.858462336452869 57.66303493311814)"
+        },
+        "LocationSignature": "Vib",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Vattholma",
+        "Geometry": {
+            "WGS84": "POINT (17.730865290008413 60.02511868161011)"
+        },
+        "LocationSignature": "Vha",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Ulriksfors",
+        "Geometry": {
+            "WGS84": "POINT (15.62081731272755 63.83231220134711)"
+        },
+        "LocationSignature": "Uf",
+        "PlatformLine": [
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Ulriksdal",
+        "Geometry": {
+            "WGS84": "POINT (18.00129058481793 59.3797706297159)"
+        },
+        "LocationSignature": "Udl",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Varjisträsk",
+        "Geometry": {
+            "WGS84": "POINT (19.529869928454637 66.04456840193006)"
+        },
+        "LocationSignature": "Vaj"
+    },
+    {
+        "AdvertisedLocationName": "Triangeln",
+        "Geometry": {
+            "WGS84": "POINT (13.000853697723674 55.59246336791903)"
+        },
+        "LocationSignature": "Tri",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Vårgårda",
+        "Geometry": {
+            "WGS84": "POINT (12.809253563632469 58.03114357080547)"
+        },
+        "LocationSignature": "Vgå",
+        "PlatformLine": [
+            "1",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Varberg",
+        "Geometry": {
+            "WGS84": "POINT (12.248148605641644 57.10940435733867)"
+        },
+        "LocationSignature": "Vb",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Värmlands Bro",
+        "Geometry": {
+            "WGS84": "POINT (13.013889775896303 59.18534449254292)"
+        },
+        "LocationSignature": "Vdb",
+        "PlatformLine": [
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Uppsala C",
+        "Geometry": {
+            "WGS84": "POINT (17.64869381436992 59.85788169781748)"
+        },
+        "LocationSignature": "U",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "10",
+            "7n",
+            "7s",
+            "8n",
+            "8s",
+            "1a",
+            "1b",
+            "2a",
+            "2b",
+            "7a",
+            "7b",
+            "8a",
+            "8b"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Viskafors",
+        "Geometry": {
+            "WGS84": "POINT (12.84512087808266 57.62927078065517)"
+        },
+        "LocationSignature": "Vfo",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Vänersborg C",
+        "Geometry": {
+            "WGS84": "POINT (12.318685025914473 58.37754860433986)"
+        },
+        "LocationSignature": "Vg",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Tungelsta",
+        "Geometry": {
+            "WGS84": "POINT (18.046493774584693 59.10284954389717)"
+        },
+        "LocationSignature": "Ts",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Uddevalla C",
+        "Geometry": {
+            "WGS84": "POINT (11.92343684034566 58.35422333538101)"
+        },
+        "LocationSignature": "Uv",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "2a",
+            "2b",
+            "3a",
+            "3b"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Uddevalla Ö",
+        "Geometry": {
+            "WGS84": "POINT (11.945058028507319 58.350355715864424)"
+        },
+        "LocationSignature": "Uö",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Värnamo",
+        "Geometry": {
+            "WGS84": "POINT (14.035995992549305 57.18637858551666)"
+        },
+        "LocationSignature": "V",
+        "PlatformLine": [
+            "1",
+            "3a",
+            "3b",
+            "4a",
+            "4b"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Vissefjärda",
+        "Geometry": {
+            "WGS84": "POINT (15.582586142693545 56.53801694212454)"
+        },
+        "LocationSignature": "Vfa",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Vaggeryd",
+        "Geometry": {
+            "WGS84": "POINT (14.145410375900997 57.498203709590534)"
+        },
+        "LocationSignature": "Vgd",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Umeå C",
+        "Geometry": {
+            "WGS84": "POINT (20.26700335933932 63.830145338113354)"
+        },
+        "LocationSignature": "Uå",
+        "PlatformLine": [
+            "1",
+            "1a",
+            "1b",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Undersåker",
+        "Geometry": {
+            "WGS84": "POINT (13.238468868154436 63.314993806109705)"
+        },
+        "LocationSignature": "Un",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Vännäsby",
+        "Geometry": {
+            "WGS84": "POINT (19.817416135342015 63.915223210714174)"
+        },
+        "LocationSignature": "Vby",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Västerhaninge",
+        "Geometry": {
+            "WGS84": "POINT (18.103366450191004 59.12303313879594)"
+        },
+        "LocationSignature": "Vhe",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Västervik",
+        "Geometry": {
+            "WGS84": "POINT (16.642875950478558 57.75563171574041)"
+        },
+        "LocationSignature": "Vk",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Trolmen",
+        "Geometry": {
+            "WGS84": "POINT (13.347926934850472 58.594828108595486)"
+        },
+        "LocationSignature": "Trm",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Trelleborg",
+        "Geometry": {
+            "WGS84": "POINT (13.161120593885759 55.3715014913109)"
+        },
+        "LocationSignature": "Trg",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Tjörnarp",
+        "Geometry": {
+            "WGS84": "POINT (13.631212179236938 56.001482609448786)"
+        },
+        "LocationSignature": "Tö",
+        "PlatformLine": [
+            "1",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Umeå Ö",
+        "Geometry": {
+            "WGS84": "POINT (20.29358809905884 63.818221267698995)"
+        },
+        "LocationSignature": "Uåö",
+        "PlatformLine": [
+            "1",
+            "2",
+            "1a",
+            "1b",
+            "2a",
+            "2b"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Vega",
+        "Geometry": {
+            "WGS84": "POINT (18.135840879679357 59.186802676715665)"
+        },
+        "LocationSignature": "Vga",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Vagnhärad",
+        "Geometry": {
+            "WGS84": "POINT (17.49878397536677 58.94583470022704)"
+        },
+        "LocationSignature": "Vhd",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Torved",
+        "Geometry": {
+            "WGS84": "POINT (14.100594332661101 58.82626908585966)"
+        },
+        "LocationSignature": "Tvd",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Vojmån",
+        "Geometry": {
+            "WGS84": "POINT (16.816545306197494 64.79184829267957)"
+        },
+        "LocationSignature": "Vjm",
+        "PlatformLine": [
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Timrå",
+        "Geometry": {
+            "WGS84": "POINT (17.33027035317587 62.48640256321447)"
+        },
+        "LocationSignature": "Trå",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Tvärålund",
+        "Geometry": {
+            "WGS84": "POINT (19.677608488593513 64.09966413146115)"
+        },
+        "LocationSignature": "Tvä",
+        "PlatformLine": [
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Vara",
+        "Geometry": {
+            "WGS84": "POINT (12.95151028626041 58.26096162875698)"
+        },
+        "LocationSignature": "Vaa",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Västra Ingelstad",
+        "Geometry": {
+            "WGS84": "POINT (13.10647547845362 55.491522424202245)"
+        },
+        "LocationSignature": "Vid",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Tisselskog",
+        "Geometry": {
+            "WGS84": "POINT (12.385625007670573 58.89719548559316)"
+        },
+        "LocationSignature": "Tsl"
+    },
+    {
+        "AdvertisedLocationName": "Tullinge",
+        "Geometry": {
+            "WGS84": "POINT (17.90526941954288 59.20569892752887)"
+        },
+        "LocationSignature": "Tul",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Vedum",
+        "Geometry": {
+            "WGS84": "POINT (12.998680295557389 58.16898333314739)"
+        },
+        "LocationSignature": "Ved",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Vassijaure",
+        "Geometry": {
+            "WGS84": "POINT (18.257670045642197 68.42957731290946)"
+        },
+        "LocationSignature": "Vj",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Vad",
+        "Geometry": {
+            "WGS84": "POINT (15.641570835108386 60.03236487171857)"
+        },
+        "LocationSignature": "Vad",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Vargön",
+        "Geometry": {
+            "WGS84": "POINT (12.391194643610309 58.35977256149721)"
+        },
+        "LocationSignature": "Vag",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Vislanda",
+        "Geometry": {
+            "WGS84": "POINT (14.456503391464464 56.78865375112148)"
+        },
+        "LocationSignature": "Vs",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Vallsta",
+        "Geometry": {
+            "WGS84": "POINT (16.36748127138293 61.518063691991316)"
+        },
+        "LocationSignature": "Vl",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Vilhelmina",
+        "Geometry": {
+            "WGS84": "POINT (16.65138978584911 64.6229731673905)"
+        },
+        "LocationSignature": "Vma",
+        "PlatformLine": [
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Vingåker",
+        "Geometry": {
+            "WGS84": "POINT (15.876508044889901 59.04210176467909)"
+        },
+        "LocationSignature": "Vr",
+        "PlatformLine": [
+            "1",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Växjö",
+        "Geometry": {
+            "WGS84": "POINT (14.805327926627928 56.876666244681225)"
+        },
+        "LocationSignature": "Vö",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "1a",
+            "1b",
+            "1c",
+            "2a",
+            "2b",
+            "3a",
+            "3b",
+            "4a",
+            "4b",
+            "4c",
+            "1ab",
+            "1bc",
+            "4ab",
+            "4bc"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Västerås C",
+        "Geometry": {
+            "WGS84": "POINT (16.552911395701365 59.60769591346944)"
+        },
+        "LocationSignature": "Vå",
+        "PlatformLine": [
+            "1",
+            "1a",
+            "1b",
+            "2",
+            "3",
+            "3a",
+            "3b",
+            "4",
+            "4a",
+            "4b",
+            "5"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Vinslöv",
+        "Geometry": {
+            "WGS84": "POINT (13.916529317596337 56.10492079291515)"
+        },
+        "LocationSignature": "Vöv",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Västeraspby",
+        "Geometry": {
+            "WGS84": "POINT (17.747631407792724 63.05568689711318)"
+        },
+        "LocationSignature": "Väy",
+        "PlatformLine": [
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Vikingstad",
+        "Geometry": {
+            "WGS84": "POINT (15.432983306582676 58.38348056921931)"
+        },
+        "LocationSignature": "Vsd",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Vallåkra",
+        "Geometry": {
+            "WGS84": "POINT (12.862229987247117 55.96382723958079)"
+        },
+        "LocationSignature": "Våk",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Vetlanda",
+        "Geometry": {
+            "WGS84": "POINT (15.081629057016732 57.42593877763404)"
+        },
+        "LocationSignature": "Vta",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Vattnäs",
+        "Geometry": {
+            "WGS84": "POINT (14.597827372400163 61.0493419740301)"
+        },
+        "LocationSignature": "Vtn",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Virsbo",
+        "Geometry": {
+            "WGS84": "POINT (16.084287806932494 59.871855109392925)"
+        },
+        "LocationSignature": "Vso",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Vilhelmina norra",
+        "Geometry": {
+            "WGS84": "POINT (16.613601624515624 64.64639488575558)"
+        },
+        "LocationSignature": "Vman",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Västra Ämtervik",
+        "Geometry": {
+            "WGS84": "POINT (13.147127417799577 59.72774026993494)"
+        },
+        "LocationSignature": "Vät",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Vännäs",
+        "Geometry": {
+            "WGS84": "POINT (19.749005567890734 63.91027427561762)"
+        },
+        "LocationSignature": "Vns",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Vittsjö",
+        "Geometry": {
+            "WGS84": "POINT (13.66298862977174 56.342332381096334)"
+        },
+        "LocationSignature": "Vsj",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Hell",
+        "Geometry": {
+            "WGS84": "POINT (10.976086984843768 63.40380375151755)"
+        },
+        "LocationSignature": "Xhel"
+    },
+    {
+        "AdvertisedLocationName": "Ystad",
+        "Geometry": {
+            "WGS84": "POINT (13.825460699219333 55.427372002991056)"
+        },
+        "LocationSignature": "Y",
+        "PlatformLine": [
+            "1",
+            "2",
+            "2a",
+            "2b",
+            "3",
+            "3a",
+            "3b",
+            "3c",
+            "3ab",
+            "3bc"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Ytterby",
+        "Geometry": {
+            "WGS84": "POINT (11.917445420699801 57.86230188185646)"
+        },
+        "LocationSignature": "Yb",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Verkebäck",
+        "Geometry": {
+            "WGS84": "POINT (16.51576846284091 57.72869266989044)"
+        },
+        "LocationSignature": "xVbä"
+    },
+    {
+        "AdvertisedLocationName": "Österport",
+        "Geometry": {
+            "WGS84": "POINT (12.700128437886463 55.600231403463866)"
+        },
+        "LocationSignature": "Zkk"
+    },
+    {
+        "AdvertisedLocationName": "Ytterhogdal",
+        "Geometry": {
+            "WGS84": "POINT (14.855394844494286 62.197288513778865)"
+        },
+        "LocationSignature": "Yl",
+        "PlatformLine": [
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Ånn",
+        "Geometry": {
+            "WGS84": "POINT (12.539021467159916 63.321352292118576)"
+        },
+        "LocationSignature": "Ånn",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Åsarna S",
+        "Geometry": {
+            "WGS84": "POINT (14.371992639994378 62.64081830216797)"
+        },
+        "LocationSignature": "Åsra",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Örtofta",
+        "Geometry": {
+            "WGS84": "POINT (13.242727367694334 55.77846920460445)"
+        },
+        "LocationSignature": "Ö",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Överhogdal",
+        "Geometry": {
+            "WGS84": "POINT (14.797685868461908 62.27792225202071)"
+        },
+        "LocationSignature": "Öhl",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Östersund V",
+        "Geometry": {
+            "WGS84": "POINT (14.631148538939899 63.17853809665549)"
+        },
+        "LocationSignature": "Ösv",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Åre",
+        "Geometry": {
+            "WGS84": "POINT (13.074856075628473 63.3993976740134)"
+        },
+        "LocationSignature": "Åre",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Örbyhus",
+        "Geometry": {
+            "WGS84": "POINT (17.703482816120193 60.22932528079214)"
+        },
+        "LocationSignature": "Öh",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Åstorp",
+        "Geometry": {
+            "WGS84": "POINT (12.951115223843647 56.13330497048648)"
+        },
+        "LocationSignature": "Åp",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Älvängen",
+        "Geometry": {
+            "WGS84": "POINT (12.106636408564174 57.95440137131778)"
+        },
+        "LocationSignature": "Än",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Åtvidaberg",
+        "Geometry": {
+            "WGS84": "POINT (16.00206025522281 58.203647880652014)"
+        },
+        "LocationSignature": "Åvg",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Ängelholm",
+        "Geometry": {
+            "WGS84": "POINT (12.853425440320063 56.24676111334818)"
+        },
+        "LocationSignature": "Ä",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Äskekärr",
+        "Geometry": {
+            "WGS84": "POINT (13.608936221931133 58.62605901819057)"
+        },
+        "LocationSignature": "Äsr",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Östra Grevie",
+        "Geometry": {
+            "WGS84": "POINT (13.134462058169955 55.46440567449536)"
+        },
+        "LocationSignature": "Ög",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Örsjö",
+        "Geometry": {
+            "WGS84": "POINT (15.749782017233676 56.6967277555331)"
+        },
+        "LocationSignature": "Örs",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Åkarp",
+        "Geometry": {
+            "WGS84": "POINT (13.108224150276582 55.65729391186111)"
+        },
+        "LocationSignature": "Åk",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Öjervik",
+        "Geometry": {
+            "WGS84": "POINT (13.122478360101043 59.773665351502444)"
+        },
+        "LocationSignature": "Öjr",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Ösmo",
+        "Geometry": {
+            "WGS84": "POINT (17.902643771807412 58.98451424987104)"
+        },
+        "LocationSignature": "Öso",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Åsa",
+        "Geometry": {
+            "WGS84": "POINT (12.13507444082344 57.36429861176986)"
+        },
+        "LocationSignature": "Åsa",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Åmotfors",
+        "Geometry": {
+            "WGS84": "POINT (12.366380780707596 59.76840496369997)"
+        },
+        "LocationSignature": "Åt",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Älvkarleby",
+        "Geometry": {
+            "WGS84": "POINT (17.428060189184563 60.55552967413492)"
+        },
+        "LocationSignature": "Äkb",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Örebro S",
+        "Geometry": {
+            "WGS84": "POINT (15.202467158375073 59.269992557053094)"
+        },
+        "LocationSignature": "Öb",
+        "PlatformLine": [
+            "1",
+            "2",
+            "30"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Örnsköldsvik norra",
+        "Geometry": {
+            "WGS84": "POINT (18.724879373534005 63.306090834562184)"
+        },
+        "LocationSignature": "Ökn",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Överums Bruk",
+        "Geometry": {
+            "WGS84": "POINT (16.31950229864916 57.989751979329924)"
+        },
+        "LocationSignature": "Övmb",
+        "PlatformLine": [
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Östersund C",
+        "Geometry": {
+            "WGS84": "POINT (14.638147585139462 63.17002070733922)"
+        },
+        "LocationSignature": "Ös",
+        "PlatformLine": [
+            "3",
+            "1",
+            "2",
+            "1a",
+            "1b",
+            "2a",
+            "2b"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Älvho",
+        "Geometry": {
+            "WGS84": "POINT (14.747337466605702 61.49795539139601)"
+        },
+        "LocationSignature": "Älo",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Örebro C",
+        "Geometry": {
+            "WGS84": "POINT (15.210956333462374 59.2782140091467)"
+        },
+        "LocationSignature": "Ör",
+        "PlatformLine": [
+            "3",
+            "4",
+            "1",
+            "1a",
+            "1b"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Östertälje",
+        "Geometry": {
+            "WGS84": "POINT (17.658394772630633 59.184989919946844)"
+        },
+        "LocationSignature": "Öte",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Österäng",
+        "Geometry": {
+            "WGS84": "POINT (13.55985044703901 58.634097100051186)"
+        },
+        "LocationSignature": "Öäg",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Åmål",
+        "Geometry": {
+            "WGS84": "POINT (12.698337633501968 59.046439406816006)"
+        },
+        "LocationSignature": "Ål",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Åsarna C",
+        "Geometry": {
+            "WGS84": "POINT (14.374511968718771 62.647139731088146)"
+        },
+        "LocationSignature": "Åsal",
+        "PlatformLine": [
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Ödåkra",
+        "Geometry": {
+            "WGS84": "POINT (12.745100556797613 56.10471250850341)"
+        },
+        "LocationSignature": "Öda",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Älmhult",
+        "Geometry": {
+            "WGS84": "POINT (14.136752817329516 56.54996921844647)"
+        },
+        "LocationSignature": "Äh",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Önnestad",
+        "Geometry": {
+            "WGS84": "POINT (14.016756119481466 56.06669123705537)"
+        },
+        "LocationSignature": "Önd",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Ånge",
+        "Geometry": {
+            "WGS84": "POINT (15.656838659985995 62.52371779619788)"
+        },
+        "LocationSignature": "Åg",
+        "PlatformLine": [
+            "1",
+            "1a",
+            "1b",
+            "2",
+            "2a",
+            "2b",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Älvsjö",
+        "Geometry": {
+            "WGS84": "POINT (18.01126835235629 59.27859023113897)"
+        },
+        "LocationSignature": "Äs",
+        "PlatformLine": [
+            "3",
+            "4",
+            "7",
+            "8"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Älvsbyn",
+        "Geometry": {
+            "WGS84": "POINT (20.993327001954647 65.67824820325042)"
+        },
+        "LocationSignature": "Äy",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Örnsköldsvik C",
+        "Geometry": {
+            "WGS84": "POINT (18.704691643493067 63.288447675720725)"
+        },
+        "LocationSignature": "Ök",
+        "PlatformLine": [
+            "11",
+            "12"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Överby",
+        "Geometry": {
+            "WGS84": "POINT (11.26002209308879 58.84355703902712)"
+        },
+        "LocationSignature": "Övb",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Östervärn",
+        "Geometry": {
+            "WGS84": "POINT (13.033559582580143 55.60681507312105)"
+        },
+        "LocationSignature": "Övn",
+        "PlatformLine": [
+            "1"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Öxnered",
+        "Geometry": {
+            "WGS84": "POINT (12.272577388536199 58.35678699965874)"
+        },
+        "LocationSignature": "Öx",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Åsensbruk",
+        "Geometry": {
+            "WGS84": "POINT (12.42556422201936 58.805352333360794)"
+        },
+        "LocationSignature": "Åb"
+    },
+    {
+        "AdvertisedLocationName": "Årstaberg",
+        "Geometry": {
+            "WGS84": "POINT (18.027693219158454 59.2994166097003)"
+        },
+        "LocationSignature": "Åbe",
+        "PlatformLine": [
+            "2",
+            "3"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Ängelsberg",
+        "Geometry": {
+            "WGS84": "POINT (16.009245690118707 59.95698077920842)"
+        },
+        "LocationSignature": "Äbg",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Svalöv",
+        "Geometry": {
+            "WGS84": "POINT (13.110517062821998 55.913514219560604)"
+        },
+        "LocationSignature": "Sal",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Billesholm",
+        "Geometry": {
+            "WGS84": "POINT (12.976830160760777 56.05640540346406)"
+        },
+        "LocationSignature": "Bih",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Kågeröd",
+        "Geometry": {
+            "WGS84": "POINT (13.082759740945544 56.00153406201346)"
+        },
+        "LocationSignature": "Kd",
+        "PlatformLine": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Lissabon",
+        "Geometry": {
+            "WGS84": "POINT (-9.157293845631589 38.69603691647582)"
+        },
+        "LocationSignature": "Pt.lis"
+    },
+    {
+        "AdvertisedLocationName": "Amsterdam",
+        "Geometry": {
+            "WGS84": "POINT (4.879368963100642 52.36727035907419)"
+        },
+        "LocationSignature": "Nl.ams"
+    },
+    {
+        "AdvertisedLocationName": "Väse",
+        "Geometry": {
+            "WGS84": "POINT (13.853246879190458 59.38163802328396)"
+        },
+        "LocationSignature": "Ve",
+        "PlatformLine": [
+            "2"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Borås C",
+        "Geometry": {
+            "WGS84": "POINT (12.931025017416324 57.72033164629185)"
+        },
+        "LocationSignature": "Bsc",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Karlstad C",
+        "Geometry": {
+            "WGS84": "POINT (13.499025373646646 59.37789093051029)"
+        },
+        "LocationSignature": "Ksc",
+        "PlatformLine": [
+            "20",
+            "21",
+            "1",
+            "1a",
+            "1b"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Mora C",
+        "Geometry": {
+            "WGS84": "POINT (14.559096105462443 61.00871230738821)"
+        },
+        "LocationSignature": "Mrc",
+        "PlatformLine": [
+            "1",
+            "2",
+            "4"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Schwarzach St Veit",
+        "Geometry": {
+            "WGS84": "POINT (13.151710004071145 47.3204799938716)"
+        },
+        "LocationSignature": "At.Sch"
+    },
+    {
+        "AdvertisedLocationName": "Zell am See",
+        "Geometry": {
+            "WGS84": "POINT (12.79444001084209 47.32555999510242)"
+        },
+        "LocationSignature": "At.zel"
+    },
+    {
+        "AdvertisedLocationName": "Wörgl",
+        "Geometry": {
+            "WGS84": "POINT (12.061740004664617 47.48905999449431)"
+        },
+        "LocationSignature": "At.wör"
+    },
+    {
+        "AdvertisedLocationName": "Dresden",
+        "Geometry": {
+            "WGS84": "POINT (13.738320007875798 51.050889996228044)"
+        },
+        "LocationSignature": "De.dre"
+    },
+    {
+        "AdvertisedLocationName": "München",
+        "Geometry": {
+            "WGS84": "POINT (11.575490007113128 48.13742999178437)"
+        },
+        "LocationSignature": "De.mun"
+    },
+    {
+        "AdvertisedLocationName": "Blgc",
+        "Geometry": {
+            "WGS84": "POINT (15.42547212652746 60.48294313492728)"
+        },
+        "LocationSignature": "Blgc",
+        "PlatformLine": [
+            "2",
+            "3",
+            "4",
+            "5",
+            "2a",
+            "2b"
+        ]
+    },
+    {
+        "AdvertisedLocationName": "Salzburg",
+        "Geometry": {
+            "WGS84": "POINT (13.038425455069344 47.79615550218493)"
+        },
+        "LocationSignature": "At.Sal"
+    },
+    {
+        "AdvertisedLocationName": "Odense",
+        "Geometry": {
+            "WGS84": "POINT (10.399292421147312 55.4117096636631)"
+        },
+        "LocationSignature": "Dk.ode"
+    },
+    {
+        "AdvertisedLocationName": "Padborg",
+        "Geometry": {
+            "WGS84": "POINT (9.399868418160866 54.84079173940873)"
+        },
+        "LocationSignature": "Dk.pad"
+    },
+    {
+        "AdvertisedLocationName": "Hamburg-Altona",
+        "Geometry": {
+            "WGS84": "POINT (9.934901912570869 53.552469109401855)"
+        },
+        "LocationSignature": "De.alt"
+    },
+    {
+        "AdvertisedLocationName": "Hrc",
+        "Geometry": {
+            "WGS84": "POINT (13.02094869281716 58.07905700496917)"
+        },
+        "LocationSignature": "Hrc",
+        "PlatformLine": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+        ]
+    }
+]

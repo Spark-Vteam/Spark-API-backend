@@ -1,0 +1,33 @@
+version: "3"
+networks:
+  dbwebb:
+
+services:
+  db:
+    build:
+      context: ./Spark-mysql
+      dockerfile: Dockerfile
+    container_name: mysql-db
+    restart: always
+    ports:
+      - 3308:3306
+    networks:
+      dbwebb:
+
+  server:
+    build:
+      context: ./Spark-API-v1
+      target: builder
+      dockerfile: Dockerfile
+    container_name: api-server
+    restart: always
+    depends_on:
+      - db
+    stdin_open: true
+    tty: true
+    ports:
+      - "3000:3000"
+    networks:
+      dbwebb:
+    links:
+      - db:mysql-db
