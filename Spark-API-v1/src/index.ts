@@ -19,7 +19,8 @@ const connection = mysql.createConnection({
  * @param next 
  */
 const logRequest = (req: Request, res: Response, next: NextFunction) => {
-    console.log(req);
+    console.log("HEj");
+    // console.log(req);
     next();
 };
 
@@ -32,7 +33,7 @@ app.get("/", (req: Request, res: Response) => {
 
     connection.query(sql, (err:any, results:any, fields:any) => {
         if (err) throw err;
-        console.log(results);
+        // console.log(results);
         
 
         res.send(results)

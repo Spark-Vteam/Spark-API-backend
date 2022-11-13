@@ -20,6 +20,8 @@ services:
       target: builder
       dockerfile: Dockerfile
     container_name: api-server
+    volumes:
+      - "./Spark-API-v1:/app"
     restart: always
     depends_on:
       - db
