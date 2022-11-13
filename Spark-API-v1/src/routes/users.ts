@@ -1,6 +1,8 @@
-import { Request, Response, Router } from 'express';
+import { Request, Response, Router } from "express";
 const router = Router();
-const sitename = " | Users";
+const sitename = "Users";
+
+const users = require("../models/users.ts");
 
 /**
  * Users ROUTE
@@ -9,12 +11,10 @@ const sitename = " | Users";
  *     summary: Display list of users
  *     description: Render users page
  */
-router.get("/users", (req: Request, res: Response) => {
-    let data = {
-        title: `Välkommen  ${sitename}`,
-    };
+router.get("/users", async (req: Request, res: Response) => {
+    let allUsers = await users.showAllUsers();
 
-    res.send(data);
+    res.send(allUsers);
 });
 
 module.exports = router;
