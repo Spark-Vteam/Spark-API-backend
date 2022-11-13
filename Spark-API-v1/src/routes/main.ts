@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
 const router = Router();
-const sitename = " | Main";
+const sitename = " | Spark API Main";
 
 /**
  * Main ROUTE
@@ -8,6 +8,11 @@ const sitename = " | Main";
  *   get:
  *     summary: Display
  *     description: Render welcome page
+ * @param {Request}  req  The incoming request.
+ * @param {Response} res  The outgoing response.
+ * @param {Function} next Next to call in chain of middleware.
+ *
+ * @returns {void}
  */
 router.get("/", (req: Request, res: Response) => {
     let data = {

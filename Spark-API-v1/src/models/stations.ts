@@ -1,5 +1,5 @@
 module.exports = {
-    showAllUsers: showAllUsers,
+    showAllStations: showAllStations,
 };
 
 const mysql = require('mysql2/promise');
@@ -36,8 +36,8 @@ let db: {
  * @returns {RowDataPacket} Resultset from the query.
  */
 
-async function showAllUsers() {
-    let sql = "SELECT * FROM Users";
+async function showAllStations() {
+    let sql = "SELECT * FROM Stations";
     let res; 
 
     res = await db.query(sql);

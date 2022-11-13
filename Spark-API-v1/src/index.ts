@@ -5,12 +5,14 @@ const app: Application = express();
 const middleware = require("./middleware/index.ts");
 
 const mainRoute = require("./routes/main.ts");
+const stationsRoute = require("./routes/stations.ts");
 const userRoute = require("./routes/users.ts");
 
 app.use(middleware.logIncomingToConsole);
 
 
 app.use('/', mainRoute);
+app.use('/', stationsRoute);
 app.use('/', userRoute);
 
 

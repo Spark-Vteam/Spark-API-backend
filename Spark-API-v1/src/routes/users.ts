@@ -1,8 +1,7 @@
 import { Request, Response, Router } from "express";
 const router = Router();
-const sitename = "Users";
 
-const users = require("../models/users.ts");
+const userModel = require("../models/users.ts");
 
 /**
  * Users ROUTE
@@ -18,7 +17,7 @@ const users = require("../models/users.ts");
  */
 
 router.get("/users", async (req: Request, res: Response) => {
-    let allUsers = await users.showAllUsers();
+    let allUsers = await userModel.showAllUsers();
 
     res.send(allUsers);
 });
