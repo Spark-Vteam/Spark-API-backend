@@ -17,7 +17,7 @@ let db: {
 };
 
 /**
- * Main function.
+ * Main function to connect to database.
  * @async
  * @returns void
  */
