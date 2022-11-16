@@ -1,7 +1,7 @@
 import { Request, Response, Router } from "express";
 const router = Router();
 
-const stationModel = require("../models/stations.ts");
+import stationModel from "../models/station";
 
 /**
  * Stations ROUTE
@@ -15,7 +15,7 @@ const stationModel = require("../models/stations.ts");
  * 
  * @returns {void}
  */
-router.get("/stations", async (req: Request, res: Response) => {
+router.get("/station", async (req: Request, res: Response) => {
     let allStations = await stationModel.showAllStations();
 
     res.send(allStations);

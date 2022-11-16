@@ -2,14 +2,14 @@ import express, { Application, Request, Response, NextFunction } from 'express';
 const port = process.env.PORT || 3000;
 
 const app: Application = express();
-const middleware = require("./middleware/index.ts");
+import middleware from './middleware/index';
+// const middleware = require("./middleware/index.ts");
 
 const mainRoute = require("./routes/main.ts");
-const stationsRoute = require("./routes/stations.ts");
-const userRoute = require("./routes/users.ts");
+const stationsRoute = require("./routes/station.ts");
+const userRoute = require("./routes/user.ts");
 
 app.use(middleware.logIncomingToConsole);
-
 
 app.use('/', mainRoute);
 app.use('/', stationsRoute);

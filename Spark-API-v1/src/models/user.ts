@@ -1,9 +1,7 @@
-module.exports = {
-    showAllStations: showAllStations,
-};
+import mysql from "mysql2/promise";
+import dotenv from "dotenv";
 
-const mysql = require('mysql2/promise');
-require("dotenv").config();
+dotenv.config();
 
 const config = {
     user: process.env.DB_USER,
@@ -30,17 +28,20 @@ let db: {
     });
 })();
 
-/**
- * Function to show all users
- * @async
- * @returns {RowDataPacket} Resultset from the query.
- */
+const userModel = {
+    /**
+     * Function to show all users
+     * @async
+     * @returns {RowDataPacket} Resultset from the query.
+     */
+    showAllUsers: async function showAllUsers() {
+        let sql = "SELECT * FROM Users";
+        let res;
 
-async function showAllStations() {
-    let sql = "SELECT * FROM Stations";
-    let res; 
+        res = await db.query(sql);
 
-    res = await db.query(sql);
-    
-    return res[0];
-}
+        return res[0];
+    },
+};
+
+export default userModel;

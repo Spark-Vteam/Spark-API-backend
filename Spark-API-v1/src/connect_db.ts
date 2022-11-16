@@ -1,27 +1,24 @@
-module.exports = {
-    connectDb: connectDb,
-};
+import mysql from "mysql2/promise";
+import dotenv from "dotenv";
 
-const mysql = require('mysql2/promise');
-require("dotenv").config();
-
-const config = {
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    port: process.env.DB_PORT,
-    host: process.env.DB_HOST
-};
+dotenv.config();
 
 /**
  * Main function to connect to database.
  * @async
  * @returns void
  */
-async function connectDb() {
-    let db: {
-        promise(): unknown; end: () => void; query: (arg0: string) => any; 
+export async function connectDb() {
+    const config = {
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME,
+        port: process.env.DB_PORT,
+        host: process.env.DB_HOST,
     };
+    
+    let db: mysql.Connection;
+
     db = await mysql.createConnection(config);
 
     process.on("exit", () => {

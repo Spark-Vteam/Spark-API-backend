@@ -1,7 +1,7 @@
 import { Request, Response, Router } from "express";
 const router = Router();
 
-const userModel = require("../models/users.ts");
+import userModel from "../models/user";
 
 /**
  * Users ROUTE
@@ -12,11 +12,11 @@ const userModel = require("../models/users.ts");
  * @param {Request}  req  The incoming request.
  * @param {Response} res  The outgoing response.
  * @param {Function} next Next to call in chain of middleware.
- * 
+ *
  * @returns {void}
  */
 
-router.get("/users", async (req: Request, res: Response) => {
+router.get("/user", async (req: Request, res: Response) => {
     let allUsers = await userModel.showAllUsers();
 
     res.send(allUsers);
