@@ -7,13 +7,15 @@ import {logIncomingToConsole} from './middleware/index';
 
 import mainRoute from "./routes/main";
 import stationsRoute from "./routes/station";
-import userRoute from "./routes/user.ts";
+import userRoute from "./routes/user";
+import bikeRoute from "./routes/bike";
 
 app.use(logIncomingToConsole);
 
 app.use('/', mainRoute);
 app.use('/', stationsRoute);
 app.use('/', userRoute);
+app.use('/', bikeRoute);
 
 app.listen(port, logStartUpDetailsToConsole);
 
