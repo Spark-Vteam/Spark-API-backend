@@ -7,6 +7,7 @@ dotenv.config();
  * Main function to connect to database.
  * @async
  * @returns void
+ * WIP - THIS FUNCTION IS NOT CALLED ANYWHERE
  */
 export async function connectDb() {
     const config = {

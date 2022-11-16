@@ -21,4 +21,4 @@ router.get("/station", async (req: Request, res: Response) => {
     res.send(allStations);
 });
 
-module.exports = router;
+export default router;

@@ -22,4 +22,4 @@ router.get("/user", async (req: Request, res: Response) => {
     res.send(allUsers);
 });
 
-module.exports = router;
+export default router;
