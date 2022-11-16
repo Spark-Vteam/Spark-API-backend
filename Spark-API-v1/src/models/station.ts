@@ -15,7 +15,8 @@ let db: {
     promise(): unknown;
     end: () => void;
     query: (arg0: string) => any;
-};/**
+};
+/**
  * Main function to connect to database.
  * @async
  * @returns void
@@ -41,6 +42,13 @@ const stationModel = {
         res = await db.query(sql);
 
         return res[0];
+    },
+    getOneStation: async function getOneStation(id: string) {
+        let sql = `SELECT * FROM Stations WHERE id = ${id}`;
+        let res;
+
+        res = await db.query(sql);
+        return res[0]; 
     },
 };
 
