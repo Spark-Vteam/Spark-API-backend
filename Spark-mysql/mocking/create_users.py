@@ -31,7 +31,7 @@ def generate_user():
     last_name = get_last_name()
     return [first_name, last_name, get_phone_number(), get_email_adress(first_name, last_name), get_balance(), get_password()]
 
-with open('../sql/insert-1users.sql', 'w') as fh:
+with open('../sql/insert-1-users.sql', 'w') as fh:
     fh.write("USE 'mydb'\n")
     fh.write("INSERT INTO Users\n")
     fh.write("    ( FirstName, LastName, PhoneNumber, EmailAdress, Balance, Password )\n")
