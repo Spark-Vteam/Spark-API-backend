@@ -2,7 +2,7 @@
  * General middleware.
  */
 "use strict";
-import express, { Application, Request, Response, NextFunction } from 'express';
+import express, { Application, Request, Response, NextFunction } from "express";
 /**
  * Log incoming requests to console to see who accesses the server
  * on what route.
@@ -13,11 +13,7 @@ import express, { Application, Request, Response, NextFunction } from 'express';
  *
  * @returns {void}
  */
-function logIncomingToConsole(req: Request, res: Response, next: NextFunction) {
+export function logIncomingToConsole(req: Request, res: Response, next: NextFunction) {
     console.info(`Got request on ${req.path} (${req.method}).`);
     next();
 }
-
-module.exports = {
-    logIncomingToConsole: logIncomingToConsole,
-};

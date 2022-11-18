@@ -1,25 +1,25 @@
 import { Request, Response, Router } from "express";
 const router = Router();
-const sitename = " | Spark API Main";
+
+import userModel from "../models/user";
 
 /**
- * Main ROUTE
- * /:
+ * Users ROUTE
+ * /users:
  *   get:
- *     summary: Display
- *     description: Render welcome page
+ *     summary: Display list of users
+ *     description: Render all users from database
  * @param {Request}  req  The incoming request.
  * @param {Response} res  The outgoing response.
  * @param {Function} next Next to call in chain of middleware.
  *
  * @returns {void}
  */
-router.get("/", (req: Request, res: Response) => {
-    let data = {
-        title: `Welcome to the  ${sitename}`,
-    };
 
-    res.send(data);
+router.get("/user", async (req: Request, res: Response) => {
+    let allUsers = await userModel.showAllUsers();
+
+    res.send(allUsers);
 });
 
 export default router;

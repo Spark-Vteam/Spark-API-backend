@@ -2,17 +2,20 @@ import express, { Application, Request, Response, NextFunction } from 'express';
 const port = process.env.PORT || 3000;
 
 const app: Application = express();
-const middleware = require("./middleware/index.ts");
+import {logIncomingToConsole} from './middleware/index';
+// const middleware = require("./middleware/index.ts");
 
-const mainRoute = require("./routes/main.ts");
-const userRoute = require("./routes/users.ts");
+import mainRoute from "./routes/main";
+import stationsRoute from "./routes/station";
+import userRoute from "./routes/user";
+import bikeRoute from "./routes/bike";
 
-app.use(middleware.logIncomingToConsole);
-
+app.use(logIncomingToConsole);
 
 app.use('/', mainRoute);
+app.use('/', stationsRoute);
 app.use('/', userRoute);
-
+app.use('/', bikeRoute);
 
 app.listen(port, logStartUpDetailsToConsole);
 
