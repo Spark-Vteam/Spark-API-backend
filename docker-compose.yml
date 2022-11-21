@@ -20,6 +20,9 @@ services:
       target: builder
       dockerfile: Dockerfile
     container_name: api-server
+    image: spark-backend-server:v1.0
+    env_file:
+      - "./Spark-API-v1/.env"
     volumes:
       - "./Spark-API-v1:/app"
     restart: always

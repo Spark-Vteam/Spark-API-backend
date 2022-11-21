@@ -44,11 +44,14 @@ const getConfig = (): ENV => {
 
 const getSanitzedConfig = (config: ENV): Config => {
     for (const [key, value] of Object.entries(config)) {
+        
         if (value === undefined) {
-            throw new Error(`Missing key ${key} in config.env`);
+            console.log(key,value);
+
+            // throw new Error(`Missing key ${key} in config.env`);
         }
     }
-    return config as unknown as Config;
+    return config as Config;
 };
 
 const config = getConfig();
