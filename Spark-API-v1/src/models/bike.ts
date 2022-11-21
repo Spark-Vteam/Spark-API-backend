@@ -40,9 +40,8 @@ const bikeModel = {
         let res;
 
         res = await db.query(sql);
-        console.log(res[0]);
         
-        // return res[0];
+        return res[0];
     }
 };
 

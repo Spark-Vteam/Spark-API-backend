@@ -8,11 +8,13 @@ const config = {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     port: process.env.DB_PORT,
-    host: process.env.DB_HOST
+    host: process.env.DB_HOST,
 };
 
 let db: {
-    promise(): unknown; end: () => void; query: (arg0: string) => any; 
+    promise(): unknown;
+    end: () => void;
+    query: (arg0: string) => any;
 };
 
 /**
