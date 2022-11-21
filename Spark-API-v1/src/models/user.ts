@@ -16,7 +16,6 @@ let db: {
     end: () => void;
     query: (arg0: string) => any;
 };
-
 /**
  * Main function to connect to database.
  * @async
