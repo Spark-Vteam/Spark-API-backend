@@ -1,28 +1,19 @@
 import mysql from "mysql2/promise";
-import dotenv from "dotenv";
+import config from "../config"
 
-dotenv.config();
-
-const config = {
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    port: process.env.DB_PORT,
-    host: process.env.DB_HOST,
-};
-
-let db: {
-    promise(): unknown;
-    end: () => void;
-    query: (arg0: string) => any;
-};
+let db: mysql.Connection;
 /**
  * Main function to connect to database.
  * @async
  * @returns void
  */
 (async function () {
-    db = await mysql.createConnection(config);
+    db = await mysql.createConnection({
+        host: config.DB_HOST,  
+        user: config.DB_USER,
+        database: config.DB_NAME,
+        password: config.DB_PASSWORD  
+    });
 
     process.on("exit", () => {
         db.end();
