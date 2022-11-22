@@ -381,8 +381,12 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 -- -----------------------------------------------------
 
+-- -----------------------------------------------------
+-- -                 LOG INSERTS                       -
+-- -----------------------------------------------------
+
 --
--- Procedure to insert into log
+-- Procedure to insert into UsersLog
 --
 DROP PROCEDURE IF EXISTS insert_UsersLog;
 DELIMITER ;;
@@ -397,6 +401,129 @@ CREATE PROCEDURE insert_UsersLog(
 	END
     ;;
 DELIMITER ;
+
+--
+-- Procedure to insert into BikesLog
+--
+DROP PROCEDURE IF EXISTS insert_BikesLog;
+DELIMITER ;;
+CREATE PROCEDURE insert_BikesLog(
+    a_Bikes_id INT,
+    a_Event VARCHAR(45),
+    a_Info VARCHAR(45)
+    )
+    BEGIN
+		INSERT INTO BikesLog (Bikes_id, Event, Timestamp, Info)
+        VALUES (a_Bikes_id, a_Event, CURRENT_TIMESTAMP(), a_Info);
+	END
+    ;;
+DELIMITER ;
+
+--
+-- Procedure to insert into ChargersLog
+--
+DROP PROCEDURE IF EXISTS insert_ChargersLog;
+DELIMITER ;;
+CREATE PROCEDURE insert_ChargersLog(
+    a_Chargers_id INT,
+    a_Event VARCHAR(45),
+    a_Info VARCHAR(45)
+    )
+    BEGIN
+		INSERT INTO ChargersLogs (Chargers_id, Event, Timestamp, Info)
+        VALUES (a_Chargers_id, a_Event, CURRENT_TIMESTAMP(), a_Info);
+	END
+    ;;
+DELIMITER ;
+
+--
+-- Procedure to insert into GeofencesLog
+--
+DROP PROCEDURE IF EXISTS insert_GeofencesLog;
+DELIMITER ;;
+CREATE PROCEDURE insert_GeofencesLog(
+    a_Geofences_id INT,
+    a_Event VARCHAR(45),
+    a_Info VARCHAR(45)
+    )
+    BEGIN
+		INSERT INTO GeofencesLog (Geofences_id, Event, Timestamp, Info)
+        VALUES (a_Geofences_id, a_Event, CURRENT_TIMESTAMP(), a_Info);
+	END
+    ;;
+DELIMITER ;
+
+--
+-- Procedure to insert into AdminsLog
+--
+DROP PROCEDURE IF EXISTS insert_AdminsLog;
+DELIMITER ;;
+CREATE PROCEDURE insert_AdminsLog(
+    a_Admins_id INT,
+    a_Event VARCHAR(45),
+    a_Info VARCHAR(45)
+    )
+    BEGIN
+		INSERT INTO AdminsLog (Admins_id, Event, Timestamp, Info)
+        VALUES (a_Admins_id, a_Event, CURRENT_TIMESTAMP(), a_Info);
+	END
+    ;;
+DELIMITER ;
+
+--
+-- Procedure to insert into StationsLog
+--
+DROP PROCEDURE IF EXISTS insert_StationsLog;
+DELIMITER ;;
+CREATE PROCEDURE insert_StationsLog(
+    a_Stations_id INT,
+    a_Event VARCHAR(45),
+    a_Info VARCHAR(45)
+    )
+    BEGIN
+		INSERT INTO StationsLog (Stations_id, Event, Timestamp, Info)
+        VALUES (a_Stations_id, a_Event, CURRENT_TIMESTAMP(), a_Info);
+	END
+    ;;
+DELIMITER ;
+
+--
+-- Procedure to insert into RentsLog
+--
+DROP PROCEDURE IF EXISTS insert_RentsLog;
+DELIMITER ;;
+CREATE PROCEDURE insert_RentsLog(
+    a_Rents_id INT,
+    a_Event VARCHAR(45),
+    a_Info VARCHAR(45)
+    )
+    BEGIN
+		INSERT INTO RentsLog (Rents_id, Event, Timestamp, Info)
+        VALUES (a_Rents_id, a_Event, CURRENT_TIMESTAMP(), a_Info);
+	END
+    ;;
+DELIMITER ;
+
+--
+-- Procedure to insert into InvoicesLog
+--
+DROP PROCEDURE IF EXISTS insert_InvoicesLog;
+DELIMITER ;;
+CREATE PROCEDURE insert_InvoicesLog(
+    a_Invoices_id INT,
+    a_Event VARCHAR(45),
+    a_Info VARCHAR(45)
+    )
+    BEGIN
+		INSERT INTO InvoicesLog (Invoices_id, Event, Timestamp, Info)
+        VALUES (a_Invoices_id, a_Event, CURRENT_TIMESTAMP(), a_Info);
+	END
+    ;;
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- -                 LOG INSERTS                       -
+-- -----------------------------------------------------
 
 -- --
 -- -- Procedure to fetch categories
@@ -416,8 +543,12 @@ DELIMITER ;
 -- -----------------------------------------------------
 -- -----------------------------------------------------
 
+-- -----------------------------------------------------
+-- -                 LOG TRIGGERS                      -
+-- -----------------------------------------------------
+
 --
--- Trigger to update log with product insert events
+-- Trigger to update UsersLog with insert events
 --
 DROP TRIGGER IF EXISTS UsersLog_Insert;
 
