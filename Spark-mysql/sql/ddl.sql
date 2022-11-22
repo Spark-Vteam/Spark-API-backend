@@ -374,3 +374,39 @@ SHOW WARNINGS;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- -                 PROCEDURES                        -
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+
+--
+-- Procedure to insert into log
+--
+DROP PROCEDURE IF EXISTS insert_UsersLog;
+DELIMITER ;;
+CREATE PROCEDURE insert_UsersLog(
+    a_Users_id INT,
+    a_Event VARCHAR(45),
+    a_Timestamp DATETIME,
+    a_Info VARCHAR(45)
+    )
+    BEGIN
+		INSERT INTO UsersLog (Users_id, Event, Timestamp, Info)
+        VALUES (a_Users_id, a_Event, CURRENT_TIMESTAMP(), a_Info);
+	END
+    ;;
+DELIMITER ;
+
+-- --
+-- -- Procedure to fetch categories
+-- --
+-- DROP PROCEDURE IF EXISTS show_prodcat;
+-- DELIMITER ;;
+-- CREATE PROCEDURE show_prodcat()
+-- 	BEGIN
+-- 		SELECT * FROM prodcat;
+-- 	END
+-- ;;
+-- DELIMITER ;
