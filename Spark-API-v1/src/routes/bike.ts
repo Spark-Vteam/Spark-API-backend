@@ -15,7 +15,7 @@ import bikeModel from "../models/bike";
  *
  * @returns {void}
  */
-router.get("/bike", async (req: Request, res: Response) => { 
+router.get("/bike", async (req: Request, res: Response) => {
     let allBikes = await bikeModel.showAllBikes();
     res.send(allBikes);
 });
