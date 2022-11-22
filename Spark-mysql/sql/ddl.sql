@@ -389,7 +389,6 @@ DELIMITER ;;
 CREATE PROCEDURE insert_UsersLog(
     a_Users_id INT,
     a_Event VARCHAR(45),
-    a_Timestamp DATETIME,
     a_Info VARCHAR(45)
     )
     BEGIN
@@ -410,3 +409,20 @@ DELIMITER ;
 -- 	END
 -- ;;
 -- DELIMITER ;
+
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- -                 TRIGGERS                          -
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+
+--
+-- Trigger to update log with product insert events
+--
+DROP TRIGGER IF EXISTS UsersLog_Insert;
+
+CREATE TRIGGER UsersLog_Insert
+AFTER INSERT
+ON Users FOR EACH ROW
+	CALL insert_UsersLog(NEW.id, "created", "New user created");
+
