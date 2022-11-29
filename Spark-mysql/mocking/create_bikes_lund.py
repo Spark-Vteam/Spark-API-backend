@@ -31,9 +31,9 @@ with open('../sql/insert-3-bikes-lund.sql', 'w') as fh:
                 status = 30
             else:
                 if battery < 60 and battery > 53:
-                    status = codes[0]
-                else:
                     status = codes[1]
+                else:
+                    status = codes[0]
             
             speed = 0
             fh.write(f"      ('{positionGen}', '{battery}', '{status}', '{speed}'){separator}\n")
