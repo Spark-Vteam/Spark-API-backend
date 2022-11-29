@@ -540,7 +540,8 @@ DROP PROCEDURE IF EXISTS get_users;
 DELIMITER ;;
 CREATE PROCEDURE get_users()
 	BEGIN
-		SELECT * FROM Users;
+		SELECT * FROM Users
+    WHERE EmailAdress != "DELETED";
 	END
 ;;
 DELIMITER ;
@@ -711,7 +712,11 @@ CREATE PROCEDURE delete_user(
   a_Users_id INT
 )
 	BEGIN
-		DELETE FROM Users
+		UPDATE Users
+    SET FirstName = "DELETED",
+        LastName = "DELETED",
+        PhoneNumber = "DELETED",
+        EmailAdress = "DELETED"
     WHERE id = a_Users_id;
 	END
 ;;
@@ -934,6 +939,29 @@ CREATE PROCEDURE get_bike(
 ;;
 DELIMITER ;
 
+--
+-- Procedure to update bike data
+--
+DROP PROCEDURE IF EXISTS update_bike;
+DELIMITER ;;
+CREATE PROCEDURE update_bike(
+  a_Bikes_id INT,
+  a_Position VARCHAR(45),
+  a_Battery INT,
+  a_Status TINYINT,
+  a_Speed INT
+)
+  BEGIN
+    UPDATE Bikes
+    SET Position = a_Position,
+        Battery = a_Battery,
+        Status = a_Status,
+        Speed = a_Speed
+    WHERE id = a_Bikes_id;
+  END
+;;
+DELIMITER ;
+
 -- -----------------------------------------------------
 -- -                 Invoices                          -
 -- -----------------------------------------------------
@@ -1025,7 +1053,8 @@ DROP PROCEDURE IF EXISTS get_geofences;
 DELIMITER ;;
 CREATE PROCEDURE get_geofences()
 	BEGIN
-		SELECT * FROM Geofences;
+		SELECT * FROM Geofences
+    WHERE Type != 40;
 	END
 ;;
 DELIMITER ;
@@ -1122,7 +1151,8 @@ CREATE PROCEDURE delete_geofence(
   a_Geofences_id TINYINT
 )
   BEGIN
-    DELETE FROM Geofences
+    UPDATE Geofences
+    SET Type = 40
     WHERE id = a_Geofences_id;
   END
 ;;
