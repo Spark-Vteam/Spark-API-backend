@@ -935,6 +935,23 @@ CREATE PROCEDURE get_bike(
 DELIMITER ;
 
 --
+-- Procedure to fetch bikes within a given radius
+--
+DROP PROCEDURE IF EXISTS get_bikes_in_radius;
+DELIMITER ;;
+CREATE PROCEDURE get_bikes_in_radius(
+  a_latitude VARCHAR(45),
+  a_longitude VARCHAR(45),
+  a_radius VARCHAR(45)
+)
+  BEGIN
+    SELECT *, CAST(calculate_distance(a_latitude, a_longitude, a_radius, Position) AS UNSIGNED) AS 'Distance' FROM Bikes
+    WHERE is_point_in_radius(a_latitude, a_longitude, a_radius, Position) = 1;
+  END
+;;
+DELIMITER ;
+
+--
 -- Procedure to update bike data
 --
 DROP PROCEDURE IF EXISTS update_bike;
@@ -1397,6 +1414,75 @@ DETERMINISTIC
       RETURN 20;
     END IF;
     RETURN 10;
+  END
+;;
+DELIMITER ;
+
+--
+-- Split string
+--
+DROP FUNCTION IF EXISTS split_string_by_delimiter;
+DELIMITER ;;
+CREATE FUNCTION split_string_by_delimiter(
+  a_string VARCHAR(45),
+  a_delimiter CHAR(1),
+  a_index TINYINT
+)
+RETURNS VARCHAR(45)
+DETERMINISTIC
+  BEGIN
+    RETURN SUBSTRING_INDEX(a_string, a_delimiter, a_index);
+  END
+;;
+DELIMITER ;
+
+--
+-- Split string
+--
+DROP FUNCTION IF EXISTS calculate_distance;
+DELIMITER ;;
+CREATE FUNCTION calculate_distance(
+  a_center_lat VARCHAR(45),
+  a_center_lon VARCHAR(45),
+  a_radius VARCHAR(45),
+  a_bike_position VARCHAR(45)
+)
+RETURNS VARCHAR(45)
+DETERMINISTIC
+  BEGIN
+    DECLARE var_bike_lat VARCHAR(45);
+    DECLARE var_bike_lon VARCHAR(45);
+    DECLARE var_distance VARCHAR(45);
+    SET var_bike_lat = split_string_by_delimiter(a_bike_position, ",", 1);
+    SET var_bike_lon = split_string_by_delimiter(a_bike_position, ",", -1);
+    SET var_distance = (SELECT ST_Distance_Sphere(point(var_bike_lon, var_bike_lat), point(a_center_lon, a_center_lat)));
+
+    RETURN var_distance;
+  END
+;;
+DELIMITER ;
+
+--
+-- Determine if a bike is within a given radius
+--
+DROP FUNCTION IF EXISTS is_point_in_radius;
+DELIMITER ;;
+CREATE FUNCTION is_point_in_radius(
+  a_center_lat VARCHAR(45),
+  a_center_lon VARCHAR(45),
+  a_radius VARCHAR(45),
+  a_bike_position VARCHAR(45)
+)
+RETURNS TINYINT
+DETERMINISTIC
+  BEGIN
+    DECLARE var_distance VARCHAR(45);
+    SET var_distance = calculate_distance(a_center_lat, a_center_lon, a_radius, a_bike_position);
+    
+    IF CAST(var_distance AS UNSIGNED) < CAST(a_radius AS UNSIGNED) THEN
+      RETURN 1;
+    END IF;
+    RETURN 0;
   END
 ;;
 DELIMITER ;
