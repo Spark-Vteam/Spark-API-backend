@@ -159,7 +159,9 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Invoices` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Users_id` INT NOT NULL,
   `Amount` SMALLINT NULL,
-  `Timestamp` TIMESTAMP NOT NULL,
+  `Created` TIMESTAMP NOT NULL,
+  `Expires` TIMESTAMP NOT NULL,
+  `Paid` TIMESTAMP NULL,
   `Status` TINYINT NULL,
   `Rents_id` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -540,7 +542,8 @@ DROP PROCEDURE IF EXISTS get_users;
 DELIMITER ;;
 CREATE PROCEDURE get_users()
 	BEGIN
-		SELECT * FROM Users;
+		SELECT * FROM Users
+    WHERE EmailAdress != "DELETED";
 	END
 ;;
 DELIMITER ;
@@ -711,7 +714,11 @@ CREATE PROCEDURE delete_user(
   a_Users_id INT
 )
 	BEGIN
-		DELETE FROM Users
+		UPDATE Users
+    SET FirstName = "DELETED",
+        LastName = "DELETED",
+        PhoneNumber = "DELETED",
+        EmailAdress = "DELETED"
     WHERE id = a_Users_id;
 	END
 ;;
@@ -799,19 +806,12 @@ CREATE PROCEDURE update_rent(
     DECLARE var_price SMALLINT(45);
     
     SET var_bike_id = (SELECT Bikes_id FROM Rents WHERE id = a_Rents_id);
-    SELECT var_bike_id;
     SET var_rent_start_timestamp = (SELECT StartTimestamp FROM Rents WHERE id = a_Rents_id);
-    SELECT var_rent_start_timestamp;
     SET var_rent_start = (SELECT Start FROM Rents WHERE id = a_Rents_id);
-    SELECT var_rent_start;
     SET var_bike_position = (SELECT position FROM Bikes WHERE id = var_bike_id);
-    SELECT var_bike_position;
     SET var_duration = Rents_Duration(var_rent_start_timestamp, CURRENT_TIMESTAMP());
-    SELECT var_duration;
     SET var_status = Rents_Status(var_duration, var_rent_start, var_bike_position);
-    SELECT var_status;
     SET var_price = Rents_Price(var_status, var_duration);
-    SELECT var_price;
 
 
 		UPDATE Rents
@@ -934,6 +934,46 @@ CREATE PROCEDURE get_bike(
 ;;
 DELIMITER ;
 
+--
+-- Procedure to fetch bikes within a given radius
+--
+DROP PROCEDURE IF EXISTS get_bikes_in_radius;
+DELIMITER ;;
+CREATE PROCEDURE get_bikes_in_radius(
+  a_latitude VARCHAR(45),
+  a_longitude VARCHAR(45),
+  a_radius VARCHAR(45)
+)
+  BEGIN
+    SELECT *, CAST(calculate_distance(a_latitude, a_longitude, a_radius, Position) AS UNSIGNED) AS 'Distance' FROM Bikes
+    WHERE is_point_in_radius(a_latitude, a_longitude, a_radius, Position) = 1;
+  END
+;;
+DELIMITER ;
+
+--
+-- Procedure to update bike data
+--
+DROP PROCEDURE IF EXISTS update_bike;
+DELIMITER ;;
+CREATE PROCEDURE update_bike(
+  a_Bikes_id INT,
+  a_Position VARCHAR(45),
+  a_Battery INT,
+  a_Status TINYINT,
+  a_Speed INT
+)
+  BEGIN
+    UPDATE Bikes
+    SET Position = a_Position,
+        Battery = a_Battery,
+        Status = a_Status,
+        Speed = a_Speed
+    WHERE id = a_Bikes_id;
+  END
+;;
+DELIMITER ;
+
 -- -----------------------------------------------------
 -- -                 Invoices                          -
 -- -----------------------------------------------------
@@ -1014,6 +1054,32 @@ CREATE PROCEDURE update_invoice_amount(
 ;;
 DELIMITER ;
 
+--
+-- Procedure to create a invoice
+--
+DROP PROCEDURE IF EXISTS create_invoice;
+DELIMITER ;;
+CREATE PROCEDURE create_invoice(
+  a_Rents_id INT,
+  a_Users_id INT,
+  a_Amount SMALLINT,
+  a_Status TINYINT
+)
+  BEGIN
+    DECLARE var_PartialPayment TINYINT;
+    DECLARE var_Expire DATETIME;
+    DECLARE var_Status TINYINT;
+
+    SET var_PartialPayment = (SELECT PartialPayment FROM Users WHERE id = a_Users_id);
+    SET var_Expire = (calculate_invoice_expire(var_PartialPayment));
+    SET var_Status = (calculate_invoice_status(a_Status));
+
+    INSERT INTO Invoices (Users_id, Amount, Created, Expires, Paid, Status, Rents_id)
+    VALUES (a_Users_id, a_Amount, CURRENT_TIMESTAMP(), var_Expire, NULL, var_Status, a_Rents_id);
+  END
+;;
+DELIMITER ;
+
 -- -----------------------------------------------------
 -- -                 GEOFENCES                         -
 -- -----------------------------------------------------
@@ -1025,7 +1091,8 @@ DROP PROCEDURE IF EXISTS get_geofences;
 DELIMITER ;;
 CREATE PROCEDURE get_geofences()
 	BEGIN
-		SELECT * FROM Geofences;
+		SELECT * FROM Geofences
+    WHERE Type != 40;
 	END
 ;;
 DELIMITER ;
@@ -1122,7 +1189,8 @@ CREATE PROCEDURE delete_geofence(
   a_Geofences_id TINYINT
 )
   BEGIN
-    DELETE FROM Geofences
+    UPDATE Geofences
+    SET Type = 40
     WHERE id = a_Geofences_id;
   END
 ;;
@@ -1230,12 +1298,31 @@ ON Users FOR EACH ROW
 
 
 
+
+-- ------------------- Rents ----------------------------
+
+--
+-- Trigger to create a invoice once a Rent is finished
+--
+DROP TRIGGER IF EXISTS Rents_update_create_invoice;
+
+CREATE TRIGGER Rents_update_create_invoice
+AFTER UPDATE
+ON Rents FOR EACH ROW
+   CALL create_invoice(old.id, old.Users_id, new.Price, new.Status);
+
+
+
+
 -- -----------------------------------------------------
 -- -----------------------------------------------------
 -- -                 FUNCTIONS                         -
 -- -----------------------------------------------------
 -- -----------------------------------------------------
 
+--
+-- Calculate the duration of a finished Rent
+--
 DROP FUNCTION IF EXISTS Rents_Duration;
 DELIMITER ;;
 CREATE FUNCTION Rents_Duration(
@@ -1252,6 +1339,9 @@ CREATE FUNCTION Rents_Duration(
 ;;
 DELIMITER ;
 
+--
+-- Calculate status of a finished Rent
+--
 DROP FUNCTION IF EXISTS Rents_Status;
 DELIMITER ;;
 CREATE FUNCTION Rents_Status(
@@ -1270,6 +1360,9 @@ CREATE FUNCTION Rents_Status(
 ;;
 DELIMITER ;
 
+--
+-- Calculate price of finished Rent
+--
 DROP FUNCTION IF EXISTS Rents_Price;
 DELIMITER ;;
 CREATE FUNCTION Rents_Price(
@@ -1284,5 +1377,112 @@ CREATE FUNCTION Rents_Price(
       END IF;
           RETURN (3 * Duration + 15);
     END
+;;
+DELIMITER ;
+
+--
+-- Decide invoice expire date based on users preferred payment plan
+--
+DROP FUNCTION IF EXISTS calculate_invoice_expire;
+DELIMITER ;;
+CREATE FUNCTION calculate_invoice_expire(
+  a_PartialPayment TINYINT
+)
+RETURNS DATETIME
+DETERMINISTIC
+  BEGIN
+    IF a_PartialPayment = 1 THEN
+      RETURN LAST_DAY(CURDATE() + INTERVAL 1 MONTH);
+    END IF;
+    RETURN (CURRENT_TIMESTAMP() + INTERVAL 1 MONTH);
+  END
+;;
+DELIMITER ;
+
+--
+-- Decide invoice Paid status
+--
+DROP FUNCTION IF EXISTS calculate_invoice_status;
+DELIMITER ;;
+CREATE FUNCTION calculate_invoice_status(
+  a_Status TINYINT
+)
+RETURNS TINYINT
+DETERMINISTIC
+  BEGIN
+    IF a_Status = 30 THEN
+      RETURN 20;
+    END IF;
+    RETURN 10;
+  END
+;;
+DELIMITER ;
+
+--
+-- Split string
+--
+DROP FUNCTION IF EXISTS split_string_by_delimiter;
+DELIMITER ;;
+CREATE FUNCTION split_string_by_delimiter(
+  a_string VARCHAR(45),
+  a_delimiter CHAR(1),
+  a_index TINYINT
+)
+RETURNS VARCHAR(45)
+DETERMINISTIC
+  BEGIN
+    RETURN SUBSTRING_INDEX(a_string, a_delimiter, a_index);
+  END
+;;
+DELIMITER ;
+
+--
+-- Split string
+--
+DROP FUNCTION IF EXISTS calculate_distance;
+DELIMITER ;;
+CREATE FUNCTION calculate_distance(
+  a_center_lat VARCHAR(45),
+  a_center_lon VARCHAR(45),
+  a_radius VARCHAR(45),
+  a_bike_position VARCHAR(45)
+)
+RETURNS VARCHAR(45)
+DETERMINISTIC
+  BEGIN
+    DECLARE var_bike_lat VARCHAR(45);
+    DECLARE var_bike_lon VARCHAR(45);
+    DECLARE var_distance VARCHAR(45);
+    SET var_bike_lat = split_string_by_delimiter(a_bike_position, ",", 1);
+    SET var_bike_lon = split_string_by_delimiter(a_bike_position, ",", -1);
+    SET var_distance = (SELECT ST_Distance_Sphere(point(var_bike_lon, var_bike_lat), point(a_center_lon, a_center_lat)));
+
+    RETURN var_distance;
+  END
+;;
+DELIMITER ;
+
+--
+-- Determine if a bike is within a given radius
+--
+DROP FUNCTION IF EXISTS is_point_in_radius;
+DELIMITER ;;
+CREATE FUNCTION is_point_in_radius(
+  a_center_lat VARCHAR(45),
+  a_center_lon VARCHAR(45),
+  a_radius VARCHAR(45),
+  a_bike_position VARCHAR(45)
+)
+RETURNS TINYINT
+DETERMINISTIC
+  BEGIN
+    DECLARE var_distance VARCHAR(45);
+    SET var_distance = calculate_distance(a_center_lat, a_center_lon, a_radius, a_bike_position);
+    
+    IF CAST(var_distance AS UNSIGNED) < CAST(a_radius AS UNSIGNED) THEN
+      RETURN 1;
+    END IF;
+    RETURN 0;
+  END
 ;;
 DELIMITER ;
