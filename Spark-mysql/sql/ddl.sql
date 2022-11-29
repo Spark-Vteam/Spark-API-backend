@@ -159,7 +159,9 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Invoices` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Users_id` INT NOT NULL,
   `Amount` SMALLINT NULL,
-  `Timestamp` TIMESTAMP NOT NULL,
+  `Created` TIMESTAMP NOT NULL,
+  `Expires` TIMESTAMP NOT NULL,
+  `Paid` TIMESTAMP NULL,
   `Status` TINYINT NULL,
   `Rents_id` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -804,19 +806,12 @@ CREATE PROCEDURE update_rent(
     DECLARE var_price SMALLINT(45);
     
     SET var_bike_id = (SELECT Bikes_id FROM Rents WHERE id = a_Rents_id);
-    SELECT var_bike_id;
     SET var_rent_start_timestamp = (SELECT StartTimestamp FROM Rents WHERE id = a_Rents_id);
-    SELECT var_rent_start_timestamp;
     SET var_rent_start = (SELECT Start FROM Rents WHERE id = a_Rents_id);
-    SELECT var_rent_start;
     SET var_bike_position = (SELECT position FROM Bikes WHERE id = var_bike_id);
-    SELECT var_bike_position;
     SET var_duration = Rents_Duration(var_rent_start_timestamp, CURRENT_TIMESTAMP());
-    SELECT var_duration;
     SET var_status = Rents_Status(var_duration, var_rent_start, var_bike_position);
-    SELECT var_status;
     SET var_price = Rents_Price(var_status, var_duration);
-    SELECT var_price;
 
 
 		UPDATE Rents
@@ -1042,6 +1037,32 @@ CREATE PROCEDURE update_invoice_amount(
 ;;
 DELIMITER ;
 
+--
+-- Procedure to create a invoice
+--
+DROP PROCEDURE IF EXISTS create_invoice;
+DELIMITER ;;
+CREATE PROCEDURE create_invoice(
+  a_Rents_id INT,
+  a_Users_id INT,
+  a_Amount SMALLINT,
+  a_Status TINYINT
+)
+  BEGIN
+    DECLARE var_PartialPayment TINYINT;
+    DECLARE var_Expire DATETIME;
+    DECLARE var_Status TINYINT;
+
+    SET var_PartialPayment = (SELECT PartialPayment FROM Users WHERE id = a_Users_id);
+    SET var_Expire = (calculate_invoice_expire(var_PartialPayment));
+    SET var_Status = (calculate_invoice_status(a_Status));
+
+    INSERT INTO Invoices (Users_id, Amount, Created, Expires, Paid, Status, Rents_id)
+    VALUES (a_Users_id, a_Amount, CURRENT_TIMESTAMP(), var_Expire, NULL, var_Status, a_Rents_id);
+  END
+;;
+DELIMITER ;
+
 -- -----------------------------------------------------
 -- -                 GEOFENCES                         -
 -- -----------------------------------------------------
@@ -1260,12 +1281,31 @@ ON Users FOR EACH ROW
 
 
 
+
+-- ------------------- Rents ----------------------------
+
+--
+-- Trigger to create a invoice once a Rent is finished
+--
+DROP TRIGGER IF EXISTS Rents_update_create_invoice;
+
+CREATE TRIGGER Rents_update_create_invoice
+AFTER UPDATE
+ON Rents FOR EACH ROW
+   CALL create_invoice(old.id, old.Users_id, new.Price, new.Status);
+
+
+
+
 -- -----------------------------------------------------
 -- -----------------------------------------------------
 -- -                 FUNCTIONS                         -
 -- -----------------------------------------------------
 -- -----------------------------------------------------
 
+--
+-- Calculate the duration of a finished Rent
+--
 DROP FUNCTION IF EXISTS Rents_Duration;
 DELIMITER ;;
 CREATE FUNCTION Rents_Duration(
@@ -1282,6 +1322,9 @@ CREATE FUNCTION Rents_Duration(
 ;;
 DELIMITER ;
 
+--
+-- Calculate status of a finished Rent
+--
 DROP FUNCTION IF EXISTS Rents_Status;
 DELIMITER ;;
 CREATE FUNCTION Rents_Status(
@@ -1300,6 +1343,9 @@ CREATE FUNCTION Rents_Status(
 ;;
 DELIMITER ;
 
+--
+-- Calculate price of finished Rent
+--
 DROP FUNCTION IF EXISTS Rents_Price;
 DELIMITER ;;
 CREATE FUNCTION Rents_Price(
@@ -1314,5 +1360,43 @@ CREATE FUNCTION Rents_Price(
       END IF;
           RETURN (3 * Duration + 15);
     END
+;;
+DELIMITER ;
+
+--
+-- Decide invoice expire date based on users preferred payment plan
+--
+DROP FUNCTION IF EXISTS calculate_invoice_expire;
+DELIMITER ;;
+CREATE FUNCTION calculate_invoice_expire(
+  a_PartialPayment TINYINT
+)
+RETURNS DATETIME
+DETERMINISTIC
+  BEGIN
+    IF a_PartialPayment = 1 THEN
+      RETURN LAST_DAY(CURDATE() + INTERVAL 1 MONTH);
+    END IF;
+    RETURN (CURRENT_TIMESTAMP() + INTERVAL 1 MONTH);
+  END
+;;
+DELIMITER ;
+
+--
+-- Decide invoice Paid status
+--
+DROP FUNCTION IF EXISTS calculate_invoice_status;
+DELIMITER ;;
+CREATE FUNCTION calculate_invoice_status(
+  a_Status TINYINT
+)
+RETURNS TINYINT
+DETERMINISTIC
+  BEGIN
+    IF a_Status = 30 THEN
+      RETURN 20;
+    END IF;
+    RETURN 10;
+  END
 ;;
 DELIMITER ;
