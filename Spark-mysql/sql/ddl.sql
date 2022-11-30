@@ -33,6 +33,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Users` (
   `EmailAdress` VARCHAR(45) NOT NULL,
   `Balance` INT NOT NULL,
   `Password` VARCHAR(45) NOT NULL,
+  `PartialPayment` TINYINT,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `emailAdress_UNIQUE` (`EmailAdress` ASC) VISIBLE,
   UNIQUE INDEX `PhoneNumber_UNIQUE` (`PhoneNumber` ASC) VISIBLE)
@@ -124,6 +125,7 @@ SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `mydb`.`Rents` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Users_id` INT NOT NULL,
+  `Bikes_id`INT NOT NULL,
   `Start` VARCHAR(45) NOT NULL,
   `Destination` VARCHAR(45) NULL,
   `StartTimestamp` TIMESTAMP NULL,
@@ -132,9 +134,15 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Rents` (
   `Status` TINYINT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Rents_Users1_idx` (`Users_id` ASC) VISIBLE,
+  INDEX `fk_Rents_Bikes1_idx` (`Bikes_id` ASC) VISIBLE,
   CONSTRAINT `fk_Rents_Users1`
     FOREIGN KEY (`Users_id`)
     REFERENCES `mydb`.`Users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Rents_Bikes1`
+    FOREIGN KEY (`Bikes_id`)
+    REFERENCES `mydb`.`Bikes` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -148,10 +156,12 @@ DROP TABLE IF EXISTS `mydb`.`Invoices` ;
 
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `mydb`.`Invoices` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `Users_id` INT NOT NULL,
   `Amount` SMALLINT NULL,
-  `Timestamp` TIMESTAMP NOT NULL,
+  `Created` TIMESTAMP NOT NULL,
+  `Expires` TIMESTAMP NOT NULL,
+  `Paid` TIMESTAMP NULL,
   `Status` TINYINT NULL,
   `Rents_id` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -188,7 +198,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`UsersLog` (
   CONSTRAINT `fk_UsersLog_Users1`
     FOREIGN KEY (`Users_id`)
     REFERENCES `mydb`.`Users` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE RESTRICT -- MIGHT CHANGE LATER
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -340,8 +350,8 @@ DROP TABLE IF EXISTS `mydb`.`Geofences` ;
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `mydb`.`Geofences` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `Coordinates` VARCHAR(45) NOT NULL,
-  `Info` VARCHAR(45) NULL,
+  `Coordinates` TEXT NOT NULL,
+  `Info` VARCHAR(255) NULL,
   `Type` TINYINT NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -374,3 +384,1105 @@ SHOW WARNINGS;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- -                 PROCEDURES                        -
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- -                 LOG INSERTS                       -
+-- -----------------------------------------------------
+
+--
+-- Procedure to insert into UsersLog
+--
+DROP PROCEDURE IF EXISTS insert_UsersLog;
+DELIMITER ;;
+CREATE PROCEDURE insert_UsersLog(
+    a_Users_id INT,
+    a_Event VARCHAR(45),
+    a_Info VARCHAR(45)
+    )
+    BEGIN
+		INSERT INTO UsersLog (Users_id, Event, Timestamp, Info)
+        VALUES (a_Users_id, a_Event, CURRENT_TIMESTAMP(), a_Info);
+	END
+    ;;
+DELIMITER ;
+
+--
+-- Procedure to insert into BikesLog
+--
+DROP PROCEDURE IF EXISTS insert_BikesLog;
+DELIMITER ;;
+CREATE PROCEDURE insert_BikesLog(
+    a_Bikes_id INT,
+    a_Event VARCHAR(45),
+    a_Info VARCHAR(45)
+    )
+    BEGIN
+		INSERT INTO BikesLog (Bikes_id, Event, Timestamp, Info)
+        VALUES (a_Bikes_id, a_Event, CURRENT_TIMESTAMP(), a_Info);
+	END
+    ;;
+DELIMITER ;
+
+--
+-- Procedure to insert into ChargersLog
+--
+DROP PROCEDURE IF EXISTS insert_ChargersLog;
+DELIMITER ;;
+CREATE PROCEDURE insert_ChargersLog(
+    a_Chargers_id INT,
+    a_Event VARCHAR(45),
+    a_Info VARCHAR(45)
+    )
+    BEGIN
+		INSERT INTO ChargersLogs (Chargers_id, Event, Timestamp, Info)
+        VALUES (a_Chargers_id, a_Event, CURRENT_TIMESTAMP(), a_Info);
+	END
+    ;;
+DELIMITER ;
+
+--
+-- Procedure to insert into GeofencesLog
+--
+DROP PROCEDURE IF EXISTS insert_GeofencesLog;
+DELIMITER ;;
+CREATE PROCEDURE insert_GeofencesLog(
+    a_Geofences_id INT,
+    a_Event VARCHAR(45),
+    a_Info VARCHAR(45)
+    )
+    BEGIN
+		INSERT INTO GeofencesLog (Geofences_id, Event, Timestamp, Info)
+        VALUES (a_Geofences_id, a_Event, CURRENT_TIMESTAMP(), a_Info);
+	END
+    ;;
+DELIMITER ;
+
+--
+-- Procedure to insert into AdminsLog
+--
+DROP PROCEDURE IF EXISTS insert_AdminsLog;
+DELIMITER ;;
+CREATE PROCEDURE insert_AdminsLog(
+    a_Admins_id INT,
+    a_Event VARCHAR(45),
+    a_Info VARCHAR(45)
+    )
+    BEGIN
+		INSERT INTO AdminsLog (Admins_id, Event, Timestamp, Info)
+        VALUES (a_Admins_id, a_Event, CURRENT_TIMESTAMP(), a_Info);
+	END
+    ;;
+DELIMITER ;
+
+--
+-- Procedure to insert into StationsLog
+--
+DROP PROCEDURE IF EXISTS insert_StationsLog;
+DELIMITER ;;
+CREATE PROCEDURE insert_StationsLog(
+    a_Stations_id INT,
+    a_Event VARCHAR(45),
+    a_Info VARCHAR(45)
+    )
+    BEGIN
+		INSERT INTO StationsLog (Stations_id, Event, Timestamp, Info)
+        VALUES (a_Stations_id, a_Event, CURRENT_TIMESTAMP(), a_Info);
+	END
+    ;;
+DELIMITER ;
+
+--
+-- Procedure to insert into RentsLog
+--
+DROP PROCEDURE IF EXISTS insert_RentsLog;
+DELIMITER ;;
+CREATE PROCEDURE insert_RentsLog(
+    a_Rents_id INT,
+    a_Event VARCHAR(45),
+    a_Info VARCHAR(45)
+    )
+    BEGIN
+		INSERT INTO RentsLog (Rents_id, Event, Timestamp, Info)
+        VALUES (a_Rents_id, a_Event, CURRENT_TIMESTAMP(), a_Info);
+	END
+    ;;
+DELIMITER ;
+
+--
+-- Procedure to insert into InvoicesLog
+--
+DROP PROCEDURE IF EXISTS insert_InvoicesLog;
+DELIMITER ;;
+CREATE PROCEDURE insert_InvoicesLog(
+    a_Invoices_id INT,
+    a_Event VARCHAR(45),
+    a_Info VARCHAR(45)
+    )
+    BEGIN
+		INSERT INTO InvoicesLog (Invoices_id, Event, Timestamp, Info)
+        VALUES (a_Invoices_id, a_Event, CURRENT_TIMESTAMP(), a_Info);
+	END
+    ;;
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- -                 USERS                             -
+-- -----------------------------------------------------
+
+--
+-- Procedure to fetch Users
+--
+DROP PROCEDURE IF EXISTS get_users;
+DELIMITER ;;
+CREATE PROCEDURE get_users()
+	BEGIN
+		SELECT * FROM Users
+    WHERE EmailAdress != "DELETED";
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to fetch single User
+--
+DROP PROCEDURE IF EXISTS get_user;
+DELIMITER ;;
+CREATE PROCEDURE get_user(
+  a_Users_id INT
+)
+	BEGIN
+		SELECT * FROM Users
+    WHERE id = a_Users_id;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to create a User
+--
+DROP PROCEDURE IF EXISTS create_user;
+DELIMITER ;;
+CREATE PROCEDURE create_user(
+  a_FirstName VARCHAR(45),
+  a_LastName VARCHAR(45),
+  a_PhoneNumber VARCHAR(45),
+  a_EmailAdress VARCHAR(45),
+  a_Password VARCHAR(45)
+)
+	BEGIN
+		INSERT INTO
+      Users (FirstName, LastName, PhoneNumber, EmailAdress, Balance, Password, PartialPayment)
+    VALUES
+      (a_FirstName, a_LastName, a_PhoneNumber, a_EmailAdress, 0, a_Password, 0);
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to update User FirstName
+--
+DROP PROCEDURE IF EXISTS update_user_firstname;
+DELIMITER ;;
+CREATE PROCEDURE update_user_firstname(
+  a_Users_id INT,
+  a_FirstName VARCHAR(45)
+)
+	BEGIN
+		UPDATE Users
+    SET FirstName = a_FirstName
+    WHERE id = a_Users_id;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to update User LastName
+--
+DROP PROCEDURE IF EXISTS update_user_lastname;
+DELIMITER ;;
+CREATE PROCEDURE update_user_lastname(
+  a_Users_id INT,
+  a_LastName VARCHAR(45)
+)
+	BEGIN
+		UPDATE Users
+    SET LastName = a_LastName
+    WHERE id = a_Users_id;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to update User PhoneNumber
+--
+DROP PROCEDURE IF EXISTS update_user_phonenumber;
+DELIMITER ;;
+CREATE PROCEDURE update_user_phonenumber(
+  a_Users_id INT,
+  a_PhoneNumber VARCHAR(45)
+)
+	BEGIN
+		UPDATE Users
+    SET PhoneNumber = a_PhoneNumber
+    WHERE id = a_Users_id;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to update User EmailAdress
+--
+DROP PROCEDURE IF EXISTS update_user_emailadress;
+DELIMITER ;;
+CREATE PROCEDURE update_user_emailadress(
+  a_Users_id INT,
+  a_EmailAdress VARCHAR(45)
+)
+	BEGIN
+		UPDATE Users
+    SET EmailAdress = a_EmailAdress
+    WHERE id = a_Users_id;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to update User Balance
+--
+DROP PROCEDURE IF EXISTS update_user_balance;
+DELIMITER ;;
+CREATE PROCEDURE update_user_balance(
+  a_Users_id INT,
+  a_Amount INT
+)
+	BEGIN
+    DECLARE var_balance INT;
+    SET var_balance = (SELECT Balance FROM Users WHERE id = a_Users_id);
+		UPDATE Users
+    SET Balance = (var_balance + a_Amount)
+    WHERE id = a_Users_id;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to update User Password
+--
+DROP PROCEDURE IF EXISTS update_user_password;
+DELIMITER ;;
+CREATE PROCEDURE update_user_password(
+  a_Users_id INT,
+  a_Password VARCHAR(45)
+)
+	BEGIN
+		UPDATE Users
+    SET Password = a_Password
+    WHERE id = a_Users_id;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to update User PartialPayment
+--
+DROP PROCEDURE IF EXISTS update_user_partial_payment;
+DELIMITER ;;
+CREATE PROCEDURE update_user_partial_payment(
+  a_Users_id INT,
+  a_PartialPayment INT
+)
+	BEGIN
+		UPDATE Users
+    SET PartialPayment = a_PartialPayment
+    WHERE id = a_Users_id;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to delete User
+--
+DROP PROCEDURE IF EXISTS delete_user;
+DELIMITER ;;
+CREATE PROCEDURE delete_user(
+  a_Users_id INT
+)
+	BEGIN
+		UPDATE Users
+    SET FirstName = "DELETED",
+        LastName = "DELETED",
+        PhoneNumber = "DELETED",
+        EmailAdress = "DELETED"
+    WHERE id = a_Users_id;
+	END
+;;
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- -                 RENTS                             -
+-- -----------------------------------------------------
+
+--
+-- Procedure to fetch Rents
+--
+DROP PROCEDURE IF EXISTS get_rents;
+DELIMITER ;;
+CREATE PROCEDURE get_rents()
+	BEGIN
+		SELECT * FROM Rents;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to fetch Rents
+--
+DROP PROCEDURE IF EXISTS get_rent;
+DELIMITER ;;
+CREATE PROCEDURE get_rent(
+  a_Rents_id INT
+)
+	BEGIN
+		SELECT * FROM Rents
+    WHERE id = a_Rents_id;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to fetch Rents by User
+--
+DROP PROCEDURE IF EXISTS get_rents_by_user;
+DELIMITER ;;
+CREATE PROCEDURE get_rents_by_user(
+  a_Users_id INT
+)
+	BEGIN
+		SELECT * FROM Rents
+    WHERE Users_id = a_Users_id;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to fetch Rents
+--
+DROP PROCEDURE IF EXISTS create_rent;
+DELIMITER ;;
+CREATE PROCEDURE create_rent(
+  a_Users_id INT,
+  a_Bikes_id INT
+)
+	BEGIN
+    DECLARE var_bike_position VARCHAR(45);
+    SET var_bike_position = (SELECT position FROM Bikes WHERE id = a_Bikes_id);
+		INSERT INTO Rents (Users_id, Bikes_id, Start, StartTimestamp, Status)
+    VALUES (a_Users_id, a_Bikes_id, var_bike_position, CURRENT_TIMESTAMP(), 10);
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to Update Rents
+--
+DROP PROCEDURE IF EXISTS update_rent;
+DELIMITER ;;
+CREATE PROCEDURE update_rent(
+  a_Rents_id INT
+)
+	BEGIN
+    DECLARE var_bike_id INT;
+    DECLARE var_rent_start_timestamp DATETIME;
+    DECLARE var_rent_start VARCHAR(45);
+    DECLARE var_bike_position VARCHAR(45);
+    DECLARE var_duration SMALLINT;
+    DECLARE var_status TINYINT(45);
+    DECLARE var_price SMALLINT(45);
+    
+    SET var_bike_id = (SELECT Bikes_id FROM Rents WHERE id = a_Rents_id);
+    SET var_rent_start_timestamp = (SELECT StartTimestamp FROM Rents WHERE id = a_Rents_id);
+    SET var_rent_start = (SELECT Start FROM Rents WHERE id = a_Rents_id);
+    SET var_bike_position = (SELECT position FROM Bikes WHERE id = var_bike_id);
+    SET var_duration = Rents_Duration(var_rent_start_timestamp, CURRENT_TIMESTAMP());
+    SET var_status = Rents_Status(var_duration, var_rent_start, var_bike_position);
+    SET var_price = Rents_Price(var_status, var_duration);
+
+
+		UPDATE Rents
+    SET Destination = var_bike_position, DestinationTimestamp = CURRENT_TIMESTAMP(), Price = var_price, Status = var_status
+    WHERE id = a_Rents_id;
+	END
+;;
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- -                 STATIONS                          -
+-- -----------------------------------------------------
+
+--
+-- Procedure to fetch stations
+--
+DROP PROCEDURE IF EXISTS get_stations;
+DELIMITER ;;
+CREATE PROCEDURE get_stations()
+	BEGIN
+		SELECT * FROM Stations;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to fetch single station
+--
+DROP PROCEDURE IF EXISTS get_station;
+DELIMITER ;;
+CREATE PROCEDURE get_station(
+  a_Stations_id INT
+)
+	BEGIN
+		SELECT * FROM Stations
+    WHERE id = a_Stations_id;
+	END
+;;
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- -                 ADMINS                            -
+-- -----------------------------------------------------
+
+--
+-- Procedure to fetch admins
+--
+DROP PROCEDURE IF EXISTS get_admins;
+DELIMITER ;;
+CREATE PROCEDURE get_admins()
+	BEGIN
+		SELECT * FROM Admins;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to fetch single admin
+--
+DROP PROCEDURE IF EXISTS get_admin;
+DELIMITER ;;
+CREATE PROCEDURE get_admin(
+  a_Admins_id INT
+)
+	BEGIN
+		SELECT * FROM Admins
+    WHERE id = a_Admins_id;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to create a admin
+--
+DROP PROCEDURE IF EXISTS create_admin;
+DELIMITER ;;
+CREATE PROCEDURE create_admin(
+  a_FirstName VARCHAR(45),
+  a_LastName VARCHAR(45),
+  a_PhoneNumber VARCHAR(45),
+  a_EmailAdress VARCHAR(45),
+  a_Authority INT,
+  a_Password VARCHAR(45)
+)
+	BEGIN
+		INSERT INTO Admins (FirstName, LastName, PhoneNumber, EmailAdress, Authority, Password)
+    VALUES (a_FirstName, a_LastName, a_PhoneNumber, a_EmailAdress, a_Authority, a_Password);
+	END
+;;
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- -                 Bikes                             -
+-- -----------------------------------------------------
+
+--
+-- Procedure to fetch bikes
+--
+DROP PROCEDURE IF EXISTS get_bikes;
+DELIMITER ;;
+CREATE PROCEDURE get_bikes()
+	BEGIN
+		SELECT * FROM Bikes;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to fetch single bike
+--
+DROP PROCEDURE IF EXISTS get_bike;
+DELIMITER ;;
+CREATE PROCEDURE get_bike(
+  a_Bikes_id INT
+)
+	BEGIN
+		SELECT * FROM Bikes
+    WHERE id = a_Bikes_id;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to fetch bikes within a given radius
+--
+DROP PROCEDURE IF EXISTS get_bikes_in_radius;
+DELIMITER ;;
+CREATE PROCEDURE get_bikes_in_radius(
+  a_latitude VARCHAR(45),
+  a_longitude VARCHAR(45),
+  a_radius VARCHAR(45)
+)
+  BEGIN
+    SELECT *, CAST(calculate_distance(a_latitude, a_longitude, a_radius, Position) AS UNSIGNED) AS 'Distance' FROM Bikes
+    WHERE is_point_in_radius(a_latitude, a_longitude, a_radius, Position) = 1;
+  END
+;;
+DELIMITER ;
+
+--
+-- Procedure to update bike data
+--
+DROP PROCEDURE IF EXISTS update_bike;
+DELIMITER ;;
+CREATE PROCEDURE update_bike(
+  a_Bikes_id INT,
+  a_Position VARCHAR(45),
+  a_Battery INT,
+  a_Status TINYINT,
+  a_Speed INT
+)
+  BEGIN
+    UPDATE Bikes
+    SET Position = a_Position,
+        Battery = a_Battery,
+        Status = a_Status,
+        Speed = a_Speed
+    WHERE id = a_Bikes_id;
+  END
+;;
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- -                 Invoices                          -
+-- -----------------------------------------------------
+
+--
+-- Procedure to fetch Invoices
+--
+DROP PROCEDURE IF EXISTS get_invoices;
+DELIMITER ;;
+CREATE PROCEDURE get_invoices()
+	BEGIN
+		SELECT * FROM Invoices;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to fetch single Invoice
+--
+DROP PROCEDURE IF EXISTS get_invoice;
+DELIMITER ;;
+CREATE PROCEDURE get_invoice(
+  a_Invoices_id INT
+)
+	BEGIN
+		SELECT * FROM Invoices
+    WHERE id = a_Invoices_id;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to fetch Invoices by Users id
+--
+DROP PROCEDURE IF EXISTS get_invoices_by_user;
+DELIMITER ;;
+CREATE PROCEDURE get_invoices_by_user(
+  a_Users_id INT
+)
+	BEGIN
+		SELECT * FROM Invoices
+    WHERE Users_id = a_Users_id;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to Update Invoice Status
+--
+DROP PROCEDURE IF EXISTS update_invoice_status;
+DELIMITER ;;
+CREATE PROCEDURE update_invoice_status(
+  a_Invoices_id INT,
+  a_status TINYINT
+)
+	BEGIN
+		UPDATE Invoices
+    SET Status = a_status
+    WHERE id = a_Invoices_id;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to Update Invoice Amount
+--
+DROP PROCEDURE IF EXISTS update_invoice_amount;
+DELIMITER ;;
+CREATE PROCEDURE update_invoice_amount(
+  a_Invoices_id INT,
+  a_amount SMALLINT
+)
+	BEGIN
+		UPDATE Invoices
+    SET Amount = a_amount
+    WHERE id = a_Invoices_id;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to create a invoice
+--
+DROP PROCEDURE IF EXISTS create_invoice;
+DELIMITER ;;
+CREATE PROCEDURE create_invoice(
+  a_Rents_id INT,
+  a_Users_id INT,
+  a_Amount SMALLINT,
+  a_Status TINYINT
+)
+  BEGIN
+    DECLARE var_PartialPayment TINYINT;
+    DECLARE var_Expire DATETIME;
+    DECLARE var_Status TINYINT;
+
+    SET var_PartialPayment = (SELECT PartialPayment FROM Users WHERE id = a_Users_id);
+    SET var_Expire = (calculate_invoice_expire(var_PartialPayment));
+    SET var_Status = (calculate_invoice_status(a_Status));
+
+    INSERT INTO Invoices (Users_id, Amount, Created, Expires, Paid, Status, Rents_id)
+    VALUES (a_Users_id, a_Amount, CURRENT_TIMESTAMP(), var_Expire, NULL, var_Status, a_Rents_id);
+  END
+;;
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- -                 GEOFENCES                         -
+-- -----------------------------------------------------
+
+--
+-- Procedure to fetch Geofences
+--
+DROP PROCEDURE IF EXISTS get_geofences;
+DELIMITER ;;
+CREATE PROCEDURE get_geofences()
+	BEGIN
+		SELECT * FROM Geofences
+    WHERE Type != 40;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to fetch single Geofence
+--
+DROP PROCEDURE IF EXISTS get_geofence;
+DELIMITER ;;
+CREATE PROCEDURE get_geofence(
+  a_Geofences_id TINYINT
+)
+	BEGIN
+		SELECT * FROM Geofences
+    WHERE id = a_Geofences_id;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to create a Geofence
+--
+DROP PROCEDURE IF EXISTS create_geofence;
+DELIMITER ;;
+CREATE PROCEDURE create_geofence(
+  a_Coordinates TEXT,
+  a_Info VARCHAR(255),
+  a_Type TINYINT
+)
+	BEGIN
+		INSERT INTO Geofences (Coordinates, Info, Type)
+    VALUES (a_Coordinates, a_Info, a_Type);
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to Update Geofence Coordinates
+--
+DROP PROCEDURE IF EXISTS update_geofence_coordinates;
+DELIMITER ;;
+CREATE PROCEDURE update_geofence_coordinates(
+  a_Geofences_id TINYINT,
+  a_Coordinates TEXT
+)
+	BEGIN
+		UPDATE Geofences
+    SET Coordinates = a_Coordinates
+    WHERE id = a_Geofences_id;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to Update Geofence Info
+--
+DROP PROCEDURE IF EXISTS update_geofence_info;
+DELIMITER ;;
+CREATE PROCEDURE update_geofence_info(
+  a_Geofences_id TINYINT,
+  a_Info VARCHAR(255)
+)
+	BEGIN
+		UPDATE Geofences
+    SET Info = a_Info
+    WHERE id = a_Geofences_id;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to Update Geofence Type
+--
+DROP PROCEDURE IF EXISTS update_geofence_type;
+DELIMITER ;;
+CREATE PROCEDURE update_geofence_type(
+  a_Geofences_id TINYINT,
+  a_Type TINYINT
+)
+	BEGIN
+		UPDATE Geofences
+    SET Type = a_Type
+    WHERE id = a_Geofences_id;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to delete a geofence
+--
+DROP PROCEDURE IF EXISTS delete_geofence;
+DELIMITER ;;
+CREATE PROCEDURE delete_geofence(
+  a_Geofences_id TINYINT
+)
+  BEGIN
+    UPDATE Geofences
+    SET Type = 40
+    WHERE id = a_Geofences_id;
+  END
+;;
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- -                 CHARGERS                          -
+-- -----------------------------------------------------
+
+--
+-- Procedure to fetch Chargers
+--
+DROP PROCEDURE IF EXISTS get_chargers;
+DELIMITER ;;
+CREATE PROCEDURE get_chargers()
+	BEGIN
+		SELECT * FROM Chargers;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to fetch single Charger
+--
+DROP PROCEDURE IF EXISTS get_charger;
+DELIMITER ;;
+CREATE PROCEDURE get_charger(
+  a_Chargers_id TINYINT
+)
+	BEGIN
+		SELECT * FROM Chargers
+    WHERE id = a_Chargers_id;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to Update Charger Status
+--
+DROP PROCEDURE IF EXISTS update_charger_status;
+DELIMITER ;;
+CREATE PROCEDURE update_charger_status(
+  a_Chargers_id TINYINT,
+  a_Status VARCHAR(45)
+)
+	BEGIN
+		UPDATE Chargers
+    SET Status = a_status
+    WHERE id = a_Chargers_id;
+	END
+;;
+DELIMITER ;
+
+
+
+
+
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- -                 TRIGGERS                          -
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- -                 LOG TRIGGERS                      -
+-- -----------------------------------------------------
+
+
+
+-- ------------------- UsersLog ------------------------
+
+--
+-- Trigger to update UsersLog with insert events
+--
+DROP TRIGGER IF EXISTS UsersLog_insert;
+
+CREATE TRIGGER UsersLog_insert
+AFTER INSERT
+ON Users FOR EACH ROW
+	CALL insert_UsersLog(NEW.id, "created", "new user created");
+
+--
+-- Trigger to update UsersLog with update events
+--
+DROP TRIGGER IF EXISTS UsersLog_update;
+
+CREATE TRIGGER UsersLog_update
+AFTER UPDATE
+ON Users FOR EACH ROW
+    CALL insert_UsersLog(NEW.id, "updated", "user data updated");
+    
+--
+-- Trigger to update UsersLog with delete events
+--
+DROP TRIGGER IF EXISTS UsersLog_deleted;
+
+CREATE TRIGGER UsersLog_deleted
+AFTER DELETE
+ON Users FOR EACH ROW
+    CALL insert_UsersLog(old.id, "deleted", "user deleted");
+
+
+
+-- ------------------- BikesLog ------------------------
+
+
+
+
+-- ------------------- Rents ----------------------------
+
+--
+-- Trigger to create a invoice once a Rent is finished
+--
+DROP TRIGGER IF EXISTS Rents_update_create_invoice;
+
+CREATE TRIGGER Rents_update_create_invoice
+AFTER UPDATE
+ON Rents FOR EACH ROW
+   CALL create_invoice(old.id, old.Users_id, new.Price, new.Status);
+
+
+
+
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- -                 FUNCTIONS                         -
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+
+--
+-- Calculate the duration of a finished Rent
+--
+DROP FUNCTION IF EXISTS Rents_Duration;
+DELIMITER ;;
+CREATE FUNCTION Rents_Duration(
+  StartTimestamp DATETIME,
+  DestinationTimestamp DATETIME
+    )
+    RETURNS SMALLINT
+    DETERMINISTIC
+    BEGIN
+      DECLARE var_duration SMALLINT;
+      SET var_duration = TIMESTAMPDIFF(minute, StartTimestamp, DestinationTimestamp);
+      RETURN var_duration;
+    END
+;;
+DELIMITER ;
+
+--
+-- Calculate status of a finished Rent
+--
+DROP FUNCTION IF EXISTS Rents_Status;
+DELIMITER ;;
+CREATE FUNCTION Rents_Status(
+  Duration SMALLINT,
+  Start VARCHAR(45),
+  Destination VARCHAR(45)
+    )
+    RETURNS TINYINT
+    DETERMINISTIC
+    BEGIN
+      IF Duration < 10 AND Start = Destination THEN
+        RETURN 30;
+      END IF;
+          RETURN 20;
+    END
+;;
+DELIMITER ;
+
+--
+-- Calculate price of finished Rent
+--
+DROP FUNCTION IF EXISTS Rents_Price;
+DELIMITER ;;
+CREATE FUNCTION Rents_Price(
+  Status TINYINT,
+  Duration SMALLINT
+    )
+    RETURNS SMALLINT
+    DETERMINISTIC
+    BEGIN
+      IF Status = 30 THEN
+        RETURN 0;
+      END IF;
+          RETURN (3 * Duration + 15);
+    END
+;;
+DELIMITER ;
+
+--
+-- Decide invoice expire date based on users preferred payment plan
+--
+DROP FUNCTION IF EXISTS calculate_invoice_expire;
+DELIMITER ;;
+CREATE FUNCTION calculate_invoice_expire(
+  a_PartialPayment TINYINT
+)
+RETURNS DATETIME
+DETERMINISTIC
+  BEGIN
+    IF a_PartialPayment = 1 THEN
+      RETURN LAST_DAY(CURDATE() + INTERVAL 1 MONTH);
+    END IF;
+    RETURN (CURRENT_TIMESTAMP() + INTERVAL 1 MONTH);
+  END
+;;
+DELIMITER ;
+
+--
+-- Decide invoice Paid status
+--
+DROP FUNCTION IF EXISTS calculate_invoice_status;
+DELIMITER ;;
+CREATE FUNCTION calculate_invoice_status(
+  a_Status TINYINT
+)
+RETURNS TINYINT
+DETERMINISTIC
+  BEGIN
+    IF a_Status = 30 THEN
+      RETURN 20;
+    END IF;
+    RETURN 10;
+  END
+;;
+DELIMITER ;
+
+--
+-- Split string
+--
+DROP FUNCTION IF EXISTS split_string_by_delimiter;
+DELIMITER ;;
+CREATE FUNCTION split_string_by_delimiter(
+  a_string VARCHAR(45),
+  a_delimiter CHAR(1),
+  a_index TINYINT
+)
+RETURNS VARCHAR(45)
+DETERMINISTIC
+  BEGIN
+    RETURN SUBSTRING_INDEX(a_string, a_delimiter, a_index);
+  END
+;;
+DELIMITER ;
+
+--
+-- Split string
+--
+DROP FUNCTION IF EXISTS calculate_distance;
+DELIMITER ;;
+CREATE FUNCTION calculate_distance(
+  a_center_lat VARCHAR(45),
+  a_center_lon VARCHAR(45),
+  a_radius VARCHAR(45),
+  a_bike_position VARCHAR(45)
+)
+RETURNS VARCHAR(45)
+DETERMINISTIC
+  BEGIN
+    DECLARE var_bike_lat VARCHAR(45);
+    DECLARE var_bike_lon VARCHAR(45);
+    DECLARE var_distance VARCHAR(45);
+    SET var_bike_lat = split_string_by_delimiter(a_bike_position, ",", 1);
+    SET var_bike_lon = split_string_by_delimiter(a_bike_position, ",", -1);
+    SET var_distance = (SELECT ST_Distance_Sphere(point(var_bike_lon, var_bike_lat), point(a_center_lon, a_center_lat)));
+
+    RETURN var_distance;
+  END
+;;
+DELIMITER ;
+
+--
+-- Determine if a bike is within a given radius
+--
+DROP FUNCTION IF EXISTS is_point_in_radius;
+DELIMITER ;;
+CREATE FUNCTION is_point_in_radius(
+  a_center_lat VARCHAR(45),
+  a_center_lon VARCHAR(45),
+  a_radius VARCHAR(45),
+  a_bike_position VARCHAR(45)
+)
+RETURNS TINYINT
+DETERMINISTIC
+  BEGIN
+    DECLARE var_distance VARCHAR(45);
+    SET var_distance = calculate_distance(a_center_lat, a_center_lon, a_radius, a_bike_position);
+    
+    IF CAST(var_distance AS UNSIGNED) < CAST(a_radius AS UNSIGNED) THEN
+      RETURN 1;
+    END IF;
+    RETURN 0;
+  END
+;;
+DELIMITER ;
