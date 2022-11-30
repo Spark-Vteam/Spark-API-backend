@@ -22,4 +22,22 @@ router.get("/user", async (req: Request, res: Response) => {
     res.send(allUsers);
 });
 
+/**
+ * User ROUTE
+ *  /user/:id:
+ *   get:
+ *     summary: One User
+ *     description: Render User by ID
+ *  @param {Request}  req  The incoming request.
+ *  @param {Response} res  The outgoing response.
+ *  @param {Function} next Next to call in chain of middleware.
+ *
+ * @returns {void}
+ */
+router.get("/user/:id", async (req: Request, res: Response) => {
+    let oneUser = await userModel.getOneUser(req.params.id);
+
+    res.send(oneUser);
+});
+
 export default router;

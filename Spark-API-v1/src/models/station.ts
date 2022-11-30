@@ -27,18 +27,18 @@ const stationModel = {
      * @returns {RowDataPacket} Resultset from the query.
      */
     showAllStations: async function showAllStations() {
-        let sql = "SELECT * FROM Stations";
+        let sql = `CALL get_stations();`;
         let res;
 
         res = await db.query(sql);
 
         return res[0];
     },
-    getOneStation: async function getOneStation(id: string) {
-        let sql = `SELECT * FROM Stations WHERE id = ${id}`;
+    getOneStation: async function getOneStation(stationId: string) {
+        let sql = `CALL get_station(?)`;
         let res;
 
-        res = await db.query(sql);
+        res = await db.query(sql, [stationId]);
         return res[0]; 
     },
 };

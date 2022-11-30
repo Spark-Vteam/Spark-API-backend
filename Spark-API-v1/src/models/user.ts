@@ -27,12 +27,19 @@ const userModel = {
      * @returns {RowDataPacket} Resultset from the query.
      */
     showAllUsers: async function showAllUsers() {
-        let sql = "SELECT * FROM Users";
+        let sql = `CALL get_users();`;
         let res;
 
         res = await db.query(sql);
 
         return res[0];
+    },
+    getOneUser: async function getOneUser(userId: string) {
+        let sql = `CALL get_user(?)`;
+        let res;
+
+        res = await db.query(sql, [userId]);
+        return res[0]; 
     },
 };
 

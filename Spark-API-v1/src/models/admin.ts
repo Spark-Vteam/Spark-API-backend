@@ -20,27 +20,27 @@ let db: mysql.Connection;
     });
 })();
 
-const bikeModel = {
+const adminModel = {
     /**
      * Function to show all stations
      * @async
      * @returns {RowDataPacket} Resultset from the query.
      */
-    showAllBikes: async function showAllBikes() {
-        let sql = `CALL get_bikes();`;
+    showAllAdmins: async function showAllAdmins() {
+        let sql = `CALL get_admins();`;
         let res;
 
         res = await db.query(sql);
 
         return res[0];
     },
-    getOneBike: async function getOneBike(bikeId: string) {
-        let sql = `CALL get_bike(?)`;
+    getOneAdmin: async function getOneAdmin(adminId: string) {
+        let sql = `CALL get_admin(?)`;
         let res;
 
-        res = await db.query(sql, [bikeId]);
+        res = await db.query(sql, [adminId]);
         return res[0];
     },
 };
 
-export default bikeModel;
+export default adminModel;

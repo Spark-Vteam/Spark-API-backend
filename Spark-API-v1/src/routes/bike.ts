@@ -20,4 +20,26 @@ router.get("/bike", async (req: Request, res: Response) => {
     res.send(allBikes);
 });
 
+/**
+ * Bike ROUTE
+ * /:
+ *   get:
+ *     summary: Display information for one bike
+ *     description: Render one bike
+ * @param {Request}  req  The incoming request.
+ * @param {Response} res  The outgoing response.
+ * @param {Function} next Next to call in chain of middleware.
+ *
+ * @returns {Response}
+ */
+router.get("/bike/:id", async (req: Request, res: Response) => {
+    let oneBike = await bikeModel.getOneBike(req.params.id);
+    let oneBikeData = JSON.parse(JSON.stringify(oneBike));
+    
+    if (oneBikeData[0].length === 0) {
+        return res.status(404).send("No bike for that bike Id was found");
+    }
+    return res.status(200).send(oneBike);
+});
+
 export default router;

@@ -20,27 +20,27 @@ let db: mysql.Connection;
     });
 })();
 
-const bikeModel = {
+const chargerModel = {
     /**
-     * Function to show all stations
+     * Function to show all chargers
      * @async
      * @returns {RowDataPacket} Resultset from the query.
      */
-    showAllBikes: async function showAllBikes() {
-        let sql = `CALL get_bikes();`;
+    showAllChargers: async function showAllChargers() {
+        let sql = `CALL get_chargers();`;
         let res;
 
         res = await db.query(sql);
 
         return res[0];
     },
-    getOneBike: async function getOneBike(bikeId: string) {
-        let sql = `CALL get_bike(?)`;
+    getOneCharger: async function getOneCharger(chargerId: string) {
+        let sql = `CALL get_charger(?)`;
         let res;
 
-        res = await db.query(sql, [bikeId]);
+        res = await db.query(sql, [chargerId]);
         return res[0];
     },
 };
 
-export default bikeModel;
+export default chargerModel;

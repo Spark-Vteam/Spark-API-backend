@@ -20,27 +20,29 @@ let db: mysql.Connection;
     });
 })();
 
-const bikeModel = {
-    /**
-     * Function to show all stations
-     * @async
-     * @returns {RowDataPacket} Resultset from the query.
-     */
-    showAllBikes: async function showAllBikes() {
-        let sql = `CALL get_bikes();`;
+const rentModel = {
+    showAllRents: async function showAllRents() {
+        let sql = `CALL get_rents()`;
         let res;
 
         res = await db.query(sql);
 
         return res[0];
     },
-    getOneBike: async function getOneBike(bikeId: string) {
-        let sql = `CALL get_bike(?)`;
+    getOneRent: async function getOneRent(rentId: string) {
+        let sql = `CALL get_rent(?)`;
         let res;
 
-        res = await db.query(sql, [bikeId]);
+        res = await db.query(sql, [rentId]);
+        return res[0];
+    },
+    getRentsByUserId: async function getRentsByUserId(userId: string) {
+        let sql = `CALL get_rents_by_user(?)`;
+        let res;
+
+        res = await db.query(sql, [userId]);
         return res[0];
     },
 };
 
-export default bikeModel;
+export default rentModel;
