@@ -34,11 +34,11 @@ const stationModel = {
 
         return res[0];
     },
-    getOneStation: async function getOneStation(id: string) {
+    getOneStation: async function getOneStation(stationId: string) {
         let sql = `CALL get_station(?)`;
         let res;
 
-        res = await db.query(sql, [id]);
+        res = await db.query(sql, [stationId]);
         return res[0]; 
     },
 };

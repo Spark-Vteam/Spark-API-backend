@@ -14,6 +14,8 @@ import mainRoute from "./routes/main";
 import stationsRoute from "./routes/station";
 import userRoute from "./routes/user";
 import bikeRoute from "./routes/bike";
+import rentRoute from "./routes/rent";
+import adminRoute from "./routes/admin";
 
 app.use(logIncomingToConsole);
 
@@ -21,6 +23,8 @@ app.use("/", mainRoute);
 app.use("/", stationsRoute);
 app.use("/", userRoute);
 app.use("/", bikeRoute);
+app.use("/", rentRoute);
+app.use("/", adminRoute);
 
 app.listen(port, logStartUpDetailsToConsole);
 
