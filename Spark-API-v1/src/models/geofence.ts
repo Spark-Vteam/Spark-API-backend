@@ -20,27 +20,27 @@ let db: mysql.Connection;
     });
 })();
 
-const bikeModel = {
+const geofenceModel = {
     /**
      * Function to show all stations
      * @async
      * @returns {RowDataPacket} Resultset from the query.
      */
-    showAllBikes: async function showAllBikes() {
-        let sql = `CALL get_bikes();`;
+    showAllGeofences: async function showAllGeofences() {
+        let sql = `CALL get_geofences();`;
         let res;
 
         res = await db.query(sql);
 
         return res[0];
     },
-    getOneBike: async function getOneBike(bikeId: string) {
-        let sql = `CALL get_bike(?)`;
+    getOneGeofence: async function getOneGeofence(geofenceId: string) {
+        let sql = `CALL get_geofence(?)`;
         let res;
 
-        res = await db.query(sql, [bikeId]);
+        res = await db.query(sql, [geofenceId]);
         return res[0];
     },
 };
 
-export default bikeModel;
+export default geofenceModel;

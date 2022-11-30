@@ -1,6 +1,5 @@
 import { Request, Response, Router } from "express";
 const router = Router();
-const sitename = "rent | Spark API Main";
 
 import rentModel from "../models/rent";
 

@@ -20,27 +20,34 @@ let db: mysql.Connection;
     });
 })();
 
-const bikeModel = {
+const invoiceModel = {
     /**
      * Function to show all stations
      * @async
      * @returns {RowDataPacket} Resultset from the query.
      */
-    showAllBikes: async function showAllBikes() {
-        let sql = `CALL get_bikes();`;
+    showAllInvoices: async function showAllInvoices() {
+        let sql = `CALL get_invoices();`;
         let res;
 
         res = await db.query(sql);
 
         return res[0];
     },
-    getOneBike: async function getOneBike(bikeId: string) {
-        let sql = `CALL get_bike(?)`;
+    getOneInvoice: async function getOneInvoice(invoiceId: string) {
+        let sql = `CALL get_invoice(?)`;
         let res;
 
-        res = await db.query(sql, [bikeId]);
+        res = await db.query(sql, [invoiceId]);
+        return res[0];
+    },
+    getInvoicesByUserId: async function getOneInvoice(userId: string) {
+        let sql = `CALL get_invoices_by_user(?)`;
+        let res;
+
+        res = await db.query(sql, [userId]);
         return res[0];
     },
 };
 
-export default bikeModel;
+export default invoiceModel;

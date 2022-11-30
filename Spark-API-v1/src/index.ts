@@ -16,6 +16,9 @@ import userRoute from "./routes/user";
 import bikeRoute from "./routes/bike";
 import rentRoute from "./routes/rent";
 import adminRoute from "./routes/admin";
+import invoiceRoute from "./routes/invoice";
+import geofenceRoute from "./routes/geofence";
+import chargerRoute from "./routes/charger";
 
 app.use(logIncomingToConsole);
 
@@ -25,6 +28,9 @@ app.use("/", userRoute);
 app.use("/", bikeRoute);
 app.use("/", rentRoute);
 app.use("/", adminRoute);
+app.use("/", invoiceRoute);
+app.use("/", geofenceRoute);
+app.use("/", chargerRoute);
 
 app.listen(port, logStartUpDetailsToConsole);
 
