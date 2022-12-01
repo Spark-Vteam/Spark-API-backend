@@ -17,9 +17,17 @@ import userModel from "../models/user";
  */
 
 router.get("/user", async (req: Request, res: Response) => {
-    let allUsers = await userModel.showAllUsers();
+    try {
+        let allUsers = await userModel.showAllUsers();
 
-    res.send(allUsers);
+        let allUsersData = JSON.parse(JSON.stringify(allUsers));
+        if (allUsersData[0].length === 0) {
+            return res.status(404).send("No users currently in the system");
+        }
+        return res.status(200).send(allUsers);
+    } catch (error) {
+        return res.status(404).send(error);
+    }
 });
 
 /**
@@ -35,9 +43,13 @@ router.get("/user", async (req: Request, res: Response) => {
  * @returns {void}
  */
 router.get("/user/:id", async (req: Request, res: Response) => {
-    let oneUser = await userModel.getOneUser(req.params.id);
+    try {
+        let oneUser = await userModel.getOneUser(req.params.id);
 
-    res.send(oneUser);
+        res.status(200).send(oneUser);
+    } catch (error) {
+        res.status(404).send(error);
+    }
 });
 
 export default router;

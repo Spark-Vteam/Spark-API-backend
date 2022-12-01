@@ -16,13 +16,18 @@ const sitename = " Admin | Spark API Main";
  * @returns {void}
  */
 router.get("/admin", async (req: Request, res: Response) => {
-    let allAdmins = await adminModel.showAllAdmins();
+    try {
+        let allAdmins = await adminModel.showAllAdmins();
 
-    let allAdminsData = JSON.parse(JSON.stringify(allAdmins));
-    if (allAdminsData[0].length === 0) {
-        return res.status(404).send("No admins currently in the system");
+        let allAdminsData = JSON.parse(JSON.stringify(allAdmins));
+
+        if (allAdminsData[0].length === 0) {
+            return res.status(404).send("No admins currently in the system");
+        }
+        return res.status(200).send(allAdmins);
+    } catch (error) {
+        res.status(404).send(error);
     }
-    return res.status(200).send(allAdmins);
 });
 
 /**
@@ -38,12 +43,18 @@ router.get("/admin", async (req: Request, res: Response) => {
  * @returns {Response}
  */
 router.get("/admin/:id", async (req: Request, res: Response) => {
-    let oneAdmin = await adminModel.getOneAdmin(req.params.id);
-    let oneAdminData = JSON.parse(JSON.stringify(oneAdmin));
-    if (oneAdminData[0].length === 0) {
-        return res.status(404).send("No admin for that admin Id was found");
+    try {
+        let oneAdmin = await adminModel.getOneAdmin(req.params.id);
+        let oneAdminData = JSON.parse(JSON.stringify(oneAdmin));
+        if (oneAdminData[0].length === 0) {
+            return res
+                .status(404)
+                .send(`No admin for Id ${req.params.id} was found`);
+        }
+        return res.status(200).send(oneAdmin);
+    } catch (error) {
+        return res.status(404).send(error);
     }
-    return res.status(200).send(oneAdmin);
 });
 
 export default router;
