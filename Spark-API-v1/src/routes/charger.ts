@@ -15,13 +15,12 @@ const router = Router();
  * @returns {void}
  */
 router.get("/charger", async (req: Request, res: Response) => {
-    let allChargers = await chargerModel.showAllChargers();
-    let allChargersData = JSON.parse(JSON.stringify(allChargers));
-    if (allChargersData[0].length === 0) {
-        return res.status(404).send("No chargers currently in the system");
+    try {
+        let allChargers = await chargerModel.showAllChargers();
+        return res.status(200).send(allChargers);
+    } catch (error) {
+        return res.status(404).send(error);
     }
-
-    return res.status(200).send(allChargers);
 });
 
 /**
@@ -37,21 +36,12 @@ router.get("/charger", async (req: Request, res: Response) => {
  * @returns {void}
  */
 router.get("/charger/:id", async (req: Request, res: Response) => {
-    // DB has 1000 chargers atm
-    // but if changed 
-    // Find better way to render Error msg
-    if (parseInt(req.params.id) > 1000) {
-        return res
-            .status(404)
-            .send(`No Charger with id ${req.params.id} in the system`);
+    try {
+        let oneCharger = await chargerModel.getOneCharger(req.params.id);
+        return res.status(200).send(oneCharger);
+    } catch (error) {
+        return res.status(404).send(error);
     }
-    let oneCharger = await chargerModel.getOneCharger(req.params.id);
-
-    let oneChargerData = JSON.parse(JSON.stringify(oneCharger));
-
-    console.log(oneChargerData);
-
-    return res.status(200).send(oneCharger);
 });
 
 export default router;

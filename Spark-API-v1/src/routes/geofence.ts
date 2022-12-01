@@ -1,7 +1,6 @@
 import { Request, Response, Router } from "express";
 import geofenceModel from "../models/geofence";
 const router = Router();
-const sitename = " | Spark API Main";
 
 /**
  * Geofence ROUTE
@@ -16,12 +15,16 @@ const sitename = " | Spark API Main";
  * @returns {void}
  */
 router.get("/geofence", async (req: Request, res: Response) => {
-    let allGeofences = await geofenceModel.showAllGeofences();
-    let allGeofencesData = JSON.parse(JSON.stringify(allGeofences));
-    if (allGeofencesData[0].length === 0) {
-        return res.status(404).send("No geofences currently in the system");
+    try {
+        let allGeofences = await geofenceModel.showAllGeofences();
+        let allGeofencesData = JSON.parse(JSON.stringify(allGeofences));
+        if (allGeofencesData[0].length === 0) {
+            return res.status(404).send("No geofences currently in the system");
+        }
+        return res.status(200).send(allGeofences);
+    } catch (error) {
+        return res.status(404).send(error);
     }
-    return res.status(200).send(allGeofences);
 });
 
 /**
@@ -37,15 +40,19 @@ router.get("/geofence", async (req: Request, res: Response) => {
  * @returns {void}
  */
 router.get("/geofence/:id", async (req: Request, res: Response) => {
-    let oneGeofence = await geofenceModel.getOneGeofence(req.params.id);
+    try {
+        let oneGeofence = await geofenceModel.getOneGeofence(req.params.id);
 
-    let oneGeofenceData = JSON.parse(JSON.stringify(oneGeofence));
-    if (oneGeofenceData[0].length === 0) {
-        return res
-            .status(404)
-            .send(`No geofence with id ${req.params.id} in the system`);
+        let oneGeofenceData = JSON.parse(JSON.stringify(oneGeofence));
+        if (oneGeofenceData[0].length === 0) {
+            return res
+                .status(404)
+                .send(`No geofence with id ${req.params.id} in the system`);
+        }
+        return res.status(200).send(oneGeofence);
+    } catch (error) {
+        return res.status(404).send(error);
     }
-    return res.status(200).send(oneGeofence);
 });
 
 export default router;

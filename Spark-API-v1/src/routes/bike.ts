@@ -16,8 +16,12 @@ import bikeModel from "../models/bike";
  * @returns {void}
  */
 router.get("/bike", async (req: Request, res: Response) => {
-    let allBikes = await bikeModel.showAllBikes();
-    res.send(allBikes);
+    try {
+        let allBikes = await bikeModel.showAllBikes();
+        return res.status(200).send(allBikes);
+    } catch (error) {
+        return res.status(404).send(error);
+    }
 });
 
 /**
@@ -33,13 +37,13 @@ router.get("/bike", async (req: Request, res: Response) => {
  * @returns {Response}
  */
 router.get("/bike/:id", async (req: Request, res: Response) => {
-    let oneBike = await bikeModel.getOneBike(req.params.id);
-    let oneBikeData = JSON.parse(JSON.stringify(oneBike));
-    
-    if (oneBikeData[0].length === 0) {
-        return res.status(404).send("No bike for that bike Id was found");
+    try {
+        let oneBike = await bikeModel.getOneBike(req.params.id);
+
+        return res.status(200).send(oneBike);
+    } catch (error) {
+        return res.status(404).send(error);
     }
-    return res.status(200).send(oneBike);
 });
 
 export default router;
