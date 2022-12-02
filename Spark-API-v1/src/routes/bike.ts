@@ -1,5 +1,17 @@
 import { Request, Response, Router } from "express";
 const router = Router();
+const Redis = require('redis');
+
+let redisClient = Redis.createClient({
+    legacyMode: true,
+    socket: {
+      port: 6379,
+      host: "cache"
+    }
+});
+      
+redisClient.connect().catch(console.error)
+
 
 import bikeModel from "../models/bike";
 
@@ -15,9 +27,18 @@ import bikeModel from "../models/bike";
  *
  * @returns {void}
  */
-router.get("/bike", async (req: Request, res: Response) => {
-    let allBikes = await bikeModel.showAllBikes();
-    res.send(allBikes);
+router.get("/bike", (req: Request, res: Response) => {
+    redisClient.get('bikes', async (error:Error, bikes:string) => {
+        if (error) console.error(error);
+        if (bikes != null) {
+            console.log("CACHE HIT!");
+            return res.send(JSON.parse(bikes));
+        }
+        console.log("CACHE MISS!");
+        let allBikes = await bikeModel.showAllBikes();
+        redisClient.setex('bikes', 5, JSON.stringify(allBikes));
+        return res.send(allBikes);
+    })
 });
 
 /**

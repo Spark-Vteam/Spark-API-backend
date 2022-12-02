@@ -15,6 +15,18 @@ services:
     networks:
       dbwebb:
 
+  cache:
+    image: redis:6.2-alpine
+    container_name: cache
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning
+    volumes: 
+      - cache:/data
+    networks:
+      dbwebb:
+
   server:
     build:
       context: ./Spark-API-v1
@@ -29,6 +41,7 @@ services:
     restart: always
     depends_on:
       - db
+      - cache
     stdin_open: true
     tty: true
     ports:
@@ -37,3 +50,8 @@ services:
       dbwebb:
     links:
       - db:mysql-db
+      - cache:cache
+
+volumes:
+  cache:
+    driver: local
