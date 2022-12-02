@@ -1,4 +1,6 @@
 import express, { Application, Request, Response, NextFunction } from "express";
+
+import bodyParser from "body-parser";
 const port = process.env.PORT || 4000;
 
 const cors = require("cors");
@@ -9,6 +11,9 @@ import { logIncomingToConsole } from "./middleware/index";
 
 app.use(cors());
 app.options("*", cors());
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 import mainRoute from "./routes/main";
 import stationsRoute from "./routes/station";

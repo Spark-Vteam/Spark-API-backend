@@ -1233,7 +1233,7 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS update_charger_status;
 DELIMITER ;;
 CREATE PROCEDURE update_charger_status(
-  a_Chargers_id TINYINT,
+  a_Chargers_id INT,
   a_Status VARCHAR(45)
 )
 	BEGIN

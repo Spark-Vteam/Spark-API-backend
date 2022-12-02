@@ -1,5 +1,6 @@
 import mysql from "mysql2/promise";
-import config from "../config"
+import config from "../config";
+import { async } from "../connect_db";
 
 let db: mysql.Connection;
 /**
@@ -9,16 +10,17 @@ let db: mysql.Connection;
  */
 (async function () {
     db = await mysql.createConnection({
-        host: config.DB_HOST,  
+        host: config.DB_HOST,
         user: config.DB_USER,
         database: config.DB_NAME,
-        password: config.DB_PASSWORD  
+        password: config.DB_PASSWORD,
     });
 
     process.on("exit", () => {
         db.end();
     });
 })();
+
 
 const userModel = {
     /**
@@ -39,7 +41,17 @@ const userModel = {
         let res;
 
         res = await db.query(sql, [userId]);
-        return res[0]; 
+        return res[0];
+    },
+    updateOneUser: async function updateOneUser(firstName: string) {
+        return firstName;
+    },
+    deleteOneUser: async function deleteOneUser(userId: string) {
+        let sql = `CALL delete_user(?)`;
+        let res;
+
+        res = await db.query(sql, [userId]);
+        return res[0];
     },
 };
 
