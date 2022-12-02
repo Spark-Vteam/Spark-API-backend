@@ -75,12 +75,37 @@ router.get("/user/:id", async (req: Request, res: Response) => {
  * @returns {void}
  */
 router.post("/user/:id", async (req: Request, res: Response) => {
-    const firstName = req.body.firstName;
+    const userInfo = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        phoneNumber: req.body.phoneNumber,
+        emailAdress: req.body.emailAdress,
+    };
     const userID = req.params.id;
-    
-    let oneUser = await userModel.updateUserFirstName(userID, firstName);
 
-    res.status(201).send(oneUser);
+    let newUserInfo = {
+        firstName: await userModel.updateUserFirstName(
+            userID,
+            userInfo.firstName
+        ),
+        lastName: await userModel.updateUserLastName(userID, userInfo.lastName),
+        phoneNumber: await userModel.updateUserPhoneNumber(
+            userID,
+            userInfo.phoneNumber
+        ),
+        emailAdress: await userModel.updateUserEmailAdress(
+            userID,
+            userInfo.emailAdress
+        ),
+    };
+
+    res.status(201).send(
+        `User with id ${userID} has been updated to:\n
+            firstName: ${userInfo.firstName},
+            lastName: ${userInfo.lastName}, 
+            phoneNumber: ${userInfo.phoneNumber}, 
+            emailAdress: ${userInfo.emailAdress}`
+    );
 });
 
 /**

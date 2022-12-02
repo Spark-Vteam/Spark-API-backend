@@ -51,6 +51,30 @@ const userModel = {
 
         return res[0];
     },
+    updateUserLastName: async function updateUserLastName(userId: string, lastName: string) {
+        let sql = `CALL update_user_lastname(?, ?)`;
+        let res;
+        
+        res = await db.query(sql, [userId, lastName]);
+
+        return res[0];
+    },
+    updateUserPhoneNumber: async function updateUserPhoneNumber(userId: string, phoneNumber: string) {
+        let sql = `CALL update_user_phonenumber(?, ?)`;
+        let res;
+        
+        res = await db.query(sql, [userId, phoneNumber]);
+
+        return res[0];
+    },
+    updateUserEmailAdress: async function updateUserEmailAdress(userId: string, emailAdress: string) {
+        let sql = `CALL update_user_emailadress(?, ?)`;
+        let res;
+        
+        res = await db.query(sql, [userId, emailAdress]);
+
+        return res[0];
+    },
     deleteOneUser: async function deleteOneUser(userId: string) {
         let sql = `CALL delete_user(?)`;
         let res;
