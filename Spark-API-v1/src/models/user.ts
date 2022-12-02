@@ -43,8 +43,13 @@ const userModel = {
         res = await db.query(sql, [userId]);
         return res[0];
     },
-    updateOneUser: async function updateOneUser(firstName: string) {
-        return firstName;
+    updateUserFirstName: async function updateUserFirstName(userId: string, firstName: string) {
+        let sql = `CALL update_user_firstname(?, ?)`;
+        let res;
+        
+        res = await db.query(sql, [userId, firstName]);
+
+        return res[0];
     },
     deleteOneUser: async function deleteOneUser(userId: string) {
         let sql = `CALL delete_user(?)`;

@@ -75,8 +75,12 @@ router.get("/user/:id", async (req: Request, res: Response) => {
  * @returns {void}
  */
 router.post("/user/:id", async (req: Request, res: Response) => {
-    const result = req.body;
-    res.status(201).send({data: result});
+    const firstName = req.body.firstName;
+    const userID = req.params.id;
+    
+    let oneUser = await userModel.updateUserFirstName(userID, firstName);
+
+    res.status(201).send(oneUser);
 });
 
 /**
