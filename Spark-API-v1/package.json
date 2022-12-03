@@ -8,7 +8,7 @@
         "start": "node dist/index.js",
         "dev": "ts-node-dev --respawn --clear --transpile-only --ignore-watch node_modules src/index.ts",
         "build": "tsc -p .",
-        "test": "mocha -r ts-node/register test/**/*.spec.ts"
+        "test": "nyc --reporter=html --reporter=text mocha -r ts-node/register test/**/*.spec.ts --exit"
     },
     "keywords": [],
     "author": "",
@@ -30,6 +30,7 @@
         "@types/node": "^18.11.9",
         "chai-http": "^4.3.0",
         "mocha": "^10.1.0",
+        "nyc": "^15.1.0",
         "ts-node-dev": "^2.0.0",
         "typescript": "^4.8.4"
     }

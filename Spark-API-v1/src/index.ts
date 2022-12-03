@@ -37,7 +37,7 @@ app.use("/", invoiceRoute);
 app.use("/", geofenceRoute);
 app.use("/", chargerRoute);
 
-app.listen(port, logStartUpDetailsToConsole);
+const server = app.listen(port, logStartUpDetailsToConsole);
 
 /**
  * Log app details to console when starting up.
@@ -73,3 +73,5 @@ function logStartUpDetailsToConsole() {
     console.info("Available routes are:");
     console.info(routes);
 }
+
+export default server;

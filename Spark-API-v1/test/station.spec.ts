@@ -1,15 +1,27 @@
-import route from "../src/routes/station";
+import chai from "chai";
+import chaiHttp from 'chai-http';
 
-import * as chai from "chai";
-import chaiHttp = require("chai-http");
 import "mocha";
 
-chai.use(chaiHttp);
-const expect = chai.expect;
+const server = require('../src/index');
 
-describe("Calculator Tests", () => {
-    it("should return 5 when 2 is added to 3", () => {
-        const result = 2 + 3;
-        chai.assert.equal(result, 5);
+chai.should();
+
+chai.use(chaiHttp);
+
+describe('Reports', () => {
+    describe('GET /station', () => {
+        it('200 HAPPY PATH', (done) => {
+            chai.request(server)
+                .get("/station")
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.an("object");
+                    // res.body.data.should.be.an("array");
+                    // res.body.data.length.should.be.above(0);
+                    done();
+                });
+        });
     });
 });
+
