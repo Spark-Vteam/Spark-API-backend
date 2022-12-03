@@ -2,6 +2,13 @@ import { Request, Response, Router } from "express";
 import invoiceModel from "../models/invoice";
 const router = Router();
 
+interface InvoiceInfo {
+    RentId: number;
+    UserId: number;
+    Amount: number;
+    Status: number;
+}
+
 /**
  * Invoice ROUTE
  * /:
@@ -48,9 +55,7 @@ router.get("/invoice/:id", async (req: Request, res: Response) => {
         if (oneInvoiceData[0].length === 0) {
             return res
                 .status(404)
-                .send(
-                    `No Invoice with id ${req.params.id} in the system`
-                );
+                .send(`No Invoice with id ${req.params.id} in the system`);
         }
         return res.status(200).send(oneInvoice);
     } catch (error) {
@@ -85,6 +90,101 @@ router.get("/invoice/user/:id", async (req: Request, res: Response) => {
                 );
         }
         return res.status(200).send(userInvoices);
+    } catch (error) {
+        return res.status(404).send(error);
+    }
+});
+
+/**
+ * Invoice ROUTE
+ * /:
+ *   get:
+ *     summary: Create a invoice for a user
+ *     description: Create a invoice for a user with information
+ *     { Rent_id, User_id, PhoneNumber, Amount, Status }
+ * @param {Request}  req  The incoming request.
+ * @param {Response} res  The outgoing response.
+ * @param {Function} next Next to call in chain of middleware.
+ *
+ * @returns {void}
+ */
+router.post("/invoice/user/:id", async (req: Request, res: Response) => {
+    try {
+        const invoiceInfo = {
+            rentId: req.body.rentId,
+            userId: parseInt(req.params.id),
+            amount: req.body.amount,
+            status: req.body.status,
+        };
+
+        const newInvoice = await invoiceModel.createOneInvoice(
+            invoiceInfo.rentId,
+            invoiceInfo.userId,
+            invoiceInfo.amount,
+            invoiceInfo.status
+        );
+
+        res.status(201).send(
+            `New Invoice has been created with information:\n
+                RentId: ${invoiceInfo.rentId},
+                UserId: ${invoiceInfo.userId}, 
+                Amount: ${invoiceInfo.amount}, 
+                Status: ${invoiceInfo.status}`
+        );
+    } catch (error) {
+        return res.status(404).send(error);
+    }
+});
+
+/**
+ * Invoice ROUTE
+ * /:
+ *   get:
+ *     summary: Update invoice status
+ *     description: Update an  status invoice
+ * @param {Request}  req  The incoming request.
+ * @param {Response} res  The outgoing response.
+ * @param {Function} next Next to call in chain of middleware.
+ *
+ * @returns {void}
+ */
+router.post("/invoice/status/:id", async (req: Request, res: Response) => {
+    try {
+        let invoiceId = parseInt(req.params.id);
+        let status = req.body.status;
+
+        let newInvoiceStatus = await invoiceModel.updateInvoiceStatus(invoiceId, status);
+
+        res.status(201).send(
+            `Invoice with id ${invoiceId} has changed status to ${status}`
+        );
+    } catch (error) {
+        return res.status(404).send(error);
+    }
+});
+
+/**
+ * Invoice ROUTE
+ * /:
+ *   post:
+ *     summary: Update invoice amount
+ *     description: Update an invoice amount
+ * @param {Request}  req  The incoming request.
+ * @param {Response} res  The outgoing response.
+ * @param {Function} next Next to call in chain of middleware.
+ *
+ * @returns {void}
+ */
+router.post("/invoice/amount/:id", async (req: Request, res: Response) => {
+    try {
+        let invoiceId = parseInt(req.params.id);
+        let amount = req.body.amount;
+
+        let newInvoiceAmount = await invoiceModel.updateInvoiceAmount(invoiceId, amount);
+
+        res.status(201).send(
+            `Invoice with id ${invoiceId} has changed amount to ${amount}`
+        );
     } catch (error) {
         return res.status(404).send(error);
     }
