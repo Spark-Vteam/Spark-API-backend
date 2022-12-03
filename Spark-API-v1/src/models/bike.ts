@@ -1,3 +1,4 @@
+import { stat } from "fs";
 import mysql from "mysql2/promise";
 import config from "../config";
 
@@ -39,6 +40,19 @@ const bikeModel = {
         let res;
 
         res = await db.query(sql, [bikeId]);
+        return res[0];
+    },
+    updateOneBike: async function updateOneBike(
+        bikeId: number,
+        position: string,
+        battery: number,
+        status: number,
+        speed: number
+    ) {
+        let sql = `CALL update_bike(?, ?, ?, ?, ?)`;
+        let res;
+
+        res = await db.query(sql, [bikeId, position, battery, status, speed]);
         return res[0];
     },
 };
