@@ -67,7 +67,7 @@ router.get("/user/:id", async (req: Request, res: Response) => {
  *  /user/:id:
  *   get:
  *     summary: Update One User
- *     description: Update User by ID
+ *     description: Update User information { firstName, lastName,phoneNumber, emailAdress} by ID
  *  @param {Request}  req  The incoming request.
  *  @param {Response} res  The outgoing response.
  *  @param {Function} next Next to call in chain of middleware.
@@ -106,6 +106,32 @@ router.post("/user/:id", async (req: Request, res: Response) => {
             phoneNumber: ${userInfo.phoneNumber}, 
             emailAdress: ${userInfo.emailAdress}`
     );
+});
+
+/**
+ * User ROUTE
+ *  /user/:id:
+ *   get:
+ *     summary: Update balance of one User
+ *     description: Update User Balance by ID
+ *  @param {Request}  req  The incoming request.
+ *  @param {Response} res  The outgoing response.
+ *  @param {Function} next Next to call in chain of middleware.
+ *
+ * @returns {void}
+ */
+router.post("/user/balance/:id", async (req: Request, res: Response) => {
+    const balance = req.body.balance;
+    const userID = req.params.id;
+    try {
+        let newBalance = await userModel.updateUserBalance(userID, balance);
+
+        res.status(201).send(
+            `User with id ${userID} added ${balance} to its balance`
+        );
+    } catch (error) {
+        res.status(404).send(error);
+    }
 });
 
 /**

@@ -75,6 +75,14 @@ const userModel = {
 
         return res[0];
     },
+    updateUserBalance: async function updateUserBalance(userId: string, balance: number) {
+        let sql = `CALL update_user_balance(?, ?)`;
+        let res;
+        
+        res = await db.query(sql, [userId, balance]);
+
+        return res[0];
+    },
     deleteOneUser: async function deleteOneUser(userId: string) {
         let sql = `CALL delete_user(?)`;
         let res;
