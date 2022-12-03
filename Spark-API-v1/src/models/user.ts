@@ -1,6 +1,5 @@
 import mysql from "mysql2/promise";
 import config from "../config";
-import { async } from "../connect_db";
 
 let db: mysql.Connection;
 /**
