@@ -44,4 +44,32 @@ router.get("/charger/:id", async (req: Request, res: Response) => {
     }
 });
 
+/**
+ * Charger ROUTE
+ * /:
+ *   post:
+ *     summary: Change status of one charger
+ *     description: Update a status for one charger
+ * @param {Request}  req  The incoming request.
+ * @param {Response} res  The outgoing response.
+ * @param {Function} next Next to call in chain of middleware.
+ *
+ * @returns {void}
+ */
+router.post("/charger/:id", async (req: Request, res: Response) => {
+    try {
+        const chargerID = req.params.id;
+        let status = req.body.status;
+
+        let newStatus = await chargerModel.updateStatus(chargerID, status);
+        return res
+            .status(200)
+            .send(
+                `Charger with id ${req.params.id} has changed status to ${status} `
+            );
+    } catch (error) {
+        return res.status(404).send(error);
+    }
+});
+
 export default router;

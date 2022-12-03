@@ -2,6 +2,12 @@ import { Request, Response, Router } from "express";
 import geofenceModel from "../models/geofence";
 const router = Router();
 
+interface GeofenceInfo {
+    Coordinates: string;
+    Info: string;
+    Type: number;
+}
+
 /**
  * Geofence ROUTE
  * /:
@@ -50,6 +56,159 @@ router.get("/geofence/:id", async (req: Request, res: Response) => {
                 .send(`No geofence with id ${req.params.id} in the system`);
         }
         return res.status(200).send(oneGeofence);
+    } catch (error) {
+        return res.status(404).send(error);
+    }
+});
+
+/**
+ * Geofence ROUTE
+ * /:
+ *   get:
+ *     summary: Create one geofence
+ *     description: Create one geofence with information:
+ * { coordinates, info , type }
+ * @param {Request}  req  The incoming request.
+ * @param {Response} res  The outgoing response.
+ * @param {Function} next Next to call in chain of middleware.
+ *
+ * @returns {void}
+ */
+router.post("/geofence", async (req: Request, res: Response) => {
+    try {
+        const geofenceInfo = {
+            coordinates: req.body.coordinates,
+            info: req.body.info,
+            type: req.body.type,
+        };
+
+        const _newGeofence = await geofenceModel.createOneGeofence(
+            geofenceInfo.coordinates,
+            geofenceInfo.info,
+            geofenceInfo.type
+        );
+
+        return res.status(200)
+            .send(`A new geofence has been created with info:\n
+        Coordinates: ${geofenceInfo.coordinates},
+        Info: ${geofenceInfo.info},
+        Type: ${geofenceInfo.type}
+        `);
+    } catch (error) {
+        return res.status(404).send(error);
+    }
+});
+
+/**
+ * Geofence ROUTE
+ * /:
+ *   post:
+ *     summary: Update coordinates for one geofence
+ *     description: Update one geofence with information: { coordinates }
+ * @param {Request}  req  The incoming request.
+ * @param {Response} res  The outgoing response.
+ * @param {Function} next Next to call in chain of middleware.
+ *
+ * @returns {void}
+ */
+router.post(
+    "/geofence/coordinates/:id",
+    async (req: Request, res: Response) => {
+        try {
+            const geofenceId = req.params.id;
+            const coordinates = req.body.coordinates;
+
+            const _newCoordinates = await geofenceModel.updateCoordinates(
+                geofenceId,
+                coordinates
+            );
+
+            return res
+                .status(200)
+                .send(
+                    `Geofence with id has been updated with new coordinates ${coordinates}`
+                );
+        } catch (error) {
+            return res.status(404).send(error);
+        }
+    }
+);
+
+/**
+ * Geofence ROUTE
+ * /:
+ *   post:
+ *     summary: Update info for one geofence
+ *     description: Update one geofence with information: { info }
+ * @param {Request}  req  The incoming request.
+ * @param {Response} res  The outgoing response.
+ * @param {Function} next Next to call in chain of middleware.
+ *
+ * @returns {void}
+ */
+router.post("/geofence/info/:id", async (req: Request, res: Response) => {
+    try {
+        const geofenceId = req.params.id;
+        const info = req.body.info;
+
+        const _newInfo = await geofenceModel.updateInfo(geofenceId, info);
+
+        return res
+            .status(200)
+            .send(`Geofence with id has been updated with new info ${info}`);
+    } catch (error) {
+        return res.status(404).send(error);
+    }
+});
+
+/**
+ * Geofence ROUTE
+ * /:
+ *   post:
+ *     summary: Update type for one geofence
+ *     description: Update one geofence with information: { type }
+ * @param {Request}  req  The incoming request.
+ * @param {Response} res  The outgoing response.
+ * @param {Function} next Next to call in chain of middleware.
+ *
+ * @returns {void}
+ */
+router.post("/geofence/type/:id", async (req: Request, res: Response) => {
+    try {
+        const geofenceId = req.params.id;
+        const type = req.body.type;
+
+        const _newType = await geofenceModel.updateType(geofenceId, type);
+
+        return res
+            .status(200)
+            .send(`Geofence with id has been updated with new type ${type}`);
+    } catch (error) {
+        return res.status(404).send(error);
+    }
+});
+
+/**
+ * Geofence ROUTE
+ * /:
+ *   post:
+ *     summary: Delete one geofence
+ *     description: Delete a geofence with its id
+ * @param {Request}  req  The incoming request.
+ * @param {Response} res  The outgoing response.
+ * @param {Function} next Next to call in chain of middleware.
+ *
+ * @returns {void}
+ */
+router.delete("/geofence/:id", async (req: Request, res: Response) => {
+    try {
+        const geofenceId = req.params.id;
+
+        const deleteGeofence = await geofenceModel.deleteOneGeofence(geofenceId);
+
+        return res
+            .status(200)
+            .send(`Geofence with id ${geofenceId} has been deleted (Type 40)`);
     } catch (error) {
         return res.status(404).send(error);
     }

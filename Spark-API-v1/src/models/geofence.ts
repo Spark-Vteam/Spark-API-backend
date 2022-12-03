@@ -41,6 +41,48 @@ const geofenceModel = {
         res = await db.query(sql, [geofenceId]);
         return res[0];
     },
+    createOneGeofence: async function createOneGeofence(
+        coordinates: string,
+        info: string,
+        type: number
+    ) {
+        let sql = `CALL create_geofence(?, ? ,?)`;
+        let res;
+
+        res = await db.query(sql, [coordinates, info, type]);
+        return res[0];
+    },
+    updateCoordinates: async function updateCoordinates(
+        geofenceId: string,
+        coordinates: string
+    ) {
+        let sql = `CALL update_geofence_coordinates(?, ?)`;
+        let res;
+
+        res = await db.query(sql, [geofenceId, coordinates]);
+        return res[0];
+    },
+    updateInfo: async function updateInfo(geofenceId: string, info: string) {
+        let sql = `CALL update_geofence_info(?, ?)`;
+        let res;
+
+        res = await db.query(sql, [geofenceId, info]);
+        return res[0];
+    },
+    updateType: async function updateType(geofenceId: string, type: number) {
+        let sql = `CALL update_geofence_type(?, ?)`;
+        let res;
+
+        res = await db.query(sql, [geofenceId, type]);
+        return res[0];
+    },
+    deleteOneGeofence: async function deleteOneGeofence(geofenceId: string) {
+        let sql = `CALL delete_geofence(?)`;
+        let res;
+
+        res = await db.query(sql, [geofenceId]);
+        return res[0];
+    },
 };
 
 export default geofenceModel;
