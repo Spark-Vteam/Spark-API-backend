@@ -1,7 +1,15 @@
 import { Request, Response, Router } from "express";
 import adminModel from "../models/admin";
 const router = Router();
-const sitename = " Admin | Spark API Main";
+
+interface AdminInfo {
+    FirstName: string;
+    LastName: string;
+    PhoneNumber: string;
+    EmailAdress: string;
+    Authority: number;
+    Password: string;
+}
 
 /**
  * Admin ROUTE
@@ -52,6 +60,51 @@ router.get("/admin/:id", async (req: Request, res: Response) => {
                 .send(`No admin for Id ${req.params.id} was found`);
         }
         return res.status(200).send(oneAdmin);
+    } catch (error) {
+        return res.status(404).send(error);
+    }
+});
+
+/**
+ * Admin ROUTE
+ *  /admin/:id:
+ *   get:
+ *     summary: Create one admin
+ *     description: Create Admin with information
+ *     { firstName, lastName,phoneNumber, emailAdress }
+ *  @param {Request}  req  The incoming request.
+ *  @param {Response} res  The outgoing response.
+ *  @param {Function} next Next to call in chain of middleware.
+ *
+ * @returns {Response}
+ */
+router.post("/admin", async (req: Request, res: Response) => {
+    try {
+        const adminInfo = {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            phoneNumber: req.body.phoneNumber,
+            emailAdress: req.body.emailAdress,
+            authority: req.body.authority,
+            password: req.body.password,
+        };
+
+        let newAdmin = await adminModel.createOneAdmin(
+            adminInfo.firstName,
+            adminInfo.lastName,
+            adminInfo.phoneNumber,
+            adminInfo.emailAdress,
+            adminInfo.authority,
+            adminInfo.password
+        );
+
+        res.status(201).send(
+            `Admin has been created with the following information:\n
+                firstName: ${adminInfo.firstName},
+                lastName: ${adminInfo.lastName}, 
+                phoneNumber: ${adminInfo.phoneNumber}, 
+                emailAdress: ${adminInfo.emailAdress}`
+        );
     } catch (error) {
         return res.status(404).send(error);
     }

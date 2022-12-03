@@ -41,6 +41,27 @@ const adminModel = {
         res = await db.query(sql, [adminId]);
         return res[0];
     },
+    createOneAdmin: async function createOneAdmin(
+        firstName: string,
+        lastName: string,
+        phoneNumber: number,
+        emailAdress: string,
+        authority: number,
+        password: string,
+    ) {
+        let sql = `CALL create_admin(?, ?, ?, ?, ?, ?)`;
+        let res;
+
+        res = await db.query(sql, [
+            firstName,
+            lastName,
+            phoneNumber,
+            emailAdress,
+            authority,
+            password,
+        ]);
+        return res[0];
+    },
 };
 
 export default adminModel;
