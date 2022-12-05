@@ -18,6 +18,7 @@
     },
     "plugins": ["prettier", "import"],
     "rules": {
+        "@typescript-eslint/no-misused-promises": "error",
         "prettier/prettier": "error",
         "import/extensions": "off",
         "no-console": "off",

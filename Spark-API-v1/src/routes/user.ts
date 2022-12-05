@@ -1,5 +1,4 @@
 import { Request, Response, Router } from 'express';
-import { userInfo } from 'os';
 
 import userModel from '../models/user';
 const router = Router();
@@ -56,9 +55,9 @@ router.get('/user/:id', async (req: Request, res: Response) => {
     try {
         const oneUser = await userModel.getOneUser(req.params.id);
 
-        res.status(200).send(oneUser);
+        return res.status(200).send(oneUser);
     } catch (error) {
-        res.status(404).send(error);
+        return res.status(404).send(error);
     }
 });
 
@@ -75,7 +74,7 @@ router.get('/user/:id', async (req: Request, res: Response) => {
  * @returns {void}
  */
 router.post('/user/:id', async (req: Request, res: Response) => {
-    const userInfo = {
+    const userInfo: UserInfo = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         phoneNumber: req.body.phoneNumber,
@@ -83,14 +82,14 @@ router.post('/user/:id', async (req: Request, res: Response) => {
     };
     const userID = req.params.id;
 
-    const newUserInfo = {
+    const _newUserInfo = {
         firstName: await userModel.updateUserFirstName(userID, userInfo.firstName),
         lastName: await userModel.updateUserLastName(userID, userInfo.lastName),
         phoneNumber: await userModel.updateUserPhoneNumber(userID, userInfo.phoneNumber),
         emailAdress: await userModel.updateUserEmailAdress(userID, userInfo.emailAdress),
     };
 
-    res.status(201).send(
+    return res.status(201).send(
         `User with id ${userID} has been updated to:\n
             firstName: ${userInfo.firstName},
             lastName: ${userInfo.lastName}, 
@@ -111,17 +110,20 @@ router.post('/user/:id', async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.post('/user/balance/:id', async (req: Request, res: Response) => {
-    const balance = req.body.balance;
-    const userID = req.params.id;
-    try {
-        const newBalance = await userModel.updateUserBalance(userID, balance);
+router.post(
+    '/user/balance/:id',
+    (Promise<void> = async (req: Request, res: Response) => {
+        const balance = req.body.balance;
+        const userID = req.params.id;
+        try {
+            const newBalance = await userModel.updateUserBalance(userID, balance);
 
-        res.status(201).send(`User with id ${userID} added ${balance} to its balance`);
-    } catch (error) {
-        res.status(404).send(error);
-    }
-});
+            return res.status(201).send(`User with id ${userID} added ${balance} to its balance`);
+        } catch (error) {
+            return res.status(404).send(error);
+        }
+    })
+);
 
 /**
  * User ROUTE
@@ -133,15 +135,17 @@ router.post('/user/balance/:id', async (req: Request, res: Response) => {
  *  @param {Response} res  The outgoing response.
  *  @param {Function} next Next to call in chain of middleware.
  *
- * @returns {void}
+ * @returns {Promise}
  */
 router.delete('/user/:id', async (req: Request, res: Response) => {
     try {
         const deletedUser = await userModel.deleteOneUser(req.params.id);
+
         const deletedUserData = JSON.parse(JSON.stringify(deletedUser));
-        res.status(204).send(`User with id ${deletedUserData.id} was deleted`);
+
+        return res.status(204).send(`User with id ${deletedUserData.id} was deleted`);
     } catch (error) {
-        res.status(404).send(error);
+        return res.status(404).send(error);
     }
 });
 
