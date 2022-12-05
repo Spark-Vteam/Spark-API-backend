@@ -24,6 +24,7 @@ import adminRoute from "./routes/admin";
 import invoiceRoute from "./routes/invoice";
 import geofenceRoute from "./routes/geofence";
 import chargerRoute from "./routes/charger";
+import authRoute from "./routes/auth";
 
 app.use(logIncomingToConsole);
 
@@ -36,6 +37,7 @@ app.use("/", adminRoute);
 app.use("/", invoiceRoute);
 app.use("/", geofenceRoute);
 app.use("/", chargerRoute);
+app.use("/", authRoute);
 
 app.listen(port, logStartUpDetailsToConsole);
 
