@@ -72,19 +72,25 @@ const userModel = {
         }
     },
     updateUserBalance: async function updateUserBalance(userId: string, balance: number) {
-        const sql = `CALL update_user_balance(?, ?)`;
-        let res;
+        const db = await database.getDb();
+        try {
+            const sql = `CALL update_user_balance(?, ?)`;
+            const res = await db.query(sql, [userId, balance]);
 
-        res = await db.query(sql, [userId, balance]);
-
-        return res[0];
+            return res[0];
+        } finally {
+            await db.end();
+        }
     },
     deleteOneUser: async function deleteOneUser(userId: string) {
-        const sql = `CALL delete_user(?)`;
-        let res;
-
-        res = await db.query(sql, [userId]);
-        return res[0];
+        const db = await database.getDb();
+        try {
+            const sql = `CALL delete_user(?)`;
+            const res = await db.query(sql, [userId]);
+            return res[0];
+        } finally {
+            await db.end();
+        }
     },
 };
 

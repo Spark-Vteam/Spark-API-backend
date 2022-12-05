@@ -74,7 +74,7 @@ router.get('/user/:id', async (req: Request, res: Response) => {
  * @returns {void}
  */
 router.post('/user/:id', async (req: Request, res: Response) => {
-    const userInfo: UserInfo = {
+    const userInfo = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         phoneNumber: req.body.phoneNumber,
@@ -110,20 +110,17 @@ router.post('/user/:id', async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.post(
-    '/user/balance/:id',
-    (Promise<void> = async (req: Request, res: Response) => {
-        const balance = req.body.balance;
-        const userID = req.params.id;
-        try {
-            const newBalance = await userModel.updateUserBalance(userID, balance);
+router.post('/user/balance/:id', async (req: Request, res: Response) => {
+    const balance = req.body.balance;
+    const userID = req.params.id;
+    try {
+        const newBalance = await userModel.updateUserBalance(userID, balance);
 
-            return res.status(201).send(`User with id ${userID} added ${balance} to its balance`);
-        } catch (error) {
-            return res.status(404).send(error);
-        }
-    })
-);
+        return res.status(201).send(`User with id ${userID} added ${balance} to its balance`);
+    } catch (error) {
+        return res.status(404).send(error);
+    }
+});
 
 /**
  * User ROUTE
