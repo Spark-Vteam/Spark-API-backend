@@ -1,6 +1,3 @@
-import mysql from 'mysql2/promise';
-
-import config from '../config';
 import database from '../db/db';
 
 const stationModel = {
@@ -13,9 +10,7 @@ const stationModel = {
         const db = await database.getDb();
         try {
             const sql = `CALL get_stations();`;
-            let res;
-
-            res = await db.query(sql);
+            const res = await db.query(sql);
 
             return res[0];
             // Error always empty . . .
@@ -29,9 +24,8 @@ const stationModel = {
         const db = await database.getDb();
         try {
             const sql = `CALL get_station(?)`;
-            let res;
 
-            res = await db.query(sql, [stationId]);
+            const res = await db.query(sql, [stationId]);
             return res[0];
         } finally {
             await db.end();

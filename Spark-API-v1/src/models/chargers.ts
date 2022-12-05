@@ -1,25 +1,4 @@
-import mysql from 'mysql2/promise';
-
-import config from '../config';
-
-let db: mysql.Connection;
-/**
- * Main function to connect to database.
- * @async
- * @returns void
- */
-(async function () {
-    db = await mysql.createConnection({
-        host: config.DB_HOST,
-        user: config.DB_USER,
-        database: config.DB_NAME,
-        password: config.DB_PASSWORD,
-    });
-
-    process.on('exit', () => {
-        db.end();
-    });
-})();
+import database from '../db/db';
 
 const chargerModel = {
     /**
@@ -28,26 +7,35 @@ const chargerModel = {
      * @returns {RowDataPacket} Resultset from the query.
      */
     showAllChargers: async function showAllChargers() {
-        const sql = `CALL get_chargers();`;
-        let res;
+        const db = await database.getDb();
+        try {
+            const sql = `CALL get_chargers();`;
+            const res = await db.query(sql);
 
-        res = await db.query(sql);
-
-        return res[0];
+            return res[0];
+        } finally {
+            await db.end();
+        }
     },
     getOneCharger: async function getOneCharger(chargerId: string) {
-        const sql = `CALL get_charger(?)`;
-        let res;
-
-        res = await db.query(sql, [chargerId]);
-        return res[0];
+        const db = await database.getDb();
+        try {
+            const sql = `CALL get_charger(?)`;
+            const res = await db.query(sql, [chargerId]);
+            return res[0];
+        } finally {
+            await db.end();
+        }
     },
     updateStatus: async function updateStatus(chargerId: string, status: string) {
-        const sql = `CALL update_charger_status(?, ?)`;
-        let res;
-
-        res = await db.query(sql, [chargerId, status]);
-        return res[0];
+        const db = await database.getDb();
+        try {
+            const sql = `CALL update_charger_status(?, ?)`;
+            const res = await db.query(sql, [chargerId, status]);
+            return res[0];
+        } finally {
+            await db.end();
+        }
     },
 };
 

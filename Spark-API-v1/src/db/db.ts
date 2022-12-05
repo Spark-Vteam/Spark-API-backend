@@ -9,7 +9,7 @@ const database = {
      * @returns void
      */
     getDb: async function getDb() {
-        const db: mysql.Connection;
+        let db: mysql.Connection;
         db = await mysql.createConnection({
             host: config.DB_HOST,
             user: config.DB_USER,

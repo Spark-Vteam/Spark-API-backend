@@ -1,25 +1,4 @@
-import mysql from 'mysql2/promise';
-
-import config from '../config';
-
-let db: mysql.Connection;
-/**
- * Main function to connect to database.
- * @async
- * @returns void
- */
-(async function () {
-    db = await mysql.createConnection({
-        host: config.DB_HOST,
-        user: config.DB_USER,
-        database: config.DB_NAME,
-        password: config.DB_PASSWORD,
-    });
-
-    process.on('exit', () => {
-        db.end();
-    });
-})();
+import database from '../db/db';
 
 const adminModel = {
     /**
@@ -28,19 +7,25 @@ const adminModel = {
      * @returns {RowDataPacket} Resultset from the query.
      */
     showAllAdmins: async function showAllAdmins() {
-        const sql = `CALL get_admins();`;
-        let res;
+        const db = await database.getDb();
+        try {
+            const sql = `CALL get_admins();`;
+            const res = await db.query(sql);
 
-        res = await db.query(sql);
-
-        return res[0];
+            return res[0];
+        } finally {
+            await db.end();
+        }
     },
     getOneAdmin: async function getOneAdmin(adminId: string) {
-        const sql = `CALL get_admin(?)`;
-        let res;
-
-        res = await db.query(sql, [adminId]);
-        return res[0];
+        const db = await database.getDb();
+        try {
+            const sql = `CALL get_admin(?)`;
+            const res = await db.query(sql, [adminId]);
+            return res[0];
+        } finally {
+            await db.end();
+        }
     },
     createOneAdmin: async function createOneAdmin(
         firstName: string,
@@ -50,11 +35,14 @@ const adminModel = {
         authority: number,
         password: string
     ) {
-        const sql = `CALL create_admin(?, ?, ?, ?, ?, ?)`;
-        let res;
-
-        res = await db.query(sql, [firstName, lastName, phoneNumber, emailAdress, authority, password]);
-        return res[0];
+        const db = await database.getDb();
+        try {
+            const sql = `CALL create_admin(?, ?, ?, ?, ?, ?)`;
+            const res = await db.query(sql, [firstName, lastName, phoneNumber, emailAdress, authority, password]);
+            return res[0];
+        } finally {
+            await db.end();
+        }
     },
 };
 

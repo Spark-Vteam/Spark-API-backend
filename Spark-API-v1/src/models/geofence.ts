@@ -1,25 +1,4 @@
-import mysql from 'mysql2/promise';
-
-import config from '../config';
-
-let db: mysql.Connection;
-/**
- * Main function to connect to database.
- * @async
- * @returns void
- */
-(async function () {
-    db = await mysql.createConnection({
-        host: config.DB_HOST,
-        user: config.DB_USER,
-        database: config.DB_NAME,
-        password: config.DB_PASSWORD,
-    });
-
-    process.on('exit', () => {
-        db.end();
-    });
-})();
+import database from '../db/db';
 
 const geofenceModel = {
     /**
@@ -28,54 +7,75 @@ const geofenceModel = {
      * @returns {RowDataPacket} Resultset from the query.
      */
     showAllGeofences: async function showAllGeofences() {
-        const sql = `CALL get_geofences();`;
-        let res;
+        const db = await database.getDb();
+        try {
+            const sql = `CALL get_geofences();`;
+            const res = await db.query(sql);
 
-        res = await db.query(sql);
-
-        return res[0];
+            return res[0];
+        } finally {
+            await db.end();
+        }
     },
     getOneGeofence: async function getOneGeofence(geofenceId: string) {
-        const sql = `CALL get_geofence(?)`;
-        let res;
-
-        res = await db.query(sql, [geofenceId]);
-        return res[0];
+        const db = await database.getDb();
+        try {
+            const sql = `CALL get_geofence(?)`;
+            const res = await db.query(sql, [geofenceId]);
+            return res[0];
+        } finally {
+            await db.end();
+        }
     },
     createOneGeofence: async function createOneGeofence(coordinates: string, info: string, type: number) {
-        const sql = `CALL create_geofence(?, ? ,?)`;
-        let res;
-
-        res = await db.query(sql, [coordinates, info, type]);
-        return res[0];
+        const db = await database.getDb();
+        try {
+            const sql = `CALL create_geofence(?, ? ,?)`;
+            const res = await db.query(sql, [coordinates, info, type]);
+            return res[0];
+        } finally {
+            await db.end();
+        }
     },
     updateCoordinates: async function updateCoordinates(geofenceId: string, coordinates: string) {
-        const sql = `CALL update_geofence_coordinates(?, ?)`;
-        let res;
-
-        res = await db.query(sql, [geofenceId, coordinates]);
-        return res[0];
+        const db = await database.getDb();
+        try {
+            const sql = `CALL update_geofence_coordinates(?, ?)`;
+            const res = await db.query(sql, [geofenceId, coordinates]);
+            return res[0];
+        } finally {
+            await db.end();
+        }
     },
     updateInfo: async function updateInfo(geofenceId: string, info: string) {
-        const sql = `CALL update_geofence_info(?, ?)`;
-        let res;
-
-        res = await db.query(sql, [geofenceId, info]);
-        return res[0];
+        const db = await database.getDb();
+        try {
+            const sql = `CALL update_geofence_info(?, ?)`;
+            const res = await db.query(sql, [geofenceId, info]);
+            return res[0];
+        } finally {
+            await db.end();
+        }
     },
     updateType: async function updateType(geofenceId: string, type: number) {
-        const sql = `CALL update_geofence_type(?, ?)`;
-        let res;
-
-        res = await db.query(sql, [geofenceId, type]);
-        return res[0];
+        const db = await database.getDb();
+        try {
+            const sql = `CALL update_geofence_type(?, ?)`;
+            const res = await db.query(sql, [geofenceId, type]);
+            return res[0];
+        } finally {
+            await db.end();
+        }
     },
     deleteOneGeofence: async function deleteOneGeofence(geofenceId: string) {
-        const sql = `CALL delete_geofence(?)`;
-        let res;
-
-        res = await db.query(sql, [geofenceId]);
-        return res[0];
+        const db = await database.getDb();
+        try {
+            const sql = `CALL delete_geofence(?)`;
+            const res = await db.query(sql, [geofenceId]);
+            return res[0];
+        } finally {
+            await db.end();
+        }
     },
 };
 

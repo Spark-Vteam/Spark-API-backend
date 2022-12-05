@@ -1,25 +1,4 @@
-import mysql from 'mysql2/promise';
-
-import config from '../config';
-
-let db: mysql.Connection;
-/**
- * Main function to connect to database.
- * @async
- * @returns void
- */
-(async function () {
-    db = await mysql.createConnection({
-        host: config.DB_HOST,
-        user: config.DB_USER,
-        database: config.DB_NAME,
-        password: config.DB_PASSWORD,
-    });
-
-    process.on('exit', () => {
-        db.end();
-    });
-})();
+import database from '../db/db';
 
 const userModel = {
     /**
@@ -28,51 +7,69 @@ const userModel = {
      * @returns {RowDataPacket} Resultset from the query.
      */
     showAllUsers: async function showAllUsers() {
-        const sql = `CALL get_users();`;
-        let res;
+        const db = await database.getDb();
+        try {
+            const sql = `CALL get_users();`;
+            const res = await db.query(sql);
 
-        res = await db.query(sql);
-
-        return res[0];
+            return res[0];
+        } finally {
+            await db.end();
+        }
     },
     getOneUser: async function getOneUser(userId: string) {
-        const sql = `CALL get_user(?)`;
-        let res;
-
-        res = await db.query(sql, [userId]);
-        return res[0];
+        const db = await database.getDb();
+        try {
+            const sql = `CALL get_user(?)`;
+            const res = await db.query(sql, [userId]);
+            return res[0];
+        } finally {
+            await db.end();
+        }
     },
     updateUserFirstName: async function updateUserFirstName(userId: string, firstName: string) {
-        const sql = `CALL update_user_firstname(?, ?)`;
-        let res;
+        const db = await database.getDb();
+        try {
+            const sql = `CALL update_user_firstname(?, ?)`;
+            const res = await db.query(sql, [userId, firstName]);
 
-        res = await db.query(sql, [userId, firstName]);
-
-        return res[0];
+            return res[0];
+        } finally {
+            await db.end();
+        }
     },
     updateUserLastName: async function updateUserLastName(userId: string, lastName: string) {
-        const sql = `CALL update_user_lastname(?, ?)`;
-        let res;
+        const db = await database.getDb();
+        try {
+            const sql = `CALL update_user_lastname(?, ?)`;
+            const res = await db.query(sql, [userId, lastName]);
 
-        res = await db.query(sql, [userId, lastName]);
-
-        return res[0];
+            return res[0];
+        } finally {
+            await db.end();
+        }
     },
     updateUserPhoneNumber: async function updateUserPhoneNumber(userId: string, phoneNumber: string) {
-        const sql = `CALL update_user_phonenumber(?, ?)`;
-        let res;
+        const db = await database.getDb();
+        try {
+            const sql = `CALL update_user_phonenumber(?, ?)`;
+            const res = await db.query(sql, [userId, phoneNumber]);
 
-        res = await db.query(sql, [userId, phoneNumber]);
-
-        return res[0];
+            return res[0];
+        } finally {
+            await db.end();
+        }
     },
     updateUserEmailAdress: async function updateUserEmailAdress(userId: string, emailAdress: string) {
-        const sql = `CALL update_user_emailadress(?, ?)`;
-        let res;
+        const db = await database.getDb();
+        try {
+            const sql = `CALL update_user_emailadress(?, ?)`;
+            const res = await db.query(sql, [userId, emailAdress]);
 
-        res = await db.query(sql, [userId, emailAdress]);
-
-        return res[0];
+            return res[0];
+        } finally {
+            await db.end();
+        }
     },
     updateUserBalance: async function updateUserBalance(userId: string, balance: number) {
         const sql = `CALL update_user_balance(?, ?)`;
