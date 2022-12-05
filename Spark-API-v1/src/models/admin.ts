@@ -1,5 +1,6 @@
-import mysql from "mysql2/promise";
-import config from "../config";
+import mysql from 'mysql2/promise';
+
+import config from '../config';
 
 let db: mysql.Connection;
 /**
@@ -15,7 +16,7 @@ let db: mysql.Connection;
         password: config.DB_PASSWORD,
     });
 
-    process.on("exit", () => {
+    process.on('exit', () => {
         db.end();
     });
 })();
@@ -27,7 +28,7 @@ const adminModel = {
      * @returns {RowDataPacket} Resultset from the query.
      */
     showAllAdmins: async function showAllAdmins() {
-        let sql = `CALL get_admins();`;
+        const sql = `CALL get_admins();`;
         let res;
 
         res = await db.query(sql);
@@ -35,7 +36,7 @@ const adminModel = {
         return res[0];
     },
     getOneAdmin: async function getOneAdmin(adminId: string) {
-        let sql = `CALL get_admin(?)`;
+        const sql = `CALL get_admin(?)`;
         let res;
 
         res = await db.query(sql, [adminId]);
@@ -47,19 +48,12 @@ const adminModel = {
         phoneNumber: number,
         emailAdress: string,
         authority: number,
-        password: string,
+        password: string
     ) {
-        let sql = `CALL create_admin(?, ?, ?, ?, ?, ?)`;
+        const sql = `CALL create_admin(?, ?, ?, ?, ?, ?)`;
         let res;
 
-        res = await db.query(sql, [
-            firstName,
-            lastName,
-            phoneNumber,
-            emailAdress,
-            authority,
-            password,
-        ]);
+        res = await db.query(sql, [firstName, lastName, phoneNumber, emailAdress, authority, password]);
         return res[0];
     },
 };

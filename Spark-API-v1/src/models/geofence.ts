@@ -1,5 +1,6 @@
-import mysql from "mysql2/promise";
-import config from "../config";
+import mysql from 'mysql2/promise';
+
+import config from '../config';
 
 let db: mysql.Connection;
 /**
@@ -15,7 +16,7 @@ let db: mysql.Connection;
         password: config.DB_PASSWORD,
     });
 
-    process.on("exit", () => {
+    process.on('exit', () => {
         db.end();
     });
 })();
@@ -27,7 +28,7 @@ const geofenceModel = {
      * @returns {RowDataPacket} Resultset from the query.
      */
     showAllGeofences: async function showAllGeofences() {
-        let sql = `CALL get_geofences();`;
+        const sql = `CALL get_geofences();`;
         let res;
 
         res = await db.query(sql);
@@ -35,49 +36,42 @@ const geofenceModel = {
         return res[0];
     },
     getOneGeofence: async function getOneGeofence(geofenceId: string) {
-        let sql = `CALL get_geofence(?)`;
+        const sql = `CALL get_geofence(?)`;
         let res;
 
         res = await db.query(sql, [geofenceId]);
         return res[0];
     },
-    createOneGeofence: async function createOneGeofence(
-        coordinates: string,
-        info: string,
-        type: number
-    ) {
-        let sql = `CALL create_geofence(?, ? ,?)`;
+    createOneGeofence: async function createOneGeofence(coordinates: string, info: string, type: number) {
+        const sql = `CALL create_geofence(?, ? ,?)`;
         let res;
 
         res = await db.query(sql, [coordinates, info, type]);
         return res[0];
     },
-    updateCoordinates: async function updateCoordinates(
-        geofenceId: string,
-        coordinates: string
-    ) {
-        let sql = `CALL update_geofence_coordinates(?, ?)`;
+    updateCoordinates: async function updateCoordinates(geofenceId: string, coordinates: string) {
+        const sql = `CALL update_geofence_coordinates(?, ?)`;
         let res;
 
         res = await db.query(sql, [geofenceId, coordinates]);
         return res[0];
     },
     updateInfo: async function updateInfo(geofenceId: string, info: string) {
-        let sql = `CALL update_geofence_info(?, ?)`;
+        const sql = `CALL update_geofence_info(?, ?)`;
         let res;
 
         res = await db.query(sql, [geofenceId, info]);
         return res[0];
     },
     updateType: async function updateType(geofenceId: string, type: number) {
-        let sql = `CALL update_geofence_type(?, ?)`;
+        const sql = `CALL update_geofence_type(?, ?)`;
         let res;
 
         res = await db.query(sql, [geofenceId, type]);
         return res[0];
     },
     deleteOneGeofence: async function deleteOneGeofence(geofenceId: string) {
-        let sql = `CALL delete_geofence(?)`;
+        const sql = `CALL delete_geofence(?)`;
         let res;
 
         res = await db.query(sql, [geofenceId]);

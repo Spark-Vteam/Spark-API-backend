@@ -1,5 +1,6 @@
-import mysql from "mysql2/promise";
-import config from "../config";
+import mysql from 'mysql2/promise';
+
+import config from '../config';
 
 let db: mysql.Connection;
 /**
@@ -15,11 +16,10 @@ let db: mysql.Connection;
         password: config.DB_PASSWORD,
     });
 
-    process.on("exit", () => {
+    process.on('exit', () => {
         db.end();
     });
 })();
-
 
 const userModel = {
     /**
@@ -28,7 +28,7 @@ const userModel = {
      * @returns {RowDataPacket} Resultset from the query.
      */
     showAllUsers: async function showAllUsers() {
-        let sql = `CALL get_users();`;
+        const sql = `CALL get_users();`;
         let res;
 
         res = await db.query(sql);
@@ -36,54 +36,54 @@ const userModel = {
         return res[0];
     },
     getOneUser: async function getOneUser(userId: string) {
-        let sql = `CALL get_user(?)`;
+        const sql = `CALL get_user(?)`;
         let res;
 
         res = await db.query(sql, [userId]);
         return res[0];
     },
     updateUserFirstName: async function updateUserFirstName(userId: string, firstName: string) {
-        let sql = `CALL update_user_firstname(?, ?)`;
+        const sql = `CALL update_user_firstname(?, ?)`;
         let res;
-        
+
         res = await db.query(sql, [userId, firstName]);
 
         return res[0];
     },
     updateUserLastName: async function updateUserLastName(userId: string, lastName: string) {
-        let sql = `CALL update_user_lastname(?, ?)`;
+        const sql = `CALL update_user_lastname(?, ?)`;
         let res;
-        
+
         res = await db.query(sql, [userId, lastName]);
 
         return res[0];
     },
     updateUserPhoneNumber: async function updateUserPhoneNumber(userId: string, phoneNumber: string) {
-        let sql = `CALL update_user_phonenumber(?, ?)`;
+        const sql = `CALL update_user_phonenumber(?, ?)`;
         let res;
-        
+
         res = await db.query(sql, [userId, phoneNumber]);
 
         return res[0];
     },
     updateUserEmailAdress: async function updateUserEmailAdress(userId: string, emailAdress: string) {
-        let sql = `CALL update_user_emailadress(?, ?)`;
+        const sql = `CALL update_user_emailadress(?, ?)`;
         let res;
-        
+
         res = await db.query(sql, [userId, emailAdress]);
 
         return res[0];
     },
     updateUserBalance: async function updateUserBalance(userId: string, balance: number) {
-        let sql = `CALL update_user_balance(?, ?)`;
+        const sql = `CALL update_user_balance(?, ?)`;
         let res;
-        
+
         res = await db.query(sql, [userId, balance]);
 
         return res[0];
     },
     deleteOneUser: async function deleteOneUser(userId: string) {
-        let sql = `CALL delete_user(?)`;
+        const sql = `CALL delete_user(?)`;
         let res;
 
         res = await db.query(sql, [userId]);

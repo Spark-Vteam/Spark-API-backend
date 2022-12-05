@@ -1,5 +1,6 @@
-import mysql from "mysql2/promise";
-import config from "../config";
+import mysql from 'mysql2/promise';
+
+import config from '../config';
 
 let db: mysql.Connection;
 /**
@@ -15,7 +16,7 @@ let db: mysql.Connection;
         password: config.DB_PASSWORD,
     });
 
-    process.on("exit", () => {
+    process.on('exit', () => {
         db.end();
     });
 })();
@@ -27,7 +28,7 @@ const invoiceModel = {
      * @returns {RowDataPacket} Resultset from the query.
      */
     showAllInvoices: async function showAllInvoices() {
-        let sql = `CALL get_invoices();`;
+        const sql = `CALL get_invoices();`;
         let res;
 
         res = await db.query(sql);
@@ -35,46 +36,35 @@ const invoiceModel = {
         return res[0];
     },
     getOneInvoice: async function getOneInvoice(invoiceId: string) {
-        let sql = `CALL get_invoice(?)`;
+        const sql = `CALL get_invoice(?)`;
         let res;
 
         res = await db.query(sql, [invoiceId]);
         return res[0];
     },
     getInvoicesByUserId: async function getOneInvoice(userId: string) {
-        let sql = `CALL get_invoices_by_user(?)`;
+        const sql = `CALL get_invoices_by_user(?)`;
         let res;
 
         res = await db.query(sql, [userId]);
         return res[0];
     },
-    createOneInvoice: async function createOneInvoice(
-        rentId: number,
-        userId: number,
-        amount: number,
-        status: number
-    ) {
-        let sql = `CALL create_invoice(?, ?, ?, ?)`;
+    createOneInvoice: async function createOneInvoice(rentId: number, userId: number, amount: number, status: number) {
+        const sql = `CALL create_invoice(?, ?, ?, ?)`;
         let res;
 
         res = await db.query(sql, [rentId, userId, amount, status]);
         return res[0];
     },
-    updateInvoiceStatus: async function updateInvoiceStatus(
-        invoiceId: number,
-        status: number
-    ) {
-        let sql = `CALL update_invoice_status(?, ?)`;
+    updateInvoiceStatus: async function updateInvoiceStatus(invoiceId: number, status: number) {
+        const sql = `CALL update_invoice_status(?, ?)`;
         let res;
 
         res = await db.query(sql, [invoiceId, status]);
         return res[0];
     },
-    updateInvoiceAmount: async function updateInvoiceAmount(
-        invoiceId: number,
-        amount: number
-    ) {
-        let sql = `CALL update_invoice_amount(?, ?)`;
+    updateInvoiceAmount: async function updateInvoiceAmount(invoiceId: number, amount: number) {
+        const sql = `CALL update_invoice_amount(?, ?)`;
         let res;
 
         res = await db.query(sql, [invoiceId, amount]);

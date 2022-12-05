@@ -1,5 +1,6 @@
-import mysql from "mysql2/promise";
-import config from "../config";
+import mysql from 'mysql2/promise';
+
+import config from '../config';
 
 let db: mysql.Connection;
 /**
@@ -15,7 +16,7 @@ let db: mysql.Connection;
         password: config.DB_PASSWORD,
     });
 
-    process.on("exit", () => {
+    process.on('exit', () => {
         db.end();
     });
 })();
@@ -27,7 +28,7 @@ const chargerModel = {
      * @returns {RowDataPacket} Resultset from the query.
      */
     showAllChargers: async function showAllChargers() {
-        let sql = `CALL get_chargers();`;
+        const sql = `CALL get_chargers();`;
         let res;
 
         res = await db.query(sql);
@@ -35,17 +36,14 @@ const chargerModel = {
         return res[0];
     },
     getOneCharger: async function getOneCharger(chargerId: string) {
-        let sql = `CALL get_charger(?)`;
+        const sql = `CALL get_charger(?)`;
         let res;
 
         res = await db.query(sql, [chargerId]);
         return res[0];
     },
-    updateStatus: async function updateStatus(
-        chargerId: string,
-        status: string
-    ) {
-        let sql = `CALL update_charger_status(?, ?)`;
+    updateStatus: async function updateStatus(chargerId: string, status: string) {
+        const sql = `CALL update_charger_status(?, ?)`;
         let res;
 
         res = await db.query(sql, [chargerId, status]);

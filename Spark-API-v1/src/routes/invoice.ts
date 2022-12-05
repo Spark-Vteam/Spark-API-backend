@@ -1,5 +1,6 @@
-import { Request, Response, Router } from "express";
-import invoiceModel from "../models/invoice";
+import { Request, Response, Router } from 'express';
+
+import invoiceModel from '../models/invoice';
 const router = Router();
 
 interface InvoiceInfo {
@@ -21,13 +22,13 @@ interface InvoiceInfo {
  *
  * @returns {void}
  */
-router.get("/invoice", async (req: Request, res: Response) => {
+router.get('/invoice', async (req: Request, res: Response) => {
     try {
-        let allInvoices = await invoiceModel.showAllInvoices();
+        const allInvoices = await invoiceModel.showAllInvoices();
 
-        let allInvoicesData = JSON.parse(JSON.stringify(allInvoices));
+        const allInvoicesData = JSON.parse(JSON.stringify(allInvoices));
         if (allInvoicesData[0].length === 0) {
-            return res.status(404).send("No Invoices currently in the system");
+            return res.status(404).send('No Invoices currently in the system');
         }
         return res.status(200).send(allInvoices);
     } catch (error) {
@@ -47,15 +48,13 @@ router.get("/invoice", async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.get("/invoice/:id", async (req: Request, res: Response) => {
+router.get('/invoice/:id', async (req: Request, res: Response) => {
     try {
-        let oneInvoice = await invoiceModel.getOneInvoice(req.params.id);
+        const oneInvoice = await invoiceModel.getOneInvoice(req.params.id);
 
-        let oneInvoiceData = JSON.parse(JSON.stringify(oneInvoice));
+        const oneInvoiceData = JSON.parse(JSON.stringify(oneInvoice));
         if (oneInvoiceData[0].length === 0) {
-            return res
-                .status(404)
-                .send(`No Invoice with id ${req.params.id} in the system`);
+            return res.status(404).send(`No Invoice with id ${req.params.id} in the system`);
         }
         return res.status(200).send(oneInvoice);
     } catch (error) {
@@ -75,19 +74,13 @@ router.get("/invoice/:id", async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.get("/invoice/user/:id", async (req: Request, res: Response) => {
+router.get('/invoice/user/:id', async (req: Request, res: Response) => {
     try {
-        let userInvoices = await invoiceModel.getInvoicesByUserId(
-            req.params.id
-        );
+        const userInvoices = await invoiceModel.getInvoicesByUserId(req.params.id);
 
-        let userInvoicesData = JSON.parse(JSON.stringify(userInvoices));
+        const userInvoicesData = JSON.parse(JSON.stringify(userInvoices));
         if (userInvoicesData[0].length === 0) {
-            return res
-                .status(404)
-                .send(
-                    `User with id ${req.params.id} currently has no invoices in the system`
-                );
+            return res.status(404).send(`User with id ${req.params.id} currently has no invoices in the system`);
         }
         return res.status(200).send(userInvoices);
     } catch (error) {
@@ -108,7 +101,7 @@ router.get("/invoice/user/:id", async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.post("/invoice/user/:id", async (req: Request, res: Response) => {
+router.post('/invoice/user/:id', async (req: Request, res: Response) => {
     try {
         const invoiceInfo = {
             rentId: req.body.rentId,
@@ -148,16 +141,14 @@ router.post("/invoice/user/:id", async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.post("/invoice/status/:id", async (req: Request, res: Response) => {
+router.post('/invoice/status/:id', async (req: Request, res: Response) => {
     try {
-        let invoiceId = parseInt(req.params.id);
-        let status = req.body.status;
+        const invoiceId = parseInt(req.params.id);
+        const status = req.body.status;
 
-        let newInvoiceStatus = await invoiceModel.updateInvoiceStatus(invoiceId, status);
+        const newInvoiceStatus = await invoiceModel.updateInvoiceStatus(invoiceId, status);
 
-        res.status(201).send(
-            `Invoice with id ${invoiceId} has changed status to ${status}`
-        );
+        res.status(201).send(`Invoice with id ${invoiceId} has changed status to ${status}`);
     } catch (error) {
         return res.status(404).send(error);
     }
@@ -175,16 +166,14 @@ router.post("/invoice/status/:id", async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.post("/invoice/amount/:id", async (req: Request, res: Response) => {
+router.post('/invoice/amount/:id', async (req: Request, res: Response) => {
     try {
-        let invoiceId = parseInt(req.params.id);
-        let amount = req.body.amount;
+        const invoiceId = parseInt(req.params.id);
+        const amount = req.body.amount;
 
-        let newInvoiceAmount = await invoiceModel.updateInvoiceAmount(invoiceId, amount);
+        const newInvoiceAmount = await invoiceModel.updateInvoiceAmount(invoiceId, amount);
 
-        res.status(201).send(
-            `Invoice with id ${invoiceId} has changed amount to ${amount}`
-        );
+        res.status(201).send(`Invoice with id ${invoiceId} has changed amount to ${amount}`);
     } catch (error) {
         return res.status(404).send(error);
     }

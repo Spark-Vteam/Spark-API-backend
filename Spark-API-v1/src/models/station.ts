@@ -1,7 +1,7 @@
-import mysql from "mysql2/promise";
-import config from "../config";
+import mysql from 'mysql2/promise';
 
-import database from "../db/db";
+import config from '../config';
+import database from '../db/db';
 
 const stationModel = {
     /**
@@ -10,25 +10,25 @@ const stationModel = {
      * @returns {RowDataPacket} Resultset from the query.
      */
     showAllStations: async function showAllStations() {
-        let db = await database.getDb();
+        const db = await database.getDb();
         try {
-            let sql = `CALL get_stations();`;
+            const sql = `CALL get_stations();`;
             let res;
 
             res = await db.query(sql);
 
             return res[0];
-        // Error always empty . . .    
-        // } catch (error) {
-        //     return error;
+            // Error always empty . . .
+            // } catch (error) {
+            //     return error;
         } finally {
             await db.end();
         }
     },
     getOneStation: async function getOneStation(stationId: string) {
-        let db = await database.getDb();
+        const db = await database.getDb();
         try {
-            let sql = `CALL get_station(?)`;
+            const sql = `CALL get_station(?)`;
             let res;
 
             res = await db.query(sql, [stationId]);

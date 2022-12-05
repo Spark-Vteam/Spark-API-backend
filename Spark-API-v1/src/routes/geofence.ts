@@ -1,5 +1,6 @@
-import { Request, Response, Router } from "express";
-import geofenceModel from "../models/geofence";
+import { Request, Response, Router } from 'express';
+
+import geofenceModel from '../models/geofence';
 const router = Router();
 
 interface GeofenceInfo {
@@ -20,12 +21,12 @@ interface GeofenceInfo {
  *
  * @returns {void}
  */
-router.get("/geofence", async (req: Request, res: Response) => {
+router.get('/geofence', async (req: Request, res: Response) => {
     try {
-        let allGeofences = await geofenceModel.showAllGeofences();
-        let allGeofencesData = JSON.parse(JSON.stringify(allGeofences));
+        const allGeofences = await geofenceModel.showAllGeofences();
+        const allGeofencesData = JSON.parse(JSON.stringify(allGeofences));
         if (allGeofencesData[0].length === 0) {
-            return res.status(404).send("No geofences currently in the system");
+            return res.status(404).send('No geofences currently in the system');
         }
         return res.status(200).send(allGeofences);
     } catch (error) {
@@ -45,15 +46,13 @@ router.get("/geofence", async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.get("/geofence/:id", async (req: Request, res: Response) => {
+router.get('/geofence/:id', async (req: Request, res: Response) => {
     try {
-        let oneGeofence = await geofenceModel.getOneGeofence(req.params.id);
+        const oneGeofence = await geofenceModel.getOneGeofence(req.params.id);
 
-        let oneGeofenceData = JSON.parse(JSON.stringify(oneGeofence));
+        const oneGeofenceData = JSON.parse(JSON.stringify(oneGeofence));
         if (oneGeofenceData[0].length === 0) {
-            return res
-                .status(404)
-                .send(`No geofence with id ${req.params.id} in the system`);
+            return res.status(404).send(`No geofence with id ${req.params.id} in the system`);
         }
         return res.status(200).send(oneGeofence);
     } catch (error) {
@@ -74,7 +73,7 @@ router.get("/geofence/:id", async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.post("/geofence", async (req: Request, res: Response) => {
+router.post('/geofence', async (req: Request, res: Response) => {
     try {
         const geofenceInfo = {
             coordinates: req.body.coordinates,
@@ -88,8 +87,7 @@ router.post("/geofence", async (req: Request, res: Response) => {
             geofenceInfo.type
         );
 
-        return res.status(200)
-            .send(`A new geofence has been created with info:\n
+        return res.status(200).send(`A new geofence has been created with info:\n
         Coordinates: ${geofenceInfo.coordinates},
         Info: ${geofenceInfo.info},
         Type: ${geofenceInfo.type}
@@ -111,28 +109,18 @@ router.post("/geofence", async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.post(
-    "/geofence/coordinates/:id",
-    async (req: Request, res: Response) => {
-        try {
-            const geofenceId = req.params.id;
-            const coordinates = req.body.coordinates;
+router.post('/geofence/coordinates/:id', async (req: Request, res: Response) => {
+    try {
+        const geofenceId = req.params.id;
+        const coordinates = req.body.coordinates;
 
-            const _newCoordinates = await geofenceModel.updateCoordinates(
-                geofenceId,
-                coordinates
-            );
+        const _newCoordinates = await geofenceModel.updateCoordinates(geofenceId, coordinates);
 
-            return res
-                .status(200)
-                .send(
-                    `Geofence with id has been updated with new coordinates ${coordinates}`
-                );
-        } catch (error) {
-            return res.status(404).send(error);
-        }
+        return res.status(200).send(`Geofence with id has been updated with new coordinates ${coordinates}`);
+    } catch (error) {
+        return res.status(404).send(error);
     }
-);
+});
 
 /**
  * Geofence ROUTE
@@ -146,16 +134,14 @@ router.post(
  *
  * @returns {void}
  */
-router.post("/geofence/info/:id", async (req: Request, res: Response) => {
+router.post('/geofence/info/:id', async (req: Request, res: Response) => {
     try {
         const geofenceId = req.params.id;
         const info = req.body.info;
 
         const _newInfo = await geofenceModel.updateInfo(geofenceId, info);
 
-        return res
-            .status(200)
-            .send(`Geofence with id has been updated with new info ${info}`);
+        return res.status(200).send(`Geofence with id has been updated with new info ${info}`);
     } catch (error) {
         return res.status(404).send(error);
     }
@@ -173,16 +159,14 @@ router.post("/geofence/info/:id", async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.post("/geofence/type/:id", async (req: Request, res: Response) => {
+router.post('/geofence/type/:id', async (req: Request, res: Response) => {
     try {
         const geofenceId = req.params.id;
         const type = req.body.type;
 
         const _newType = await geofenceModel.updateType(geofenceId, type);
 
-        return res
-            .status(200)
-            .send(`Geofence with id has been updated with new type ${type}`);
+        return res.status(200).send(`Geofence with id has been updated with new type ${type}`);
     } catch (error) {
         return res.status(404).send(error);
     }
@@ -200,15 +184,13 @@ router.post("/geofence/type/:id", async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.delete("/geofence/:id", async (req: Request, res: Response) => {
+router.delete('/geofence/:id', async (req: Request, res: Response) => {
     try {
         const geofenceId = req.params.id;
 
         const deleteGeofence = await geofenceModel.deleteOneGeofence(geofenceId);
 
-        return res
-            .status(200)
-            .send(`Geofence with id ${geofenceId} has been deleted (Type 40)`);
+        return res.status(200).send(`Geofence with id ${geofenceId} has been deleted (Type 40)`);
     } catch (error) {
         return res.status(404).send(error);
     }

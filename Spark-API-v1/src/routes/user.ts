@@ -1,8 +1,8 @@
-import { Request, Response, Router } from "express";
-import { userInfo } from "os";
-const router = Router();
+import { Request, Response, Router } from 'express';
+import { userInfo } from 'os';
 
-import userModel from "../models/user";
+import userModel from '../models/user';
+const router = Router();
 
 interface UserInfo {
     FirstName: string;
@@ -26,13 +26,13 @@ interface UserInfo {
  * @returns {void}
  */
 
-router.get("/user", async (req: Request, res: Response) => {
+router.get('/user', async (req: Request, res: Response) => {
     try {
-        let allUsers = await userModel.showAllUsers();
+        const allUsers = await userModel.showAllUsers();
 
-        let allUsersData = JSON.parse(JSON.stringify(allUsers));
+        const allUsersData = JSON.parse(JSON.stringify(allUsers));
         if (allUsersData[0].length === 0) {
-            return res.status(404).send("No users currently in the system");
+            return res.status(404).send('No users currently in the system');
         }
         return res.status(200).send(allUsers);
     } catch (error) {
@@ -52,9 +52,9 @@ router.get("/user", async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.get("/user/:id", async (req: Request, res: Response) => {
+router.get('/user/:id', async (req: Request, res: Response) => {
     try {
-        let oneUser = await userModel.getOneUser(req.params.id);
+        const oneUser = await userModel.getOneUser(req.params.id);
 
         res.status(200).send(oneUser);
     } catch (error) {
@@ -74,7 +74,7 @@ router.get("/user/:id", async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.post("/user/:id", async (req: Request, res: Response) => {
+router.post('/user/:id', async (req: Request, res: Response) => {
     const userInfo = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -83,20 +83,11 @@ router.post("/user/:id", async (req: Request, res: Response) => {
     };
     const userID = req.params.id;
 
-    let newUserInfo = {
-        firstName: await userModel.updateUserFirstName(
-            userID,
-            userInfo.firstName
-        ),
+    const newUserInfo = {
+        firstName: await userModel.updateUserFirstName(userID, userInfo.firstName),
         lastName: await userModel.updateUserLastName(userID, userInfo.lastName),
-        phoneNumber: await userModel.updateUserPhoneNumber(
-            userID,
-            userInfo.phoneNumber
-        ),
-        emailAdress: await userModel.updateUserEmailAdress(
-            userID,
-            userInfo.emailAdress
-        ),
+        phoneNumber: await userModel.updateUserPhoneNumber(userID, userInfo.phoneNumber),
+        emailAdress: await userModel.updateUserEmailAdress(userID, userInfo.emailAdress),
     };
 
     res.status(201).send(
@@ -120,15 +111,13 @@ router.post("/user/:id", async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.post("/user/balance/:id", async (req: Request, res: Response) => {
+router.post('/user/balance/:id', async (req: Request, res: Response) => {
     const balance = req.body.balance;
     const userID = req.params.id;
     try {
-        let newBalance = await userModel.updateUserBalance(userID, balance);
+        const newBalance = await userModel.updateUserBalance(userID, balance);
 
-        res.status(201).send(
-            `User with id ${userID} added ${balance} to its balance`
-        );
+        res.status(201).send(`User with id ${userID} added ${balance} to its balance`);
     } catch (error) {
         res.status(404).send(error);
     }
@@ -146,10 +135,10 @@ router.post("/user/balance/:id", async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.delete("/user/:id", async (req: Request, res: Response) => {
+router.delete('/user/:id', async (req: Request, res: Response) => {
     try {
-        let deletedUser = await userModel.deleteOneUser(req.params.id);
-        let deletedUserData = JSON.parse(JSON.stringify(deletedUser));
+        const deletedUser = await userModel.deleteOneUser(req.params.id);
+        const deletedUserData = JSON.parse(JSON.stringify(deletedUser));
         res.status(204).send(`User with id ${deletedUserData.id} was deleted`);
     } catch (error) {
         res.status(404).send(error);

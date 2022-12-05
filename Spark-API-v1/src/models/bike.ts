@@ -1,6 +1,7 @@
-import { stat } from "fs";
-import mysql from "mysql2/promise";
-import config from "../config";
+import { stat } from 'fs';
+import mysql from 'mysql2/promise';
+
+import config from '../config';
 
 let db: mysql.Connection;
 /**
@@ -16,7 +17,7 @@ let db: mysql.Connection;
         password: config.DB_PASSWORD,
     });
 
-    process.on("exit", () => {
+    process.on('exit', () => {
         db.end();
     });
 })();
@@ -28,7 +29,7 @@ const bikeModel = {
      * @returns {RowDataPacket} Resultset from the query.
      */
     showAllBikes: async function showAllBikes() {
-        let sql = `CALL get_bikes();`;
+        const sql = `CALL get_bikes();`;
         let res;
 
         res = await db.query(sql);
@@ -36,7 +37,7 @@ const bikeModel = {
         return res[0];
     },
     getOneBike: async function getOneBike(bikeId: string) {
-        let sql = `CALL get_bike(?)`;
+        const sql = `CALL get_bike(?)`;
         let res;
 
         res = await db.query(sql, [bikeId]);
@@ -49,7 +50,7 @@ const bikeModel = {
         status: number,
         speed: number
     ) {
-        let sql = `CALL update_bike(?, ?, ?, ?, ?)`;
+        const sql = `CALL update_bike(?, ?, ?, ?, ?)`;
         let res;
 
         res = await db.query(sql, [bikeId, position, battery, status, speed]);

@@ -1,5 +1,6 @@
-import { Request, Response, Router } from "express";
-import chargerModel from "../models/chargers";
+import { Request, Response, Router } from 'express';
+
+import chargerModel from '../models/chargers';
 const router = Router();
 
 /**
@@ -14,9 +15,9 @@ const router = Router();
  *
  * @returns {void}
  */
-router.get("/charger", async (req: Request, res: Response) => {
+router.get('/charger', async (req: Request, res: Response) => {
     try {
-        let allChargers = await chargerModel.showAllChargers();
+        const allChargers = await chargerModel.showAllChargers();
         return res.status(200).send(allChargers);
     } catch (error) {
         return res.status(404).send(error);
@@ -35,9 +36,9 @@ router.get("/charger", async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.get("/charger/:id", async (req: Request, res: Response) => {
+router.get('/charger/:id', async (req: Request, res: Response) => {
     try {
-        let oneCharger = await chargerModel.getOneCharger(req.params.id);
+        const oneCharger = await chargerModel.getOneCharger(req.params.id);
         return res.status(200).send(oneCharger);
     } catch (error) {
         return res.status(404).send(error);
@@ -56,17 +57,13 @@ router.get("/charger/:id", async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.post("/charger/:id", async (req: Request, res: Response) => {
+router.post('/charger/:id', async (req: Request, res: Response) => {
     try {
         const chargerID = req.params.id;
-        let status = req.body.status;
+        const status = req.body.status;
 
-        let newStatus = await chargerModel.updateStatus(chargerID, status);
-        return res
-            .status(200)
-            .send(
-                `Charger with id ${req.params.id} has changed status to ${status} `
-            );
+        const newStatus = await chargerModel.updateStatus(chargerID, status);
+        return res.status(200).send(`Charger with id ${req.params.id} has changed status to ${status} `);
     } catch (error) {
         return res.status(404).send(error);
     }
