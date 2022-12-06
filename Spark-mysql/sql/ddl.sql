@@ -833,10 +833,22 @@ DROP PROCEDURE IF EXISTS get_stations;
 DELIMITER ;;
 CREATE PROCEDURE get_stations()
 	BEGIN
-		SELECT * FROM Stations;
+		SELECT *, available_station_chargers(id) AS Available, occupied_station_chargers(id) AS Occupied FROM Stations;
 	END
 ;;
 DELIMITER ;
+
+-- --
+-- -- Procedure to fetch stations
+-- --
+-- DROP PROCEDURE IF EXISTS get_stations;
+-- DELIMITER ;;
+-- CREATE PROCEDURE get_stations()
+-- 	BEGIN
+-- 		SELECT * FROM Stations;
+-- 	END
+-- ;;
+-- DELIMITER ;
 
 --
 -- Procedure to fetch single station
@@ -1484,6 +1496,38 @@ DETERMINISTIC
       RETURN 1;
     END IF;
     RETURN 0;
+  END
+;;
+DELIMITER ;
+
+--
+-- Get available chargers connected to Station id
+--
+DROP FUNCTION IF EXISTS available_station_chargers;
+DELIMITER ;;
+CREATE FUNCTION available_station_chargers(
+  a_Stations_id INT
+)
+RETURNS INT
+DETERMINISTIC
+  BEGIN
+    RETURN (SELECT COUNT(id) FROM Chargers WHERE Stations_id = a_Stations_id AND Status = '10');
+  END
+;;
+DELIMITER ;
+
+--
+-- Get occupied chargers connected to Station id
+--
+DROP FUNCTION IF EXISTS occupied_station_chargers;
+DELIMITER ;;
+CREATE FUNCTION occupied_station_chargers(
+  a_Stations_id INT
+)
+RETURNS INT
+DETERMINISTIC
+  BEGIN
+    RETURN (SELECT COUNT(id) FROM Chargers WHERE Stations_id = a_Stations_id AND Status = '20');
   END
 ;;
 DELIMITER ;
