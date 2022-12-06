@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Users` (
   `Balance` INT NOT NULL,
   `Password` VARCHAR(45) NOT NULL,
   `PartialPayment` TINYINT,
+  `Oauth` VARCHAR(45) NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `emailAdress_UNIQUE` (`EmailAdress` ASC) VISIBLE,
   UNIQUE INDEX `PhoneNumber_UNIQUE` (`PhoneNumber` ASC) VISIBLE)
