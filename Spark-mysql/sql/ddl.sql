@@ -718,8 +718,8 @@ CREATE PROCEDURE delete_user(
 		UPDATE Users
     SET FirstName = "DELETED",
         LastName = "DELETED",
-        PhoneNumber = "DELETED",
-        EmailAdress = "DELETED"
+        PhoneNumber = CONCAT("DELETED", a_Users_id),
+        EmailAdress = CONCAT("DELETED", a_Users_id)
     WHERE id = a_Users_id;
 	END
 ;;
@@ -1313,6 +1313,26 @@ ON Users FOR EACH ROW
 
 
 -- ------------------- Rents ----------------------------
+
+--
+-- Trigger to update bike status once a Rent is created
+--
+DROP TRIGGER IF EXISTS Rents_insert_update_bike_status;
+
+CREATE TRIGGER Rents_insert_update_bike_status
+AFTER INSERT
+ON Rents FOR EACH ROW
+   UPDATE Bikes SET Status = '20' WHERE id = new.Bikes_id;
+
+--
+-- Trigger to update bike status once a Rent is finished
+--
+DROP TRIGGER IF EXISTS Rents_update_update_bike_status;
+
+CREATE TRIGGER Rents_update_update_bike_status
+AFTER UPDATE
+ON Rents FOR EACH ROW
+   UPDATE Bikes SET Status = '10' WHERE id = old.Bikes_id;
 
 --
 -- Trigger to create a invoice once a Rent is finished
