@@ -742,7 +742,7 @@ CREATE PROCEDURE get_rents()
 DELIMITER ;
 
 --
--- Procedure to fetch Rents
+-- Procedure to fetch single Rent
 --
 DROP PROCEDURE IF EXISTS get_rent;
 DELIMITER ;;
@@ -772,7 +772,7 @@ CREATE PROCEDURE get_rents_by_user(
 DELIMITER ;
 
 --
--- Procedure to fetch Rents
+-- Procedure to create Rents
 --
 DROP PROCEDURE IF EXISTS create_rent;
 DELIMITER ;;
