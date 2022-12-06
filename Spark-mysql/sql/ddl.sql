@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Users` (
   `Balance` INT NOT NULL,
   `Password` VARCHAR(45) NOT NULL,
   `PartialPayment` TINYINT,
+  `Oauth` VARCHAR(45) NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `emailAdress_UNIQUE` (`EmailAdress` ASC) VISIBLE,
   UNIQUE INDEX `PhoneNumber_UNIQUE` (`PhoneNumber` ASC) VISIBLE)
@@ -717,8 +718,8 @@ CREATE PROCEDURE delete_user(
 		UPDATE Users
     SET FirstName = "DELETED",
         LastName = "DELETED",
-        PhoneNumber = "DELETED",
-        EmailAdress = "DELETED"
+        PhoneNumber = CONCAT("DELETED", a_Users_id),
+        EmailAdress = CONCAT("DELETED", a_Users_id)
     WHERE id = a_Users_id;
 	END
 ;;
@@ -741,7 +742,7 @@ CREATE PROCEDURE get_rents()
 DELIMITER ;
 
 --
--- Procedure to fetch Rents
+-- Procedure to fetch single Rent
 --
 DROP PROCEDURE IF EXISTS get_rent;
 DELIMITER ;;
@@ -771,7 +772,7 @@ CREATE PROCEDURE get_rents_by_user(
 DELIMITER ;
 
 --
--- Procedure to fetch Rents
+-- Procedure to create Rents
 --
 DROP PROCEDURE IF EXISTS create_rent;
 DELIMITER ;;
@@ -832,10 +833,22 @@ DROP PROCEDURE IF EXISTS get_stations;
 DELIMITER ;;
 CREATE PROCEDURE get_stations()
 	BEGIN
-		SELECT * FROM Stations;
+		SELECT *, available_station_chargers(id) AS Available, occupied_station_chargers(id) AS Occupied FROM Stations;
 	END
 ;;
 DELIMITER ;
+
+-- --
+-- -- Procedure to fetch stations
+-- --
+-- DROP PROCEDURE IF EXISTS get_stations;
+-- DELIMITER ;;
+-- CREATE PROCEDURE get_stations()
+-- 	BEGIN
+-- 		SELECT * FROM Stations;
+-- 	END
+-- ;;
+-- DELIMITER ;
 
 --
 -- Procedure to fetch single station
@@ -1302,6 +1315,26 @@ ON Users FOR EACH ROW
 -- ------------------- Rents ----------------------------
 
 --
+-- Trigger to update bike status once a Rent is created
+--
+DROP TRIGGER IF EXISTS Rents_insert_update_bike_status;
+
+CREATE TRIGGER Rents_insert_update_bike_status
+AFTER INSERT
+ON Rents FOR EACH ROW
+   UPDATE Bikes SET Status = '20' WHERE id = new.Bikes_id;
+
+--
+-- Trigger to update bike status once a Rent is finished
+--
+DROP TRIGGER IF EXISTS Rents_update_update_bike_status;
+
+CREATE TRIGGER Rents_update_update_bike_status
+AFTER UPDATE
+ON Rents FOR EACH ROW
+   UPDATE Bikes SET Status = '10' WHERE id = old.Bikes_id;
+
+--
 -- Trigger to create a invoice once a Rent is finished
 --
 DROP TRIGGER IF EXISTS Rents_update_create_invoice;
@@ -1483,6 +1516,38 @@ DETERMINISTIC
       RETURN 1;
     END IF;
     RETURN 0;
+  END
+;;
+DELIMITER ;
+
+--
+-- Get available chargers connected to Station id
+--
+DROP FUNCTION IF EXISTS available_station_chargers;
+DELIMITER ;;
+CREATE FUNCTION available_station_chargers(
+  a_Stations_id INT
+)
+RETURNS INT
+DETERMINISTIC
+  BEGIN
+    RETURN (SELECT COUNT(id) FROM Chargers WHERE Stations_id = a_Stations_id AND Status = '10');
+  END
+;;
+DELIMITER ;
+
+--
+-- Get occupied chargers connected to Station id
+--
+DROP FUNCTION IF EXISTS occupied_station_chargers;
+DELIMITER ;;
+CREATE FUNCTION occupied_station_chargers(
+  a_Stations_id INT
+)
+RETURNS INT
+DETERMINISTIC
+  BEGIN
+    RETURN (SELECT COUNT(id) FROM Chargers WHERE Stations_id = a_Stations_id AND Status = '20');
   END
 ;;
 DELIMITER ;
