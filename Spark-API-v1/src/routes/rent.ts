@@ -1,7 +1,7 @@
-import { Request, Response, Router } from "express";
-const router = Router();
+import { Request, Response, Router } from 'express';
 
-import rentModel from "../models/rent";
+import rentModel from '../models/rent';
+const router = Router();
 
 interface RentInfo {
     Id: number;
@@ -25,12 +25,12 @@ interface RentInfo {
  *
  * @returns {Response}
  */
-router.get("/rent", async (req: Request, res: Response) => {
+router.get('/rent', async (req: Request, res: Response) => {
     try {
-        let allRents = await rentModel.showAllRents();
-        let allRentsData = JSON.parse(JSON.stringify(allRents));
+        const allRents = await rentModel.showAllRents();
+        const allRentsData = JSON.parse(JSON.stringify(allRents));
         if (allRentsData[0].length === 0) {
-            return res.status(404).send("No rents currently in the system");
+            return res.status(404).send('No rents currently in the system');
         }
         return res.status(200).send(allRents);
     } catch (error) {
@@ -50,14 +50,12 @@ router.get("/rent", async (req: Request, res: Response) => {
  *
  * @returns {Response}
  */
-router.get("/rent/:id", async (req: Request, res: Response) => {
+router.get('/rent/:id', async (req: Request, res: Response) => {
     try {
-        let oneRent = await rentModel.getOneRent(req.params.id);
-        let oneRentData = JSON.parse(JSON.stringify(oneRent));
+        const oneRent = await rentModel.getOneRent(req.params.id);
+        const oneRentData = JSON.parse(JSON.stringify(oneRent));
         if (oneRentData[0].length === 0) {
-            return res
-                .status(404)
-                .send(`No rent with Id ${req.params.id} was found`);
+            return res.status(404).send(`No rent with Id ${req.params.id} was found`);
         }
         return res.status(200).send(oneRent);
     } catch (error) {
@@ -77,16 +75,14 @@ router.get("/rent/:id", async (req: Request, res: Response) => {
  *
  * @returns {Response}
  */
-router.get("/rent/user/:id", async (req: Request, res: Response) => {
+router.get('/rent/user/:id', async (req: Request, res: Response) => {
     try {
-        let rentByUserId = await rentModel.getRentsByUserId(req.params.id);
+        const rentByUserId = await rentModel.getRentsByUserId(req.params.id);
 
-        let rentByUserIdData = JSON.parse(JSON.stringify(rentByUserId));
+        const rentByUserIdData = JSON.parse(JSON.stringify(rentByUserId));
 
         if (rentByUserIdData[0].length === 0) {
-            return res
-                .status(404)
-                .send(`No rents for user Id ${req.params.id} was found`);
+            return res.status(404).send(`No rents for user Id ${req.params.id} was found`);
         }
         return res.status(200).send(rentByUserId);
     } catch (error) {
@@ -106,11 +102,11 @@ router.get("/rent/user/:id", async (req: Request, res: Response) => {
  *
  * @returns {Response}
  */
-router.post("/rent/user/:id", async (req: Request, res: Response) => {
-    let bikeId = req.body.bikeId;
-    let userId = req.params.id;
+router.post('/rent/user/:id', async (req: Request, res: Response) => {
+    const bikeId = req.body.bikeId;
+    const userId = req.params.id;
     try {
-        let newRent = await rentModel.createOneRent(userId, bikeId);
+        const newRent = await rentModel.createOneRent(userId, bikeId);
 
         return res.status(200).send(`New rent created`);
     } catch (error) {
@@ -130,10 +126,10 @@ router.post("/rent/user/:id", async (req: Request, res: Response) => {
  *
  * @returns {Response}
  */
-router.post("/rent/:id", async (req: Request, res: Response) => {
-    let rentId = req.params.id;
+router.post('/rent/:id', async (req: Request, res: Response) => {
+    const rentId = req.params.id;
     try {
-        let updateRent = await rentModel.updateOneRent(rentId);
+        const updateRent = await rentModel.updateOneRent(rentId);
 
         return res.status(200).send(`Rent with id ${rentId} has been updated`);
     } catch (error) {

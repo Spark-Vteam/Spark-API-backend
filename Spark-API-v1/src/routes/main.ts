@@ -1,6 +1,6 @@
-import { Request, Response, Router } from "express";
+import { Request, Response, Router } from 'express';
 const router = Router();
-const sitename = " | Spark API Main";
+const sitename = ' | Spark API Main';
 
 /**
  * Main ROUTE
@@ -14,8 +14,8 @@ const sitename = " | Spark API Main";
  *
  * @returns {void}
  */
-router.get("/", (req: Request, res: Response) => {
-    let data = {
+router.get('/', (req: Request, res: Response) => {
+    const data = {
         title: `Welcome to the  ${sitename}`,
     };
 

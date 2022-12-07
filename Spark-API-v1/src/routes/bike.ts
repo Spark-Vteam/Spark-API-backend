@@ -1,7 +1,7 @@
-import { Request, Response, Router } from "express";
-const router = Router();
+import { Request, Response, Router } from 'express';
 
-import bikeModel from "../models/bike";
+import bikeModel from '../models/bike';
+const router = Router();
 
 interface BikeInfo {
     Bikes_id: number;
@@ -23,9 +23,9 @@ interface BikeInfo {
  *
  * @returns {void}
  */
-router.get("/bike", async (req: Request, res: Response) => {
+router.get('/bike', async (req: Request, res: Response) => {
     try {
-        let allBikes = await bikeModel.showAllBikes();
+        const allBikes = await bikeModel.showAllBikes();
         return res.status(200).send(allBikes);
     } catch (error) {
         return res.status(404).send(error);
@@ -44,9 +44,9 @@ router.get("/bike", async (req: Request, res: Response) => {
  *
  * @returns {Response}
  */
-router.get("/bike/:id", async (req: Request, res: Response) => {
+router.get('/bike/:id', async (req: Request, res: Response) => {
     try {
-        let oneBike = await bikeModel.getOneBike(req.params.id);
+        const oneBike = await bikeModel.getOneBike(req.params.id);
 
         return res.status(200).send(oneBike);
     } catch (error) {
@@ -66,7 +66,7 @@ router.get("/bike/:id", async (req: Request, res: Response) => {
  *
  * @returns {Response}
  */
-router.post("/bike/:id", async (req: Request, res: Response) => {
+router.post('/bike/:id', async (req: Request, res: Response) => {
     try {
         const bikeInfo = {
             bikeId: req.body.bikeId,
@@ -75,7 +75,7 @@ router.post("/bike/:id", async (req: Request, res: Response) => {
             status: req.body.status,
             speed: req.body.speed,
         };
-        let updateBike = await bikeModel.updateOneBike(
+        const updateBike = await bikeModel.updateOneBike(
             bikeInfo.bikeId,
             bikeInfo.position,
             bikeInfo.battery,
@@ -83,8 +83,7 @@ router.post("/bike/:id", async (req: Request, res: Response) => {
             bikeInfo.speed
         );
 
-        return res.status(200)
-            .send(`Bike with id ${bikeInfo.bikeId} has been updated:\n
+        return res.status(200).send(`Bike with id ${bikeInfo.bikeId} has been updated:\n
             Postion: ${bikeInfo.position},
             Battery: ${bikeInfo.battery},
             Status: ${bikeInfo.status},
