@@ -1,8 +1,8 @@
 /**
  * General middleware.
  */
-"use strict";
-import express, { Application, Request, Response, NextFunction } from "express";
+'use strict';
+import express, { Application, Request, Response, NextFunction } from 'express';
 /**
  * Log incoming requests to console to see who accesses the server
  * on what route.

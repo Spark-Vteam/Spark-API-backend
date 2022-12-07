@@ -1,7 +1,7 @@
-import { Request, Response, Router } from "express";
-const router = Router();
+import { Request, Response, Router } from 'express';
 
-import stationModel from "../models/station";
+import stationModel from '../models/station';
+const router = Router();
 
 /**
  * Stations ROUTE
@@ -15,12 +15,12 @@ import stationModel from "../models/station";
  *
  * @returns {void}
  */
-router.get("/station", async (req: Request, res: Response) => {
+router.get('/station', async (req: Request, res: Response) => {
     try {
-        let allStations = await stationModel.showAllStations();
-        let allStationsData = JSON.parse(JSON.stringify(allStations));
+        const allStations = await stationModel.showAllStations();
+        const allStationsData = JSON.parse(JSON.stringify(allStations));
         if (allStationsData[0].length === 0) {
-            return res.status(404).send("No stations currently in the system");
+            return res.status(404).send('No stations currently in the system');
         }
         return res.send(allStations);
     } catch (error) {
@@ -40,14 +40,12 @@ router.get("/station", async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.get("/station/:id", async (req: Request, res: Response) => {
+router.get('/station/:id', async (req: Request, res: Response) => {
     try {
-        let oneStation = await stationModel.getOneStation(req.params.id);
-        let oneStationData = JSON.parse(JSON.stringify(oneStation));
+        const oneStation = await stationModel.getOneStation(req.params.id);
+        const oneStationData = JSON.parse(JSON.stringify(oneStation));
         if (oneStationData[0].length === 0) {
-            return res
-                .status(404)
-                .send(`No station with Id ${req.params.id} was found`);
+            return res.status(404).send(`No station with Id ${req.params.id} was found`);
         }
         return res.send(oneStation);
     } catch (error) {

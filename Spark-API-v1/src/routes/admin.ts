@@ -1,5 +1,6 @@
-import { Request, Response, Router } from "express";
-import adminModel from "../models/admin";
+import { Request, Response, Router } from 'express';
+
+import adminModel from '../models/admin';
 const router = Router();
 
 interface AdminInfo {
@@ -23,14 +24,14 @@ interface AdminInfo {
  *
  * @returns {void}
  */
-router.get("/admin", async (req: Request, res: Response) => {
+router.get('/admin', async (req: Request, res: Response) => {
     try {
-        let allAdmins = await adminModel.showAllAdmins();
+        const allAdmins = await adminModel.showAllAdmins();
 
-        let allAdminsData = JSON.parse(JSON.stringify(allAdmins));
+        const allAdminsData = JSON.parse(JSON.stringify(allAdmins));
 
         if (allAdminsData[0].length === 0) {
-            return res.status(404).send("No admins currently in the system");
+            return res.status(404).send('No admins currently in the system');
         }
         return res.status(200).send(allAdmins);
     } catch (error) {
@@ -50,14 +51,12 @@ router.get("/admin", async (req: Request, res: Response) => {
  *
  * @returns {Response}
  */
-router.get("/admin/:id", async (req: Request, res: Response) => {
+router.get('/admin/:id', async (req: Request, res: Response) => {
     try {
-        let oneAdmin = await adminModel.getOneAdmin(req.params.id);
-        let oneAdminData = JSON.parse(JSON.stringify(oneAdmin));
+        const oneAdmin = await adminModel.getOneAdmin(req.params.id);
+        const oneAdminData = JSON.parse(JSON.stringify(oneAdmin));
         if (oneAdminData[0].length === 0) {
-            return res
-                .status(404)
-                .send(`No admin for Id ${req.params.id} was found`);
+            return res.status(404).send(`No admin for Id ${req.params.id} was found`);
         }
         return res.status(200).send(oneAdmin);
     } catch (error) {
@@ -78,7 +77,7 @@ router.get("/admin/:id", async (req: Request, res: Response) => {
  *
  * @returns {Response}
  */
-router.post("/admin", async (req: Request, res: Response) => {
+router.post('/admin', async (req: Request, res: Response) => {
     try {
         const adminInfo = {
             firstName: req.body.firstName,
@@ -89,7 +88,7 @@ router.post("/admin", async (req: Request, res: Response) => {
             password: req.body.password,
         };
 
-        let newAdmin = await adminModel.createOneAdmin(
+        const newAdmin = await adminModel.createOneAdmin(
             adminInfo.firstName,
             adminInfo.lastName,
             adminInfo.phoneNumber,

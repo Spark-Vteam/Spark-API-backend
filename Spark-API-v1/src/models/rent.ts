@@ -1,61 +1,57 @@
-import mysql from "mysql2/promise";
-import config from "../config";
-
-let db: mysql.Connection;
-/**
- * Main function to connect to database.
- * @async
- * @returns void
- */
-(async function () {
-    db = await mysql.createConnection({
-        host: config.DB_HOST,
-        user: config.DB_USER,
-        database: config.DB_NAME,
-        password: config.DB_PASSWORD,
-    });
-
-    process.on("exit", () => {
-        db.end();
-    });
-})();
+import database from '../db/db';
 
 const rentModel = {
     showAllRents: async function showAllRents() {
-        let sql = `CALL get_rents()`;
-        let res;
+        const db = await database.getDb();
+        try {
+            const sql = `CALL get_rents()`;
 
-        res = await db.query(sql);
+            const res = await db.query(sql);
 
-        return res[0];
+            return res[0];
+        } finally {
+            await db.end();
+        }
     },
     getOneRent: async function getOneRent(rentId: string) {
-        let sql = `CALL get_rent(?)`;
-        let res;
-
-        res = await db.query(sql, [rentId]);
-        return res[0];
+        const db = await database.getDb();
+        try {
+            const sql = `CALL get_rent(?)`;
+            const res = await db.query(sql, [rentId]);
+            return res[0];
+        } finally {
+            await db.end();
+        }
     },
     getRentsByUserId: async function getRentsByUserId(userId: string) {
-        let sql = `CALL get_rents_by_user(?)`;
-        let res;
-
-        res = await db.query(sql, [userId]);
-        return res[0];
+        const db = await database.getDb();
+        try {
+            const sql = `CALL get_rents_by_user(?)`;
+            const res = await db.query(sql, [userId]);
+            return res[0];
+        } finally {
+            await db.end();
+        }
     },
     createOneRent: async function createOneRent(userId: string, bikeId: string) {
-        let sql = `CALL create_rent(?, ?)`;
-        let res;
-
-        res = await db.query(sql, [userId, bikeId]);
-        return res[0];
+        const db = await database.getDb();
+        try {
+            const sql = `CALL create_rent(?, ?)`;
+            const res = await db.query(sql, [userId, bikeId]);
+            return res[0];
+        } finally {
+            await db.end();
+        }
     },
     updateOneRent: async function createOneRent(rentId: string) {
-        let sql = `CALL update_rent(?)`;
-        let res;
-
-        res = await db.query(sql, [rentId]);
-        return res[0];
+        const db = await database.getDb();
+        try {
+            const sql = `CALL update_rent(?)`;
+            const res = await db.query(sql, [rentId]);
+            return res[0];
+        } finally {
+            await db.end();
+        }
     },
 };
 
