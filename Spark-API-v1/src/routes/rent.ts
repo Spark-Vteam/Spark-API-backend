@@ -3,6 +3,16 @@ const router = Router();
 
 import rentModel from "../models/rent";
 
+interface RentInfo {
+    Id: number;
+    User_id: number;
+    Start: string;
+    StartTimeStamp: string;
+    Destination: number;
+    DestinationTimeStamp: string;
+    Bike_id: number;
+}
+
 /**
  * Rent ROUTE
  * /:
@@ -79,6 +89,53 @@ router.get("/rent/user/:id", async (req: Request, res: Response) => {
                 .send(`No rents for user Id ${req.params.id} was found`);
         }
         return res.status(200).send(rentByUserId);
+    } catch (error) {
+        return res.status(404).send(error);
+    }
+});
+
+/**
+ * Rent ROUTE
+ *  /rent/user/:id:
+ *   get:
+ *     summary: Create a new rent
+ *     description: Create a active rent to user and taken bike
+ *  @param {Request}  req  The incoming request.
+ *  @param {Response} res  The outgoing response.
+ *  @param {Function} next Next to call in chain of middleware.
+ *
+ * @returns {Response}
+ */
+router.post("/rent/user/:id", async (req: Request, res: Response) => {
+    let bikeId = req.body.bikeId;
+    let userId = req.params.id;
+    try {
+        let newRent = await rentModel.createOneRent(userId, bikeId);
+
+        return res.status(200).send(`New rent created`);
+    } catch (error) {
+        return res.status(404).send(error);
+    }
+});
+
+/**
+ * Rent ROUTE
+ *  /rent/user/:id:
+ *   get:
+ *     summary: Update active rent
+ *     description: Update rent for bike and user
+ *  @param {Request}  req  The incoming request.
+ *  @param {Response} res  The outgoing response.
+ *  @param {Function} next Next to call in chain of middleware.
+ *
+ * @returns {Response}
+ */
+router.post("/rent/:id", async (req: Request, res: Response) => {
+    let rentId = req.params.id;
+    try {
+        let updateRent = await rentModel.updateOneRent(rentId);
+
+        return res.status(200).send(`Rent with id ${rentId} has been updated`);
     } catch (error) {
         return res.status(404).send(error);
     }

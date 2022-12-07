@@ -1,5 +1,5 @@
 import mysql from "mysql2/promise";
-import config from "../config"
+import config from "../config";
 
 let db: mysql.Connection;
 /**
@@ -9,16 +9,17 @@ let db: mysql.Connection;
  */
 (async function () {
     db = await mysql.createConnection({
-        host: config.DB_HOST,  
+        host: config.DB_HOST,
         user: config.DB_USER,
         database: config.DB_NAME,
-        password: config.DB_PASSWORD  
+        password: config.DB_PASSWORD,
     });
 
     process.on("exit", () => {
         db.end();
     });
 })();
+
 
 const userModel = {
     /**
@@ -39,7 +40,54 @@ const userModel = {
         let res;
 
         res = await db.query(sql, [userId]);
-        return res[0]; 
+        return res[0];
+    },
+    updateUserFirstName: async function updateUserFirstName(userId: string, firstName: string) {
+        let sql = `CALL update_user_firstname(?, ?)`;
+        let res;
+        
+        res = await db.query(sql, [userId, firstName]);
+
+        return res[0];
+    },
+    updateUserLastName: async function updateUserLastName(userId: string, lastName: string) {
+        let sql = `CALL update_user_lastname(?, ?)`;
+        let res;
+        
+        res = await db.query(sql, [userId, lastName]);
+
+        return res[0];
+    },
+    updateUserPhoneNumber: async function updateUserPhoneNumber(userId: string, phoneNumber: string) {
+        let sql = `CALL update_user_phonenumber(?, ?)`;
+        let res;
+        
+        res = await db.query(sql, [userId, phoneNumber]);
+
+        return res[0];
+    },
+    updateUserEmailAdress: async function updateUserEmailAdress(userId: string, emailAdress: string) {
+        let sql = `CALL update_user_emailadress(?, ?)`;
+        let res;
+        
+        res = await db.query(sql, [userId, emailAdress]);
+
+        return res[0];
+    },
+    updateUserBalance: async function updateUserBalance(userId: string, balance: number) {
+        let sql = `CALL update_user_balance(?, ?)`;
+        let res;
+        
+        res = await db.query(sql, [userId, balance]);
+
+        return res[0];
+    },
+    deleteOneUser: async function deleteOneUser(userId: string) {
+        let sql = `CALL delete_user(?)`;
+        let res;
+
+        res = await db.query(sql, [userId]);
+        return res[0];
     },
 };
 

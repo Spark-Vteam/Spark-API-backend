@@ -48,6 +48,38 @@ const invoiceModel = {
         res = await db.query(sql, [userId]);
         return res[0];
     },
+    createOneInvoice: async function createOneInvoice(
+        rentId: number,
+        userId: number,
+        amount: number,
+        status: number
+    ) {
+        let sql = `CALL create_invoice(?, ?, ?, ?)`;
+        let res;
+
+        res = await db.query(sql, [rentId, userId, amount, status]);
+        return res[0];
+    },
+    updateInvoiceStatus: async function updateInvoiceStatus(
+        invoiceId: number,
+        status: number
+    ) {
+        let sql = `CALL update_invoice_status(?, ?)`;
+        let res;
+
+        res = await db.query(sql, [invoiceId, status]);
+        return res[0];
+    },
+    updateInvoiceAmount: async function updateInvoiceAmount(
+        invoiceId: number,
+        amount: number
+    ) {
+        let sql = `CALL update_invoice_amount(?, ?)`;
+        let res;
+
+        res = await db.query(sql, [invoiceId, amount]);
+        return res[0];
+    },
 };
 
 export default invoiceModel;

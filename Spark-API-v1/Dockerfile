@@ -1,4 +1,4 @@
-ARG PORT=3000
+ARG PORT=4000
 
 FROM node:14-alpine AS node
 

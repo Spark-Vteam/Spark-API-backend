@@ -41,6 +41,16 @@ const chargerModel = {
         res = await db.query(sql, [chargerId]);
         return res[0];
     },
+    updateStatus: async function updateStatus(
+        chargerId: string,
+        status: string
+    ) {
+        let sql = `CALL update_charger_status(?, ?)`;
+        let res;
+
+        res = await db.query(sql, [chargerId, status]);
+        return res[0];
+    },
 };
 
 export default chargerModel;

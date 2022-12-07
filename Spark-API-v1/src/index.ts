@@ -1,5 +1,7 @@
 import express, { Application, Request, Response, NextFunction } from "express";
-const port = process.env.PORT || 3000;
+
+import bodyParser from "body-parser";
+const port = process.env.PORT || 4000;
 
 const cors = require("cors");
 require("dotenv").config();
@@ -10,6 +12,9 @@ import { logIncomingToConsole } from "./middleware/index";
 app.use(cors());
 app.options("*", cors());
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 import mainRoute from "./routes/main";
 import stationsRoute from "./routes/station";
 import userRoute from "./routes/user";
@@ -19,6 +24,7 @@ import adminRoute from "./routes/admin";
 import invoiceRoute from "./routes/invoice";
 import geofenceRoute from "./routes/geofence";
 import chargerRoute from "./routes/charger";
+import authRoute from "./routes/auth";
 
 app.use(logIncomingToConsole);
 
@@ -31,6 +37,7 @@ app.use("/", adminRoute);
 app.use("/", invoiceRoute);
 app.use("/", geofenceRoute);
 app.use("/", chargerRoute);
+app.use("/", authRoute);
 
 app.listen(port, logStartUpDetailsToConsole);
 
