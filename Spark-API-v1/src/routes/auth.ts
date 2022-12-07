@@ -3,7 +3,7 @@ import fetch from "cross-fetch";
 const router = Router();
 
 
-router.get("/getAccessToken", async function (req: Request, res: Response) {
+router.get("/auth/getAccessToken", async function (req: Request, res: Response) {
     const code = req.query.code;
 
     await fetch(
@@ -24,7 +24,7 @@ router.get("/getAccessToken", async function (req: Request, res: Response) {
         });
 });
 
-router.get("/getUserData", async function (req: Request, res: Response) {
+router.get("/auth/getUserData", async function (req: Request, res: Response) {
     await fetch(`https://api.github.com/user`, {
         method: "GET",
         headers: {
