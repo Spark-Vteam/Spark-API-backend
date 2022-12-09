@@ -70,7 +70,7 @@ router.get('/admin/:id', async (req: Request, res: Response) => {
  *   get:
  *     summary: Create one admin
  *     description: Create Admin with information
- *     { firstName, lastName,phoneNumber, emailAdress }
+ *     { firstName, lastName,phoneNumber, emailAdress, authority, password }
  *  @param {Request}  req  The incoming request.
  *  @param {Response} res  The outgoing response.
  *  @param {Function} next Next to call in chain of middleware.

@@ -24,7 +24,6 @@ interface UserInfo {
  *
  * @returns {void}
  */
-
 router.get('/user', async (req: Request, res: Response) => {
     try {
         const allUsers = await userModel.showAllUsers();
@@ -56,6 +55,49 @@ router.get('/user/:id', async (req: Request, res: Response) => {
         const oneUser = await userModel.getOneUser(req.params.id);
 
         return res.status(200).send(oneUser);
+    } catch (error) {
+        return res.status(404).send(error);
+    }
+});
+
+/**
+ * User ROUTE
+ *  /user:
+ *   post:
+ *     summary: Create one user
+ *     description: Create user with information
+ *     { firstName, lastName,phoneNumber, emailAdress, password }
+ *  @param {Request}  req  The incoming request.
+ *  @param {Response} res  The outgoing response.
+ *  @param {Function} next Next to call in chain of middleware.
+ *
+ * @returns {Response}
+ */
+router.post('/user', async (req: Request, res: Response) => {
+    try {
+        const userInfo = {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            phoneNumber: req.body.phoneNumber,
+            emailAdress: req.body.emailAdress,
+            password: req.body.password,
+        };
+
+        const newUser = await userModel.createOneUser(
+            userInfo.firstName,
+            userInfo.lastName,
+            userInfo.phoneNumber,
+            userInfo.emailAdress,
+            userInfo.password
+        );
+
+        res.status(201).send(
+            `User has been created with the following information:\n
+                firstName: ${userInfo.firstName},
+                lastName: ${userInfo.lastName}, 
+                phoneNumber: ${userInfo.phoneNumber}, 
+                emailAdress: ${userInfo.emailAdress}`
+        );
     } catch (error) {
         return res.status(404).send(error);
     }
@@ -100,8 +142,8 @@ router.put('/user/:id', async (req: Request, res: Response) => {
 
 /**
  * User ROUTE
- *  /user/:id:
- *   get:
+ *  /user/balance/:id:
+ *   put:
  *     summary: Update balance of one User
  *     description: Update User Balance by ID
  *  @param {Request}  req  The incoming request.
@@ -114,9 +156,57 @@ router.put('/user/balance/:id', async (req: Request, res: Response) => {
     const balance = req.body.balance;
     const userID = req.params.id;
     try {
-        const newBalance = await userModel.updateUserBalance(userID, balance);
+        await userModel.updateUserBalance(userID, balance);
 
         return res.status(201).send(`User with id ${userID} added ${balance} to its balance`);
+    } catch (error) {
+        return res.status(404).send(error);
+    }
+});
+
+/**
+ * User ROUTE
+ *  /user/partial_balance/:id:
+ *   put:
+ *     summary: Update partial balance of one User
+ *     description: Update User Partial Balance by ID
+ *  @param {Request}  req  The incoming request.
+ *  @param {Response} res  The outgoing response.
+ *  @param {Function} next Next to call in chain of middleware.
+ *
+ * @returns {void}
+ */
+router.put('/user/partial_balance/:id', async (req: Request, res: Response) => {
+    const balance = req.body.balance;
+    const userID = req.params.id;
+    try {
+        await userModel.updateUserPartialBalance(userID, balance);
+
+        return res.status(201).send(`User with id ${userID} added ${balance} `);
+    } catch (error) {
+        return res.status(404).send(error);
+    }
+});
+
+/**
+ * User ROUTE
+ *  /user/password/:id:
+ *   get:
+ *     summary: Update password of one User
+ *     description: Update User password by ID
+ *  @param {Request}  req  The incoming request.
+ *  @param {Response} res  The outgoing response.
+ *  @param {Function} next Next to call in chain of middleware.
+ *
+ * @returns {void}
+ */
+router.put('/user/password/:id', async (req: Request, res: Response) => {
+    const password = req.body.password;
+    const userID = req.params.id;
+    try {
+        await userModel.updateUserPassword(userID, password);
+
+        return res.status(201).send(`User with id ${userID} has updated its password`);
     } catch (error) {
         return res.status(404).send(error);
     }
@@ -136,11 +226,12 @@ router.put('/user/balance/:id', async (req: Request, res: Response) => {
  */
 router.delete('/user/:id', async (req: Request, res: Response) => {
     try {
-        const deletedUser = await userModel.deleteOneUser(req.params.id);
+        await userModel.deleteOneUser(req.params.id);
 
-        const deletedUserData = JSON.parse(JSON.stringify(deletedUser));
-
-        return res.status(204).send(`User with id ${deletedUserData.id} was deleted`);
+        // 202: The request has been accepted for processing, but the processing has not been completed.
+        // 204: The server has successfully fulfilled the request and that there is no additional content to send in the response payload body.
+        // 200: The request has succeeded and the request payload includes a representation of the status of the action.
+        return res.status(200).send(`User with id ${req.params.id} was deleted`);
     } catch (error) {
         return res.status(404).send(error);
     }

@@ -27,6 +27,22 @@ const userModel = {
             await db.end();
         }
     },
+    createOneUser: async function createOneUser(
+        firstName: string,
+        lastName: string,
+        phoneNumber: number,
+        emailAdress: string,
+        password: string
+    ) {
+        const db = await database.getDb();
+        try {
+            const sql = `CALL create_user(?, ?, ?, ?, ?)`;
+            const res = await db.query(sql, [firstName, lastName, phoneNumber, emailAdress, password]);
+            return res[0];
+        } finally {
+            await db.end();
+        }
+    },
     updateUserFirstName: async function updateUserFirstName(userId: string, firstName: string) {
         const db = await database.getDb();
         try {
@@ -76,6 +92,28 @@ const userModel = {
         try {
             const sql = `CALL update_user_balance(?, ?)`;
             const res = await db.query(sql, [userId, balance]);
+
+            return res[0];
+        } finally {
+            await db.end();
+        }
+    },
+    updateUserPartialBalance: async function updateUserPartialBalance(userId: string, balance: number) {
+        const db = await database.getDb();
+        try {
+            const sql = `CALL update_user_partial_payment(?, ?)`;
+            const res = await db.query(sql, [userId, balance]);
+
+            return res[0];
+        } finally {
+            await db.end();
+        }
+    },
+    updateUserPassword: async function updateUserPassword(userId: string, password: string) {
+        const db = await database.getDb();
+        try {
+            const sql = `CALL update_user_password(?, ?)`;
+            const res = await db.query(sql, [userId, password]);
 
             return res[0];
         } finally {
