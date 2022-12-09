@@ -126,7 +126,7 @@ router.post('/rent/user/:id', async (req: Request, res: Response) => {
  *
  * @returns {Response}
  */
-router.post('/rent/:id', async (req: Request, res: Response) => {
+router.put('/rent/:id', async (req: Request, res: Response) => {
     const rentId = req.params.id;
     try {
         const updateRent = await rentModel.updateOneRent(rentId);

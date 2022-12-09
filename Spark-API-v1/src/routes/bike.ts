@@ -66,7 +66,7 @@ router.get('/bike/:id', async (req: Request, res: Response) => {
  *
  * @returns {Response}
  */
-router.post('/bike/:id', async (req: Request, res: Response) => {
+router.put('/bike/:id', async (req: Request, res: Response) => {
     try {
         const bikeInfo = {
             bikeId: req.body.bikeId,

@@ -73,7 +73,7 @@ router.get('/user/:id', async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.post('/user/:id', async (req: Request, res: Response) => {
+router.put('/user/:id', async (req: Request, res: Response) => {
     const userInfo = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -110,7 +110,7 @@ router.post('/user/:id', async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.post('/user/balance/:id', async (req: Request, res: Response) => {
+router.put('/user/balance/:id', async (req: Request, res: Response) => {
     const balance = req.body.balance;
     const userID = req.params.id;
     try {

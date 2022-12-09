@@ -48,7 +48,7 @@ router.get('/charger/:id', async (req: Request, res: Response) => {
 /**
  * Charger ROUTE
  * /:
- *   post:
+ *   put:
  *     summary: Change status of one charger
  *     description: Update a status for one charger
  * @param {Request}  req  The incoming request.
@@ -57,7 +57,7 @@ router.get('/charger/:id', async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.post('/charger/:id', async (req: Request, res: Response) => {
+router.put('/charger/:id', async (req: Request, res: Response) => {
     try {
         const chargerID = req.params.id;
         const status = req.body.status;

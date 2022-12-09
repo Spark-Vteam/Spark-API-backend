@@ -100,7 +100,7 @@ router.post('/geofence', async (req: Request, res: Response) => {
 /**
  * Geofence ROUTE
  * /:
- *   post:
+ *   put:
  *     summary: Update coordinates for one geofence
  *     description: Update one geofence with information: { coordinates }
  * @param {Request}  req  The incoming request.
@@ -109,7 +109,7 @@ router.post('/geofence', async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.post('/geofence/coordinates/:id', async (req: Request, res: Response) => {
+router.put('/geofence/coordinates/:id', async (req: Request, res: Response) => {
     try {
         const geofenceId = req.params.id;
         const coordinates = req.body.coordinates;
@@ -125,7 +125,7 @@ router.post('/geofence/coordinates/:id', async (req: Request, res: Response) => 
 /**
  * Geofence ROUTE
  * /:
- *   post:
+ *   put:
  *     summary: Update info for one geofence
  *     description: Update one geofence with information: { info }
  * @param {Request}  req  The incoming request.
@@ -134,7 +134,7 @@ router.post('/geofence/coordinates/:id', async (req: Request, res: Response) => 
  *
  * @returns {void}
  */
-router.post('/geofence/info/:id', async (req: Request, res: Response) => {
+router.put('/geofence/info/:id', async (req: Request, res: Response) => {
     try {
         const geofenceId = req.params.id;
         const info = req.body.info;
@@ -150,7 +150,7 @@ router.post('/geofence/info/:id', async (req: Request, res: Response) => {
 /**
  * Geofence ROUTE
  * /:
- *   post:
+ *   put:
  *     summary: Update type for one geofence
  *     description: Update one geofence with information: { type }
  * @param {Request}  req  The incoming request.
@@ -159,7 +159,7 @@ router.post('/geofence/info/:id', async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.post('/geofence/type/:id', async (req: Request, res: Response) => {
+router.put('/geofence/type/:id', async (req: Request, res: Response) => {
     try {
         const geofenceId = req.params.id;
         const type = req.body.type;

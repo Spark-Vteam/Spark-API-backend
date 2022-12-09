@@ -132,7 +132,7 @@ router.post('/invoice/user/:id', async (req: Request, res: Response) => {
 /**
  * Invoice ROUTE
  * /:
- *   get:
+ *   put:
  *     summary: Update invoice status
  *     description: Update an  status invoice
  * @param {Request}  req  The incoming request.
@@ -141,7 +141,7 @@ router.post('/invoice/user/:id', async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.post('/invoice/status/:id', async (req: Request, res: Response) => {
+router.put('/invoice/status/:id', async (req: Request, res: Response) => {
     try {
         const invoiceId = parseInt(req.params.id);
         const status = req.body.status;
@@ -157,7 +157,7 @@ router.post('/invoice/status/:id', async (req: Request, res: Response) => {
 /**
  * Invoice ROUTE
  * /:
- *   post:
+ *   put:
  *     summary: Update invoice amount
  *     description: Update an invoice amount
  * @param {Request}  req  The incoming request.
@@ -166,7 +166,7 @@ router.post('/invoice/status/:id', async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.post('/invoice/amount/:id', async (req: Request, res: Response) => {
+router.put('/invoice/amount/:id', async (req: Request, res: Response) => {
     try {
         const invoiceId = parseInt(req.params.id);
         const amount = req.body.amount;
