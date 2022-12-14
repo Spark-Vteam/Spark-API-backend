@@ -1409,6 +1409,26 @@ ON Chargers FOR EACH ROW
 
 -- ------------------- GeofencesLog --------------------
 
+--
+-- Trigger to update GeofencesLog with insert events
+--
+DROP TRIGGER IF EXISTS GeofencesLog_insert;
+
+CREATE TRIGGER GeofencesLog_insert
+AFTER INSERT
+ON Chargers FOR EACH ROW
+	CALL insert_GeofencesLog(NEW.id, "created", "new geofenced zone created");
+
+--
+-- Trigger to update GeofencesLog with update events
+--
+DROP TRIGGER IF EXISTS GeofencesLog_update;
+
+CREATE TRIGGER GeofencesLog_update
+AFTER UPDATE
+ON Chargers FOR EACH ROW
+  CALL insert_GeofencesLog(NEW.id, "updated", geofences_status(NEW.Type));
+
 -- ------------------- AdminsLog -----------------------
 
 --
@@ -1710,6 +1730,29 @@ DETERMINISTIC
       RETURN "charger is occupied";
     END IF;
     RETURN "charger needs maintenance";
+  END
+;;
+DELIMITER ;
+
+--
+-- Decide Geofences status for GeofencesLog
+--
+DROP FUNCTION IF EXISTS geofences_status;
+DELIMITER ;;
+CREATE FUNCTION geofences_status(
+  a_Status TINYINT
+)
+RETURNS TINYINT
+DETERMINISTIC
+  BEGIN
+    IF a_Status = 10 THEN
+      RETURN "zone type was changed to 'slow zone'";
+    IF a_Status = 20 THEN
+      RETURN "zone type was changed to 'no parking'";
+    IF a_Status = 20 THEN
+      RETURN "zone type was changed to 'no riding'";
+    END IF;
+    RETURN "zone was 'deleted'";
   END
 ;;
 DELIMITER ;
