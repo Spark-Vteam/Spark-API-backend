@@ -1416,7 +1416,7 @@ DROP TRIGGER IF EXISTS GeofencesLog_insert;
 
 CREATE TRIGGER GeofencesLog_insert
 AFTER INSERT
-ON Chargers FOR EACH ROW
+ON Geofences FOR EACH ROW
 	CALL insert_GeofencesLog(NEW.id, "created", "new geofenced zone created");
 
 --
@@ -1426,7 +1426,7 @@ DROP TRIGGER IF EXISTS GeofencesLog_update;
 
 CREATE TRIGGER GeofencesLog_update
 AFTER UPDATE
-ON Chargers FOR EACH ROW
+ON Geofences FOR EACH ROW
   CALL insert_GeofencesLog(NEW.id, "updated", geofences_status(NEW.Type));
 
 -- ------------------- AdminsLog -----------------------
@@ -1527,6 +1527,10 @@ CREATE TRIGGER InvoicesLog_update
 AFTER UPDATE
 ON Invoices FOR EACH ROW
   CALL insert_InvoicesLog(NEW.id, "updated", invoices_status(NEW.Status));
+
+-- -----------------------------------------------------
+-- -                 END OF LOG TRIGGERS               -
+-- -----------------------------------------------------
 
 -- ------------------- Rents ----------------------------
 
