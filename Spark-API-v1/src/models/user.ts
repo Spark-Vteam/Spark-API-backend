@@ -32,12 +32,13 @@ const userModel = {
         lastName: string,
         phoneNumber: number,
         emailAdress: string,
-        password: string
+        password: string,
+        oauth: string
     ) {
         const db = await database.getDb();
         try {
-            const sql = `CALL create_user(?, ?, ?, ?, ?)`;
-            const res = await db.query(sql, [firstName, lastName, phoneNumber, emailAdress, password]);
+            const sql = `CALL create_user(?, ?, ?, ?, ?,?)`;
+            const res = await db.query(sql, [firstName, lastName, phoneNumber, emailAdress, password, oauth]);
             return res[0];
         } finally {
             await db.end();
@@ -114,6 +115,17 @@ const userModel = {
         try {
             const sql = `CALL update_user_password(?, ?)`;
             const res = await db.query(sql, [userId, password]);
+
+            return res[0];
+        } finally {
+            await db.end();
+        }
+    },
+    updateUserOauth: async function updateUserOauth(userId: string, oauth: string) {
+        const db = await database.getDb();
+        try {
+            const sql = `CALL update_user_oauth(?, ?)`;
+            const res = await db.query(sql, [userId, oauth]);
 
             return res[0];
         } finally {
