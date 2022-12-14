@@ -851,24 +851,28 @@ CREATE PROCEDURE get_active_rents_by_user(
   a_Users_id INT
 )
 	BEGIN
-		SELECT * FROM Rents WHERE Users_id = a_Users_id AND DestinationTimestamp = NULL;
+		SELECT * FROM Rents WHERE Users_id = a_Users_id AND Status = 10;
 	END
 ;;
 DELIMITER ;
 --
 -- Procedure to fetch all Bikeslog from a specific rent
 --
-DROP PROCEDURE IF EXISTS create_rent;
+DROP PROCEDURE IF EXISTS get_bikeslog_from_rent;
 DELIMITER ;;
-CREATE PROCEDURE create_rent(
-  a_Rent_id INT,
-  a_Bikes_id INT
+CREATE PROCEDURE get_bikeslog_from_rent(
+  a_Rents_id INT
 )
 	BEGIN
-    DECLARE var_bike_position VARCHAR(45);
-    SET var_bike_position = (SELECT position FROM Bikes WHERE id = a_Bikes_id);
-		INSERT INTO Rents (Users_id, Bikes_id, Start, StartTimestamp, Status)
-    VALUES (a_Users_id, a_Bikes_id, var_bike_position, CURRENT_TIMESTAMP(), 10);
+    DECLARE var_bikes_id INT;
+    DECLARE var_start DATETIME;
+    DECLARE var_end DATETIME;
+
+    SET var_bikes_id = (SELECT Bikes_id FROM Rents WHERE id = a_Rents_id);
+    SET var_start = (SELECT StartTimestamp FROM Rents WHERE id = a_Rents_id);
+    SET var_end = (SELECT DestinationTimestamp FROM Rents WHERE id = a_Rents_id);
+
+		SELECT * FROM BikesLog WHERE Bikes_id = var_bikes_id AND Timestamp >= var_start AND Timestamp <= var_end;
 	END
 ;;
 DELIMITER ;
@@ -1377,10 +1381,30 @@ DROP TRIGGER IF EXISTS BikesLog_update;
 CREATE TRIGGER BikesLog_update
 AFTER UPDATE
 ON Bikes FOR EACH ROW
-    CALL insert_BikesLog(NEW.id, "updated", CONCAT('{','"Position":"',NEW.Position,'","Battery":',NEW.Battery,',"Status":',NEW.Status,',"Speed":',NEW.Speed,'}'), NEW.Position);
+  CALL insert_BikesLog(NEW.id, "updated", CONCAT('{','"Position":"',NEW.Position,'","Battery":',NEW.Battery,',"Status":',NEW.Status,',"Speed":',NEW.Speed,'}'), NEW.Position);
 
 
 -- ------------------- ChargersLog ---------------------
+
+--
+-- Trigger to update BikesLog with insert events, logs the time of the bike registration
+--
+DROP TRIGGER IF EXISTS ChargersLog_insert;
+
+CREATE TRIGGER ChargersLog_insert
+AFTER INSERT
+ON Chargers FOR EACH ROW
+	CALL insert_ChargersLog(NEW.id, "created", "new charger registered");
+
+--
+-- Trigger to update UsersLog with update events
+--
+DROP TRIGGER IF EXISTS ChargersLog_update;
+
+CREATE TRIGGER ChargersLog_update
+AFTER UPDATE
+ON Chargers FOR EACH ROW
+  CALL insert_ChargersLog(NEW.id, "updated", chargers_status(NEW.Status));
 
 
 -- ------------------- GeofencesLog --------------------
@@ -1636,6 +1660,27 @@ RETURNS INT
 DETERMINISTIC
   BEGIN
     RETURN (SELECT COUNT(id) FROM Chargers WHERE Stations_id = a_Stations_id AND Status = '20');
+  END
+;;
+DELIMITER ;
+
+--
+-- Decide Chargers status for ChargersLog
+--
+DROP FUNCTION IF EXISTS chargers_status;
+DELIMITER ;;
+CREATE FUNCTION chargers_status(
+  a_Status TINYINT
+)
+RETURNS TINYINT
+DETERMINISTIC
+  BEGIN
+    IF a_Status = 10 THEN
+      RETURN "charger is available";
+    IF a_Status = 20 THEN
+      RETURN "charger is occupied";
+    END IF;
+    RETURN "charger needs maintenance";
   END
 ;;
 DELIMITER ;
