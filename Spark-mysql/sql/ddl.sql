@@ -327,7 +327,7 @@ DROP TABLE IF EXISTS `mydb`.`BikesLog` ;
 
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `mydb`.`BikesLog` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `Bikes_id` INT NOT NULL,
   `Event` VARCHAR(45) NOT NULL,
   `Timestamp` TIMESTAMP NOT NULL,
@@ -1326,6 +1326,43 @@ ON Users FOR EACH ROW
 
 
 -- ------------------- BikesLog ------------------------
+--
+-- Trigger to update BikesLog with insert events, logs the time of the bike registration
+--
+DROP TRIGGER IF EXISTS BikesLog_insert;
+
+CREATE TRIGGER BikesLog_insert
+AFTER INSERT
+ON Bikes FOR EACH ROW
+	CALL insert_BikesLog(NEW.id, "created", "new bike registered");
+
+--
+-- Trigger to update UsersLog with update events
+--
+DROP TRIGGER IF EXISTS BikesLog_update;
+
+CREATE TRIGGER BikesLog_update
+AFTER UPDATE
+ON Bikes FOR EACH ROW
+    CALL insert_BikesLog(NEW.id, "updated", CONCAT("{","Position",NEW.Position,"Battery",NEW.Battery,"Status",NEW.Status,"Speed",NEW.Speed,"}"));
+
+
+-- ------------------- ChargersLog ---------------------
+
+
+-- ------------------- GeofencesLog --------------------
+
+
+-- ------------------- AdminsLog -----------------------
+
+
+-- ------------------- StationsLog ---------------------
+
+
+-- ------------------- RentsLog ------------------------
+
+
+-- ------------------- InvoicesLog ---------------------
 
 
 
