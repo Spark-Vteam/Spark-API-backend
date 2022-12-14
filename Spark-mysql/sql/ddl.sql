@@ -1387,7 +1387,7 @@ ON Bikes FOR EACH ROW
 -- ------------------- ChargersLog ---------------------
 
 --
--- Trigger to update BikesLog with insert events, logs the time of the bike registration
+-- Trigger to update ChargersLog with insert events, logs the time of the bike registration
 --
 DROP TRIGGER IF EXISTS ChargersLog_insert;
 
@@ -1397,7 +1397,7 @@ ON Chargers FOR EACH ROW
 	CALL insert_ChargersLog(NEW.id, "created", "new charger registered");
 
 --
--- Trigger to update UsersLog with update events
+-- Trigger to update ChargersLog with update events
 --
 DROP TRIGGER IF EXISTS ChargersLog_update;
 
@@ -1409,8 +1409,37 @@ ON Chargers FOR EACH ROW
 
 -- ------------------- GeofencesLog --------------------
 
-
 -- ------------------- AdminsLog -----------------------
+
+--
+-- Trigger to update AdminsLog with insert events
+--
+DROP TRIGGER IF EXISTS AdminsLog_insert;
+
+CREATE TRIGGER AdminsLog_insert
+AFTER INSERT
+ON Admins FOR EACH ROW
+	CALL insert_AdminsLog(NEW.id, "created", "new admin created");
+
+--
+-- Trigger to update AdminsLog with update events
+--
+DROP TRIGGER IF EXISTS AdminsLog_update;
+
+CREATE TRIGGER AdminsLog_update
+AFTER UPDATE
+ON Admins FOR EACH ROW
+    CALL insert_AdminsLog(NEW.id, "updated", "admin data updated");
+    
+--
+-- Trigger to update AdminsLog with delete events
+--
+DROP TRIGGER IF EXISTS AdminsLog_deleted;
+
+CREATE TRIGGER AdminsLog_deleted
+AFTER DELETE
+ON Admins FOR EACH ROW
+    CALL insert_AdminsLog(old.id, "deleted", "admin deleted");
 
 
 -- ------------------- StationsLog ---------------------
