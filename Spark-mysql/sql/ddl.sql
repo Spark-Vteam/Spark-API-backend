@@ -1508,8 +1508,25 @@ ON Rents FOR EACH ROW
 
 -- ------------------- InvoicesLog ---------------------
 
+--
+-- Trigger to update InvoicesLog with insert events
+--
+DROP TRIGGER IF EXISTS InvoicesLog_insert;
 
+CREATE TRIGGER InvoicesLog_insert
+AFTER INSERT
+ON Invoices FOR EACH ROW
+	CALL insert_InvoicesLog(NEW.id, "created", "new invoice was created");
 
+--
+-- Trigger to update InvoicesLog with update events
+--
+DROP TRIGGER IF EXISTS InvoicesLog_update;
+
+CREATE TRIGGER InvoicesLog_update
+AFTER UPDATE
+ON Invoices FOR EACH ROW
+  CALL insert_InvoicesLog(NEW.id, "updated", invoices_status(NEW.Status));
 
 -- ------------------- Rents ----------------------------
 
@@ -1787,10 +1804,32 @@ DETERMINISTIC
       RETURN "zone type was changed to 'slow zone'";
     IF a_Status = 20 THEN
       RETURN "zone type was changed to 'no parking'";
-    IF a_Status = 20 THEN
+    IF a_Status = 30 THEN
       RETURN "zone type was changed to 'no riding'";
     END IF;
     RETURN "zone was 'deleted'";
   END
 ;;
 DELIMITER ;
+
+--
+-- Decide Invoices status for InvoicesLog
+--
+DROP FUNCTION IF EXISTS invoices_status;
+DELIMITER ;;
+CREATE FUNCTION invoices_status(
+  a_Status TINYINT
+)
+RETURNS TINYINT
+DETERMINISTIC
+  BEGIN
+    IF a_Status = 20 THEN
+      RETURN "invoice paid";
+    IF a_Status = 30 THEN
+      RETURN "invoice overdue";
+    END IF;
+    RETURN "invoice canceled";
+  END
+;;
+DELIMITER ;
+
