@@ -235,7 +235,7 @@ DROP TABLE IF EXISTS `mydb`.`ChargersLog` ;
 
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `mydb`.`ChargersLog` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `Chargers_id` INT NOT NULL,
   `Event` VARCHAR(45) NOT NULL,
   `Timestamp` TIMESTAMP NOT NULL,
@@ -282,14 +282,14 @@ DROP TABLE IF EXISTS `mydb`.`InvoicesLog` ;
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `mydb`.`InvoicesLog` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `Transactions_id` INT NOT NULL,
+  `Invoices_id` INT NOT NULL,
   `Event` VARCHAR(45) NOT NULL,
   `Timestamp` TIMESTAMP NOT NULL,
   `Info` VARCHAR(45) NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_TransactionsLog_Transactions1_idx` (`Transactions_id` ASC) VISIBLE,
-  CONSTRAINT `fk_TransactionsLog_Transactions1`
-    FOREIGN KEY (`Transactions_id`)
+  INDEX `fk_InvoicesLog_Invoices1_idx` (`Invoices_id` ASC) VISIBLE,
+  CONSTRAINT `fk_InvoicesLog_Invoices1`
+    FOREIGN KEY (`Invoices_id`)
     REFERENCES `mydb`.`Invoices` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -443,7 +443,7 @@ CREATE PROCEDURE insert_ChargersLog(
     a_Info VARCHAR(45)
     )
     BEGIN
-		INSERT INTO ChargersLogs (Chargers_id, Event, Timestamp, Info)
+		INSERT INTO ChargersLog (Chargers_id, Event, Timestamp, Info)
         VALUES (a_Chargers_id, a_Event, CURRENT_TIMESTAMP(), a_Info);
 	END
     ;;
@@ -1780,12 +1780,12 @@ DELIMITER ;;
 CREATE FUNCTION chargers_status(
   a_Status TINYINT
 )
-RETURNS TINYINT
+RETURNS VARCHAR(45)
 DETERMINISTIC
   BEGIN
     IF a_Status = 10 THEN
       RETURN "charger is available";
-    IF a_Status = 20 THEN
+    ELSEIF a_Status = 20 THEN
       RETURN "charger is occupied";
     END IF;
     RETURN "charger needs maintenance";
@@ -1801,14 +1801,14 @@ DELIMITER ;;
 CREATE FUNCTION geofences_status(
   a_Status TINYINT
 )
-RETURNS TINYINT
+RETURNS VARCHAR(45)
 DETERMINISTIC
   BEGIN
     IF a_Status = 10 THEN
       RETURN "zone type was changed to 'slow zone'";
-    IF a_Status = 20 THEN
+    ELSEIF a_Status = 20 THEN
       RETURN "zone type was changed to 'no parking'";
-    IF a_Status = 30 THEN
+    ELSEIF a_Status = 30 THEN
       RETURN "zone type was changed to 'no riding'";
     END IF;
     RETURN "zone was 'deleted'";
@@ -1824,12 +1824,12 @@ DELIMITER ;;
 CREATE FUNCTION invoices_status(
   a_Status TINYINT
 )
-RETURNS TINYINT
+RETURNS VARCHAR(45)
 DETERMINISTIC
   BEGIN
     IF a_Status = 20 THEN
       RETURN "invoice paid";
-    IF a_Status = 30 THEN
+    ELSEIF a_Status = 30 THEN
       RETURN "invoice overdue";
     END IF;
     RETURN "invoice canceled";
