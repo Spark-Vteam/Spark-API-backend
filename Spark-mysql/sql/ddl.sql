@@ -331,7 +331,8 @@ CREATE TABLE IF NOT EXISTS `mydb`.`BikesLog` (
   `Bikes_id` INT NOT NULL,
   `Event` VARCHAR(45) NOT NULL,
   `Timestamp` TIMESTAMP NOT NULL,
-  `Info` VARCHAR(45) NULL,
+  `Info` VARCHAR(200) NULL,
+  `Position` VARCHAR(45) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_BikesLog_Bikes1_idx` (`Bikes_id` ASC) VISIBLE,
   CONSTRAINT `fk_BikesLog_Bikes1`
@@ -421,11 +422,12 @@ DELIMITER ;;
 CREATE PROCEDURE insert_BikesLog(
     a_Bikes_id INT,
     a_Event VARCHAR(45),
-    a_Info VARCHAR(45)
+    a_Info VARCHAR(200),
+    a_Position VARCHAR(45)
     )
     BEGIN
-		INSERT INTO BikesLog (Bikes_id, Event, Timestamp, Info)
-        VALUES (a_Bikes_id, a_Event, CURRENT_TIMESTAMP(), a_Info);
+		INSERT INTO BikesLog (Bikes_id, Event, Timestamp, Info, Position)
+        VALUES (a_Bikes_id, a_Event, CURRENT_TIMESTAMP(), a_Info, a_Position);
 	END
     ;;
 DELIMITER ;
@@ -836,6 +838,37 @@ CREATE PROCEDURE update_rent(
 		UPDATE Rents
     SET Destination = var_bike_position, DestinationTimestamp = CURRENT_TIMESTAMP(), Price = var_price, Status = var_status
     WHERE id = a_Rents_id;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to fetch all active rents from a user
+--
+DROP PROCEDURE IF EXISTS get_active_rents_by_user;
+DELIMITER ;;
+CREATE PROCEDURE get_active_rents_by_user(
+  a_Users_id INT
+)
+	BEGIN
+		SELECT * FROM Rents WHERE Users_id = a_Users_id AND DestinationTimestamp = NULL;
+	END
+;;
+DELIMITER ;
+--
+-- Procedure to fetch all Bikeslog from a specific rent
+--
+DROP PROCEDURE IF EXISTS create_rent;
+DELIMITER ;;
+CREATE PROCEDURE create_rent(
+  a_Rent_id INT,
+  a_Bikes_id INT
+)
+	BEGIN
+    DECLARE var_bike_position VARCHAR(45);
+    SET var_bike_position = (SELECT position FROM Bikes WHERE id = a_Bikes_id);
+		INSERT INTO Rents (Users_id, Bikes_id, Start, StartTimestamp, Status)
+    VALUES (a_Users_id, a_Bikes_id, var_bike_position, CURRENT_TIMESTAMP(), 10);
 	END
 ;;
 DELIMITER ;
@@ -1334,7 +1367,7 @@ DROP TRIGGER IF EXISTS BikesLog_insert;
 CREATE TRIGGER BikesLog_insert
 AFTER INSERT
 ON Bikes FOR EACH ROW
-	CALL insert_BikesLog(NEW.id, "created", "new bike registered");
+	CALL insert_BikesLog(NEW.id, "created", "new bike registered", NEW.Position);
 
 --
 -- Trigger to update UsersLog with update events
@@ -1344,7 +1377,7 @@ DROP TRIGGER IF EXISTS BikesLog_update;
 CREATE TRIGGER BikesLog_update
 AFTER UPDATE
 ON Bikes FOR EACH ROW
-    CALL insert_BikesLog(NEW.id, "updated", CONCAT("{","Position",NEW.Position,"Battery",NEW.Battery,"Status",NEW.Status,"Speed",NEW.Speed,"}"));
+    CALL insert_BikesLog(NEW.id, "updated", CONCAT('{','"Position":"',NEW.Position,'","Battery":',NEW.Battery,',"Status":',NEW.Status,',"Speed":',NEW.Speed,'}'), NEW.Position);
 
 
 -- ------------------- ChargersLog ---------------------
