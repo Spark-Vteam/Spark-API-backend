@@ -1486,6 +1486,25 @@ ON Stations FOR EACH ROW
 
 -- ------------------- RentsLog ------------------------
 
+--
+-- Trigger to update RentsLog with insert events
+--
+DROP TRIGGER IF EXISTS RentsLog_insert;
+
+CREATE TRIGGER RentsLog_insert
+AFTER INSERT
+ON Rents FOR EACH ROW
+	CALL insert_RentsLog(NEW.id, "created", "new rent was started");
+
+--
+-- Trigger to update RentsLog with update events
+--
+DROP TRIGGER IF EXISTS RentsLog_update;
+
+CREATE TRIGGER RentsLog_update
+AFTER UPDATE
+ON Rents FOR EACH ROW
+  CALL insert_RentsLog(NEW.id, "updated", "rent was finished");
 
 -- ------------------- InvoicesLog ---------------------
 
