@@ -1464,6 +1464,25 @@ ON Admins FOR EACH ROW
 
 -- ------------------- StationsLog ---------------------
 
+--
+-- Trigger to update StationsLog with insert events
+--
+DROP TRIGGER IF EXISTS StationsLog_insert;
+
+CREATE TRIGGER StationsLog_insert
+AFTER INSERT
+ON Stations FOR EACH ROW
+	CALL insert_StationsLog(NEW.id, "created", "new station registered");
+
+--
+-- Trigger to update StationsLog with update events
+--
+DROP TRIGGER IF EXISTS StationsLog_update;
+
+CREATE TRIGGER StationsLog_update
+AFTER UPDATE
+ON Stations FOR EACH ROW
+  CALL insert_StationsLog(NEW.id, "updated", "station was updated");
 
 -- ------------------- RentsLog ------------------------
 
