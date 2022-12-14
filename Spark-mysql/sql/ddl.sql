@@ -574,13 +574,14 @@ CREATE PROCEDURE create_user(
   a_LastName VARCHAR(45),
   a_PhoneNumber VARCHAR(45),
   a_EmailAdress VARCHAR(45),
-  a_Password VARCHAR(45)
+  a_Password VARCHAR(45),
+  a_Oauth VARCHAR(46)
 )
 	BEGIN
 		INSERT INTO
-      Users (FirstName, LastName, PhoneNumber, EmailAdress, Balance, Password, PartialPayment)
+      Users (FirstName, LastName, PhoneNumber, EmailAdress, Balance, Password, PartialPayment, Oauth)
     VALUES
-      (a_FirstName, a_LastName, a_PhoneNumber, a_EmailAdress, 0, a_Password, 0);
+      (a_FirstName, a_LastName, a_PhoneNumber, a_EmailAdress, 0, a_Password, 0, a_Oauth);
 	END
 ;;
 DELIMITER ;
@@ -697,6 +698,23 @@ DELIMITER ;;
 CREATE PROCEDURE update_user_partial_payment(
   a_Users_id INT,
   a_PartialPayment INT
+)
+	BEGIN
+		UPDATE Users
+    SET PartialPayment = a_PartialPayment
+    WHERE id = a_Users_id;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to update User PartialPayment
+--
+DROP PROCEDURE IF EXISTS update_user_oauth;
+DELIMITER ;;
+CREATE PROCEDURE update_user_oauth(
+  a_Users_id INT,
+  a_Oauth VARCHAR(45)
 )
 	BEGIN
 		UPDATE Users
