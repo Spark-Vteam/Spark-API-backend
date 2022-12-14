@@ -708,7 +708,7 @@ CREATE PROCEDURE update_user_partial_payment(
 DELIMITER ;
 
 --
--- Procedure to update User PartialPayment
+-- Procedure to update User Oauth id
 --
 DROP PROCEDURE IF EXISTS update_user_oauth;
 DELIMITER ;;
@@ -718,7 +718,7 @@ CREATE PROCEDURE update_user_oauth(
 )
 	BEGIN
 		UPDATE Users
-    SET PartialPayment = a_PartialPayment
+    SET Oauth = a_Oauth
     WHERE id = a_Users_id;
 	END
 ;;
