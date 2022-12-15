@@ -235,7 +235,7 @@ DROP TABLE IF EXISTS `mydb`.`ChargersLog` ;
 
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `mydb`.`ChargersLog` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `Chargers_id` INT NOT NULL,
   `Event` VARCHAR(45) NOT NULL,
   `Timestamp` TIMESTAMP NOT NULL,
@@ -282,14 +282,14 @@ DROP TABLE IF EXISTS `mydb`.`InvoicesLog` ;
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `mydb`.`InvoicesLog` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `Transactions_id` INT NOT NULL,
+  `Invoices_id` INT NOT NULL,
   `Event` VARCHAR(45) NOT NULL,
   `Timestamp` TIMESTAMP NOT NULL,
   `Info` VARCHAR(45) NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_TransactionsLog_Transactions1_idx` (`Transactions_id` ASC) VISIBLE,
-  CONSTRAINT `fk_TransactionsLog_Transactions1`
-    FOREIGN KEY (`Transactions_id`)
+  INDEX `fk_InvoicesLog_Invoices1_idx` (`Invoices_id` ASC) VISIBLE,
+  CONSTRAINT `fk_InvoicesLog_Invoices1`
+    FOREIGN KEY (`Invoices_id`)
     REFERENCES `mydb`.`Invoices` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -327,11 +327,12 @@ DROP TABLE IF EXISTS `mydb`.`BikesLog` ;
 
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `mydb`.`BikesLog` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `Bikes_id` INT NOT NULL,
   `Event` VARCHAR(45) NOT NULL,
   `Timestamp` TIMESTAMP NOT NULL,
-  `Info` VARCHAR(45) NULL,
+  `Info` VARCHAR(200) NULL,
+  `Position` VARCHAR(45) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_BikesLog_Bikes1_idx` (`Bikes_id` ASC) VISIBLE,
   CONSTRAINT `fk_BikesLog_Bikes1`
@@ -421,11 +422,12 @@ DELIMITER ;;
 CREATE PROCEDURE insert_BikesLog(
     a_Bikes_id INT,
     a_Event VARCHAR(45),
-    a_Info VARCHAR(45)
+    a_Info VARCHAR(200),
+    a_Position VARCHAR(45)
     )
     BEGIN
-		INSERT INTO BikesLog (Bikes_id, Event, Timestamp, Info)
-        VALUES (a_Bikes_id, a_Event, CURRENT_TIMESTAMP(), a_Info);
+		INSERT INTO BikesLog (Bikes_id, Event, Timestamp, Info, Position)
+        VALUES (a_Bikes_id, a_Event, CURRENT_TIMESTAMP(), a_Info, a_Position);
 	END
     ;;
 DELIMITER ;
@@ -441,7 +443,7 @@ CREATE PROCEDURE insert_ChargersLog(
     a_Info VARCHAR(45)
     )
     BEGIN
-		INSERT INTO ChargersLogs (Chargers_id, Event, Timestamp, Info)
+		INSERT INTO ChargersLog (Chargers_id, Event, Timestamp, Info)
         VALUES (a_Chargers_id, a_Event, CURRENT_TIMESTAMP(), a_Info);
 	END
     ;;
@@ -574,13 +576,14 @@ CREATE PROCEDURE create_user(
   a_LastName VARCHAR(45),
   a_PhoneNumber VARCHAR(45),
   a_EmailAdress VARCHAR(45),
-  a_Password VARCHAR(45)
+  a_Password VARCHAR(45),
+  a_Oauth VARCHAR(46)
 )
 	BEGIN
 		INSERT INTO
-      Users (FirstName, LastName, PhoneNumber, EmailAdress, Balance, Password, PartialPayment)
+      Users (FirstName, LastName, PhoneNumber, EmailAdress, Balance, Password, PartialPayment, Oauth)
     VALUES
-      (a_FirstName, a_LastName, a_PhoneNumber, a_EmailAdress, 0, a_Password, 0);
+      (a_FirstName, a_LastName, a_PhoneNumber, a_EmailAdress, 0, a_Password, 0, a_Oauth);
 	END
 ;;
 DELIMITER ;
@@ -707,6 +710,23 @@ CREATE PROCEDURE update_user_partial_payment(
 DELIMITER ;
 
 --
+-- Procedure to update User Oauth id
+--
+DROP PROCEDURE IF EXISTS update_user_oauth;
+DELIMITER ;;
+CREATE PROCEDURE update_user_oauth(
+  a_Users_id INT,
+  a_Oauth VARCHAR(45)
+)
+	BEGIN
+		UPDATE Users
+    SET Oauth = a_Oauth
+    WHERE id = a_Users_id;
+	END
+;;
+DELIMITER ;
+
+--
 -- Procedure to delete User
 --
 DROP PROCEDURE IF EXISTS delete_user;
@@ -818,6 +838,41 @@ CREATE PROCEDURE update_rent(
 		UPDATE Rents
     SET Destination = var_bike_position, DestinationTimestamp = CURRENT_TIMESTAMP(), Price = var_price, Status = var_status
     WHERE id = a_Rents_id;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to fetch all active rents from a user
+--
+DROP PROCEDURE IF EXISTS get_active_rents_by_user;
+DELIMITER ;;
+CREATE PROCEDURE get_active_rents_by_user(
+  a_Users_id INT
+)
+	BEGIN
+		SELECT * FROM Rents WHERE Users_id = a_Users_id AND Status = 10;
+	END
+;;
+DELIMITER ;
+--
+-- Procedure to fetch all Bikeslog from a specific rent
+--
+DROP PROCEDURE IF EXISTS get_bikeslog_from_rent;
+DELIMITER ;;
+CREATE PROCEDURE get_bikeslog_from_rent(
+  a_Rents_id INT
+)
+	BEGIN
+    DECLARE var_bikes_id INT;
+    DECLARE var_start DATETIME;
+    DECLARE var_end DATETIME;
+
+    SET var_bikes_id = (SELECT Bikes_id FROM Rents WHERE id = a_Rents_id);
+    SET var_start = (SELECT StartTimestamp FROM Rents WHERE id = a_Rents_id);
+    SET var_end = (SELECT DestinationTimestamp FROM Rents WHERE id = a_Rents_id);
+
+		SELECT * FROM BikesLog WHERE Bikes_id = var_bikes_id AND Timestamp >= var_start AND Timestamp <= var_end;
 	END
 ;;
 DELIMITER ;
@@ -1308,9 +1363,174 @@ ON Users FOR EACH ROW
 
 
 -- ------------------- BikesLog ------------------------
+--
+-- Trigger to update BikesLog with insert events, logs the time of the bike registration
+--
+DROP TRIGGER IF EXISTS BikesLog_insert;
+
+CREATE TRIGGER BikesLog_insert
+AFTER INSERT
+ON Bikes FOR EACH ROW
+	CALL insert_BikesLog(NEW.id, "created", "new bike registered", NEW.Position);
+
+--
+-- Trigger to update UsersLog with update events
+--
+DROP TRIGGER IF EXISTS BikesLog_update;
+
+CREATE TRIGGER BikesLog_update
+AFTER UPDATE
+ON Bikes FOR EACH ROW
+  CALL insert_BikesLog(NEW.id, "updated", CONCAT('{','"Position":"',NEW.Position,'","Battery":',NEW.Battery,',"Status":',NEW.Status,',"Speed":',NEW.Speed,'}'), NEW.Position);
 
 
+-- ------------------- ChargersLog ---------------------
 
+--
+-- Trigger to update ChargersLog with insert events, logs the time of the bike registration
+--
+DROP TRIGGER IF EXISTS ChargersLog_insert;
+
+CREATE TRIGGER ChargersLog_insert
+AFTER INSERT
+ON Chargers FOR EACH ROW
+	CALL insert_ChargersLog(NEW.id, "created", "new charger registered");
+
+--
+-- Trigger to update ChargersLog with update events
+--
+DROP TRIGGER IF EXISTS ChargersLog_update;
+
+CREATE TRIGGER ChargersLog_update
+AFTER UPDATE
+ON Chargers FOR EACH ROW
+  CALL insert_ChargersLog(NEW.id, "updated", chargers_status(NEW.Status));
+
+
+-- ------------------- GeofencesLog --------------------
+
+--
+-- Trigger to update GeofencesLog with insert events
+--
+DROP TRIGGER IF EXISTS GeofencesLog_insert;
+
+CREATE TRIGGER GeofencesLog_insert
+AFTER INSERT
+ON Geofences FOR EACH ROW
+	CALL insert_GeofencesLog(NEW.id, "created", "new geofenced zone created");
+
+--
+-- Trigger to update GeofencesLog with update events
+--
+DROP TRIGGER IF EXISTS GeofencesLog_update;
+
+CREATE TRIGGER GeofencesLog_update
+AFTER UPDATE
+ON Geofences FOR EACH ROW
+  CALL insert_GeofencesLog(NEW.id, "updated", geofences_status(NEW.Type));
+
+-- ------------------- AdminsLog -----------------------
+
+--
+-- Trigger to update AdminsLog with insert events
+--
+DROP TRIGGER IF EXISTS AdminsLog_insert;
+
+CREATE TRIGGER AdminsLog_insert
+AFTER INSERT
+ON Admins FOR EACH ROW
+	CALL insert_AdminsLog(NEW.id, "created", "new admin created");
+
+--
+-- Trigger to update AdminsLog with update events
+--
+DROP TRIGGER IF EXISTS AdminsLog_update;
+
+CREATE TRIGGER AdminsLog_update
+AFTER UPDATE
+ON Admins FOR EACH ROW
+    CALL insert_AdminsLog(NEW.id, "updated", "admin data updated");
+    
+--
+-- Trigger to update AdminsLog with delete events
+--
+DROP TRIGGER IF EXISTS AdminsLog_deleted;
+
+CREATE TRIGGER AdminsLog_deleted
+AFTER DELETE
+ON Admins FOR EACH ROW
+    CALL insert_AdminsLog(old.id, "deleted", "admin deleted");
+
+
+-- ------------------- StationsLog ---------------------
+
+--
+-- Trigger to update StationsLog with insert events
+--
+DROP TRIGGER IF EXISTS StationsLog_insert;
+
+CREATE TRIGGER StationsLog_insert
+AFTER INSERT
+ON Stations FOR EACH ROW
+	CALL insert_StationsLog(NEW.id, "created", "new station registered");
+
+--
+-- Trigger to update StationsLog with update events
+--
+DROP TRIGGER IF EXISTS StationsLog_update;
+
+CREATE TRIGGER StationsLog_update
+AFTER UPDATE
+ON Stations FOR EACH ROW
+  CALL insert_StationsLog(NEW.id, "updated", "station was updated");
+
+-- ------------------- RentsLog ------------------------
+
+--
+-- Trigger to update RentsLog with insert events
+--
+DROP TRIGGER IF EXISTS RentsLog_insert;
+
+CREATE TRIGGER RentsLog_insert
+AFTER INSERT
+ON Rents FOR EACH ROW
+	CALL insert_RentsLog(NEW.id, "created", "new rent was started");
+
+--
+-- Trigger to update RentsLog with update events
+--
+DROP TRIGGER IF EXISTS RentsLog_update;
+
+CREATE TRIGGER RentsLog_update
+AFTER UPDATE
+ON Rents FOR EACH ROW
+  CALL insert_RentsLog(NEW.id, "updated", "rent was finished");
+
+-- ------------------- InvoicesLog ---------------------
+
+--
+-- Trigger to update InvoicesLog with insert events
+--
+DROP TRIGGER IF EXISTS InvoicesLog_insert;
+
+CREATE TRIGGER InvoicesLog_insert
+AFTER INSERT
+ON Invoices FOR EACH ROW
+	CALL insert_InvoicesLog(NEW.id, "created", "new invoice was created");
+
+--
+-- Trigger to update InvoicesLog with update events
+--
+DROP TRIGGER IF EXISTS InvoicesLog_update;
+
+CREATE TRIGGER InvoicesLog_update
+AFTER UPDATE
+ON Invoices FOR EACH ROW
+  CALL insert_InvoicesLog(NEW.id, "updated", invoices_status(NEW.Status));
+
+-- -----------------------------------------------------
+-- -                 END OF LOG TRIGGERS               -
+-- -----------------------------------------------------
 
 -- ------------------- Rents ----------------------------
 
@@ -1551,3 +1771,69 @@ DETERMINISTIC
   END
 ;;
 DELIMITER ;
+
+--
+-- Decide Chargers status for ChargersLog
+--
+DROP FUNCTION IF EXISTS chargers_status;
+DELIMITER ;;
+CREATE FUNCTION chargers_status(
+  a_Status TINYINT
+)
+RETURNS VARCHAR(45)
+DETERMINISTIC
+  BEGIN
+    IF a_Status = 10 THEN
+      RETURN "charger is available";
+    ELSEIF a_Status = 20 THEN
+      RETURN "charger is occupied";
+    END IF;
+    RETURN "charger needs maintenance";
+  END
+;;
+DELIMITER ;
+
+--
+-- Decide Geofences status for GeofencesLog
+--
+DROP FUNCTION IF EXISTS geofences_status;
+DELIMITER ;;
+CREATE FUNCTION geofences_status(
+  a_Status TINYINT
+)
+RETURNS VARCHAR(45)
+DETERMINISTIC
+  BEGIN
+    IF a_Status = 10 THEN
+      RETURN "zone type was changed to 'slow zone'";
+    ELSEIF a_Status = 20 THEN
+      RETURN "zone type was changed to 'no parking'";
+    ELSEIF a_Status = 30 THEN
+      RETURN "zone type was changed to 'no riding'";
+    END IF;
+    RETURN "zone was 'deleted'";
+  END
+;;
+DELIMITER ;
+
+--
+-- Decide Invoices status for InvoicesLog
+--
+DROP FUNCTION IF EXISTS invoices_status;
+DELIMITER ;;
+CREATE FUNCTION invoices_status(
+  a_Status TINYINT
+)
+RETURNS VARCHAR(45)
+DETERMINISTIC
+  BEGIN
+    IF a_Status = 20 THEN
+      RETURN "invoice paid";
+    ELSEIF a_Status = 30 THEN
+      RETURN "invoice overdue";
+    END IF;
+    RETURN "invoice canceled";
+  END
+;;
+DELIMITER ;
+

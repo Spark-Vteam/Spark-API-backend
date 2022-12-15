@@ -81,14 +81,16 @@ router.post('/user', async (req: Request, res: Response) => {
             phoneNumber: req.body.phoneNumber,
             emailAdress: req.body.emailAdress,
             password: req.body.password,
-        };
+            oauth: req.body.oauth,
+        };       
 
         const newUser = await userModel.createOneUser(
             userInfo.firstName,
             userInfo.lastName,
             userInfo.phoneNumber,
             userInfo.emailAdress,
-            userInfo.password
+            userInfo.password,
+            userInfo.oauth
         );
 
         res.status(201).send(
@@ -121,6 +123,7 @@ router.put('/user/:id', async (req: Request, res: Response) => {
         lastName: req.body.lastName,
         phoneNumber: req.body.phoneNumber,
         emailAdress: req.body.emailAdress,
+        oauth: req.body.oauth
     };
     const userID = req.params.id;
 
@@ -129,6 +132,7 @@ router.put('/user/:id', async (req: Request, res: Response) => {
         lastName: await userModel.updateUserLastName(userID, userInfo.lastName),
         phoneNumber: await userModel.updateUserPhoneNumber(userID, userInfo.phoneNumber),
         emailAdress: await userModel.updateUserEmailAdress(userID, userInfo.emailAdress),
+        oauth: await userModel.updateUserOauth(userID, userInfo.oauth)
     };
 
     return res.status(201).send(
