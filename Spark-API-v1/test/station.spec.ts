@@ -3,24 +3,20 @@ import chaiHttp from 'chai-http';
 
 import 'mocha';
 
-const server = require('../src/index');
+import server from '../src/index';
 
 chai.should();
 
 chai.use(chaiHttp);
 
-describe('Reports', () => {
-    describe('GET /station', () => {
-        it('200 HAPPY PATH', (done) => {
+describe("Main", () => {
+    describe("GET /", () => {
+        it("200 HAPPY PATH", (done) => {
             chai.request(server)
-                .get('/station')
+                .get("/")
                 .end((err, res) => {
-                    console.log(res);
-                    
-                    // res.should.have.status(200);
-                    // res.body.should.be.an('object');
-                    // res.body.data.should.be.an("array");
-                    // res.body.data.length.should.be.above(0);
+                    res.should.have.status(200);
+
                     done();
                 });
         });

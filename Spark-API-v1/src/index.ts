@@ -18,17 +18,17 @@ const cors = require('cors');
 require('dotenv').config();
 
 const app: Application = express();
-const httpServer = require("http").createServer(app);
+const httpServer = require('http').createServer(app);
 
 app.use(cors());
 app.options('*', cors());
 
-app.disable("x-powered-by");
+app.disable('x-powered-by');
 
 // don't show the log when it is test
-if (process.env.NODE_ENV !== "test") {
+if (process.env.NODE_ENV !== 'test') {
     // use morgan to log at command line
-    app.use(morgan("combined")); // 'combined' outputs the Apache style LOGs
+    app.use(morgan('combined')); // 'combined' outputs the Apache style LOGs
 }
 
 app.use(bodyParser.json());
@@ -36,46 +36,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(logIncomingToConsole);
 
-app.use("/", mainRoute);
-app.use("/", stationsRoute);
-app.use("/", userRoute);
-app.use("/", bikeRoute);
-app.use("/", rentRoute);
-app.use("/", adminRoute);
-app.use("/", invoiceRoute);
-app.use("/", geofenceRoute);
-app.use("/", chargerRoute);
-app.use("/", authRoute);
+app.use('/', mainRoute);
+app.use('/', stationsRoute);
+app.use('/', userRoute);
+app.use('/', bikeRoute);
+app.use('/', rentRoute);
+app.use('/', adminRoute);
+app.use('/', invoiceRoute);
+app.use('/', geofenceRoute);
+app.use('/', chargerRoute);
+app.use('/', authRoute);
 
-const server = httpServer.listen(port, logStartUpDetailsToConsole);
-
-/**
- * Log app details to console when starting up.
- *
- * @return {void}
- */
-function logStartUpDetailsToConsole() {
-    const routes: any[] = [];
-
-    // Find what routes are supported
-    app._router.stack.forEach((middleware: { route: any; name: string; handle: { stack: any[] } }) => {
-        if (middleware.route) {
-            // Routes registered directly on the app
-            routes.push(middleware.route);
-        } else if (middleware.name === 'router') {
-            // Routes added as router middleware
-            middleware.handle.stack.forEach((handler) => {
-                let route;
-
-                route = handler.route;
-                route && routes.push(route);
-            });
-        }
-    });
-
-    console.info(`Server is listening on port ${port}.`);
-    console.info('Available routes are:');
-    console.info(routes);
-}
+const server = httpServer.listen(port, () => {
+    console.log('Spark api listening on port ' + port);
+});
 
 export default server;
