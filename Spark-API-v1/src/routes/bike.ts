@@ -59,7 +59,7 @@ router.get('/bike/:id', async (req: Request, res: Response) => {
  * /:
  *   get:
  *     summary: Update information for one bike
- *     description: Render one bike
+ *     description: Render msg of update
  * @param {Request}  req  The incoming request.
  * @param {Response} res  The outgoing response.
  * @param {Function} next Next to call in chain of middleware.
