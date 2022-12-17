@@ -24,8 +24,6 @@ const userModel = {
             const sql = `CALL get_user(?)`;
             const res = await db.query(sql, [userId]);
             return res[0];
-        } catch (error: Error) {
-            next()
         } finally {
             await db.end();
         }
@@ -148,4 +146,3 @@ const userModel = {
 };
 
 export default userModel;
-

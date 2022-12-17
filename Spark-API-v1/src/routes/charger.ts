@@ -1,4 +1,4 @@
-import { Request, Response, Router } from 'express';
+import { NextFunction, Request, Response, Router } from 'express';
 
 import chargerModel from '../models/chargers';
 const router = Router();
@@ -15,13 +15,9 @@ const router = Router();
  *
  * @returns {void}
  */
-router.get('/charger', async (req: Request, res: Response) => {
-    try {
-        const allChargers = await chargerModel.showAllChargers();
-        return res.status(200).send(allChargers);
-    } catch (error) {
-        return res.status(404).send(error);
-    }
+router.get('/v1/charger', async (req: Request, res: Response, next: NextFunction) => {
+    const allChargers = await chargerModel.showAllChargers();
+    return res.status(200).send(allChargers);
 });
 
 /**

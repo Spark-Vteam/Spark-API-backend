@@ -23,35 +23,32 @@ interface BikeInfo {
  *
  * @returns {void}
  */
-router.get('/v1/bike', async (req: Request, res: Response) => {
-    try {
-        const allBikes = await bikeModel.showAllBikes();
-        return res.status(200).send(allBikes);
-    } catch (error) {
-        return res.status(404).send(error);
-    }
+router.get('/v1/bike', async (req: Request, res: Response, next: NextFunction) => {
+    const allBikes = await bikeModel.showAllBikes(res, next);
+    return res.status(200).send({ success: true, data: allBikes });
 });
 
 /**
  * Bike ROUTE
  * /:
  *   get:
- *     summary: Display information for one bike
- *     description: Render one bike
+ *     summary: Display list for bikes
+ *     description: Render all bikes
  * @param {Request}  req  The incoming request.
  * @param {Response} res  The outgoing response.
  * @param {Function} next Next to call in chain of middleware.
  *
- * @returns {Response}
+ * @returns {void}
  */
 router.get('/v1/bike/radius', async (req: Request, res: Response, next: NextFunction) => {
-    try {
-        // const bikeRadius = await bikeModel.getBikeRadius(req.params.id);
+    const radiusInfo = {
+        longitude: req.body.longitude,
+        latitude: req.body.latitude,
+        radius: req.body.radius,
+    };
 
-        return res.status(200).send('bikeradius');
-    } catch (error) {
-        return res.status(404).send(error);
-    }
+    const bikeRadius = await bikeModel.getBikeRadius(radiusInfo, res, next);
+    return res.status(200).send({ success: true, data: bikeRadius });
 });
 
 /**
@@ -69,9 +66,8 @@ router.get('/v1/bike/radius', async (req: Request, res: Response, next: NextFunc
 router.get('/v1/bike/:id', async (req: Request, res: Response, next: NextFunction) => {
     const bikeId = req.params.id;
     const oneBike = await bikeModel.getOneBike(bikeId, res, next);
-    const oneBikeData = JSON.parse(JSON.stringify(oneBike));
 
-    return res.status(200).send(oneBikeData[0]);
+    return res.status(200).send({ success: true, data: oneBike });
 });
 
 /**
@@ -86,31 +82,17 @@ router.get('/v1/bike/:id', async (req: Request, res: Response, next: NextFunctio
  *
  * @returns {Response}
  */
-router.put('/bike/:id', async (req: Request, res: Response) => {
-    try {
-        const bikeInfo = {
-            bikeId: req.body.bikeId,
-            position: req.body.position,
-            battery: req.body.battery,
-            status: req.body.status,
-            speed: req.body.speed,
-        };
-        const updateBike = await bikeModel.updateOneBike(
-            bikeInfo.bikeId,
-            bikeInfo.position,
-            bikeInfo.battery,
-            bikeInfo.status,
-            bikeInfo.speed
-        );
+router.put('/v1/bike/:id', async (req: Request, res: Response, next: NextFunction) => {
+    const bikeInfo = {
+        bikeId: req.params.id,
+        position: req.body.position,
+        battery: req.body.battery,
+        status: req.body.status,
+        speed: req.body.speed,
+    };
+    await bikeModel.updateOneBike(bikeInfo, res, next);
 
-        return res.status(200).send(`Bike with id ${bikeInfo.bikeId} has been updated:\n
-            Postion: ${bikeInfo.position},
-            Battery: ${bikeInfo.battery},
-            Status: ${bikeInfo.status},
-            Speed: ${bikeInfo.speed}`);
-    } catch (error) {
-        return res.status(404).send(error);
-    }
+    return res.status(200).send({ success: true, msg: `Bike with id ${bikeInfo.bikeId} has been updated` });
 });
 
 export default router;

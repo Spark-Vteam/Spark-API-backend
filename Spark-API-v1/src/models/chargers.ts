@@ -1,3 +1,5 @@
+import { NextFunction } from 'express';
+import { FieldPacket, RowDataPacket } from 'mysql2/promise';
 import database from '../db/db';
 
 const chargerModel = {
@@ -10,9 +12,9 @@ const chargerModel = {
         const db = await database.getDb();
         try {
             const sql = `CALL get_chargers();`;
-            const res = await db.query(sql);
+            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql);
 
-            return res[0];
+            return res[0][0];
         } finally {
             await db.end();
         }
@@ -21,8 +23,8 @@ const chargerModel = {
         const db = await database.getDb();
         try {
             const sql = `CALL get_charger(?)`;
-            const res = await db.query(sql, [chargerId]);
-            return res[0];
+            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [chargerId]);
+            return res[0][0];
         } finally {
             await db.end();
         }
