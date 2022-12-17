@@ -1,4 +1,5 @@
 import database from '../db/db';
+import { Response, NextFunction } from 'express';
 
 const bikeModel = {
     /**
@@ -6,7 +7,7 @@ const bikeModel = {
      * @async
      * @returns {RowDataPacket} Resultset from the query.
      */
-    showAllBikes: async function showAllBikes() {
+    showAllBikes: async function showAllBikes(res: Response, next: NextFunction) {
         const db = await database.getDb();
         try {
             const sql = `CALL get_bikes();`;
@@ -14,17 +15,21 @@ const bikeModel = {
             const res = await db.query(sql);
 
             return res[0];
+        } catch (error: any) {
+            next(res.status(404).send(error));
         } finally {
             await db.end();
         }
     },
-    getOneBike: async function getOneBike(bikeId: string) {
+    getOneBike: async function getOneBike(bikeId: string, res: Response, next: NextFunction) {
         const db = await database.getDb();
         try {
             const sql = `CALL get_bike(?)`;
 
             const res = await db.query(sql, [bikeId]);
             return res[0];
+        } catch (error: any) {
+            next(res.status(404).send(error));
         } finally {
             await db.end();
         }

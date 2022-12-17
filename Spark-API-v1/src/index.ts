@@ -12,6 +12,7 @@ import invoiceRoute from './routes/invoice';
 import geofenceRoute from './routes/geofence';
 import chargerRoute from './routes/charger';
 import authRoute from './routes/auth';
+import { invalidPathHandler } from './middleware/errorHandler';
 const port = process.env.PORT || 4000;
 
 const cors = require('cors');
@@ -46,6 +47,8 @@ app.use('/', invoiceRoute);
 app.use('/', geofenceRoute);
 app.use('/', chargerRoute);
 app.use('/', authRoute);
+
+app.use(invalidPathHandler);
 
 const server = httpServer.listen(port, () => {
     console.log('Spark api listening on port ' + port);

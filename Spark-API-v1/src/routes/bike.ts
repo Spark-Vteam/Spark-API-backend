@@ -1,4 +1,4 @@
-import { Request, Response, Router } from 'express';
+import { Request, Response, Router, NextFunction } from 'express';
 
 import bikeModel from '../models/bike';
 const router = Router();
@@ -23,7 +23,7 @@ interface BikeInfo {
  *
  * @returns {void}
  */
-router.get('/bike', async (req: Request, res: Response) => {
+router.get('/v1/bike', async (req: Request, res: Response) => {
     try {
         const allBikes = await bikeModel.showAllBikes();
         return res.status(200).send(allBikes);
@@ -44,14 +44,34 @@ router.get('/bike', async (req: Request, res: Response) => {
  *
  * @returns {Response}
  */
-router.get('/bike/:id', async (req: Request, res: Response) => {
+router.get('/v1/bike/radius', async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const oneBike = await bikeModel.getOneBike(req.params.id);
+        // const bikeRadius = await bikeModel.getBikeRadius(req.params.id);
 
-        return res.status(200).send(oneBike);
+        return res.status(200).send('bikeradius');
     } catch (error) {
         return res.status(404).send(error);
     }
+});
+
+/**
+ * Bike ROUTE
+ * /:
+ *   get:
+ *     summary: Display information for one bike
+ *     description: Render one bike
+ * @param {Request}  req  The incoming request.
+ * @param {Response} res  The outgoing response.
+ * @param {Function} next Next to call in chain of middleware.
+ *
+ * @returns {Response}
+ */
+router.get('/v1/bike/:id', async (req: Request, res: Response, next: NextFunction) => {
+    const bikeId = req.params.id;
+    const oneBike = await bikeModel.getOneBike(bikeId, res, next);
+    const oneBikeData = JSON.parse(JSON.stringify(oneBike));
+
+    return res.status(200).send(oneBikeData[0]);
 });
 
 /**
