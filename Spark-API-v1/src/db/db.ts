@@ -15,7 +15,7 @@ const database = {
             database: config.DB_NAME,
             password: config.DB_PASSWORD,
         });
-
+        // console.log('Db', db);
         return db;
     },
 };
