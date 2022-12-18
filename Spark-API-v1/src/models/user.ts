@@ -43,7 +43,7 @@ const userModel = {
      * @async
      * @returns {RowDataPacket} Resultset from the query.
      */
-    createOneUser: async function createOneUser(userInfo: any, res: Response, next: Nextfunction) {
+    createOneUser: async function createOneUser(userInfo: any, res: Response, next: NextFunction) {
         const db = await database.getDb();
         try {
             const sql = `CALL create_user(?, ?, ?, ?, ?,?)`;
