@@ -21,7 +21,7 @@ interface GeofenceInfo {
  *
  * @returns {void}
  */
-router.get('/v1/geofence', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/geofence', async (req: Request, res: Response, next: NextFunction) => {
     const allGeofences = await geofenceModel.showAllGeofences(res, next);
     return res.status(200).send({ success: true, data: allGeofences });
 });
@@ -38,7 +38,7 @@ router.get('/v1/geofence', async (req: Request, res: Response, next: NextFunctio
  *
  * @returns {void}
  */
-router.get('/v1/geofence/:id', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/geofence/:id', async (req: Request, res: Response, next: NextFunction) => {
     let geofenceId = parseInt(req.params.id);
     const oneGeofence = await geofenceModel.getOneGeofence(geofenceId, res, next);
 
@@ -58,7 +58,7 @@ router.get('/v1/geofence/:id', async (req: Request, res: Response, next: NextFun
  *
  * @returns {void}
  */
-router.post('/v1/geofence', async (req: Request, res: Response, next: NextFunction) => {
+router.post('/geofence', async (req: Request, res: Response, next: NextFunction) => {
     const geofenceInfo = {
         coordinates: req.body.coordinates,
         info: req.body.info,
@@ -85,7 +85,7 @@ router.post('/v1/geofence', async (req: Request, res: Response, next: NextFuncti
  *
  * @returns {void}
  */
-router.put('/v1/geofence/coordinates/:id', async (req: Request, res: Response, next: NextFunction) => {
+router.put('/geofence/coordinates/:id', async (req: Request, res: Response, next: NextFunction) => {
     let geofenceInfo = {
         geofenceId: req.params.id,
         coordinates: req.body.coordinates,
@@ -111,7 +111,7 @@ router.put('/v1/geofence/coordinates/:id', async (req: Request, res: Response, n
  *
  * @returns {void}
  */
-router.put('/v1/geofence/info/:id', async (req: Request, res: Response, next: NextFunction) => {
+router.put('/geofence/info/:id', async (req: Request, res: Response, next: NextFunction) => {
     const geofenceInfo = {
         geofenceId: req.params.id,
         info: req.body.info,
@@ -136,7 +136,7 @@ router.put('/v1/geofence/info/:id', async (req: Request, res: Response, next: Ne
  *
  * @returns {void}
  */
-router.put('/v1/geofence/type/:id', async (req: Request, res: Response, next: NextFunction) => {
+router.put('/geofence/type/:id', async (req: Request, res: Response, next: NextFunction) => {
     const geofenceInfo = {
         geofenceId: req.params.id,
         type: req.body.type,
@@ -161,7 +161,7 @@ router.put('/v1/geofence/type/:id', async (req: Request, res: Response, next: Ne
  *
  * @returns {void}
  */
-router.delete('/v1/geofence/:id', async (req: Request, res: Response, next: NextFunction) => {
+router.delete('/geofence/:id', async (req: Request, res: Response, next: NextFunction) => {
     const geofenceId = parseInt(req.params.id);
 
     await geofenceModel.deleteOneGeofence(geofenceId, res, next);

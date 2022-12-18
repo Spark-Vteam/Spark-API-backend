@@ -22,7 +22,7 @@ interface InvoiceInfo {
  *
  * @returns {void}
  */
-router.get('/v1/invoice', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/invoice', async (req: Request, res: Response, next: NextFunction) => {
     const allInvoices = await invoiceModel.showAllInvoices(res, next);
 
     return res.status(200).send({ success: true, data: allInvoices });
@@ -40,7 +40,7 @@ router.get('/v1/invoice', async (req: Request, res: Response, next: NextFunction
  *
  * @returns {void}
  */
-router.get('/v1/invoice/:id', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/invoice/:id', async (req: Request, res: Response, next: NextFunction) => {
     const invoiceId = parseInt(req.params.id);
     const oneInvoice = await invoiceModel.getOneInvoice(invoiceId, res, next);
 
@@ -59,7 +59,7 @@ router.get('/v1/invoice/:id', async (req: Request, res: Response, next: NextFunc
  *
  * @returns {void}
  */
-router.get('/v1/invoice/user/:id', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/invoice/user/:id', async (req: Request, res: Response, next: NextFunction) => {
     const userId = parseInt(req.params.id);
 
     const userInvoices = await invoiceModel.getInvoicesByUserId(userId, res, next);
@@ -80,7 +80,7 @@ router.get('/v1/invoice/user/:id', async (req: Request, res: Response, next: Nex
  *
  * @returns {void}
  */
-router.post('/v1/invoice/user/:id', async (req: Request, res: Response, next: NextFunction) => {
+router.post('/invoice/user/:id', async (req: Request, res: Response, next: NextFunction) => {
     const invoiceInfo = {
         rentId: req.body.rentId,
         userId: req.params.id,
@@ -110,7 +110,7 @@ router.post('/v1/invoice/user/:id', async (req: Request, res: Response, next: Ne
  *
  * @returns {void}
  */
-router.put('/v1/invoice/status/:id', async (req: Request, res: Response, next: NextFunction) => {
+router.put('/invoice/status/:id', async (req: Request, res: Response, next: NextFunction) => {
     const invoiceInfo = {
         invoiceId: req.params.id,
         status: req.body.status,
@@ -136,7 +136,7 @@ router.put('/v1/invoice/status/:id', async (req: Request, res: Response, next: N
  *
  * @returns {void}
  */
-router.put('/v1/invoice/amount/:id', async (req: Request, res: Response, next: NextFunction) => {
+router.put('/invoice/amount/:id', async (req: Request, res: Response, next: NextFunction) => {
     const invoiceInfo = {
         invoiceId: req.params.id,
         amount: req.body.amount,

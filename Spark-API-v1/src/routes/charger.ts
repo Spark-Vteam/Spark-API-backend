@@ -15,7 +15,7 @@ const router = Router();
  *
  * @returns {void}
  */
-router.get('/v1/charger', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/charger', async (req: Request, res: Response, next: NextFunction) => {
     const allChargers = await chargerModel.showAllChargers(res, next);
 
     return res.status(200).send({ success: true, data: allChargers });
@@ -33,7 +33,7 @@ router.get('/v1/charger', async (req: Request, res: Response, next: NextFunction
  *
  * @returns {void}
  */
-router.get('/v1/charger/:id', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/charger/:id', async (req: Request, res: Response, next: NextFunction) => {
     let chargerId = req.params.id;
 
     const oneCharger = await chargerModel.getOneCharger(chargerId, res, next);
@@ -53,7 +53,7 @@ router.get('/v1/charger/:id', async (req: Request, res: Response, next: NextFunc
  *
  * @returns {void}
  */
-router.put('/v1/charger/:id', async (req: Request, res: Response, next: NextFunction) => {
+router.put('/charger/:id', async (req: Request, res: Response, next: NextFunction) => {
     const chargerInfo = {
         id: req.params.id,
         status: req.body.status,

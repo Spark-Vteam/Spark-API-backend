@@ -23,7 +23,7 @@ interface BikeInfo {
  *
  * @returns {void}
  */
-router.get('/v1/bike', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/bike', async (req: Request, res: Response, next: NextFunction) => {
     const allBikes = await bikeModel.showAllBikes(res, next);
     
     return res.status(200).send({ success: true, data: allBikes });
@@ -41,7 +41,7 @@ router.get('/v1/bike', async (req: Request, res: Response, next: NextFunction) =
  *
  * @returns {void}
  */
-router.get('/v1/bike/radius', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/bike/radius', async (req: Request, res: Response, next: NextFunction) => {
     const radiusInfo = {
         longitude: req.body.longitude,
         latitude: req.body.latitude,
@@ -64,7 +64,7 @@ router.get('/v1/bike/radius', async (req: Request, res: Response, next: NextFunc
  *
  * @returns {Response}
  */
-router.get('/v1/bike/:id', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/bike/:id', async (req: Request, res: Response, next: NextFunction) => {
     const bikeId = req.params.id;
     const oneBike = await bikeModel.getOneBike(bikeId, res, next);
 
@@ -83,7 +83,7 @@ router.get('/v1/bike/:id', async (req: Request, res: Response, next: NextFunctio
  *
  * @returns {Response}
  */
-router.put('/v1/bike/:id', async (req: Request, res: Response, next: NextFunction) => {
+router.put('/bike/:id', async (req: Request, res: Response, next: NextFunction) => {
     const bikeInfo = {
         bikeId: req.params.id,
         position: req.body.position,

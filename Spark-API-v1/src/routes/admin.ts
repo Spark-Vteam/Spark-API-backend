@@ -24,7 +24,7 @@ interface AdminInfo {
  *
  * @returns {void}
  */
-router.get('/v1/admin', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/admin', async (req: Request, res: Response, next: NextFunction) => {
     const allAdmins = await adminModel.showAllAdmins(res, next);
 
     return res.status(200).send({ success: true, data: allAdmins });
@@ -42,7 +42,7 @@ router.get('/v1/admin', async (req: Request, res: Response, next: NextFunction) 
  *
  * @returns {Response}
  */
-router.get('/v1/admin/:id', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/admin/:id', async (req: Request, res: Response, next: NextFunction) => {
     const adminId = parseInt(req.params.id);
     const oneAdmin = await adminModel.getOneAdmin(adminId, res, next);
     return res.status(200).send({ success: true, data: oneAdmin });
@@ -61,7 +61,7 @@ router.get('/v1/admin/:id', async (req: Request, res: Response, next: NextFuncti
  *
  * @returns {Response}
  */
-router.post('/v1/admin', async (req: Request, res: Response, next: NextFunction) => {
+router.post('/admin', async (req: Request, res: Response, next: NextFunction) => {
     const adminInfo = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,

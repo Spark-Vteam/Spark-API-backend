@@ -1,4 +1,4 @@
-import { Request, Response, Router } from 'express';
+import { NextFunction, Request, Response, Router } from 'express';
 
 import userModel from '../models/user';
 const router = Router();
@@ -24,18 +24,10 @@ interface UserInfo {
  *
  * @returns {void}
  */
-router.get('/user', async (req: Request, res: Response) => {
-    try {
-        const allUsers = await userModel.showAllUsers();
+router.get('/user', async (req: Request, res: Response, next: NextFunction) => {
+    const allUsers = await userModel.showAllUsers(res, next);
 
-        const allUsersData = JSON.parse(JSON.stringify(allUsers));
-        if (allUsersData[0].length === 0) {
-            return res.status(404).send('No users currently in the system');
-        }
-        return res.status(200).send(allUsers);
-    } catch (error) {
-        return res.status(404).send(error);
-    }
+    return res.status(200).send({ success: true, data: allUsers });
 });
 
 /**
@@ -50,14 +42,12 @@ router.get('/user', async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.get('/user/:id', async (req: Request, res: Response) => {
-    try {
-        const oneUser = await userModel.getOneUser(req.params.id);
+router.get('/user/:id', async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.params.id;
 
-        return res.status(200).send(oneUser);
-    } catch (error) {
-        return res.status(404).send(error);
-    }
+    const oneUser = await userModel.getOneUser(userId, res, next);
+
+    return res.status(200).send({ success: true, data: oneUser });
 });
 
 /**
@@ -73,36 +63,19 @@ router.get('/user/:id', async (req: Request, res: Response) => {
  *
  * @returns {Response}
  */
-router.post('/user', async (req: Request, res: Response) => {
-    try {
-        const userInfo = {
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            phoneNumber: req.body.phoneNumber,
-            emailAdress: req.body.emailAdress,
-            password: req.body.password,
-            oauth: req.body.oauth,
-        };       
+router.post('/user', async (req: Request, res: Response, next: NextFunction) => {
+    const userInfo = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        phoneNumber: req.body.phoneNumber,
+        emailAdress: req.body.emailAdress,
+        password: req.body.password,
+        oauth: req.body.oauth,
+    };
 
-        const newUser = await userModel.createOneUser(
-            userInfo.firstName,
-            userInfo.lastName,
-            userInfo.phoneNumber,
-            userInfo.emailAdress,
-            userInfo.password,
-            userInfo.oauth
-        );
+    const newUser = await userModel.createOneUser(userInfo, res, next);
 
-        res.status(201).send(
-            `User has been created with the following information:\n
-                firstName: ${userInfo.firstName},
-                lastName: ${userInfo.lastName}, 
-                phoneNumber: ${userInfo.phoneNumber}, 
-                emailAdress: ${userInfo.emailAdress}`
-        );
-    } catch (error) {
-        return res.status(404).send(error);
-    }
+    res.status(201).send({ success: true, msg: `User has been registered` });
 });
 
 /**
@@ -117,31 +90,26 @@ router.post('/user', async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.put('/user/:id', async (req: Request, res: Response) => {
+router.put('/user/:id', async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.params.id;
+
     const userInfo = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         phoneNumber: req.body.phoneNumber,
         emailAdress: req.body.emailAdress,
-        oauth: req.body.oauth
+        oauth: req.body.oauth,
     };
-    const userID = req.params.id;
 
     const _newUserInfo = {
-        firstName: await userModel.updateUserFirstName(userID, userInfo.firstName),
-        lastName: await userModel.updateUserLastName(userID, userInfo.lastName),
-        phoneNumber: await userModel.updateUserPhoneNumber(userID, userInfo.phoneNumber),
-        emailAdress: await userModel.updateUserEmailAdress(userID, userInfo.emailAdress),
-        oauth: await userModel.updateUserOauth(userID, userInfo.oauth)
+        firstName: await userModel.updateUserFirstName(userId, userInfo.firstName, res, next),
+        lastName: await userModel.updateUserLastName(userId, userInfo.lastName, res, next),
+        phoneNumber: await userModel.updateUserPhoneNumber(userId, userInfo.phoneNumber, res, next),
+        emailAdress: await userModel.updateUserEmailAdress(userId, userInfo.emailAdress, res, next),
+        oauth: await userModel.updateUserOauth(userId, userInfo.oauth, res, next),
     };
 
-    return res.status(201).send(
-        `User with id ${userID} has been updated to:\n
-            firstName: ${userInfo.firstName},
-            lastName: ${userInfo.lastName}, 
-            phoneNumber: ${userInfo.phoneNumber}, 
-            emailAdress: ${userInfo.emailAdress}`
-    );
+    return res.status(201).send({ success: true, msg: `User with id ${userId} has been updated` });
 });
 
 /**
@@ -156,16 +124,13 @@ router.put('/user/:id', async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.put('/user/balance/:id', async (req: Request, res: Response) => {
+router.put('/user/balance/:id', async (req: Request, res: Response, next: NextFunction) => {
     const balance = req.body.balance;
     const userID = req.params.id;
-    try {
-        await userModel.updateUserBalance(userID, balance);
 
-        return res.status(201).send(`User with id ${userID} added ${balance} to its balance`);
-    } catch (error) {
-        return res.status(404).send(error);
-    }
+    await userModel.updateUserBalance(userID, balance, res, next);
+
+    return res.status(201).send({ success: true, msg: `User with id ${userID} added ${balance} to its balance` });
 });
 
 /**
@@ -180,16 +145,13 @@ router.put('/user/balance/:id', async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.put('/user/partial_balance/:id', async (req: Request, res: Response) => {
+router.put('/user/partial_balance/:id', async (req: Request, res: Response, next: NextFunction) => {
     const balance = req.body.balance;
     const userID = req.params.id;
-    try {
-        await userModel.updateUserPartialBalance(userID, balance);
 
-        return res.status(201).send(`User with id ${userID} added ${balance} `);
-    } catch (error) {
-        return res.status(404).send(error);
-    }
+    await userModel.updateUserPartialBalance(userID, balance, res, next);
+
+    return res.status(201).send({ success: true, msg: `User with id ${userID} added ${balance} to its balance` });
 });
 
 /**
@@ -204,16 +166,13 @@ router.put('/user/partial_balance/:id', async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.put('/user/password/:id', async (req: Request, res: Response) => {
+router.put('/user/password/:id', async (req: Request, res: Response, next: NextFunction) => {
     const password = req.body.password;
     const userID = req.params.id;
-    try {
-        await userModel.updateUserPassword(userID, password);
 
-        return res.status(201).send(`User with id ${userID} has updated its password`);
-    } catch (error) {
-        return res.status(404).send(error);
-    }
+    await userModel.updateUserPassword(userID, password, res, next);
+
+    return res.status(201).send({ success: true, msg: `User with id ${userID} has updated its password` });
 });
 
 /**
@@ -228,17 +187,11 @@ router.put('/user/password/:id', async (req: Request, res: Response) => {
  *
  * @returns {Promise}
  */
-router.delete('/user/:id', async (req: Request, res: Response) => {
-    try {
-        await userModel.deleteOneUser(req.params.id);
+router.delete('/user/:id', async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.params.id;
+    await userModel.deleteOneUser(userId, res, next);
 
-        // 202: The request has been accepted for processing, but the processing has not been completed.
-        // 204: The server has successfully fulfilled the request and that there is no additional content to send in the response payload body.
-        // 200: The request has succeeded and the request payload includes a representation of the status of the action.
-        return res.status(200).send(`User with id ${req.params.id} was deleted`);
-    } catch (error) {
-        return res.status(404).send(error);
-    }
+    return res.status(200).send({ success: true, msg: `User with id ${userId} was deleted` });
 });
 
 export default router;
