@@ -22,6 +22,11 @@ const bikeModel = {
             await db.end();
         }
     },
+    /**
+     * Function to get bikes within a radius
+     * @async
+     * @returns {RowDataPacket} Resultset from the query.
+     */
     getBikeRadius: async function getBikeRadius(radiusInfo: any, res: Response, next: NextFunction) {
         const db = await database.getDb();
         try {
@@ -32,7 +37,6 @@ const bikeModel = {
                 radiusInfo.latitude,
                 radiusInfo.radius,
             ]);
-            console.log('bikeModel');
             return res[0][0];
         } catch (error: any) {
             next(res.status(404).send(error));

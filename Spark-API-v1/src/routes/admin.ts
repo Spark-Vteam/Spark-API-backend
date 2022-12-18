@@ -1,4 +1,4 @@
-import { Request, Response, Router } from 'express';
+import { NextFunction, Request, Response, Router } from 'express';
 
 import adminModel from '../models/admin';
 const router = Router();
@@ -24,19 +24,10 @@ interface AdminInfo {
  *
  * @returns {void}
  */
-router.get('/admin', async (req: Request, res: Response) => {
-    try {
-        const allAdmins = await adminModel.showAllAdmins();
+router.get('/v1/admin', async (req: Request, res: Response, next: NextFunction) => {
+    const allAdmins = await adminModel.showAllAdmins(res, next);
 
-        const allAdminsData = JSON.parse(JSON.stringify(allAdmins));
-
-        if (allAdminsData[0].length === 0) {
-            return res.status(404).send('No admins currently in the system');
-        }
-        return res.status(200).send(allAdmins);
-    } catch (error) {
-        res.status(404).send(error);
-    }
+    return res.status(200).send({ success: true, data: allAdmins });
 });
 
 /**
@@ -51,17 +42,10 @@ router.get('/admin', async (req: Request, res: Response) => {
  *
  * @returns {Response}
  */
-router.get('/admin/:id', async (req: Request, res: Response) => {
-    try {
-        const oneAdmin = await adminModel.getOneAdmin(req.params.id);
-        const oneAdminData = JSON.parse(JSON.stringify(oneAdmin));
-        if (oneAdminData[0].length === 0) {
-            return res.status(404).send(`No admin for Id ${req.params.id} was found`);
-        }
-        return res.status(200).send(oneAdmin);
-    } catch (error) {
-        return res.status(404).send(error);
-    }
+router.get('/v1/admin/:id', async (req: Request, res: Response, next: NextFunction) => {
+    const adminId = parseInt(req.params.id);
+    const oneAdmin = await adminModel.getOneAdmin(adminId, res, next);
+    return res.status(200).send({ success: true, data: oneAdmin });
 });
 
 /**
@@ -77,36 +61,19 @@ router.get('/admin/:id', async (req: Request, res: Response) => {
  *
  * @returns {Response}
  */
-router.post('/admin', async (req: Request, res: Response) => {
-    try {
-        const adminInfo = {
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            phoneNumber: req.body.phoneNumber,
-            emailAdress: req.body.emailAdress,
-            authority: req.body.authority,
-            password: req.body.password,
-        };
+router.post('/v1/admin', async (req: Request, res: Response, next: NextFunction) => {
+    const adminInfo = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        phoneNumber: req.body.phoneNumber,
+        emailAdress: req.body.emailAdress,
+        authority: req.body.authority,
+        password: req.body.password,
+    };
 
-        const newAdmin = await adminModel.createOneAdmin(
-            adminInfo.firstName,
-            adminInfo.lastName,
-            adminInfo.phoneNumber,
-            adminInfo.emailAdress,
-            adminInfo.authority,
-            adminInfo.password
-        );
+    await adminModel.createOneAdmin(adminInfo, res, next);
 
-        res.status(201).send(
-            `Admin has been created with the following information:\n
-                firstName: ${adminInfo.firstName},
-                lastName: ${adminInfo.lastName}, 
-                phoneNumber: ${adminInfo.phoneNumber}, 
-                emailAdress: ${adminInfo.emailAdress}`
-        );
-    } catch (error) {
-        return res.status(404).send(error);
-    }
+    res.status(201).send({ success: true, msg: 'Admin registered' });
 });
 
 export default router;

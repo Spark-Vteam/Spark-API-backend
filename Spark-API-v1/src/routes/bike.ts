@@ -25,6 +25,7 @@ interface BikeInfo {
  */
 router.get('/v1/bike', async (req: Request, res: Response, next: NextFunction) => {
     const allBikes = await bikeModel.showAllBikes(res, next);
+    
     return res.status(200).send({ success: true, data: allBikes });
 });
 
