@@ -51,6 +51,45 @@ router.get('/rent/:id', async (req: Request, res: Response, next: NextFunction) 
 
 /**
  * Rent ROUTE
+ *  /rent/active/:id:
+ *   get:
+ *     summary: Active rents
+ *     description: Render active rents for a user
+ *  @param {Request}  req  The incoming request.
+ *  @param {Response} res  The outgoing response.
+ *  @param {Function} next Next to call in chain of middleware.
+ *
+ * @returns {Response}
+ */
+router.get('/rent/active/:id', async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.params.id;
+
+    const activeRents = await rentModel.getActiveRents(userId, res, next);
+
+    return res.status(200).send({ success: true, data: activeRents });
+});
+
+/**
+ * Rent ROUTE
+ *  /rent/bike/:id:
+ *   get:
+ *     summary: BikeLog from rent
+ *     description: Render bikeLog for a rent
+ *  @param {Request}  req  The incoming request.
+ *  @param {Response} res  The outgoing response.
+ *  @param {Function} next Next to call in chain of middleware.
+ *
+ * @returns {Response}
+ */
+router.get('/rent/bike/:id', async (req: Request, res: Response, next: NextFunction) => {
+    const rentId = req.params.id;
+
+    const bikeLog = await rentModel.getActiveRents(rentId, res, next);
+
+    return res.status(200).send({ success: true, data: bikeLog });
+});
+/**
+ * Rent ROUTE
  *  /rent/user/:id:
  *   get:
  *     summary: All rents by user
