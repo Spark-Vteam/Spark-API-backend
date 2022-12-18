@@ -28,9 +28,12 @@ const chargerModel = {
      */
     getOneCharger: async function getOneCharger(chargerId: string, res: Response, next: NextFunction) {
         const db = await database.getDb();
+
         try {
             const sql = `CALL get_charger(?)`;
+
             const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [chargerId]);
+
             return res[0][0];
         } catch (error: any) {
             next(res.status(404).send(error));

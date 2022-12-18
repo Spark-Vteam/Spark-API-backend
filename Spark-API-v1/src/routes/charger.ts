@@ -17,6 +17,7 @@ const router = Router();
  */
 router.get('/v1/charger', async (req: Request, res: Response, next: NextFunction) => {
     const allChargers = await chargerModel.showAllChargers(res, next);
+
     return res.status(200).send({ success: true, data: allChargers });
 });
 
@@ -34,7 +35,9 @@ router.get('/v1/charger', async (req: Request, res: Response, next: NextFunction
  */
 router.get('/v1/charger/:id', async (req: Request, res: Response, next: NextFunction) => {
     let chargerId = req.params.id;
+
     const oneCharger = await chargerModel.getOneCharger(chargerId, res, next);
+
     return res.status(200).send({ success: true, data: oneCharger });
 });
 
