@@ -1,68 +1,118 @@
+import { Response, NextFunction } from 'express';
 import database from '../db/db';
+import { FieldPacket, RowDataPacket } from 'mysql2/promise';
 
 const invoiceModel = {
     /**
-     * Function to show all stations
+     * Function to show all invoices
      * @async
      * @returns {RowDataPacket} Resultset from the query.
      */
-    showAllInvoices: async function showAllInvoices() {
+    showAllInvoices: async function showAllInvoices(res: Response, next: NextFunction) {
         const db = await database.getDb();
         try {
             const sql = `CALL get_invoices();`;
-            const res = await db.query(sql);
+            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql);
 
-            return res[0];
+            return res[0][0];
+        } catch (error: any) {
+            next(res.status(404).send(error));
         } finally {
             await db.end();
         }
     },
-    getOneInvoice: async function getOneInvoice(invoiceId: string) {
+    /**
+     * Function to get one invoice
+     * @async
+     * @returns {RowDataPacket} Resultset from the query.
+     */
+    getOneInvoice: async function getOneInvoice(invoiceId: number, res: Response, next: NextFunction) {
         const db = await database.getDb();
         try {
             const sql = `CALL get_invoice(?)`;
-            const res = await db.query(sql, [invoiceId]);
-            return res[0];
+            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [invoiceId]);
+            return res[0][0];
+        } catch (error: any) {
+            next(res.status(404).send(error));
         } finally {
             await db.end();
         }
     },
-    getInvoicesByUserId: async function getOneInvoice(userId: string) {
+    /**
+     * Function to get one invoice by user id
+     * @async
+     * @returns {RowDataPacket} Resultset from the query.
+     */
+    getInvoicesByUserId: async function getInvoicesByUserId(userId: number, res: Response, next: NextFunction) {
         const db = await database.getDb();
         try {
             const sql = `CALL get_invoices_by_user(?)`;
-            const res = await db.query(sql, [userId]);
-            return res[0];
+            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId]);
+            return res[0][0];
+        } catch (error: any) {
+            next(res.status(404).send(error));
         } finally {
             await db.end();
         }
     },
-    createOneInvoice: async function createOneInvoice(rentId: number, userId: number, amount: number, status: number) {
+    /**
+     * Function to create one invoice
+     * @async
+     * @returns {RowDataPacket} Resultset from the query.
+     */
+    createOneInvoice: async function createOneInvoice(invoiceInfo: any, res: Response, next: NextFunction) {
         const db = await database.getDb();
         try {
             const sql = `CALL create_invoice(?, ?, ?, ?)`;
-            const res = await db.query(sql, [rentId, userId, amount, status]);
-            return res[0];
+            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [
+                invoiceInfo.rentId,
+                invoiceInfo.userId,
+                invoiceInfo.amount,
+                invoiceInfo.status,
+            ]);
+            return res[0][0];
+        } catch (error: any) {
+            next(res.status(404).send(error));
         } finally {
             await db.end();
         }
     },
-    updateInvoiceStatus: async function updateInvoiceStatus(invoiceId: number, status: number) {
+    /**
+     * Function to update status of one invoice
+     * @async
+     * @returns {RowDataPacket} Resultset from the query.
+     */
+    updateInvoiceStatus: async function updateInvoiceStatus(invoiceInfo: any, res: Response, next: NextFunction) {
         const db = await database.getDb();
         try {
             const sql = `CALL update_invoice_status(?, ?)`;
-            const res = await db.query(sql, [invoiceId, status]);
-            return res[0];
+            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [
+                invoiceInfo.invoiceId,
+                invoiceInfo.status,
+            ]);
+            return res[0][0];
+        } catch (error: any) {
+            next(res.status(404).send(error));
         } finally {
             await db.end();
         }
     },
-    updateInvoiceAmount: async function updateInvoiceAmount(invoiceId: number, amount: number) {
+    /**
+     * Function to update amount of one invoice
+     * @async
+     * @returns {RowDataPacket} Resultset from the query.
+     */
+    updateInvoiceAmount: async function updateInvoiceAmount(invoiceInfo: any, res: Response, next: NextFunction) {
         const db = await database.getDb();
         try {
             const sql = `CALL update_invoice_amount(?, ?)`;
-            const res = await db.query(sql, [invoiceId, amount]);
-            return res[0];
+            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [
+                invoiceInfo.invoiceId,
+                invoiceInfo.amount,
+            ]);
+            return res[0][0];
+        } catch (error: any) {
+            next(res.status(404).send(error));
         } finally {
             await db.end();
         }

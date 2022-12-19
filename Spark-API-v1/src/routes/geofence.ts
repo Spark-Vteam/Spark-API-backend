@@ -1,4 +1,4 @@
-import { Request, Response, Router } from 'express';
+import { NextFunction, Request, Response, Router } from 'express';
 
 import geofenceModel from '../models/geofence';
 const router = Router();
@@ -21,17 +21,9 @@ interface GeofenceInfo {
  *
  * @returns {void}
  */
-router.get('/geofence', async (req: Request, res: Response) => {
-    try {
-        const allGeofences = await geofenceModel.showAllGeofences();
-        const allGeofencesData = JSON.parse(JSON.stringify(allGeofences));
-        if (allGeofencesData[0].length === 0) {
-            return res.status(404).send('No geofences currently in the system');
-        }
-        return res.status(200).send(allGeofences);
-    } catch (error) {
-        return res.status(404).send(error);
-    }
+router.get('/geofence', async (req: Request, res: Response, next: NextFunction) => {
+    const allGeofences = await geofenceModel.showAllGeofences(res, next);
+    return res.status(200).send({ success: true, data: allGeofences });
 });
 
 /**
@@ -46,18 +38,11 @@ router.get('/geofence', async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.get('/geofence/:id', async (req: Request, res: Response) => {
-    try {
-        const oneGeofence = await geofenceModel.getOneGeofence(req.params.id);
+router.get('/geofence/:id', async (req: Request, res: Response, next: NextFunction) => {
+    let geofenceId = parseInt(req.params.id);
+    const oneGeofence = await geofenceModel.getOneGeofence(geofenceId, res, next);
 
-        const oneGeofenceData = JSON.parse(JSON.stringify(oneGeofence));
-        if (oneGeofenceData[0].length === 0) {
-            return res.status(404).send(`No geofence with id ${req.params.id} in the system`);
-        }
-        return res.status(200).send(oneGeofence);
-    } catch (error) {
-        return res.status(404).send(error);
-    }
+    return res.status(200).send({ success: true, data: oneGeofence });
 });
 
 /**
@@ -73,28 +58,19 @@ router.get('/geofence/:id', async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.post('/geofence', async (req: Request, res: Response) => {
-    try {
-        const geofenceInfo = {
-            coordinates: req.body.coordinates,
-            info: req.body.info,
-            type: req.body.type,
-        };
+router.post('/geofence', async (req: Request, res: Response, next: NextFunction) => {
+    const geofenceInfo = {
+        coordinates: req.body.coordinates,
+        info: req.body.info,
+        type: req.body.type,
+    };
 
-        const _newGeofence = await geofenceModel.createOneGeofence(
-            geofenceInfo.coordinates,
-            geofenceInfo.info,
-            geofenceInfo.type
-        );
+    await geofenceModel.createOneGeofence(geofenceInfo, res, next);
 
-        return res.status(200).send(`A new geofence has been created with info:\n
-        Coordinates: ${geofenceInfo.coordinates},
-        Info: ${geofenceInfo.info},
-        Type: ${geofenceInfo.type}
-        `);
-    } catch (error) {
-        return res.status(404).send(error);
-    }
+    return res.status(200).send({
+        success: true,
+        msg: `A new geofence has been created.`,
+    });
 });
 
 /**
@@ -109,17 +85,18 @@ router.post('/geofence', async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.put('/geofence/coordinates/:id', async (req: Request, res: Response) => {
-    try {
-        const geofenceId = req.params.id;
-        const coordinates = req.body.coordinates;
+router.put('/geofence/coordinates/:id', async (req: Request, res: Response, next: NextFunction) => {
+    let geofenceInfo = {
+        geofenceId: req.params.id,
+        coordinates: req.body.coordinates,
+    };
 
-        const _newCoordinates = await geofenceModel.updateCoordinates(geofenceId, coordinates);
+    await geofenceModel.updateCoordinates(geofenceInfo, res, next);
 
-        return res.status(200).send(`Geofence with id has been updated with new coordinates ${coordinates}`);
-    } catch (error) {
-        return res.status(404).send(error);
-    }
+    return res.status(200).send({
+        success: true,
+        msg: `Geofence with id has been updated with new coordinates ${geofenceInfo.coordinates}`,
+    });
 });
 
 /**
@@ -134,17 +111,17 @@ router.put('/geofence/coordinates/:id', async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.put('/geofence/info/:id', async (req: Request, res: Response) => {
-    try {
-        const geofenceId = req.params.id;
-        const info = req.body.info;
+router.put('/geofence/info/:id', async (req: Request, res: Response, next: NextFunction) => {
+    const geofenceInfo = {
+        geofenceId: req.params.id,
+        info: req.body.info,
+    };
 
-        const _newInfo = await geofenceModel.updateInfo(geofenceId, info);
+    await geofenceModel.updateInfo(geofenceInfo, res, next);
 
-        return res.status(200).send(`Geofence with id has been updated with new info ${info}`);
-    } catch (error) {
-        return res.status(404).send(error);
-    }
+    return res
+        .status(200)
+        .send({ succes: true, msg: `Geofence with id has been updated with new info ${geofenceInfo.info}` });
 });
 
 /**
@@ -159,17 +136,17 @@ router.put('/geofence/info/:id', async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.put('/geofence/type/:id', async (req: Request, res: Response) => {
-    try {
-        const geofenceId = req.params.id;
-        const type = req.body.type;
+router.put('/geofence/type/:id', async (req: Request, res: Response, next: NextFunction) => {
+    const geofenceInfo = {
+        geofenceId: req.params.id,
+        type: req.body.type,
+    };
 
-        const _newType = await geofenceModel.updateType(geofenceId, type);
+    await geofenceModel.updateType(geofenceInfo, res, next);
 
-        return res.status(200).send(`Geofence with id has been updated with new type ${type}`);
-    } catch (error) {
-        return res.status(404).send(error);
-    }
+    return res
+        .status(200)
+        .send({ success: true, msg: `Geofence with id has been updated with new type ${geofenceInfo.type}` });
 });
 
 /**
@@ -184,16 +161,12 @@ router.put('/geofence/type/:id', async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.delete('/geofence/:id', async (req: Request, res: Response) => {
-    try {
-        const geofenceId = req.params.id;
+router.delete('/geofence/:id', async (req: Request, res: Response, next: NextFunction) => {
+    const geofenceId = parseInt(req.params.id);
 
-        const deleteGeofence = await geofenceModel.deleteOneGeofence(geofenceId);
+    await geofenceModel.deleteOneGeofence(geofenceId, res, next);
 
-        return res.status(200).send(`Geofence with id ${geofenceId} has been deleted (Type 40)`);
-    } catch (error) {
-        return res.status(404).send(error);
-    }
+    return res.status(200).send({ success: true, msg: `Geofence with id ${geofenceId} has been deleted (Type 40)` });
 });
 
 export default router;

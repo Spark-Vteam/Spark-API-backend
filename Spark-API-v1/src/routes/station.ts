@@ -1,4 +1,4 @@
-import { Request, Response, Router } from 'express';
+import { NextFunction, Request, Response, Router } from 'express';
 
 import stationModel from '../models/station';
 const router = Router();
@@ -15,17 +15,10 @@ const router = Router();
  *
  * @returns {void}
  */
-router.get('/station', async (req: Request, res: Response) => {
-    try {
-        const allStations = await stationModel.showAllStations();
-        const allStationsData = JSON.parse(JSON.stringify(allStations));
-        if (allStationsData[0].length === 0) {
-            return res.status(404).send('No stations currently in the system');
-        }
-        return res.send(allStations);
-    } catch (error) {
-        return res.status(404).send(error);
-    }
+router.get('/station', async (req: Request, res: Response, next: NextFunction) => {
+    const allStations = await stationModel.showAllStations(res, next);
+
+    return res.send({ success: true, data: allStations });
 });
 
 /**
@@ -40,17 +33,12 @@ router.get('/station', async (req: Request, res: Response) => {
  *
  * @returns {void}
  */
-router.get('/station/:id', async (req: Request, res: Response) => {
-    try {
-        const oneStation = await stationModel.getOneStation(req.params.id);
-        const oneStationData = JSON.parse(JSON.stringify(oneStation));
-        if (oneStationData[0].length === 0) {
-            return res.status(404).send(`No station with Id ${req.params.id} was found`);
-        }
-        return res.send(oneStation);
-    } catch (error) {
-        return res.status(404).send(error);
-    }
+router.get('/station/:id', async (req: Request, res: Response, next: NextFunction) => {
+    const stationId = req.params.id;
+
+    const oneStation = await stationModel.getOneStation(stationId, res, next);
+
+    return res.send({ success: true, data: oneStation });
 });
 
 export default router;

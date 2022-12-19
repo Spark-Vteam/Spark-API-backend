@@ -18,7 +18,6 @@ router.get('/', (req: Request, res: Response) => {
     const data = {
         title: `Welcome to the  ${sitename}`,
     };
-
     res.send(data);
 });
 
