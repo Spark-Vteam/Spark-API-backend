@@ -33,8 +33,8 @@ const bikeModel = {
             const sql = `CALL get_bikes_in_radius(?,?,?)`;
 
             const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [
-                radiusInfo.longitude,
                 radiusInfo.latitude,
+                radiusInfo.longitude,
                 radiusInfo.radius,
             ]);
             return res[0][0];
