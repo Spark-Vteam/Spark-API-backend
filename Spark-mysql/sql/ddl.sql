@@ -131,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Rents` (
   `Destination` VARCHAR(45) NULL,
   `StartTimestamp` TIMESTAMP NULL,
   `DestinationTimestamp` TIMESTAMP NULL,
-  `Price` SMALLINT NULL,
+  `Price` INT NULL,
   `Status` TINYINT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Rents_Users1_idx` (`Users_id` ASC) VISIBLE,
@@ -159,7 +159,7 @@ SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `mydb`.`Invoices` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Users_id` INT NOT NULL,
-  `Amount` SMALLINT NULL,
+  `Amount` INT NULL,
   `Created` TIMESTAMP NOT NULL,
   `Expires` TIMESTAMP NOT NULL,
   `Paid` TIMESTAMP NULL,
@@ -199,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`UsersLog` (
   CONSTRAINT `fk_UsersLog_Users1`
     FOREIGN KEY (`Users_id`)
     REFERENCES `mydb`.`Users` (`id`)
-    ON DELETE RESTRICT -- MIGHT CHANGE LATER
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -885,7 +885,7 @@ CREATE PROCEDURE update_rent(
     DECLARE var_bike_position VARCHAR(45);
     DECLARE var_duration SMALLINT;
     DECLARE var_status TINYINT(45);
-    DECLARE var_price SMALLINT(45);
+    DECLARE var_price INT(45);
     
     SET var_bike_id = (SELECT Bikes_id FROM Rents WHERE id = a_Rents_id);
     SET var_rent_start_timestamp = (SELECT StartTimestamp FROM Rents WHERE id = a_Rents_id);
@@ -1161,7 +1161,7 @@ DROP PROCEDURE IF EXISTS update_invoice_amount;
 DELIMITER ;;
 CREATE PROCEDURE update_invoice_amount(
   a_Invoices_id INT,
-  a_amount SMALLINT
+  a_amount INT
 )
 	BEGIN
 		UPDATE Invoices
@@ -1179,7 +1179,7 @@ DELIMITER ;;
 CREATE PROCEDURE create_invoice(
   a_Rents_id INT,
   a_Users_id INT,
-  a_Amount SMALLINT,
+  a_Amount INT,
   a_Status TINYINT
 )
   BEGIN
@@ -1208,7 +1208,7 @@ CREATE PROCEDURE pay_invoice(
 )
   BEGIN
 
-    DECLARE var_sum SMALLINT;
+    DECLARE var_sum INT;
 
     DECLARE EXIT HANDLER FOR SQLEXCEPTION 
         BEGIN
@@ -1241,7 +1241,7 @@ CREATE PROCEDURE pay_monthly_invoice(
 )
   BEGIN
 
-    DECLARE var_sum SMALLINT;
+    DECLARE var_sum INT;
 
     DECLARE EXIT HANDLER FOR SQLEXCEPTION 
         BEGIN
