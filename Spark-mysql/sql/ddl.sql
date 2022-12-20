@@ -383,6 +383,29 @@ ENGINE = InnoDB;
 
 SHOW WARNINGS;
 
+-- -----------------------------------------------------
+-- Table `mydb`.`Pricing`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`Pricing` ;
+
+SHOW WARNINGS;
+CREATE TABLE IF NOT EXISTS `mydb`.`Pricing` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `Type` VARCHAR(45) NOT NULL,
+  `Description` TEXT NOT NULL,
+  `Start` INT NOT NULL,
+  `Minute` INT NOT NULL,
+  `Parking` INT NOT NULL,
+  `DiscountStartFree` INT NOT NULL,
+  `DiscountEndParkingZone` INT NOT NULL,
+  `DiscountEndCharging` INT NOT NULL)
+
+  PRIMARY KEY (`id`),
+  
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
