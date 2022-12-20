@@ -44,5 +44,5 @@ with open('../sql/insert-3-bikes-lund.sql', 'w') as fh:
             speed = 0
             if i == len(data) - 1 and n == 4:
                 separator = ";"
-            fh.write(f"      ('{positionGen}', '{battery}', '{status}', '{speed}'){separator}\n")
+            fh.write(f"      ('{position[0]},{position[1]}', '{battery}', '{status}', '{speed}'){separator}\n")
 

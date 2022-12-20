@@ -954,6 +954,18 @@ CREATE PROCEDURE get_stations()
 ;;
 DELIMITER ;
 
+-- --
+-- -- Procedure to fetch stations
+-- --
+-- DROP PROCEDURE IF EXISTS get_stations;
+-- DELIMITER ;;
+-- CREATE PROCEDURE get_stations()
+-- 	BEGIN
+-- 		SELECT * FROM Stations;
+-- 	END
+-- ;;
+-- DELIMITER ;
+
 --
 -- Procedure to fetch single station
 --
@@ -1360,40 +1372,6 @@ CREATE PROCEDURE update_charger_status(
 	END
 ;;
 DELIMITER ;
-
---
--- Procedure to fetch all charging bikes, their position and station name
---
-DROP PROCEDURE IF EXISTS get_charging_bikes_location;
-DELIMITER ;;
-CREATE PROCEDURE get_charging_bikes_location()
-	BEGIN
-		SELECT b.id, b.Position, b.Battery, s.City, s.Name
-    FROM Bikes AS b
-    INNER JOIN Stations AS s
-    ON b.Position = s.Position;
-	END
-;;
-DELIMITER ;
-
---
--- Procedure to fetch a single station's charging bikes, their position and station name
---
-DROP PROCEDURE IF EXISTS get_charging_bikes_by_location;
-DELIMITER ;;
-CREATE PROCEDURE get_charging_bikes_by_location(
-  a_Stations_id INT
-)
-	BEGIN
-		SELECT b.id, b.Position, b.Battery, s.City, s.Name
-    FROM Bikes AS b
-    INNER JOIN Stations AS s
-    ON b.Position = s.Position
-    WHERE s.id = a_Stations_id;
-	END
-;;
-DELIMITER ;
-
 
 -- -----------------------------------------------------
 -- -                 PRICING                           -
