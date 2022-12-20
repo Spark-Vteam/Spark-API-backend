@@ -384,12 +384,12 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Pricing`
+-- Table `mydb`.`Pricings`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Pricing` ;
+DROP TABLE IF EXISTS `mydb`.`Pricings` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`Pricing` (
+CREATE TABLE IF NOT EXISTS `mydb`.`Pricings` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Type` VARCHAR(45) NOT NULL,
   `Description` TEXT NOT NULL,
@@ -398,10 +398,8 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Pricing` (
   `Parking` INT NOT NULL,
   `DiscountStartFree` INT NOT NULL,
   `DiscountEndParkingZone` INT NOT NULL,
-  `DiscountEndCharging` INT NOT NULL)
-
-  PRIMARY KEY (`id`),
-  
+  `DiscountEndCharging` INT NOT NULL,
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
@@ -1329,11 +1327,74 @@ CREATE PROCEDURE update_charger_status(
 )
 	BEGIN
 		UPDATE Chargers
-    SET Status = a_status
+    SET Status = a_Status
     WHERE id = a_Chargers_id;
 	END
 ;;
 DELIMITER ;
+
+-- -----------------------------------------------------
+-- -                 PRICING                           -
+-- -----------------------------------------------------
+
+--
+-- Procedure to fetch all Pricings
+--
+DROP PROCEDURE IF EXISTS get_pricings;
+DELIMITER ;;
+CREATE PROCEDURE get_pricings()
+	BEGIN
+		SELECT * FROM Pricings;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to fetch single Pricing
+--
+DROP PROCEDURE IF EXISTS get_pricing;
+DELIMITER ;;
+CREATE PROCEDURE get_pricing(
+  a_Pricings_id TINYINT
+)
+	BEGIN
+		SELECT * FROM Pricings
+    WHERE id = a_Pricings_id;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to Update Pricing fields
+--
+DROP PROCEDURE IF EXISTS update_pricing_status;
+DELIMITER ;;
+CREATE PROCEDURE update_pricing_status(
+  a_Pricings_id INT,
+  a_Type VARCHAR(45),
+  a_Description TEXT(45),
+  a_Start INT,
+  a_Minute INT,
+  a_Parking INT,
+  a_DiscountStartFree INT,
+  a_DiscountEndParkingZone INT,
+  a_DiscountEndCharging INT
+)
+	BEGIN
+		UPDATE Pricings
+    SET Type = a_Type,
+      Description = a_Description,
+      Start = a_Start,
+      Minute = a_Minute,
+      Parking = a_Parking,
+      DiscountStartFree = a_DiscountStartFree,
+      DiscountEndParkingZone = a_DiscountEndParkingZone,
+      DiscountEndCharging = a_DiscountEndCharging
+    WHERE id = a_Pricings_id;
+	END
+;;
+DELIMITER ;
+
 
 
 
