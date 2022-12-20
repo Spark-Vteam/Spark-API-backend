@@ -32,9 +32,9 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Users` (
   `PhoneNumber` VARCHAR(45) NOT NULL,
   `EmailAdress` VARCHAR(45) NOT NULL,
   `Balance` INT NOT NULL,
-  `Password` VARCHAR(45) NOT NULL,
+  `Password` VARCHAR(255) NOT NULL,
   `PartialPayment` TINYINT,
-  `Oauth` VARCHAR(45) NULL,
+  `Oauth` VARCHAR(255) NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `emailAdress_UNIQUE` (`EmailAdress` ASC) VISIBLE,
   UNIQUE INDEX `PhoneNumber_UNIQUE` (`PhoneNumber` ASC) VISIBLE)
@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Admins` (
   `PhoneNumber` VARCHAR(45) NOT NULL,
   `EmailAdress` VARCHAR(45) NOT NULL,
   `Authority` TINYINT NOT NULL,
-  `Password` VARCHAR(45) NOT NULL,
+  `Password` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `EmailAdress_UNIQUE` (`EmailAdress` ASC) VISIBLE,
   UNIQUE INDEX `PhoneNumber_UNIQUE` (`PhoneNumber` ASC) VISIBLE)
@@ -636,8 +636,8 @@ CREATE PROCEDURE create_user(
   a_LastName VARCHAR(45),
   a_PhoneNumber VARCHAR(45),
   a_EmailAdress VARCHAR(45),
-  a_Password VARCHAR(45),
-  a_Oauth VARCHAR(46)
+  a_Password VARCHAR(255),
+  a_Oauth VARCHAR(255)
 )
 	BEGIN
 		INSERT INTO
@@ -742,7 +742,7 @@ DROP PROCEDURE IF EXISTS update_user_password;
 DELIMITER ;;
 CREATE PROCEDURE update_user_password(
   a_Users_id INT,
-  a_Password VARCHAR(45)
+  a_Password VARCHAR(255)
 )
 	BEGIN
 		UPDATE Users
@@ -776,7 +776,7 @@ DROP PROCEDURE IF EXISTS update_user_oauth;
 DELIMITER ;;
 CREATE PROCEDURE update_user_oauth(
   a_Users_id INT,
-  a_Oauth VARCHAR(45)
+  a_Oauth VARCHAR(255)
 )
 	BEGIN
 		UPDATE Users
@@ -799,7 +799,8 @@ CREATE PROCEDURE delete_user(
     SET FirstName = "DELETED",
         LastName = "DELETED",
         PhoneNumber = CONCAT("DELETED", a_Users_id),
-        EmailAdress = CONCAT("DELETED", a_Users_id)
+        EmailAdress = CONCAT("DELETED", a_Users_id),
+        Oauth = CONCAT("DELETED", a_Users_id)
     WHERE id = a_Users_id;
 	END
 ;;
@@ -1022,7 +1023,7 @@ CREATE PROCEDURE create_admin(
   a_PhoneNumber VARCHAR(45),
   a_EmailAdress VARCHAR(45),
   a_Authority INT,
-  a_Password VARCHAR(45)
+  a_Password VARCHAR(255)
 )
 	BEGIN
 		INSERT INTO Admins (FirstName, LastName, PhoneNumber, EmailAdress, Authority, Password)
