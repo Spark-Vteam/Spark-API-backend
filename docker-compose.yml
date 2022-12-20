@@ -37,3 +37,21 @@ services:
       dbwebb:
     links:
       - db:mysql-db
+      - bike-server:bike-server
+
+  bike-server:
+    build:
+      context: ./Spark-bike-server
+      dockerfile: Dockerfile
+    container_name: bike-server
+    # command: python3 ./main.py
+    command: sh -c "sleep 10 ; python3 ./main.py"
+    restart: always
+    ports:
+      - 9898:9898/udp
+    depends_on:
+      - db
+    networks:
+      dbwebb:
+    links:
+      - db:mysql-db
