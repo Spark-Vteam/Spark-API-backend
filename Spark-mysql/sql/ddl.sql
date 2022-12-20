@@ -1230,6 +1230,41 @@ CREATE PROCEDURE pay_invoice(
 ;;
 DELIMITER ;
 
+--
+-- Procedure to pay a monthly bill
+--
+DROP PROCEDURE IF EXISTS pay_monthly_invoice;
+DELIMITER ;;
+CREATE PROCEDURE pay_monthly_invoice(
+  a_Users_id INT,
+  a_Expires DATETIME
+)
+  BEGIN
+
+    DECLARE var_sum SMALLINT;
+
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+        BEGIN
+            ROLLBACK;
+            RESIGNAL;
+        END;
+
+    START TRANSACTION;
+      SET var_sum = (SELECT SUM(Amount) FROM Invoices WHERE Users_id = a_Users_id AND Expires = a_Expires);
+
+      UPDATE Users
+      SET Balance = Balance - var_sum
+      WHERE id = a_Users_id;
+
+      UPDATE Invoices
+      SET Status = 20
+      WHERE Users_id = a_Users_id AND Expires = a_Expires;
+
+    COMMIT;
+  END
+;;
+DELIMITER ;
+
 -- -----------------------------------------------------
 -- -                 GEOFENCES                         -
 -- -----------------------------------------------------
