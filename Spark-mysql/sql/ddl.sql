@@ -1197,6 +1197,39 @@ CREATE PROCEDURE create_invoice(
 ;;
 DELIMITER ;
 
+--
+-- Procedure to pay a single invoice
+--
+DROP PROCEDURE IF EXISTS pay_invoice;
+DELIMITER ;;
+CREATE PROCEDURE pay_invoice(
+  a_id INT,
+  a_Users_id INT
+)
+  BEGIN
+
+    DECLARE var_sum SMALLINT;
+
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+        BEGIN
+            ROLLBACK;
+            RESIGNAL;
+        END;
+
+    START TRANSACTION;
+      SET var_sum = (SELECT Amount FROM Invoices WHERE id = a_id);
+
+      UPDATE Users
+      SET Balance = Balance - var_sum
+      WHERE id = a_Users_id;
+
+      CALL update_invoice_status(a_id, 20);
+
+    COMMIT;
+  END
+;;
+DELIMITER ;
+
 -- -----------------------------------------------------
 -- -                 GEOFENCES                         -
 -- -----------------------------------------------------
