@@ -15,7 +15,7 @@ DROP SCHEMA IF EXISTS `mydb` ;
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ;
 SHOW WARNINGS;
 USE `mydb` ;
 
@@ -67,7 +67,7 @@ DROP TABLE IF EXISTS `mydb`.`Stations` ;
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `mydb`.`Stations` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `Name` VARCHAR(45) NOT NULL,
+  `Name` VARCHAR(45),
   `City` VARCHAR(45) NOT NULL,
   `Position` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
@@ -412,7 +412,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`ApiKeys` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Email` VARCHAR(45) NOT NULL,
   `Organization` VARCHAR(45) NOT NULL,
-  `Key` TEXT NOT NULL,
+  `ApiKey` TEXT NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -421,6 +421,31 @@ SHOW WARNINGS;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`CreditCards`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`CreditCards` ;
+
+SHOW WARNINGS;
+CREATE TABLE IF NOT EXISTS `mydb`.`CreditCards` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `Users_id` INT NOT NULL,
+  `Pan` VARCHAR(255) NOT NULL,
+  `Expiry` VARCHAR(255) NOT NULL,
+  `FirstName` VARCHAR(255) NOT NULL,
+  `LastName` VARCHAR(255) NOT NULL,
+  `TruncPan` VARCHAR(4) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_CreditCards_Users1_idx` (`Users_id` ASC) VISIBLE,
+  CONSTRAINT `fk_CreditCards_Users1`
+    FOREIGN KEY (`Users_id`)
+    REFERENCES `mydb`.`Users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- -----------------------------------------------------
@@ -1459,12 +1484,27 @@ DELIMITER ;;
 CREATE PROCEDURE create_key(
   a_Email VARCHAR(45),
   a_Organization VARCHAR(45),
-  a_Key TEXT
+  a_ApiKey TEXT
 )
   BEGIN
-    INSERT INTO ApiKeys (Email, Organization, Key)
+    INSERT INTO ApiKeys (Email, Organization, ApiKey)
     VALUES (a_Email, a_Organization, a_Key);
   END
+;;
+DELIMITER ;
+
+--
+-- Procedure to fetch key based on key
+--
+DROP PROCEDURE IF EXISTS get_key_by_key;
+DELIMITER ;;
+CREATE PROCEDURE get_key_by_key(
+  a_ApiKey TEXT
+)
+	BEGIN
+		SELECT Email, Organization FROM ApiKeys
+    WHERE ApiKey = a_ApiKey;
+	END
 ;;
 DELIMITER ;
 
@@ -1482,21 +1522,6 @@ CREATE PROCEDURE get_key_owners()
 DELIMITER ;
 
 --
--- Procedure to fetch single key owner data
---
-DROP PROCEDURE IF EXISTS get_key_owner;
-DELIMITER ;;
-CREATE PROCEDURE get_key_owner(
-  a_ApiKeys_id TINYINT
-)
-	BEGIN
-		SELECT Email, Organization FROM ApiKeys;
-    WHERE id = a_ApiKeys_id;
-	END
-;;
-DELIMITER ;
-
---
 -- Procedure to delete single key by id
 --
 DROP PROCEDURE IF EXISTS delete_key_by_id;
@@ -1505,7 +1530,7 @@ CREATE PROCEDURE delete_key_by_id(
   a_ApiKeys_id TINYINT
 )
 	BEGIN
-		DELETE FROM ApiKeys;
+		DELETE FROM ApiKeys
     WHERE id = a_ApiKeys_id;
 	END
 ;;
@@ -1520,7 +1545,7 @@ CREATE PROCEDURE delete_key_by_email(
   a_Email TINYINT
 )
 	BEGIN
-		DELETE FROM ApiKeys;
+		DELETE FROM ApiKeys
     WHERE Email = a_Email;
 	END
 ;;
@@ -1535,9 +1560,78 @@ CREATE PROCEDURE delete_key_by_organization(
   a_Organization TINYINT
 )
 	BEGIN
-		DELETE FROM ApiKeys;
+		DELETE FROM ApiKeys
     WHERE Organization = a_Organization;
 	END
+;;
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- -                 CreditCards                       -
+-- -----------------------------------------------------
+
+--
+-- Procedure to create a credit card
+--
+DROP PROCEDURE IF EXISTS create_creditcard;
+DELIMITER ;;
+CREATE PROCEDURE create_creditcard(
+  a_Users_id INT,
+  a_Pan VARCHAR(255),
+  a_Expiry VARCHAR(255),
+  a_FirstName VARCHAR(255),
+  a_LastName VARCHAR(255),
+  a_TruncPan VARCHAR(4)
+)
+  BEGIN
+    INSERT INTO CreditCards (Users_id, Pan, Expiry, FirstName, LastName, TruncPan)
+    VALUES (a_Users_id, a_Pan, a_Expiry, a_FirstName, a_LastName, a_TruncPan);
+  END
+;;
+DELIMITER ;
+
+--
+-- Procedure to fetch all cards by user id
+--
+DROP PROCEDURE IF EXISTS get_cards_by_user;
+DELIMITER ;;
+CREATE PROCEDURE get_cards_by_user(
+  a_Users_id INT,
+)
+  BEGIN
+    SELECT * FROM CreditCards
+    WHERE Users_id = a_Users_id;
+  END
+;;
+DELIMITER ;
+
+--
+-- Procedure to fetch card by id
+--
+DROP PROCEDURE IF EXISTS get_card;
+DELIMITER ;;
+CREATE PROCEDURE get_card(
+  a_id INT,
+)
+  BEGIN
+    SELECT * FROM CreditCards
+    WHERE id = a_id;
+  END
+;;
+DELIMITER ;
+
+--
+-- Procedure to delete card by id
+--
+DROP PROCEDURE IF EXISTS delete_card;
+DELIMITER ;;
+CREATE PROCEDURE delete_card(
+  a_id INT,
+)
+  BEGIN
+    DELETE FROM CreditCards
+    WHERE id = a_id;
+  END
 ;;
 DELIMITER ;
 

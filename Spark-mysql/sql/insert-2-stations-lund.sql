@@ -1,4 +1,5 @@
-USE mydb
+USE mydb;
+SET NAMES 'utf8';
 INSERT INTO Stations
     ( Name, City, Position )
 VALUES
