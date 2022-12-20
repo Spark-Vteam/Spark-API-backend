@@ -402,6 +402,20 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Pricings` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `mydb`.`ApiKeys`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`ApiKeys` ;
+
+SHOW WARNINGS;
+CREATE TABLE IF NOT EXISTS `mydb`.`ApiKeys` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `Email` VARCHAR(45) NOT NULL,
+  `Organization` VARCHAR(45) NOT NULL,
+  `Key` TEXT NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
 SHOW WARNINGS;
 
 SET SQL_MODE=@OLD_SQL_MODE;
@@ -1395,10 +1409,81 @@ CREATE PROCEDURE update_pricing_status(
 ;;
 DELIMITER ;
 
+-- -----------------------------------------------------
+-- -                 ApiKeys                           -
+-- -----------------------------------------------------
 
+--
+-- Procedure to fetch all keys owner data
+--
+DROP PROCEDURE IF EXISTS get_key_owners;
+DELIMITER ;;
+CREATE PROCEDURE get_key_owners()
+	BEGIN
+		SELECT Email, Organization FROM ApiKeys;
+	END
+;;
+DELIMITER ;
 
+--
+-- Procedure to fetch single key owner data
+--
+DROP PROCEDURE IF EXISTS get_key_owner;
+DELIMITER ;;
+CREATE PROCEDURE get_key_owner(
+  a_ApiKeys_id TINYINT
+)
+	BEGIN
+		SELECT Email, Organization FROM ApiKeys;
+    WHERE id = a_ApiKeys_id;
+	END
+;;
+DELIMITER ;
 
+--
+-- Procedure to delete single key by id
+--
+DROP PROCEDURE IF EXISTS delete_key_by_id;
+DELIMITER ;;
+CREATE PROCEDURE delete_key_by_id(
+  a_ApiKeys_id TINYINT
+)
+	BEGIN
+		DELETE FROM ApiKeys;
+    WHERE id = a_ApiKeys_id;
+	END
+;;
+DELIMITER ;
 
+--
+-- Procedure to delete all keys by email
+--
+DROP PROCEDURE IF EXISTS delete_key_by_email;
+DELIMITER ;;
+CREATE PROCEDURE delete_key_by_email(
+  a_Email TINYINT
+)
+	BEGIN
+		DELETE FROM ApiKeys;
+    WHERE Email = a_Email;
+	END
+;;
+DELIMITER ;
+
+--
+-- Procedure to delete all keys by organization
+--
+DROP PROCEDURE IF EXISTS delete_key_by_organization;
+DELIMITER ;;
+CREATE PROCEDURE delete_key_by_organization(
+  a_Organization TINYINT
+)
+	BEGIN
+		DELETE FROM ApiKeys;
+    WHERE Organization = a_Organization;
+	END
+;;
+DELIMITER ;
 
 -- -----------------------------------------------------
 -- -----------------------------------------------------
