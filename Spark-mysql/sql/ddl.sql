@@ -1379,11 +1379,49 @@ CREATE PROCEDURE get_pricing(
 DELIMITER ;
 
 --
+-- Procedure to Create Pricing fields
+--
+DROP PROCEDURE IF EXISTS create_pricing;
+DELIMITER ;;
+CREATE PROCEDURE create_pricing(
+  a_Type VARCHAR(45),
+  a_Description TEXT(45),
+  a_Start INT,
+  a_Minute INT,
+  a_Parking INT,
+  a_DiscountStartFree INT,
+  a_DiscountEndParkingZone INT,
+  a_DiscountEndCharging INT
+)
+	BEGIN
+		INSERT INTO Pricings(
+      Type,
+      Description,
+      Start,
+      Minute,
+      Parking,
+      DiscountStartFree,
+      DiscountEndParkingZone,
+      DiscountEndCharging)
+    VALUES (
+      a_Type,
+      a_Description,
+      a_Start,
+      a_Minute,
+      a_Parking,
+      a_DiscountStartFree,
+      a_DiscountEndParkingZone,
+      a_DiscountEndCharging);
+	END
+;;
+DELIMITER ;
+
+--
 -- Procedure to Update Pricing fields
 --
-DROP PROCEDURE IF EXISTS update_pricing_status;
+DROP PROCEDURE IF EXISTS update_pricing;
 DELIMITER ;;
-CREATE PROCEDURE update_pricing_status(
+CREATE PROCEDURE update_pricing(
   a_Pricings_id INT,
   a_Type VARCHAR(45),
   a_Description TEXT(45),
@@ -1412,6 +1450,24 @@ DELIMITER ;
 -- -----------------------------------------------------
 -- -                 ApiKeys                           -
 -- -----------------------------------------------------
+
+--
+-- Procedure to create a key
+--
+DROP PROCEDURE IF EXISTS create_key;
+DELIMITER ;;
+CREATE PROCEDURE create_key(
+  a_Email VARCHAR(45),
+  a_Organization VARCHAR(45),
+  a_Key TEXT
+)
+  BEGIN
+    INSERT INTO ApiKeys (Email, Organization, Key)
+    VALUES (a_Email, a_Organization, a_Key);
+  END
+;;
+DELIMITER ;
+
 
 --
 -- Procedure to fetch all keys owner data
