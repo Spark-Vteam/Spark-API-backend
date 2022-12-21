@@ -37,10 +37,10 @@ with open('../sql/insert-1-users.sql', 'w') as fh:
     fh.write("    ( FirstName, LastName, PhoneNumber, EmailAdress, Balance, Password )\n")
     fh.write("VALUES\n")
     counter = 1
-    for n in range(1,1000):
+    for n in range(1,4000):
         user = generate_user()
         symbol = ","
-        if counter == 999:
+        if counter == 3999:
             symbol = ";"
         fh.write(f"    ('{user[0]}', '{user[1]}', '{user[2]}', '{user[3]}', {user[4]}, '{user[5]}'){symbol}\n")
         counter += 1
