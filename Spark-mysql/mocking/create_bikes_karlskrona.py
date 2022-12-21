@@ -2,7 +2,7 @@ import random
 
 separator = ","
 amount = 5
-radius = 0.02
+radius = 0.002
 codes = [10, 50]
 
 stations = [
