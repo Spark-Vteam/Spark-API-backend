@@ -9,6 +9,7 @@ data = json.load(response)["features"]
 city = "Stockholm"
 separator = ","
 last_name = ""
+counter = 0
 
 with open('../sql/insert-2-stations-stockholm.sql', 'w') as fh:
     fh.write("USE mydb\n")
@@ -16,17 +17,18 @@ with open('../sql/insert-2-stations-stockholm.sql', 'w') as fh:
     fh.write("    ( Name, City, Position )\n")
     fh.write("VALUES\n")
 
-    for i, station in enumerate(data):
-        name = station["properties"]["STREET_NAME"]
+    while counter < len(data):
+        name = data[counter]["properties"]["STREET_NAME"]
         if name == "<Gatunamn saknas>":
-            name = station["properties"]["CITY_DISTRICT"]
+            name = data[counter]["properties"]["CITY_DISTRICT"]
         if name != last_name:
         # if station["properties"]["STREET_NAME"] != last_name:
-            lat = station["geometry"]["coordinates"][0][1]
-            lon = station["geometry"]["coordinates"][0][0]
+            lat = data[counter]["geometry"]["coordinates"][0][1]
+            lon = data[counter]["geometry"]["coordinates"][0][0]
             position = f"{lat},{lon}"
-            if i == len(data) - 1:
+            if counter == len(data) - 1:
                 separator = ";"
 
             fh.write(f"      ('{name}', '{city}', '{position}'){separator}\n")
         last_name = name
+        counter += 10

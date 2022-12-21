@@ -10,18 +10,19 @@ data = json.load(response)["features"]
 separator = ","
 radius = 0.02
 last_name = ""
+counter = 0
 
 with open('../sql/insert-3-bikes-stockholm.sql', 'w') as fh:
     fh.write("USE mydb\n")
     fh.write("INSERT INTO Bikes\n")
     fh.write("    ( Position, Battery, Status, Speed )\n")
     fh.write("VALUES\n")
-    for i, station in enumerate(data):
-        name = station["properties"]["STREET_NAME"]
+    while counter < len(data):
+        name = data[counter]["properties"]["STREET_NAME"]
         if name == "<Gatunamn saknas>":
-            name = station["properties"]["CITY_DISTRICT"]
+            name = data[counter]["properties"]["CITY_DISTRICT"]
 
-        position = [station["geometry"]["coordinates"][0][1],station["geometry"]["coordinates"][0][0]]
+        position = [data[counter]["geometry"]["coordinates"][0][1],data[counter]["geometry"]["coordinates"][0][0]]
         
         if name != last_name:
             for n in range(0, 2):
@@ -46,9 +47,10 @@ with open('../sql/insert-3-bikes-stockholm.sql', 'w') as fh:
                 battery = random.randint(0,100)
                 status = 40
                 speed = 0
-                if i == len(data) - 1 and n == 2:
+                if counter == len(data) - 1 and n == 2:
                     separator = ";"
                 fh.write(f"      ('{position[0]},{position[1]}', '{battery}', '{status}', '{speed}'){separator}\n")
 
         last_name = name
+        counter += 10
 

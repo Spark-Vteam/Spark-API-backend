@@ -1618,11 +1618,11 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS delete_key_by_id;
 DELIMITER ;;
 CREATE PROCEDURE delete_key_by_id(
-  a_ApiKeys_id TINYINT
+  a_id TINYINT
 )
 	BEGIN
 		DELETE FROM ApiKeys
-    WHERE id = a_ApiKeys_id;
+    WHERE id = a_id;
 	END
 ;;
 DELIMITER ;
