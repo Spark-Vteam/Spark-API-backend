@@ -1952,7 +1952,7 @@ DROP TRIGGER IF EXISTS Rents_insert_update_bike_status;
 CREATE TRIGGER Rents_insert_update_bike_status
 AFTER INSERT
 ON Rents FOR EACH ROW
-   UPDATE Bikes SET Status = '20' WHERE id = new.Bikes_id;
+  UPDATE Bikes SET Status = '20' WHERE id = new.Bikes_id;
 
 --
 -- Trigger to update bike status once a Rent is finished
@@ -1962,7 +1962,7 @@ DROP TRIGGER IF EXISTS Rents_update_update_bike_status;
 CREATE TRIGGER Rents_update_update_bike_status
 AFTER UPDATE
 ON Rents FOR EACH ROW
-   UPDATE Bikes SET Status = '10' WHERE id = old.Bikes_id;
+  UPDATE Bikes SET Status = '10' WHERE id = old.Bikes_id;
 
 --
 -- Trigger to create a invoice once a Rent is finished
@@ -1972,7 +1972,7 @@ DROP TRIGGER IF EXISTS Rents_update_create_invoice;
 CREATE TRIGGER Rents_update_create_invoice
 AFTER UPDATE
 ON Rents FOR EACH ROW
-   CALL create_invoice(old.id, old.Users_id, new.Price, new.Status);
+  CALL create_invoice(old.id, old.Users_id, new.Price, new.Status);
 
 
 
