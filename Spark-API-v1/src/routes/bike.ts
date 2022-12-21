@@ -25,7 +25,7 @@ interface BikeInfo {
  */
 router.get('/bike', async (req: Request, res: Response, next: NextFunction) => {
     const allBikes = await bikeModel.showAllBikes(res, next);
-    
+
     return res.status(200).send({ success: true, data: allBikes });
 });
 
@@ -50,6 +50,43 @@ router.get('/bike/radius', async (req: Request, res: Response, next: NextFunctio
 
     const bikeRadius = await bikeModel.getBikeRadius(radiusInfo, res, next);
     return res.status(200).send({ success: true, data: bikeRadius });
+});
+
+/**
+ * Bike ROUTE
+ * /:
+ *   get:
+ *     summary: Display list for all charging bikes
+ *     description: Render charging all bikes
+ * @param {Request}  req  The incoming request.
+ * @param {Response} res  The outgoing response.
+ * @param {Function} next Next to call in chain of middleware.
+ *
+ * @returns {void}
+ */
+router.get('/bike/charging', async (req: Request, res: Response, next: NextFunction) => {
+    const getAllChargingBikes = await bikeModel.getAllChargingBikes(res, next);
+
+    return res.status(200).send({ success: true, data: getAllChargingBikes });
+});
+
+/**
+ * Bike ROUTE
+ * /:
+ *   get:
+ *     summary: Display list for all charging bikes at one Station
+ *     description: Render charging all bikes at a specific station
+ * @param {Request}  req  The incoming request.
+ * @param {Response} res  The outgoing response.
+ * @param {Function} next Next to call in chain of middleware.
+ *
+ * @returns {void}
+ */
+router.get('/bike/charging/:id', async (req: Request, res: Response, next: NextFunction) => {
+    let stationId = req.params.id;
+    const getChargingBikesAtStation = await bikeModel.getChargingBikesAtStation(stationId, res, next);
+
+    return res.status(200).send({ success: true, data: getChargingBikesAtStation });
 });
 
 /**
