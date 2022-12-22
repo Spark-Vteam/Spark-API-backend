@@ -123,7 +123,7 @@ router.get('/bike/:id', async (req: Request, res: Response, next: NextFunction) 
  */
 router.get('/bike/city/:city', async (req: Request, res: Response, next: NextFunction) => {
     const city = req.params.city;
-    console.log('City', city);
+
     const oneBike = await bikeModel.getBikesByCity(city, res, next);
 
     return res.status(200).send({ success: true, data: oneBike });
