@@ -3,13 +3,6 @@ import { NextFunction, Request, Response, Router } from 'express';
 import invoiceModel from '../models/invoice';
 const router = Router();
 
-interface InvoiceInfo {
-    RentId: number;
-    UserId: number;
-    Amount: number;
-    Status: number;
-}
-
 /**
  * Invoice ROUTE
  * /:
@@ -87,8 +80,6 @@ router.post('/invoice/user/:id', async (req: Request, res: Response, next: NextF
         amount: req.body.amount,
         status: req.body.status,
     };
-    console.log('/route');
-    console.log(invoiceInfo);
 
     await invoiceModel.createOneInvoice(invoiceInfo, res, next);
 
@@ -147,6 +138,54 @@ router.put('/invoice/amount/:id', async (req: Request, res: Response, next: Next
     res.status(201).send({
         success: true,
         msg: `Invoice with id ${invoiceInfo.invoiceId} has changed amount to ${invoiceInfo.amount}`,
+    });
+});
+
+/**
+ * Invoice ROUTE
+ * /:
+ *   put:
+ *     summary: Pay an invoice
+ *     description: Pay an invoice
+ * @param {Request}  req  The incoming request.
+ * @param {Response} res  The outgoing response.
+ * @param {Function} next Next to call in chain of middleware.
+ *
+ * @returns {void}
+ */
+router.put('/invoice/pay/:id', async (req: Request, res: Response, next: NextFunction) => {
+    let invoiceId = req.params.id;
+    let userId = req.body.id;
+
+    await invoiceModel.payOneInvoice(invoiceId, userId, res, next);
+
+    res.status(201).send({
+        success: true,
+        msg: `Invoice with id ${invoiceId} has been paid`,
+    });
+});
+
+/**
+ * Invoice ROUTE
+ * /:
+ *   put:
+ *     summary: Pay monthly invoice
+ *     description: Pay monthly invoice
+ * @param {Request}  req  The incoming request.
+ * @param {Response} res  The outgoing response.
+ * @param {Function} next Next to call in chain of middleware.
+ *
+ * @returns {void}
+ */
+router.put('/invoice/pay_monthly/:id', async (req: Request, res: Response, next: NextFunction) => {
+    let invoiceId = req.params.id;
+    let expireDate = req.body.expires;
+
+    await invoiceModel.payMonthlyInvoice(invoiceId, expireDate, res, next);
+
+    res.status(201).send({
+        success: true,
+        msg: `Monthly invoice with id ${invoiceId} has been paid`,
     });
 });
 
