@@ -54,6 +54,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Bikes` (
   `Battery` INT NULL,
   `Status` TINYINT NULL,
   `Speed` INT NULL,
+  `City` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -1088,6 +1089,20 @@ CREATE PROCEDURE update_bike(
         Speed = a_Speed
     WHERE id = a_Bikes_id;
   END
+;;
+DELIMITER ;
+
+--
+-- Procedure to fetch bikes by city
+--
+DROP PROCEDURE IF EXISTS get_bikes_by_city;
+DELIMITER ;;
+CREATE PROCEDURE get_bikes_by_city(
+  a_City VARCHAR(45)
+)
+	BEGIN
+		SELECT * FROM Bikes WHERE City = a_City;
+	END
 ;;
 DELIMITER ;
 
