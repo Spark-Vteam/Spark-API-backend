@@ -396,7 +396,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Pricings` (
   `Start` INT NOT NULL,
   `Minute` INT NOT NULL,
   `Parking` INT NOT NULL,
-  `DiscountStartFree` INT NOT NULL,
+  `DiscountStartFee` INT NOT NULL,
   `DiscountEndParkingZone` INT NOT NULL,
   `DiscountEndCharging` INT NOT NULL,
   PRIMARY KEY (`id`))
@@ -1415,7 +1415,7 @@ CREATE PROCEDURE create_pricing(
   a_Start INT,
   a_Minute INT,
   a_Parking INT,
-  a_DiscountStartFree INT,
+  a_DiscountStartFee INT,
   a_DiscountEndParkingZone INT,
   a_DiscountEndCharging INT
 )
@@ -1426,7 +1426,7 @@ CREATE PROCEDURE create_pricing(
       Start,
       Minute,
       Parking,
-      DiscountStartFree,
+      DiscountStartFee,
       DiscountEndParkingZone,
       DiscountEndCharging)
     VALUES (
@@ -1435,7 +1435,7 @@ CREATE PROCEDURE create_pricing(
       a_Start,
       a_Minute,
       a_Parking,
-      a_DiscountStartFree,
+      a_DiscountStartFee,
       a_DiscountEndParkingZone,
       a_DiscountEndCharging);
 	END
@@ -1454,7 +1454,7 @@ CREATE PROCEDURE update_pricing(
   a_Start INT,
   a_Minute INT,
   a_Parking INT,
-  a_DiscountStartFree INT,
+  a_DiscountStartFee INT,
   a_DiscountEndParkingZone INT,
   a_DiscountEndCharging INT
 )
@@ -1465,7 +1465,7 @@ CREATE PROCEDURE update_pricing(
       Start = a_Start,
       Minute = a_Minute,
       Parking = a_Parking,
-      DiscountStartFree = a_DiscountStartFree,
+      DiscountStartFee = a_DiscountStartFee,
       DiscountEndParkingZone = a_DiscountEndParkingZone,
       DiscountEndCharging = a_DiscountEndCharging
     WHERE id = a_Pricings_id;

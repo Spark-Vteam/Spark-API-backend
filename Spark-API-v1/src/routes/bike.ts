@@ -41,11 +41,11 @@ router.get('/bike', async (req: Request, res: Response, next: NextFunction) => {
  *
  * @returns {void}
  */
-router.get('/bike/radius', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/bike/:longitude/:latitude/:radius', async (req: Request, res: Response, next: NextFunction) => {
     const radiusInfo = {
-        longitude: req.body.longitude,
-        latitude: req.body.latitude,
-        radius: req.body.radius,
+        latitude: req.params.latitude,
+        longitude: req.params.longitude,
+        radius: req.params.radius,
     };
 
     const bikeRadius = await bikeModel.getBikeRadius(radiusInfo, res, next);
