@@ -25,6 +25,7 @@ interface BikeInfo {
  */
 router.get('/bike', async (req: Request, res: Response, next: NextFunction) => {
     const allBikes = await bikeModel.showAllBikes(res, next);
+    console.log(allBikes);
 
     return res.status(200).send({ success: true, data: allBikes });
 });
@@ -104,6 +105,26 @@ router.get('/bike/charging/:id', async (req: Request, res: Response, next: NextF
 router.get('/bike/:id', async (req: Request, res: Response, next: NextFunction) => {
     const bikeId = req.params.id;
     const oneBike = await bikeModel.getOneBike(bikeId, res, next);
+
+    return res.status(200).send({ success: true, data: oneBike });
+});
+
+/**
+ * Bike ROUTE
+ * /:
+ *   get:
+ *     summary: Display information for one bike
+ *     description: Render one bike
+ * @param {Request}  req  The incoming request.
+ * @param {Response} res  The outgoing response.
+ * @param {Function} next Next to call in chain of middleware.
+ *
+ * @returns {Response}
+ */
+router.get('/bike/city/:city', async (req: Request, res: Response, next: NextFunction) => {
+    const city = req.params.city;
+    console.log('City', city);
+    const oneBike = await bikeModel.getBikesByCity(city, res, next);
 
     return res.status(200).send({ success: true, data: oneBike });
 });

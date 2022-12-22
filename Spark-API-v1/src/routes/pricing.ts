@@ -75,6 +75,8 @@ router.put('/pricing/:id', async (req: Request, res: Response, next: NextFunctio
         discountEndCharging: req.body.discountEndCharging,
     };
 
+    console.log(pricingId, pricingInfo);
+
     await pricingModel.updateOnePricing(pricingId, pricingInfo, res, next);
 
     return res.status(200).send({ success: true, msg: `Pricing has been updated` });

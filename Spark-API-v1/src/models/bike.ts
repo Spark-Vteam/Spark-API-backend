@@ -92,6 +92,19 @@ const bikeModel = {
             await db.end();
         }
     },
+    getBikesByCity: async function getBikesByCity(city: string, res: Response, next: NextFunction) {
+        const db = await database.getDb();
+        try {
+            const sql = `CALL get_bikes_by_city(?)`;
+
+            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [city]);
+            return res[0][0];
+        } catch (error: any) {
+            next(res.status(404).send(error));
+        } finally {
+            await db.end();
+        }
+    },
     updateOneBike: async function updateOneBike(bikeInfo: any, res: Response, next: NextFunction) {
         const db = await database.getDb();
         try {
