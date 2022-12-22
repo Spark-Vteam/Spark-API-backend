@@ -40,7 +40,7 @@ router.post('/pricing', async (req: Request, res: Response, next: NextFunction) 
         start: req.body.start,
         minute: req.body.minute,
         parking: req.body.parking,
-        discountStartFee: req.body.discountStartFee,
+        discountStartFree: req.body.discountStartFree,
         discountEndParkingZone: req.body.discountEndParkingZone,
         discountEndCharging: req.body.discountEndCharging,
     };
@@ -70,7 +70,7 @@ router.put('/pricing/:id', async (req: Request, res: Response, next: NextFunctio
         start: req.body.start,
         minute: req.body.minute,
         parking: req.body.parking,
-        discountStartFee: req.body.discountStartFee,
+        discountStartFree: req.body.discountStartFree,
         discountEndParkingZone: req.body.discountEndParkingZone,
         discountEndCharging: req.body.discountEndCharging,
     };

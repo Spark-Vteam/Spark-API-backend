@@ -39,7 +39,7 @@ const pricingModel = {
                 pricingInfo.start,
                 pricingInfo.minute,
                 pricingInfo.parking,
-                pricingInfo.discountStartFee,
+                pricingInfo.discountStartFree,
                 pricingInfo.discountEndParkingZone,
                 pricingInfo.discountEndCharging,
             ]);
@@ -73,7 +73,7 @@ const pricingModel = {
                 pricingInfo.start,
                 pricingInfo.minute,
                 pricingInfo.parking,
-                pricingInfo.discountStartFee,
+                pricingInfo.discountStartFree,
                 pricingInfo.discountEndParkingZone,
                 pricingInfo.discountEndCharging,
             ]);

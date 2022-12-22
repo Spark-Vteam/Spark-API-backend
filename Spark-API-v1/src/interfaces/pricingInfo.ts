@@ -4,7 +4,7 @@ export default interface PricingInfo {
     start: number;
     minute: number;
     parking: number;
-    discountStartFee: number;
+    discountStartFree: number;
     discountEndParkingZone: number;
     discountEndCharging: number;
 }
