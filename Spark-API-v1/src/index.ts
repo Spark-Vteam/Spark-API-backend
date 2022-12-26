@@ -1,7 +1,9 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
+// Routes
 import { logIncomingToConsole } from './middleware/index';
+// Routes
 import mainRoute from './routes/main';
 import stationsRoute from './routes/station';
 import userRoute from './routes/user';
@@ -12,6 +14,8 @@ import invoiceRoute from './routes/invoice';
 import geofenceRoute from './routes/geofence';
 import chargerRoute from './routes/charger';
 import authRoute from './routes/auth';
+import pricingRoute from './routes/pricing';
+// MiddleWare
 import { invalidPathHandler } from './middleware/errorHandler';
 const port = process.env.PORT || 4000;
 
@@ -47,6 +51,7 @@ app.use('/', invoiceRoute);
 app.use('/', geofenceRoute);
 app.use('/', chargerRoute);
 app.use('/', authRoute);
+app.use('/', pricingRoute);
 
 app.use(invalidPathHandler);
 

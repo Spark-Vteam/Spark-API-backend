@@ -17,8 +17,8 @@ interface RentInfo {
  * Rent ROUTE
  * /:
  *   get:
- *     summary: Display
- *     description: Render welcome page
+ *     summary: Display rent data
+ *     description: Render rent table
  * @param {Request}  req  The incoming request.
  * @param {Response} res  The outgoing response.
  * @param {Function} next Next to call in chain of middleware.

@@ -117,6 +117,45 @@ const invoiceModel = {
             await db.end();
         }
     },
+    /**
+     * Function to pay one invoice
+     * @async
+     * @returns {RowDataPacket} Resultset from the query.
+     */
+    payOneInvoice: async function payOneInvoice(invoiceId: string, userId: string, res: Response, next: NextFunction) {
+        const db = await database.getDb();
+        try {
+            const sql = `CALL pay_invoice(?, ?)`;
+            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [invoiceId, userId]);
+            return res[0][0];
+        } catch (error: any) {
+            next(res.status(404).send(error));
+        } finally {
+            await db.end();
+        }
+    },
+    /**
+     * Function to pay monthly invoice
+     * @async
+     * @returns {RowDataPacket} Resultset from the query.
+     */
+    payMonthlyInvoice: async function payMonthlyInvoice(
+        invoiceId: string,
+        expireDate: string,
+        res: Response,
+        next: NextFunction
+    ) {
+        const db = await database.getDb();
+        try {
+            const sql = `CALL pay_monthly_invoice(?, ?)`;
+            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [invoiceId, expireDate]);
+            return res[0][0];
+        } catch (error: any) {
+            next(res.status(404).send(error));
+        } finally {
+            await db.end();
+        }
+    },
 };
 
 export default invoiceModel;

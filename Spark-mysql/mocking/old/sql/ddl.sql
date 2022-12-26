@@ -54,7 +54,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Bikes` (
   `Battery` INT NULL,
   `Status` TINYINT NULL,
   `Speed` INT NULL,
-  `City` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -132,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Rents` (
   `Destination` VARCHAR(45) NULL,
   `StartTimestamp` TIMESTAMP NULL,
   `DestinationTimestamp` TIMESTAMP NULL,
-  `Price` INT NULL,
+  `Price` SMALLINT NULL,
   `Status` TINYINT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Rents_Users1_idx` (`Users_id` ASC) VISIBLE,
@@ -160,7 +159,7 @@ SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `mydb`.`Invoices` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Users_id` INT NOT NULL,
-  `Amount` INT NULL,
+  `Amount` SMALLINT NULL,
   `Created` TIMESTAMP NOT NULL,
   `Expires` TIMESTAMP NOT NULL,
   `Paid` TIMESTAMP NULL,
@@ -200,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`UsersLog` (
   CONSTRAINT `fk_UsersLog_Users1`
     FOREIGN KEY (`Users_id`)
     REFERENCES `mydb`.`Users` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE RESTRICT -- MIGHT CHANGE LATER
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -886,7 +885,7 @@ CREATE PROCEDURE update_rent(
     DECLARE var_bike_position VARCHAR(45);
     DECLARE var_duration SMALLINT;
     DECLARE var_status TINYINT(45);
-    DECLARE var_price INT(45);
+    DECLARE var_price SMALLINT(45);
     
     SET var_bike_id = (SELECT Bikes_id FROM Rents WHERE id = a_Rents_id);
     SET var_rent_start_timestamp = (SELECT StartTimestamp FROM Rents WHERE id = a_Rents_id);
@@ -954,6 +953,18 @@ CREATE PROCEDURE get_stations()
 	END
 ;;
 DELIMITER ;
+
+-- --
+-- -- Procedure to fetch stations
+-- --
+-- DROP PROCEDURE IF EXISTS get_stations;
+-- DELIMITER ;;
+-- CREATE PROCEDURE get_stations()
+-- 	BEGIN
+-- 		SELECT * FROM Stations;
+-- 	END
+-- ;;
+-- DELIMITER ;
 
 --
 -- Procedure to fetch single station
@@ -1092,20 +1103,6 @@ CREATE PROCEDURE update_bike(
 ;;
 DELIMITER ;
 
---
--- Procedure to fetch bikes by city
---
-DROP PROCEDURE IF EXISTS get_bikes_by_city;
-DELIMITER ;;
-CREATE PROCEDURE get_bikes_by_city(
-  a_City VARCHAR(45)
-)
-	BEGIN
-		SELECT * FROM Bikes WHERE City = a_City;
-	END
-;;
-DELIMITER ;
-
 -- -----------------------------------------------------
 -- -                 Invoices                          -
 -- -----------------------------------------------------
@@ -1176,7 +1173,7 @@ DROP PROCEDURE IF EXISTS update_invoice_amount;
 DELIMITER ;;
 CREATE PROCEDURE update_invoice_amount(
   a_Invoices_id INT,
-  a_amount INT
+  a_amount SMALLINT
 )
 	BEGIN
 		UPDATE Invoices
@@ -1194,7 +1191,7 @@ DELIMITER ;;
 CREATE PROCEDURE create_invoice(
   a_Rents_id INT,
   a_Users_id INT,
-  a_Amount INT,
+  a_Amount SMALLINT,
   a_Status TINYINT
 )
   BEGIN
@@ -1208,74 +1205,6 @@ CREATE PROCEDURE create_invoice(
 
     INSERT INTO Invoices (Users_id, Amount, Created, Expires, Paid, Status, Rents_id)
     VALUES (a_Users_id, a_Amount, CURRENT_TIMESTAMP(), var_Expire, NULL, var_Status, a_Rents_id);
-  END
-;;
-DELIMITER ;
-
---
--- Procedure to pay a single invoice
---
-DROP PROCEDURE IF EXISTS pay_invoice;
-DELIMITER ;;
-CREATE PROCEDURE pay_invoice(
-  a_id INT,
-  a_Users_id INT
-)
-  BEGIN
-
-    DECLARE var_sum INT;
-
-    DECLARE EXIT HANDLER FOR SQLEXCEPTION 
-        BEGIN
-            ROLLBACK;
-            RESIGNAL;
-        END;
-
-    START TRANSACTION;
-      SET var_sum = (SELECT Amount FROM Invoices WHERE id = a_id);
-
-      UPDATE Users
-      SET Balance = Balance - var_sum
-      WHERE id = a_Users_id;
-
-      CALL update_invoice_status(a_id, 20);
-
-    COMMIT;
-  END
-;;
-DELIMITER ;
-
---
--- Procedure to pay a monthly bill
---
-DROP PROCEDURE IF EXISTS pay_monthly_invoice;
-DELIMITER ;;
-CREATE PROCEDURE pay_monthly_invoice(
-  a_Users_id INT,
-  a_Expires DATETIME
-)
-  BEGIN
-
-    DECLARE var_sum INT;
-
-    DECLARE EXIT HANDLER FOR SQLEXCEPTION 
-        BEGIN
-            ROLLBACK;
-            RESIGNAL;
-        END;
-
-    START TRANSACTION;
-      SET var_sum = (SELECT SUM(Amount) FROM Invoices WHERE Users_id = a_Users_id AND Expires = a_Expires);
-
-      UPDATE Users
-      SET Balance = Balance - var_sum
-      WHERE id = a_Users_id;
-
-      UPDATE Invoices
-      SET Status = 20
-      WHERE Users_id = a_Users_id AND Expires = a_Expires;
-
-    COMMIT;
   END
 ;;
 DELIMITER ;
@@ -1444,40 +1373,6 @@ CREATE PROCEDURE update_charger_status(
 ;;
 DELIMITER ;
 
---
--- Procedure to fetch all charging bikes, their position and station name
---
-DROP PROCEDURE IF EXISTS get_charging_bikes_location;
-DELIMITER ;;
-CREATE PROCEDURE get_charging_bikes_location()
-	BEGIN
-		SELECT b.id, b.Position, b.Battery, s.City, s.Name
-    FROM Bikes AS b
-    INNER JOIN Stations AS s
-    ON b.Position = s.Position;
-	END
-;;
-DELIMITER ;
-
---
--- Procedure to fetch a single station's charging bikes, their position and station name
---
-DROP PROCEDURE IF EXISTS get_charging_bikes_by_location;
-DELIMITER ;;
-CREATE PROCEDURE get_charging_bikes_by_location(
-  a_Stations_id INT
-)
-	BEGIN
-		SELECT b.id, b.Position, b.Battery, s.City, s.Name
-    FROM Bikes AS b
-    INNER JOIN Stations AS s
-    ON b.Position = s.Position
-    WHERE s.id = a_Stations_id;
-	END
-;;
-DELIMITER ;
-
-
 -- -----------------------------------------------------
 -- -                 PRICING                           -
 -- -----------------------------------------------------
@@ -1633,11 +1528,11 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS delete_key_by_id;
 DELIMITER ;;
 CREATE PROCEDURE delete_key_by_id(
-  a_id TINYINT
+  a_ApiKeys_id TINYINT
 )
 	BEGIN
 		DELETE FROM ApiKeys
-    WHERE id = a_id;
+    WHERE id = a_ApiKeys_id;
 	END
 ;;
 DELIMITER ;
