@@ -1,6 +1,6 @@
 import { Request, Response, Router, NextFunction } from 'express';
 
-import bikeModel from '../models/bike';
+import bikeModel from '../../../models/bike';
 const router = Router();
 
 interface BikeInfo {
@@ -25,7 +25,6 @@ interface BikeInfo {
  */
 router.get('/bike', async (req: Request, res: Response, next: NextFunction) => {
     const allBikes = await bikeModel.showAllBikes(res, next);
-    console.log(allBikes);
 
     return res.status(200).send({ success: true, data: allBikes });
 });
@@ -154,4 +153,4 @@ router.put('/bike/:id', async (req: Request, res: Response, next: NextFunction) 
     return res.status(200).send({ success: true, msg: `Bike with id ${bikeInfo.bikeId} has been updated` });
 });
 
-export default router;
+module.exports = router;

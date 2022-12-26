@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response, Router } from 'express';
 
-import geofenceModel from '../models/geofence';
+import geofenceModel from '../../../models/geofence';
 const router = Router();
 
 interface GeofenceInfo {
@@ -169,4 +169,4 @@ router.delete('/geofence/:id', async (req: Request, res: Response, next: NextFun
     return res.status(200).send({ success: true, msg: `Geofence with id ${geofenceId} has been deleted (Type 40)` });
 });
 
-export default router;
+module.exports = router;

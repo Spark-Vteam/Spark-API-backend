@@ -3,18 +3,6 @@ import bodyParser from 'body-parser';
 import morgan from 'morgan';
 // Middleware
 import { logIncomingToConsole } from './middleware/index';
-// Routes
-// import mainRoute from './routes/main';
-// import stationsRoute from './routes/station';
-// import userRoute from './routes/user';
-// import bikeRoute from './routes/bike';
-// import rentRoute from './routes/rent';
-// import adminRoute from './routes/admin';
-// import invoiceRoute from './routes/invoice';
-// import geofenceRoute from './routes/geofence';
-// import chargerRoute from './routes/charger';
-// import authRoute from './routes/auth';
-// import pricingRoute from './routes/pricing';
 // MiddleWare
 import { invalidPathHandler } from './middleware/errorHandler';
 const port = process.env.PORT || 4000;
@@ -41,17 +29,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(logIncomingToConsole);
 app.use('/', require('./api'));
-// app.use('/', mainRoute);
-// app.use('/', stationsRoute);
-// app.use('/', userRoute);
-// app.use('/', bikeRoute);
-// app.use('/', rentRoute);
-// app.use('/', adminRoute);
-// app.use('/', invoiceRoute);
-// app.use('/', geofenceRoute);
-// app.use('/', chargerRoute);
-// app.use('/', authRoute);
-// app.use('/', pricingRoute);
 
 app.use(invalidPathHandler);
 

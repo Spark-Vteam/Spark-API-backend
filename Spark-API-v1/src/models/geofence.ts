@@ -1,6 +1,6 @@
 import { NextFunction, Response } from 'express';
 import { FieldPacket, RowDataPacket } from 'mysql2/promise';
-import database from '../api/v1/db/db';
+import database from '../db/db';
 
 const geofenceModel = {
     /**

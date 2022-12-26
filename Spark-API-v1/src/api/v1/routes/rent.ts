@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction, Router } from 'express';
 
-import rentModel from '../models/rent';
+import rentModel from '../../../models/rent';
 const router = Router();
 
 interface RentInfo {
@@ -148,4 +148,4 @@ router.put('/rent/:id', async (req: Request, res: Response, next: NextFunction) 
     return res.status(200).send({ success: true, msg: `Rent with id ${rentId} has been updated` });
 });
 
-export default router;
+module.exports = router;

@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response, Router } from 'express';
 
-import chargerModel from '../models/chargers';
+import chargerModel from '../../../models/chargers';
 const router = Router();
 
 /**
@@ -66,4 +66,4 @@ router.put('/charger/:id', async (req: Request, res: Response, next: NextFunctio
         .send({ success: true, msg: `Charger with id ${chargerInfo.id} has changed status to ${chargerInfo.status} ` });
 });
 
-export default router;
+module.exports = router;
