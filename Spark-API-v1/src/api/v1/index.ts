@@ -13,8 +13,20 @@ const router = Router();
  *
  * @returns {void}
  */
-router.get('/', (req: Request, res: Response) => {
-    res.send('Hello v1.0 GET API');
-});
+// router.get('/', (req: Request, res: Response) => {
+//     res.send('Hello v1.0 GET API');
+// });
+router.use('/', require('./routes/main'));
+// router.use('/', stationsRoute);
+// router.use('/', userRoute);
+// router.use('/', bikeRoute);
+// router.use('/', rentRoute);
+// router.use('/', adminRoute);
+// router.use('/', invoiceRoute);
+// router.use('/', geofenceRoute);
+// router.use('/', chargerRoute);
+// router.use('/', authRoute);
+// router.use('/', pricingRoute);
+
 
 module.exports = router;
