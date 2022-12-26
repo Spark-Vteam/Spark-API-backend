@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response, Router } from 'express';
 
-import adminModel from '../models/admin';
+import adminModel from '../../../models/admin';
 const router = Router();
 
 interface AdminInfo {
@@ -76,4 +76,4 @@ router.post('/admin', async (req: Request, res: Response, next: NextFunction) =>
     res.status(201).send({ success: true, msg: 'Admin registered' });
 });
 
-export default router;
+module.exports = router;

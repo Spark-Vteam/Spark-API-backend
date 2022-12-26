@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response, Router } from 'express';
 
-import userModel from '../models/user';
+import userModel from '../../../models/user';
 const router = Router();
 
 interface UserInfo {
@@ -194,4 +194,4 @@ router.delete('/user/:id', async (req: Request, res: Response, next: NextFunctio
     return res.status(200).send({ success: true, msg: `User with id ${userId} was deleted` });
 });
 
-export default router;
+module.exports = router;

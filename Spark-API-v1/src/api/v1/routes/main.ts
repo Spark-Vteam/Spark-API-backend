@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express';
 const router = Router();
-const sitename = ' | Spark API Main';
+const sitename = 'Spark API | Main';
 
 /**
  * Main ROUTE
@@ -21,4 +21,4 @@ router.get('/', (req: Request, res: Response) => {
     res.send(data);
 });
 
-export default router;
+module.exports = router;

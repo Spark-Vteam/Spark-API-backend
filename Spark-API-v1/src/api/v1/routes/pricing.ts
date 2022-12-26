@@ -1,6 +1,6 @@
 import { Request, Response, Router, NextFunction } from 'express';
 import PricingInfo from 'src/interfaces/pricingInfo';
-import pricingModel from '../models/pricing';
+import pricingModel from '../../../models/pricing';
 const router = Router();
 
 /**
@@ -82,4 +82,4 @@ router.put('/pricing/:id', async (req: Request, res: Response, next: NextFunctio
     return res.status(200).send({ success: true, msg: `Pricing has been updated` });
 });
 
-export default router;
+module.exports = router;

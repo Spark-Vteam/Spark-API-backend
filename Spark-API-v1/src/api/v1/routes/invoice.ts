@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response, Router } from 'express';
 
-import invoiceModel from '../models/invoice';
+import invoiceModel from '../../../models/invoice';
 const router = Router();
 
 /**
@@ -189,4 +189,4 @@ router.put('/invoice/pay_monthly/:id', async (req: Request, res: Response, next:
     });
 });
 
-export default router;
+module.exports = router;

@@ -1,17 +1,16 @@
-import { Request, response, Response, Router } from "express";
-import fetch from "cross-fetch";
+import { Request, response, Response, Router } from 'express';
+import fetch from 'cross-fetch';
 const router = Router();
 
-
-router.get("/auth/getAccessToken", async function (req: Request, res: Response) {
+router.get('/auth/getAccessToken', async function (req: Request, res: Response) {
     const code = req.query.code;
 
     await fetch(
         `https://github.com/login/oauth/access_token?client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRETS}&code=${code}`,
         {
-            method: "POST",
+            method: 'POST',
             headers: {
-                Accept: "application/json",
+                Accept: 'application/json',
             },
         }
     )
@@ -24,11 +23,11 @@ router.get("/auth/getAccessToken", async function (req: Request, res: Response) 
         });
 });
 
-router.get("/auth/getUserData", async function (req: Request, res: Response) {
+router.get('/auth/getUserData', async function (req: Request, res: Response) {
     await fetch(`https://api.github.com/user`, {
-        method: "GET",
+        method: 'GET',
         headers: {
-            Authorization: req.get("Authorization")!,
+            Authorization: req.get('Authorization')!,
         },
     })
         .then((response) => {
@@ -40,4 +39,4 @@ router.get("/auth/getUserData", async function (req: Request, res: Response) {
         });
 });
 
-export default router;
+module.exports = router;

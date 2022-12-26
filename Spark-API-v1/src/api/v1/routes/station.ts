@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response, Router } from 'express';
 
-import stationModel from '../models/station';
+import stationModel from '../../../models/station';
 const router = Router();
 
 /**
@@ -41,4 +41,4 @@ router.get('/station/:id', async (req: Request, res: Response, next: NextFunctio
     return res.send({ success: true, data: oneStation });
 });
 
-export default router;
+module.exports = router;
