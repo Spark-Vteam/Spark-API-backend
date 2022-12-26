@@ -1,5 +1,5 @@
 import { NextFunction, Response } from 'express';
-import database from '../db/db';
+import database from '../api/v1/db/db';
 import { FieldPacket, RowDataPacket } from 'mysql2/promise';
 
 const stationModel = {
