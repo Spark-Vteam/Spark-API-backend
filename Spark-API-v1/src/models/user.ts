@@ -16,7 +16,7 @@ const userModel = {
 
             return res[0][0];
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(res.status(404).send({ error: true, db: { error } }));
         } finally {
             await db.end();
         }
@@ -33,7 +33,7 @@ const userModel = {
             const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId]);
             return res[0][0];
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(res.status(404).send({ error: true, db: { error } }));
         } finally {
             await db.end();
         }
@@ -57,7 +57,7 @@ const userModel = {
             ]);
             return res[0][0];
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(res.status(404).send({ error: true, db: { error } }));
         } finally {
             await db.end();
         }
@@ -80,7 +80,7 @@ const userModel = {
 
             return res[0][0];
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(res.status(404).send({ error: true, db: { error } }));
         } finally {
             await db.end();
         }
@@ -103,7 +103,7 @@ const userModel = {
 
             return res[0][0];
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(res.status(404).send({ error: true, db: { error } }));
         } finally {
             await db.end();
         }
@@ -126,7 +126,7 @@ const userModel = {
 
             return res[0][0];
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(res.status(404).send({ error: true, db: { error } }));
         } finally {
             await db.end();
         }
@@ -149,7 +149,7 @@ const userModel = {
 
             return res[0][0];
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(res.status(404).send({ error: true, db: { error } }));
         } finally {
             await db.end();
         }
@@ -171,6 +171,8 @@ const userModel = {
             const res = await db.query(sql, [userId, balance]);
 
             return res[0];
+        } catch (error: any) {
+            next(res.status(404).send({ error: true, db: { error } }));
         } finally {
             await db.end();
         }
@@ -193,7 +195,7 @@ const userModel = {
 
             return res[0][0];
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(res.status(404).send({ error: true, db: { error } }));
         } finally {
             await db.end();
         }
@@ -216,7 +218,7 @@ const userModel = {
 
             return res[0][0];
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(res.status(404).send({ error: true, db: { error } }));
         } finally {
             await db.end();
         }
@@ -234,7 +236,7 @@ const userModel = {
 
             return res[0][0];
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(res.status(404).send({ error: true, db: { error } }));
         } finally {
             await db.end();
         }
@@ -251,7 +253,7 @@ const userModel = {
             const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId]);
             return res[0][0];
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(res.status(404).send({ error: true, db: { error } }));
         } finally {
             await db.end();
         }
