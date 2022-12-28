@@ -1,9 +1,9 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
+
 // Middleware
 import { logIncomingToConsole } from './middleware/index';
-// MiddleWare
 import { invalidPathHandler } from './middleware/errorHandler';
 const port = process.env.PORT || 4000;
 
@@ -28,6 +28,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(logIncomingToConsole);
+
 app.use('/', require('./api'));
 
 app.use(invalidPathHandler);

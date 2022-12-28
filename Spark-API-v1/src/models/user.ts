@@ -2,6 +2,9 @@ import database from '../db/db';
 import { FieldPacket, RowDataPacket } from 'mysql2/promise';
 import { Response, NextFunction } from 'express';
 
+const bcrypt = require('bcryptjs');
+const saltRounds = 10;
+
 const userModel = {
     /**
      * Function to show all users
@@ -44,23 +47,37 @@ const userModel = {
      * @returns {RowDataPacket} Resultset from the query.
      */
     createOneUser: async function createOneUser(userInfo: any, res: Response, next: NextFunction) {
-        const db = await database.getDb();
-        try {
-            const sql = `CALL create_user(?, ?, ?, ?, ?,?)`;
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [
-                userInfo.firstName,
-                userInfo.lastName,
-                userInfo.phoneNumber,
-                userInfo.emailAdress,
-                userInfo.password,
-                userInfo.oauth,
-            ]);
-            return res[0][0];
-        } catch (error: any) {
-            next(res.status(404).send({ error: true, db: { error } }));
-        } finally {
-            await db.end();
-        }
+        bcrypt.hash(userInfo.password, saltRounds, async function (err: any, hash: any) {
+            if (err) {
+                return res.status(500).json({
+                    errors: {
+                        status: 500,
+                        message: 'Could not hash password',
+                    },
+                });
+            }
+            const db = await database.getDb();
+            try {
+                userInfo.password = hash;
+
+                console.log(userInfo);
+
+                const sql = `CALL create_user(?, ?, ?, ?, ?,?)`;
+                const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [
+                    userInfo.firstName,
+                    userInfo.lastName,
+                    userInfo.phoneNumber,
+                    userInfo.emailAdress,
+                    userInfo.password,
+                    userInfo.oauth,
+                ]);
+                return res[0][0];
+            } catch (error: any) {
+                next(res.status(404).send({ error: true, db: { error } }));
+            } finally {
+                await db.end();
+            }
+        });
     },
     /**
      * Function to update a users firstname
