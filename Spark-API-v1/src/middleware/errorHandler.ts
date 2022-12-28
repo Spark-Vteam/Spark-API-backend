@@ -34,13 +34,16 @@ import { Request, Response, NextFunction } from 'express';
  * @param {Response} res  The outgoing response.
  * @param {Function} next Next to call in chain of middleware.
  *
- * @returns {void}
+ * @returns {Promise}
  */
 
 export function errorHandler(error: Error, req: Request, res: Response, next: NextFunction): void {
+    if (res.headersSent) {
+        return next(error);
+    }
     console.log('ErrorHandler');
-    console.log(error);
-    next(error); // calling next middleware
+    console.error(error);
+    return res.status(500).send({ error: true, msg: 'Something went wrong' });
 }
 
 /**

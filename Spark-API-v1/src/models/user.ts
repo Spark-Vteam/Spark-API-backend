@@ -60,8 +60,6 @@ const userModel = {
             try {
                 userInfo.password = hash;
 
-                console.log(userInfo);
-
                 const sql = `CALL create_user(?, ?, ?, ?, ?,?)`;
                 const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [
                     userInfo.firstName,
@@ -71,9 +69,14 @@ const userModel = {
                     userInfo.password,
                     userInfo.oauth,
                 ]);
+                console.log('RESPONSE');
+                console.log(res[0][0]);
+
                 return res[0][0];
             } catch (error: any) {
-                next(res.status(404).send({ error: true, db: { error } }));
+                console.log('userModel CATCH Block');
+                console.error(error);
+                return next(res.status(404).send({ error: true, db: { error } }));
             } finally {
                 await db.end();
             }

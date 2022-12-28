@@ -64,22 +64,18 @@ router.get('/user/:id', async (req: Request, res: Response, next: NextFunction) 
  * @returns {Response}
  */
 router.post('/user', async (req: Request, res: Response, next: NextFunction) => {
-    try {
-        const userInfo = {
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            phoneNumber: req.body.phoneNumber,
-            emailAdress: req.body.emailAdress,
-            password: req.body.password,
-            oauth: req.body.oauth,
-        };
+    const userInfo = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        phoneNumber: req.body.phoneNumber,
+        emailAdress: req.body.emailAdress,
+        password: req.body.password,
+        oauth: req.body.oauth,
+    };
 
-        await userModel.createOneUser(userInfo, res, next);
+    await userModel.createOneUser(userInfo, res, next);
 
-        return res.status(201).send({ success: true, msg: `User has been registered` });
-    } catch (error: any) {
-        return res.status(404).send({ error: true, message: error.message });
-    }
+    return res.status(201).send({ success: true, msg: `User has been registered` });
 });
 
 /**
