@@ -74,11 +74,15 @@ router.post('/user', async (req: Request, res: Response, next: NextFunction) => 
             oauth: req.body.oauth,
         };
 
-        await userModel.createOneUser(userInfo, res, next);
+        const newUser = await userModel.createOneUser(userInfo, res, next);
+        console.log('/user POST');
+        console.log(newUser);
 
-        return res.status(201).send({ success: true, msg: `User has been registered` });
+        if (newUser !== undefined) {
+            res.status(201).send({ success: true, msg: `User has been registered` });
+        }
     } catch (error) {
-        return next(error);
+        next(error);
     }
 });
 

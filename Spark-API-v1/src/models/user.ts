@@ -49,7 +49,7 @@ const userModel = {
     createOneUser: async function createOneUser(userInfo: any, res: Response, next: NextFunction) {
         bcrypt.hash(userInfo.password, saltRounds, async function (error: any, hash: any) {
             if (error) {
-                return res.status(500).json({ error: true, msg: 'Could not hash password' });
+                next(error);
             }
             const db = await database.getDb();
             try {
@@ -64,12 +64,15 @@ const userModel = {
                     userInfo.password,
                     userInfo.oauth,
                 ]);
-                console.log('RESPONSE');
-                console.log(res[0][0]);
+                console.log('userModel');
+                let results = JSON.parse(JSON.stringify(res[0]));
+
+                console.log('USERMODEL');
+                console.log(results);
 
                 return res[0][0];
             } catch (error: any) {
-                return next(error);
+                next(error);
             } finally {
                 await db.end();
             }

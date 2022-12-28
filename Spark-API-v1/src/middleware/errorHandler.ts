@@ -38,9 +38,10 @@ import { Request, Response, NextFunction } from 'express';
  */
 
 export function errorHandler(error: Error, req: Request, res: Response, next: NextFunction): void {
-    console.log('ErrorHandler');
-    console.error({ error });
-    return res.status(500).send({ error: true, msg: { error } });
+    console.log('errorHandler');
+    console.log(error);
+
+    res.status(500).send({ error: true, msg: { error } });
 }
 
 /**
