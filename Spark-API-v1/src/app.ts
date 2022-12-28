@@ -4,7 +4,7 @@ import morgan from 'morgan';
 
 // Middleware
 import { logIncomingToConsole } from './middleware/index';
-import { invalidPathHandler } from './middleware/errorHandler';
+import { invalidPathHandler, errorHandler } from './middleware/errorHandler';
 const port = process.env.PORT || 4000;
 
 const cors = require('cors');
@@ -31,7 +31,7 @@ app.use(logIncomingToConsole);
 
 app.use('/', require('./api'));
 
-app.use(invalidPathHandler);
+app.use(errorHandler);
 
 const server = httpServer.listen(port, () => {
     console.log('Spark api listening on port ' + port);

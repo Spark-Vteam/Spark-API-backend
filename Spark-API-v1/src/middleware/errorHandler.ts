@@ -38,12 +38,9 @@ import { Request, Response, NextFunction } from 'express';
  */
 
 export function errorHandler(error: Error, req: Request, res: Response, next: NextFunction): void {
-    if (res.headersSent) {
-        return next(error);
-    }
     console.log('ErrorHandler');
-    console.error(error);
-    return res.status(500).send({ error: true, msg: 'Something went wrong' });
+    console.error({ error });
+    return res.status(500).send({ error: true, msg: { error } });
 }
 
 /**

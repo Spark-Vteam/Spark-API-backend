@@ -47,8 +47,8 @@ const userModel = {
      * @returns {RowDataPacket} Resultset from the query.
      */
     createOneUser: async function createOneUser(userInfo: any, res: Response, next: NextFunction) {
-        bcrypt.hash(userInfo.password, saltRounds, async function (err: any, hash: any) {
-            if (err) {
+        bcrypt.hash(userInfo.password, saltRounds, async function (error: any, hash: any) {
+            if (error) {
                 return res.status(500).json({ error: true, msg: 'Could not hash password' });
             }
             const db = await database.getDb();
@@ -69,9 +69,7 @@ const userModel = {
 
                 return res[0][0];
             } catch (error: any) {
-                console.log('userModel CATCH Block');
-                console.error(error);
-                return next(res.status(404).send({ error: true, db: { error } }));
+                return next(error);
             } finally {
                 await db.end();
             }
