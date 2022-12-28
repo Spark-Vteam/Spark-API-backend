@@ -49,12 +49,7 @@ const userModel = {
     createOneUser: async function createOneUser(userInfo: any, res: Response, next: NextFunction) {
         bcrypt.hash(userInfo.password, saltRounds, async function (err: any, hash: any) {
             if (err) {
-                return res.status(500).json({
-                    errors: {
-                        status: 500,
-                        message: 'Could not hash password',
-                    },
-                });
+                return res.status(500).json({ error: true, msg: 'Could not hash password' });
             }
             const db = await database.getDb();
             try {
@@ -231,17 +226,24 @@ const userModel = {
         res: Response,
         next: NextFunction
     ) {
-        const db = await database.getDb();
-        try {
-            const sql = `CALL update_user_password(?, ?)`;
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId, password]);
+        bcrypt.hash(password, saltRounds, async function (err: any, hash: any) {
+            if (err) {
+                return res.status(500).json({ error: true, msg: 'Could not hash password' });
+            }
+            const db = await database.getDb();
+            try {
+                password = hash;
 
-            return res[0][0];
-        } catch (error: any) {
-            next(res.status(404).send({ error: true, db: { error } }));
-        } finally {
-            await db.end();
-        }
+                const sql = `CALL update_user_password(?, ?)`;
+                const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId, password]);
+
+                return res[0][0];
+            } catch (error: any) {
+                next(res.status(404).send({ error: true, db: { error } }));
+            } finally {
+                await db.end();
+            }
+        });
     },
     /**
      * Function to update a users oauth
