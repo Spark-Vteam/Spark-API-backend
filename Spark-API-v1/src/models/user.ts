@@ -64,9 +64,10 @@ const userModel = {
                     userInfo.password,
                     userInfo.oauth,
                 ]);
-                console.log('userModel');
                 let results = JSON.parse(JSON.stringify(res[0]));
 
+                // results.affectedrows === 1
+                // when req is successful
                 console.log('USERMODEL');
                 console.log(results);
 
