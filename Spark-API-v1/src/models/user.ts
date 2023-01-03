@@ -48,15 +48,12 @@ const userModel = {
      */
     createOneUser: async function createOneUser(userInfo: any, res: Response, next: NextFunction) {
         bcrypt.hash(userInfo.password, saltRounds, async function (error: any, hash: any) {
-            if (error) {
-                next(error);
-            }
             const db = await database.getDb();
             try {
                 userInfo.password = hash;
 
                 const sql = `CALL create_user(?, ?, ?, ?, ?,?)`;
-                const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [
+                const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [
                     userInfo.firstName,
                     userInfo.lastName,
                     userInfo.phoneNumber,
@@ -64,16 +61,18 @@ const userModel = {
                     userInfo.password,
                     userInfo.oauth,
                 ]);
-                let results = JSON.parse(JSON.stringify(res[0]));
 
-                // results.affectedrows === 1
-                // when req is successful
-                console.log('USERMODEL');
-                console.log(results);
-
-                return res[0][0];
+                return res.status(200).send({ success: true, msg: 'New user added to the database' });
             } catch (error: any) {
                 next(error);
+                // Check if the error is a duplicate entry error
+                if (error) {
+                    // Return a custom error message to the client
+                    return res.status(400).send({ success: false, msg: error.sqlMessage });
+                } else {
+                    // Return the error to the client
+                    return res.status(500).send({ success: false, msg: error.message });
+                }
             } finally {
                 await db.end();
             }
