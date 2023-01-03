@@ -30,9 +30,9 @@ export function errorHandler(error: any, req: Request, res: Response, next: Next
     console.log(error);
 
     if (error instanceof CustomError) {
-        return res.status(400).json({ status: 400, msg: { error: { msg: error.msg } } });
+        return res.status(400).json({ status: 400,  error });
     }
-    return res.status(500).json({ status: 500, msg: { error: { msg: 'An internal server error occurred' } } });
+    return res.status(500).json({ status: 500, msg: { error } });
 }
 
 /**
@@ -44,6 +44,6 @@ export function errorHandler(error: any, req: Request, res: Response, next: Next
  *
  * @returns {void}
  */
-export function invalidPathHandler(req: Request, res: Response, next: NextFunction): void {
+export function invalidPathHandler(req: Request, res: Response, _next: NextFunction): void {
     res.status(404).send({ error: true, msg: 'invalid path' });
 }

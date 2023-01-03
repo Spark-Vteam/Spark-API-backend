@@ -86,14 +86,11 @@ const userModel = {
             const sql = `CALL update_user_firstname(?, ?)`;
             const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId, firstName]);
             const resultSetHeader = dbRes[0][0];
+            console.log(resultSetHeader);
 
-            if (resultSetHeader && resultSetHeader.warningStatus === 0) {
-                return { success: true };
-            } else {
-                throw new CustomError(false, 'Error updating user first name');
-            }
+            return dbRes[0][0];
         } catch (error: any) {
-            throw error;
+            throw new CustomError(false, 'Error updating user first name');
         } finally {
             await db.end();
         }
@@ -116,7 +113,7 @@ const userModel = {
 
             return dbRes[0][0];
         } catch (error: any) {
-            next(error);
+            throw new CustomError(false, 'Error updating user last name');
         } finally {
             await db.end();
         }
@@ -139,7 +136,7 @@ const userModel = {
 
             return dbRes[0][0];
         } catch (error: any) {
-            next(error);
+            throw new CustomError(false, 'Error updating user phone number');
         } finally {
             await db.end();
         }
@@ -160,11 +157,9 @@ const userModel = {
             const sql = `CALL update_user_emailadress(?, ?)`;
             const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId, emailAdress]);
 
-            if (dbRes[0][0].success === false) {
-                throw new Error(dbRes[0][0].error);
-            }
+            return dbRes[0][0];
         } catch (error: any) {
-            throw error;
+            throw new CustomError(false, 'Error updating user email adress');
         } finally {
             await db.end();
         }
@@ -187,7 +182,7 @@ const userModel = {
 
             return dbRes[0][0];
         } catch (error: any) {
-            next(error);
+            throw new CustomError(false, 'Error updating user balance');
         } finally {
             await db.end();
         }
@@ -210,7 +205,7 @@ const userModel = {
 
             return dbRes[0][0];
         } catch (error: any) {
-            next(error);
+            throw new CustomError(false, 'Error updating user partial balance');
         } finally {
             await db.end();
         }
@@ -239,7 +234,7 @@ const userModel = {
 
                 return dbRes[0][0];
             } catch (error: any) {
-                next(error);
+                throw new CustomError(false, 'Error updating user password');
             } finally {
                 await db.end();
             }
@@ -258,7 +253,7 @@ const userModel = {
 
             return dbRes[0][0];
         } catch (error: any) {
-            next(error);
+            throw new CustomError(false, 'Error updating user oauth');
         } finally {
             await db.end();
         }
@@ -276,7 +271,7 @@ const userModel = {
 
             return dbRes[0][0];
         } catch (error: any) {
-            next(error);
+            throw new CustomError(false, 'Could not delete user');
         } finally {
             await db.end();
         }

@@ -122,7 +122,7 @@ router.put('/user/:id', async (req: Request, res: Response, next: NextFunction) 
     };
 
     try {
-        const newUserInfo = {
+        const _newUserInfo = {
             firstName: await userModel.updateUserFirstName(userId, userInfo.firstName, res, next),
             lastName: await userModel.updateUserLastName(userId, userInfo.lastName, res, next),
             phoneNumber: await userModel.updateUserPhoneNumber(userId, userInfo.phoneNumber, res, next),
@@ -130,7 +130,7 @@ router.put('/user/:id', async (req: Request, res: Response, next: NextFunction) 
             oauth: await userModel.updateUserOauth(userId, userInfo.oauth, res, next),
         };
 
-        return res.status(200).json({ success: true, data: newUserInfo });
+        return res.status(200).json({ success: true, msg: `User with id ${userId} was updated` });
     } catch (error) {
         // Pass the error to the error handler middleware
         next(error);
