@@ -31,7 +31,7 @@ app.use(logIncomingToConsole);
 
 app.use('/', require('./api'));
 
-// app.use(errorHandler);
+app.use(errorHandler);
 
 const server = httpServer.listen(port, () => {
     console.log('Spark api listening on port ' + port);

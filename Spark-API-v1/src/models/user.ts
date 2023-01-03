@@ -64,15 +64,7 @@ const userModel = {
 
                 return res.status(200).send({ success: true, msg: 'New user added to the database' });
             } catch (error: any) {
-                next(error);
-                // Check if the error is a duplicate entry error
-                if (error) {
-                    // Return a custom error message to the client
-                    return res.status(400).send({ success: false, msg: error.sqlMessage });
-                } else {
-                    // Return the error to the client
-                    return res.status(500).send({ success: false, msg: error.message });
-                }
+                next(error)
             } finally {
                 await db.end();
             }

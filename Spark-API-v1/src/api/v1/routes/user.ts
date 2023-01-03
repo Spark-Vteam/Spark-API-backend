@@ -64,7 +64,6 @@ router.get('/user/:id', async (req: Request, res: Response, next: NextFunction) 
  * @returns {Response}
  */
 router.post('/user', async (req: Request, res: Response, next: NextFunction) => {
-
     const userInfo = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -77,7 +76,12 @@ router.post('/user', async (req: Request, res: Response, next: NextFunction) => 
     // Check if all keys in the userInfo object have truthy values
     const allKeysHaveValues = Object.values(userInfo).every(Boolean);
     if (allKeysHaveValues) {
-        return await userModel.createOneUser(userInfo, res, next);
+        try {
+            return await userModel.createOneUser(userInfo, res, next);
+        } catch (error) {
+            // Pass the error to the error handler middleware
+            next(error);
+        }
     } else {
         return res.status(400).json({
             errors: {

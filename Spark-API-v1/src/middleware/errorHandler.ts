@@ -38,10 +38,13 @@ import { Request, Response, NextFunction } from 'express';
  */
 
 export function errorHandler(error: Error, req: Request, res: Response, next: NextFunction): void {
-    console.log('errorHandler');
-    console.log(error);
-
-    res.status(500).send({ error: true, msg: { error } });
+    if (error) {
+        // Return a custom error message to the client
+        res.status(400).send({ success: false, msg: {error}});
+    } else {
+        // Return the error to the client
+        res.status(500).send({ success: false, msg: {error} });
+    }
 }
 
 /**
