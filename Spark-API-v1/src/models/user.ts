@@ -90,7 +90,7 @@ const userModel = {
 
             return dbRes[0][0];
         } catch (error: any) {
-            throw new CustomError(false, 'Error updating user first name');
+            next(new CustomError(false, 'Error updating user first name'));
         } finally {
             await db.end();
         }
@@ -113,7 +113,7 @@ const userModel = {
 
             return dbRes[0][0];
         } catch (error: any) {
-            throw new CustomError(false, 'Error updating user last name');
+            next(new CustomError(false, 'Error updating user last name'));
         } finally {
             await db.end();
         }
@@ -136,7 +136,7 @@ const userModel = {
 
             return dbRes[0][0];
         } catch (error: any) {
-            throw new CustomError(false, 'Error updating user phone number');
+            next(new CustomError(false, 'Error updating user phone number'));
         } finally {
             await db.end();
         }
@@ -159,7 +159,7 @@ const userModel = {
 
             return dbRes[0][0];
         } catch (error: any) {
-            throw new CustomError(false, 'Error updating user email adress');
+            next(new CustomError(false, 'Error updating user email adress'));
         } finally {
             await db.end();
         }
@@ -180,9 +180,11 @@ const userModel = {
             const sql = `CALL update_user_balance(?, ?)`;
             const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId, balance]);
 
-            return dbRes[0][0];
+            return res
+                .status(200)
+                .send({ success: true, msg: `User with ${userId} has added ${balance} to its balance` });
         } catch (error: any) {
-            throw new CustomError(false, 'Error updating user balance');
+            next(new CustomError(false, 'Error updating user balance'));
         } finally {
             await db.end();
         }
@@ -203,9 +205,11 @@ const userModel = {
             const sql = `CALL update_user_partial_payment(?, ?)`;
             const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId, balance]);
 
-            return dbRes[0][0];
+            return res
+                .status(201)
+                .send({ success: true, msg: `User with id ${userId} has changed to payment option ${balance}` });
         } catch (error: any) {
-            throw new CustomError(false, 'Error updating user partial balance');
+            next(new CustomError(false, 'Error updating user balance'));
         } finally {
             await db.end();
         }
@@ -232,9 +236,9 @@ const userModel = {
                 const sql = `CALL update_user_password(?, ?)`;
                 const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId, password]);
 
-                return dbRes[0][0];
+                return res.status(201).send({ success: true, msg: `User with id ${userId} has updated its password` });
             } catch (error: any) {
-                throw new CustomError(false, 'Error updating user password');
+                next(new CustomError(false, 'Error updating user password'));
             } finally {
                 await db.end();
             }
@@ -253,7 +257,7 @@ const userModel = {
 
             return dbRes[0][0];
         } catch (error: any) {
-            throw new CustomError(false, 'Error updating user oauth');
+            next(new CustomError(false, 'Error updating user oauth'));
         } finally {
             await db.end();
         }
@@ -269,9 +273,9 @@ const userModel = {
             const sql = `CALL delete_user(?)`;
             const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId]);
 
-            return dbRes[0][0];
+            return res.status(200).send({ success: true, msg: `User with id ${userId} was deleted` });
         } catch (error: any) {
-            throw new CustomError(false, 'Could not delete user');
+            next(new CustomError(false, 'Could not delete user'));
         } finally {
             await db.end();
         }

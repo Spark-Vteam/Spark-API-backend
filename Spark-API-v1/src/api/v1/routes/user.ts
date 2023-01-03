@@ -153,9 +153,12 @@ router.put('/user/balance/:id', async (req: Request, res: Response, next: NextFu
     const balance = req.body.balance;
     const userID = req.params.id;
 
-    await userModel.updateUserBalance(userID, balance, res, next);
-
-    return res.status(201).send({ success: true, msg: `User with id ${userID} added ${balance} to its balance` });
+    try {
+        return await userModel.updateUserBalance(userID, balance, res, next);
+    } catch (error) {
+        // Pass the error to the error handler middleware
+        next(error);
+    }
 });
 
 /**
@@ -174,9 +177,12 @@ router.put('/user/partial_balance/:id', async (req: Request, res: Response, next
     const balance = req.body.balance;
     const userID = req.params.id;
 
-    await userModel.updateUserPartialBalance(userID, balance, res, next);
-
-    return res.status(201).send({ success: true, msg: `User with id ${userID} added ${balance} to its balance` });
+    try {
+        return await userModel.updateUserPartialBalance(userID, balance, res, next);
+    } catch (error) {
+        // Pass the error to the error handler middleware
+        next(error);
+    }
 });
 
 /**
@@ -195,9 +201,11 @@ router.put('/user/password/:id', async (req: Request, res: Response, next: NextF
     const password = req.body.password;
     const userID = req.params.id;
 
-    await userModel.updateUserPassword(userID, password, res, next);
-
-    return res.status(201).send({ success: true, msg: `User with id ${userID} has updated its password` });
+    try {
+        return await userModel.updateUserPassword(userID, password, res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 /**
@@ -214,9 +222,11 @@ router.put('/user/password/:id', async (req: Request, res: Response, next: NextF
  */
 router.delete('/user/:id', async (req: Request, res: Response, next: NextFunction) => {
     const userId = req.params.id;
-    await userModel.deleteOneUser(userId, res, next);
-
-    return res.status(200).send({ success: true, msg: `User with id ${userId} was deleted` });
+    try {
+        return await userModel.deleteOneUser(userId, res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 module.exports = router;
