@@ -1,6 +1,7 @@
 import database from '../db/db';
 import { FieldPacket, RowDataPacket } from 'mysql2/promise';
 import { Response, NextFunction } from 'express';
+import { CustomError } from '../middleware/errorHandler';
 
 const bcrypt = require('bcryptjs');
 const saltRounds = 10;
@@ -15,11 +16,10 @@ const userModel = {
         const db = await database.getDb();
         try {
             const sql = `CALL get_users();`;
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql);
-
-            return res[0][0];
+            const allUsers: [RowDataPacket[], FieldPacket[]] = await db.query(sql);
+            return res.status(200).send({ success: true, data: allUsers[0][0] });
         } catch (error: any) {
-            next(res.status(404).send({ error: true, db: { error } }));
+            next(error);
         } finally {
             await db.end();
         }
@@ -33,10 +33,10 @@ const userModel = {
         const db = await database.getDb();
         try {
             const sql = `CALL get_user(?)`;
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId]);
-            return res[0][0];
+            const oneUser: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId]);
+            return res.status(200).send({ success: true, data: oneUser[0][0] });
         } catch (error: any) {
-            next(res.status(404).send({ error: true, db: { error } }));
+            next(error);
         } finally {
             await db.end();
         }
@@ -64,7 +64,7 @@ const userModel = {
 
                 return res.status(200).send({ success: true, msg: 'New user added to the database' });
             } catch (error: any) {
-                next(error)
+                next(error);
             } finally {
                 await db.end();
             }
@@ -84,11 +84,16 @@ const userModel = {
         const db = await database.getDb();
         try {
             const sql = `CALL update_user_firstname(?, ?)`;
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId, firstName]);
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId, firstName]);
+            const resultSetHeader = dbRes[0][0];
 
-            return res[0][0];
+            if (resultSetHeader && resultSetHeader.warningStatus === 0) {
+                return { success: true };
+            } else {
+                throw new CustomError(false, 'Error updating user first name');
+            }
         } catch (error: any) {
-            next(res.status(404).send({ error: true, db: { error } }));
+            throw error;
         } finally {
             await db.end();
         }
@@ -107,11 +112,11 @@ const userModel = {
         const db = await database.getDb();
         try {
             const sql = `CALL update_user_lastname(?, ?)`;
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId, lastName]);
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId, lastName]);
 
-            return res[0][0];
+            return dbRes[0][0];
         } catch (error: any) {
-            next(res.status(404).send({ error: true, db: { error } }));
+            next(error);
         } finally {
             await db.end();
         }
@@ -130,11 +135,11 @@ const userModel = {
         const db = await database.getDb();
         try {
             const sql = `CALL update_user_phonenumber(?, ?)`;
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId, phoneNumber]);
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId, phoneNumber]);
 
-            return res[0][0];
+            return dbRes[0][0];
         } catch (error: any) {
-            next(res.status(404).send({ error: true, db: { error } }));
+            next(error);
         } finally {
             await db.end();
         }
@@ -153,11 +158,13 @@ const userModel = {
         const db = await database.getDb();
         try {
             const sql = `CALL update_user_emailadress(?, ?)`;
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId, emailAdress]);
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId, emailAdress]);
 
-            return res[0][0];
+            if (dbRes[0][0].success === false) {
+                throw new Error(dbRes[0][0].error);
+            }
         } catch (error: any) {
-            next(res.status(404).send({ error: true, db: { error } }));
+            throw error;
         } finally {
             await db.end();
         }
@@ -176,11 +183,11 @@ const userModel = {
         const db = await database.getDb();
         try {
             const sql = `CALL update_user_balance(?, ?)`;
-            const res = await db.query(sql, [userId, balance]);
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId, balance]);
 
-            return res[0];
+            return dbRes[0][0];
         } catch (error: any) {
-            next(res.status(404).send({ error: true, db: { error } }));
+            next(error);
         } finally {
             await db.end();
         }
@@ -199,11 +206,11 @@ const userModel = {
         const db = await database.getDb();
         try {
             const sql = `CALL update_user_partial_payment(?, ?)`;
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId, balance]);
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId, balance]);
 
-            return res[0][0];
+            return dbRes[0][0];
         } catch (error: any) {
-            next(res.status(404).send({ error: true, db: { error } }));
+            next(error);
         } finally {
             await db.end();
         }
@@ -228,11 +235,11 @@ const userModel = {
                 password = hash;
 
                 const sql = `CALL update_user_password(?, ?)`;
-                const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId, password]);
+                const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId, password]);
 
-                return res[0][0];
+                return dbRes[0][0];
             } catch (error: any) {
-                next(res.status(404).send({ error: true, db: { error } }));
+                next(error);
             } finally {
                 await db.end();
             }
@@ -247,11 +254,11 @@ const userModel = {
         const db = await database.getDb();
         try {
             const sql = `CALL update_user_oauth(?, ?)`;
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId, oauth]);
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId, oauth]);
 
-            return res[0][0];
+            return dbRes[0][0];
         } catch (error: any) {
-            next(res.status(404).send({ error: true, db: { error } }));
+            next(error);
         } finally {
             await db.end();
         }
@@ -265,10 +272,11 @@ const userModel = {
         const db = await database.getDb();
         try {
             const sql = `CALL delete_user(?)`;
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId]);
-            return res[0][0];
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId]);
+
+            return dbRes[0][0];
         } catch (error: any) {
-            next(res.status(404).send({ error: true, db: { error } }));
+            next(error);
         } finally {
             await db.end();
         }

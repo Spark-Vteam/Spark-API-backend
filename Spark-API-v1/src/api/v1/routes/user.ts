@@ -25,9 +25,12 @@ interface UserInfo {
  * @returns {void}
  */
 router.get('/user', async (req: Request, res: Response, next: NextFunction) => {
-    const allUsers = await userModel.showAllUsers(res, next);
-
-    return res.status(200).send({ success: true, data: allUsers });
+    try {
+        return await userModel.showAllUsers(res, next);
+    } catch (error) {
+        // Pass the error to the error handler middleware
+        next(error);
+    }
 });
 
 /**
@@ -44,10 +47,14 @@ router.get('/user', async (req: Request, res: Response, next: NextFunction) => {
  */
 router.get('/user/:id', async (req: Request, res: Response, next: NextFunction) => {
     const userId = req.params.id;
-
-    const oneUser = await userModel.getOneUser(userId, res, next);
-
-    return res.status(200).send({ success: true, data: oneUser });
+    if (userId) {
+        try {
+            return await userModel.getOneUser(userId, res, next);
+        } catch (error) {
+            // Pass the error to the error handler middleware
+            next(error);
+        }
+    }
 });
 
 /**
@@ -114,15 +121,20 @@ router.put('/user/:id', async (req: Request, res: Response, next: NextFunction) 
         oauth: req.body.oauth,
     };
 
-    const _newUserInfo = {
-        firstName: await userModel.updateUserFirstName(userId, userInfo.firstName, res, next),
-        lastName: await userModel.updateUserLastName(userId, userInfo.lastName, res, next),
-        phoneNumber: await userModel.updateUserPhoneNumber(userId, userInfo.phoneNumber, res, next),
-        emailAdress: await userModel.updateUserEmailAdress(userId, userInfo.emailAdress, res, next),
-        oauth: await userModel.updateUserOauth(userId, userInfo.oauth, res, next),
-    };
+    try {
+        const newUserInfo = {
+            firstName: await userModel.updateUserFirstName(userId, userInfo.firstName, res, next),
+            lastName: await userModel.updateUserLastName(userId, userInfo.lastName, res, next),
+            phoneNumber: await userModel.updateUserPhoneNumber(userId, userInfo.phoneNumber, res, next),
+            emailAdress: await userModel.updateUserEmailAdress(userId, userInfo.emailAdress, res, next),
+            oauth: await userModel.updateUserOauth(userId, userInfo.oauth, res, next),
+        };
 
-    return res.status(201).send({ success: true, msg: `User with id ${userId} has been updated` });
+        return res.status(200).json({ success: true, data: newUserInfo });
+    } catch (error) {
+        // Pass the error to the error handler middleware
+        next(error);
+    }
 });
 
 /**

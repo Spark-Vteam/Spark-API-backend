@@ -4,28 +4,16 @@ import { Request, Response, NextFunction } from 'express';
  * Represents an error
  * @constructor
  */
-// export class AppError extends Error {
-//     status: number;
-//     constructor(status: number, message: string) {
-//         super(message);
+export class CustomError extends Error {
+    success: boolean;
+    msg: string;
 
-//         Object.setPrototypeOf(this, new.target.prototype);
-//         this.name = Error.name;
-//         this.status = status;
-//         Error.captureStackTrace(this);
-//     }
-// }
-
-// export class DbError {
-//     message = 'Db Error';
-//     status!: number;
-//     info!: any;
-
-//     constructor(status: number = 500, info: any = {}) {
-//         this.status = status;
-//         this.info = info;
-//     }
-// }
+    constructor(success: boolean, msg: string) {
+        super(msg);
+        this.success = success;
+        this.msg = msg;
+    }
+}
 
 /**
  * Error handling Middleware function for logging 500 error message
@@ -37,14 +25,14 @@ import { Request, Response, NextFunction } from 'express';
  * @returns {Promise}
  */
 
-export function errorHandler(error: Error, req: Request, res: Response, next: NextFunction): void {
-    if (error) {
-        // Return a custom error message to the client
-        res.status(400).send({ success: false, msg: {error}});
-    } else {
-        // Return the error to the client
-        res.status(500).send({ success: false, msg: {error} });
+export function errorHandler(error: any, req: Request, res: Response, next: NextFunction) {
+    console.log('ERRORHANDLER');
+    console.log(error);
+
+    if (error instanceof CustomError) {
+        return res.status(400).json({ status: 400, msg: { error: { msg: error.msg } } });
     }
+    return res.status(500).json({ status: 500, msg: { error: { msg: 'An internal server error occurred' } } });
 }
 
 /**
