@@ -13,8 +13,6 @@ const apiKey = uuid();
 // save the API key to the .env file
 require('dotenv').config({ path: '.env', env: { API_KEY: apiKey } });
 
-// const jwt = require('jsonwebtoken');
-
 const userModel = {
     /**
      * Function to show all users
@@ -141,7 +139,6 @@ const userModel = {
                     },
                 });
             }
-
             return res.status(401).json({
                 errors: {
                     status: 401,

@@ -80,7 +80,8 @@ router.post('/user', async (req: Request, res: Response, next: NextFunction) => 
         oauth: req.body.oauth,
     };
 
-    // Check if all keys in the userInfo object have truthy values
+    // Check if all keys in the userInfo object have truthy values 
+    // EXCEPT OAUTH
     const allKeysHaveValues = Object.values(userInfo).every(Boolean);
     if (allKeysHaveValues) {
         try {
