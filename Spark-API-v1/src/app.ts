@@ -8,7 +8,6 @@ import { invalidPathHandler, errorHandler } from './middleware/errorHandler';
 const port = process.env.PORT || 4000;
 
 const cors = require('cors');
-require('dotenv').config();
 
 const app: Application = express();
 const httpServer = require('http').createServer(app);
@@ -29,12 +28,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(logIncomingToConsole);
 
-app.use('/', require('./api'));
+app.use('/', require('./versions'));
 
 app.use(errorHandler);
 
 const server = httpServer.listen(port, () => {
-    console.log('Spark api listening on port ' + port);
+    console.log('Spark api listening on port ' + port + '\n');
 });
 
 export default server;

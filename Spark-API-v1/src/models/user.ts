@@ -2,9 +2,15 @@ import database from '../db/db';
 import { FieldPacket, RowDataPacket } from 'mysql2/promise';
 import { Response, NextFunction } from 'express';
 import { CustomError } from '../middleware/errorHandler';
+import { v4 as uuid } from 'uuid';
 
 const bcrypt = require('bcryptjs');
 const saltRounds = 10;
+
+// generate a unique API key
+const apiKey = uuid();
+// save the API key to the .env file
+require('dotenv').config({ path: '.env', env: { API_KEY: apiKey } });
 
 const userModel = {
     /**
@@ -51,9 +57,12 @@ const userModel = {
             const db = await database.getDb();
             try {
                 userInfo.password = hash;
+                
+                console.log('USERMODEL');
+                console.log(apiKey);
 
-                const sql = `CALL create_user(?, ?, ?, ?, ?,?)`;
-                const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [
+                const sql_user = `CALL create_user(?, ?, ?, ?, ?,?)`;
+                const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql_user, [
                     userInfo.firstName,
                     userInfo.lastName,
                     userInfo.phoneNumber,
