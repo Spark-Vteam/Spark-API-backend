@@ -14,7 +14,6 @@ export class CustomError extends Error {
         this.msg = msg;
     }
 }
-
 /**
  * Error handling Middleware function for logging 500 error message
  *
@@ -24,7 +23,6 @@ export class CustomError extends Error {
  *
  * @returns {Promise}
  */
-
 export function errorHandler(error: any, req: Request, res: Response, next: NextFunction) {
     console.log('ERRORHANDLER');
     console.log(error);

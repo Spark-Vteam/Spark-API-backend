@@ -100,6 +100,28 @@ router.post('/user', async (req: Request, res: Response, next: NextFunction) => 
 
 /**
  * User ROUTE
+ *  /user/login:
+ *   post:
+ *     summary: Login one user
+ *     description: Login user with information
+ *     { emailAdress, password }
+ *  @param {Request}  req  The incoming request.
+ *  @param {Response} res  The outgoing response.
+ *  @param {Function} next Next to call in chain of middleware.
+ *
+ * @returns {Response}
+ */
+router.post('/user/login', async (req: Request, res: Response, next: NextFunction) => {
+    const userInfo = req.body;
+    try {
+        return await userModel.login(userInfo, res, next);
+    } catch (error) {
+        next(error);
+    }
+});
+
+/**
+ * User ROUTE
  *  /user/:id:
  *   get:
  *     summary: Update One User

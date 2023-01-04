@@ -4,6 +4,7 @@ import { Response, NextFunction } from 'express';
 import { CustomError } from '../middleware/errorHandler';
 import { v4 as uuid } from 'uuid';
 
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const saltRounds = 10;
 
@@ -11,6 +12,8 @@ const saltRounds = 10;
 const apiKey = uuid();
 // save the API key to the .env file
 require('dotenv').config({ path: '.env', env: { API_KEY: apiKey } });
+
+// const jwt = require('jsonwebtoken');
 
 const userModel = {
     /**
@@ -57,7 +60,7 @@ const userModel = {
             const db = await database.getDb();
             try {
                 userInfo.password = hash;
-                
+
                 console.log('USERMODEL');
                 console.log(apiKey);
 
@@ -71,7 +74,7 @@ const userModel = {
                     userInfo.oauth,
                 ]);
 
-                return res.status(200).send({ success: true, msg: 'New user added to the database' });
+                return res.status(200).send({ success: true, msg: 'New user registered' });
             } catch (error: any) {
                 next(error);
             } finally {
@@ -80,7 +83,75 @@ const userModel = {
         });
     },
     /**
-     * Function to update a users firstname
+     * Function to login a user
+     * @async
+     * @returns {RowDataPacket} Resultset from the query.
+     */
+    login: async function login(userInfo: any, res: Response, next: NextFunction) {
+        const db = await database.getDb();
+
+        const email = userInfo.emailAdress;
+        const password = userInfo.password;
+        try {
+            const sql = `CALL get_user_by_email(?)`;
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [email]);
+
+            const user = dbRes[0][0];
+
+            if (user.length > 0) {
+                console.log(password);
+                console.log(user[0]);
+                return userModel.comparePasswords(res, user[0], password);
+            }
+            return res.status(200).send({ success: true, data: dbRes[0][0] });
+        } catch (error) {
+            next(error);
+        }
+    },
+    /**
+     * Function to verify a hashed password
+     * @async
+     * @returns {RowDataPacket} Resultset from the query.
+     */
+    comparePasswords: async function comparePasswords(res: Response, user: any, password: string) {
+        bcrypt.compare(password, user.Password, function (err: any, result: any) {
+            console.log(result);
+
+            if (err) {
+                return res.status(500).json({
+                    errors: {
+                        status: 500,
+                        message: 'Could not decrypt password.',
+                    },
+                });
+            }
+
+            if (result) {
+                const payload = { email: user.EmailAdress };
+                const secret = process.env.JWT_SECRET;
+
+                const token = jwt.sign(payload, secret, { expiresIn: '1h' });
+
+                return res.status(201).json({
+                    data: {
+                        _id: user.id,
+                        email: user.EmailAdress,
+                        token: token,
+                        msg: 'User logged in',
+                    },
+                });
+            }
+
+            return res.status(401).json({
+                errors: {
+                    status: 401,
+                    message: 'Password not correct',
+                },
+            });
+        });
+    },
+    /**
+     * Function to update a users first name
      * @async
      * @returns {RowDataPacket} Resultset from the query.
      */

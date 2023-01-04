@@ -4,9 +4,6 @@ import { Response, NextFunction } from 'express';
 import { CustomError } from '../middleware/errorHandler';
 import { v4 as uuid } from 'uuid';
 
-const bcrypt = require('bcryptjs');
-const saltRounds = 10;
-
 const apiKeyModel = {
     /**
      * Function to get a key with a key
@@ -68,7 +65,7 @@ const apiKeyModel = {
             await db.end();
         }
     },
-      /**
+    /**
      * Function to get a key with a key
      * @async
      * @returns {RowDataPacket} Resultset from the query.
