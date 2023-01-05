@@ -2,6 +2,10 @@ import { NextFunction, Response } from 'express';
 import database from '../db/db';
 import { FieldPacket, RowDataPacket } from 'mysql2/promise';
 
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const saltRounds = 10;
+
 const adminModel = {
     /**
      * Function to show all stations
@@ -49,15 +53,15 @@ const adminModel = {
 
         const email = adminInfo.emailAdress;
         const password = adminInfo.password;
-        
+
         try {
             const sql = `CALL get_admin_by_email(?)`;
-            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [email])
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [email]);
 
             const admin = dbRes[0][0];
 
             if (admin.length > 0) {
-                return adminModel.comparePassword(res, admin[0], password);
+                console.log(admin);
             }
 
             return res.send(dbRes[0][0]);
@@ -66,6 +70,47 @@ const adminModel = {
         } finally {
             await db.end();
         }
+    },
+    /**
+     * Function to verify a hashed password
+     * @async
+     * @returns {RowDataPacket} Resultset from the query.
+     */
+    comparePasswords: async function comparePasswords(res: Response, user: any, password: string) {
+        bcrypt.compare(password, user.Password, function (err: any, result: any) {
+            console.log(result);
+
+            if (err) {
+                return res.status(500).json({
+                    errors: {
+                        status: 500,
+                        message: 'Could not decrypt password.',
+                    },
+                });
+            }
+
+            if (result) {
+                const payload = { email: user.EmailAdress };
+                const secret = process.env.JWT_SECRET;
+
+                const token = jwt.sign(payload, secret, { expiresIn: '1h' });
+
+                return res.status(201).json({
+                    data: {
+                        _id: user.id,
+                        email: user.EmailAdress,
+                        token: token,
+                        msg: 'User logged in',
+                    },
+                });
+            }
+            return res.status(401).json({
+                errors: {
+                    status: 401,
+                    message: 'Password not correct',
+                },
+            });
+        });
     },
     createOneAdmin: async function createOneAdmin(adminInfo: any, res: Response, next: NextFunction) {
         const db = await database.getDb();
