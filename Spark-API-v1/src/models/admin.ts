@@ -76,8 +76,8 @@ const adminModel = {
      * @async
      * @returns {RowDataPacket} Resultset from the query.
      */
-    comparePasswords: async function comparePasswords(res: Response, user: any, password: string) {
-        bcrypt.compare(password, user.Password, function (err: any, result: any) {
+    comparePasswords: async function comparePasswords(res: Response, admin: any, password: string) {
+        bcrypt.compare(password, admin.Password, function (err: any, result: any) {
             console.log(result);
 
             if (err) {
@@ -90,17 +90,17 @@ const adminModel = {
             }
 
             if (result) {
-                const payload = { email: user.EmailAdress };
+                const payload = { email: admin.emailAdress };
                 const secret = process.env.JWT_SECRET;
 
                 const token = jwt.sign(payload, secret, { expiresIn: '1h' });
 
                 return res.status(201).json({
                     data: {
-                        _id: user.id,
-                        email: user.EmailAdress,
+                        _id: admin.id,
+                        email: admin.emailAdress,
                         token: token,
-                        msg: 'User logged in',
+                        msg: 'Admin logged in',
                     },
                 });
             }
@@ -113,23 +113,28 @@ const adminModel = {
         });
     },
     createOneAdmin: async function createOneAdmin(adminInfo: any, res: Response, next: NextFunction) {
-        const db = await database.getDb();
-        try {
-            const sql = `CALL create_admin(?, ?, ?, ?, ?, ?)`;
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [
-                adminInfo.firstName,
-                adminInfo.lastName,
-                adminInfo.phoneNumber,
-                adminInfo.emailAdress,
-                adminInfo.authority,
-                adminInfo.password,
-            ]);
-            return res[0];
-        } catch (error: any) {
-            next(res.status(404).send(error));
-        } finally {
-            await db.end();
-        }
+        bcrypt.hash(adminInfo.password, saltRounds, async function (error: any, hash: any) {
+            const db = await database.getDb();
+            try {
+                adminInfo.password = hash;
+
+                const sql = `CALL create_admin(?, ?, ?, ?, ?, ?)`;
+                const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [
+                    adminInfo.firstName,
+                    adminInfo.lastName,
+                    adminInfo.phoneNumber,
+                    adminInfo.emailAdress,
+                    adminInfo.authority,
+                    adminInfo.password,
+                ]);
+
+                return res.status(201).send({ success: true, msg: 'Admin registered' });
+            } catch (error: any) {
+                next(res.status(404).send(error));
+            } finally {
+                await db.end();
+            }
+        });
     },
 };
 

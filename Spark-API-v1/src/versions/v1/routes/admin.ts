@@ -44,7 +44,7 @@ router.get('/admin', async (req: Request, res: Response, next: NextFunction) => 
  */
 router.get('/admin/login', async (req: Request, res: Response, next: NextFunction) => {
     const adminInfo = req.body;
-    
+
     try {
         return await adminModel.adminLogin(adminInfo, res, next);
     } catch (error) {
@@ -93,9 +93,11 @@ router.post('/admin', async (req: Request, res: Response, next: NextFunction) =>
         password: req.body.password,
     };
 
-    await adminModel.createOneAdmin(adminInfo, res, next);
-
-    res.status(201).send({ success: true, msg: 'Admin registered' });
+    try {
+        return await adminModel.createOneAdmin(adminInfo, res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 module.exports = router;
