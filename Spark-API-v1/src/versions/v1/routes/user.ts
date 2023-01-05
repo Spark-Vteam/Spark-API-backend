@@ -4,12 +4,12 @@ import userModel from '../../../models/user';
 const router = Router();
 
 interface UserInfo {
-    FirstName: string;
-    LastName: string;
-    PhoneNumber: string;
-    EmailAdress: string;
-    Balance: number;
-    Password: string;
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+    emailAdress: string;
+    password: string;
+    oauth: string;
 }
 
 /**
@@ -80,10 +80,11 @@ router.post('/user', async (req: Request, res: Response, next: NextFunction) => 
         oauth: req.body.oauth,
     };
 
-    // Check if all keys in the userInfo object have truthy values 
-    // EXCEPT OAUTH
-    const allKeysHaveValues = Object.values(userInfo).every(Boolean);
-    if (allKeysHaveValues) {
+    // Check if all keys in the userInfo object have truthy values except oauth
+    const requiredKeys = Object.keys(userInfo).filter((key) => key !== 'oauth');
+    const allRequiredKeysHaveValues = requiredKeys.every((key) => Boolean(userInfo[key]));
+
+    if (allRequiredKeysHaveValues) {
         try {
             return await userModel.createOneUser(userInfo, res, next);
         } catch (error) {
