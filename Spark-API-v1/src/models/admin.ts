@@ -39,6 +39,34 @@ const adminModel = {
             await db.end();
         }
     },
+    /**
+     * Function to get one admin by mail
+     * @async
+     * @returns {RowDataPacket} Resultset from the query.
+     */
+    adminLogin: async function adminLogin(adminInfo: any, res: Response, next: NextFunction) {
+        const db = await database.getDb();
+
+        const email = adminInfo.emailAdress;
+        const password = adminInfo.password;
+        
+        try {
+            const sql = `CALL get_admin_by_email(?)`;
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [email])
+
+            const admin = dbRes[0][0];
+
+            if (admin.length > 0) {
+                return adminModel.comparePassword(res, admin[0], password);
+            }
+
+            return res.send(dbRes[0][0]);
+        } catch (error: any) {
+            next(res.status(404).send(error));
+        } finally {
+            await db.end();
+        }
+    },
     createOneAdmin: async function createOneAdmin(adminInfo: any, res: Response, next: NextFunction) {
         const db = await database.getDb();
         try {

@@ -85,7 +85,7 @@ const userModel = {
      * @async
      * @returns {RowDataPacket} Resultset from the query.
      */
-    login: async function login(userInfo: any, res: Response, next: NextFunction) {
+    userLogin: async function userLogin(userInfo: any, res: Response, next: NextFunction) {
         const db = await database.getDb();
 
         const email = userInfo.emailAdress;
@@ -97,8 +97,7 @@ const userModel = {
             const user = dbRes[0][0];
 
             if (user.length > 0) {
-                console.log(password);
-                console.log(user[0]);
+
                 return userModel.comparePasswords(res, user[0], password);
             }
             return res.status(200).send({ success: true, data: dbRes[0][0] });

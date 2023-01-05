@@ -1017,6 +1017,22 @@ CREATE PROCEDURE get_admin(
 DELIMITER ;
 
 --
+-- Procedure to fetch single admin by email
+--
+DROP PROCEDURE IF EXISTS get_admin_by_email;
+DELIMITER ;;
+CREATE PROCEDURE get_admin_by_email(
+  a_Admins_email VARCHAR(45)
+)
+	BEGIN
+		SELECT * FROM Admins
+    WHERE EmailAdress = a_Admins_email;
+	END
+;;
+DELIMITER ;
+
+
+--
 -- Procedure to create a admin
 --
 DROP PROCEDURE IF EXISTS create_admin;

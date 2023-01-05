@@ -32,6 +32,28 @@ router.get('/admin', async (req: Request, res: Response, next: NextFunction) => 
 
 /**
  * Admin ROUTE
+ *  /admin/mail/:
+ *   get:
+ *     summary: One admin
+ *     description: Render admin by adminMail
+ *  @param {Request}  req  The incoming request.
+ *  @param {Response} res  The outgoing response.
+ *  @param {Function} next Next to call in chain of middleware.
+ *
+ * @returns {Response}
+ */
+router.get('/admin/login', async (req: Request, res: Response, next: NextFunction) => {
+    const adminInfo = req.body;
+    
+    try {
+        return await adminModel.adminLogin(adminInfo, res, next);
+    } catch (error) {
+        next(error);
+    }
+});
+
+/**
+ * Admin ROUTE
  *  /admin/:id:
  *   get:
  *     summary: One admin

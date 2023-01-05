@@ -4,6 +4,7 @@ import userModel from '../../../models/user';
 const router = Router();
 
 interface UserInfo {
+    [key: string]: string;
     firstName: string;
     lastName: string;
     phoneNumber: string;
@@ -71,7 +72,7 @@ router.get('/user/:id', async (req: Request, res: Response, next: NextFunction) 
  * @returns {Response}
  */
 router.post('/user', async (req: Request, res: Response, next: NextFunction) => {
-    const userInfo = {
+    const userInfo: UserInfo = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         phoneNumber: req.body.phoneNumber,
@@ -116,7 +117,7 @@ router.post('/user', async (req: Request, res: Response, next: NextFunction) => 
 router.post('/user/login', async (req: Request, res: Response, next: NextFunction) => {
     const userInfo = req.body;
     try {
-        return await userModel.login(userInfo, res, next);
+        return await userModel.userLogin(userInfo, res, next);
     } catch (error) {
         next(error);
     }
