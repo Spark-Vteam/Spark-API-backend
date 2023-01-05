@@ -97,8 +97,7 @@ const adminModel = {
 
                 return res.status(201).json({
                     data: {
-                        _id: admin.id,
-                        email: admin.emailAdress,
+                        info: { admin },
                         token: token,
                         msg: 'Admin logged in',
                     },

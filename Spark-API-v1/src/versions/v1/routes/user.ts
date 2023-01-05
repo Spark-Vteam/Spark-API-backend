@@ -72,14 +72,7 @@ router.get('/user/:id', async (req: Request, res: Response, next: NextFunction) 
  * @returns {Response}
  */
 router.post('/user', async (req: Request, res: Response, next: NextFunction) => {
-    const userInfo: UserInfo = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        phoneNumber: req.body.phoneNumber,
-        emailAdress: req.body.emailAdress,
-        password: req.body.password,
-        oauth: req.body.oauth,
-    };
+    const userInfo: UserInfo = req.body;
 
     // Check if all keys in the userInfo object have truthy values except oauth
     const requiredKeys = Object.keys(userInfo).filter((key) => key !== 'oauth');

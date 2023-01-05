@@ -97,7 +97,6 @@ const userModel = {
             const user = dbRes[0][0];
 
             if (user.length > 0) {
-
                 return userModel.comparePasswords(res, user[0], password);
             }
             return res.status(200).send({ success: true, data: dbRes[0][0] });
@@ -112,8 +111,6 @@ const userModel = {
      */
     comparePasswords: async function comparePasswords(res: Response, user: any, password: string) {
         bcrypt.compare(password, user.Password, function (err: any, result: any) {
-            console.log(result);
-
             if (err) {
                 return res.status(500).json({
                     errors: {
@@ -128,11 +125,11 @@ const userModel = {
                 const secret = process.env.JWT_SECRET;
 
                 const token = jwt.sign(payload, secret, { expiresIn: '1h' });
+                console.log(user);
 
                 return res.status(201).json({
                     data: {
-                        _id: user.id,
-                        email: user.EmailAdress,
+                        info: { user },
                         token: token,
                         msg: 'User logged in',
                     },
