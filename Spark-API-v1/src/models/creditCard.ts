@@ -22,8 +22,8 @@ const creditCardModel = {
             creditCardInfo.truncpan = creditCardInfo.pan.substr(creditCardInfo.pan.length - 4);
             try {
                 creditCardInfo.pan = hash;
-                creditCardInfo.firsName = hash;
-                creditCardInfo.lastName = hash;
+                creditCardInfo.firstname = hash;
+                creditCardInfo.lastname = hash;
 
                 const sql_user = `CALL create_creditcard(?, ?, ?, ?, ?, ?)`;
                 const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql_user, [
