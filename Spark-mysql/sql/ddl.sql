@@ -628,6 +628,21 @@ CREATE PROCEDURE get_user(
 DELIMITER ;
 
 --
+-- Procedure to fetch single User by email
+--
+DROP PROCEDURE IF EXISTS get_user_by_email;
+DELIMITER ;;
+CREATE PROCEDURE get_user_by_email(
+  a_Users_email VARCHAR(45)
+)
+	BEGIN
+		SELECT * FROM Users
+    WHERE EmailAdress = a_Users_email;
+	END
+;;
+DELIMITER ;
+
+--
 -- Procedure to create a User
 --
 DROP PROCEDURE IF EXISTS create_user;
@@ -1594,7 +1609,7 @@ CREATE PROCEDURE create_key(
 )
   BEGIN
     INSERT INTO ApiKeys (Email, Organization, ApiKey)
-    VALUES (a_Email, a_Organization, a_Key);
+    VALUES (a_Email, a_Organization, a_ApiKey);
   END
 ;;
 DELIMITER ;
@@ -1622,7 +1637,7 @@ DROP PROCEDURE IF EXISTS get_key_owners;
 DELIMITER ;;
 CREATE PROCEDURE get_key_owners()
 	BEGIN
-		SELECT Email, Organization FROM ApiKeys;
+		SELECT * FROM ApiKeys;
 	END
 ;;
 DELIMITER ;
