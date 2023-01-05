@@ -61,7 +61,7 @@ const adminModel = {
             const admin = dbRes[0][0];
 
             if (admin.length > 0) {
-                console.log(admin);
+                return adminModel.comparePasswords(res, admin[0], password);
             }
 
             return res.send(dbRes[0][0]);
