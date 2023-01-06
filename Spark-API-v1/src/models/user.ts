@@ -23,7 +23,9 @@ const userModel = {
         const db = await database.getDb();
         try {
             const sql = `CALL get_users();`;
+
             const allUsers: [RowDataPacket[], FieldPacket[]] = await db.query(sql);
+
             return res.status(200).send({ success: true, data: allUsers[0][0] });
         } catch (error: any) {
             next(error);
@@ -40,8 +42,9 @@ const userModel = {
         const db = await database.getDb();
         try {
             const sql = `CALL get_user(?)`;
-            const oneUser: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId]);
-            return res.status(200).send({ success: true, data: oneUser[0][0] });
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId]);
+
+            return res.status(200).send({ success: true, data: dbRes[0][0] });
         } catch (error: any) {
             next(error);
         } finally {
@@ -58,9 +61,6 @@ const userModel = {
             const db = await database.getDb();
             try {
                 userInfo.password = hash;
-
-                console.log('USERMODEL');
-                console.log(apiKey);
 
                 const sql_user = `CALL create_user(?, ?, ?, ?, ?,?)`;
                 const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql_user, [
@@ -99,7 +99,8 @@ const userModel = {
             if (user.length > 0) {
                 return userModel.comparePasswords(res, user[0], password);
             }
-            return res.status(200).send({ success: true, data: dbRes[0][0] });
+
+            return res.status(400).send({ success: false, msg: 'Missing credentials' });
         } catch (error) {
             next(error);
         }
@@ -263,11 +264,11 @@ const userModel = {
         }
     },
     /**
-     * Function to update a users monthly balance
+     * Function to update a users payment option
      * @async
      * @returns {RowDataPacket} Resultset from the query.
      */
-    updateUserPartialBalance: async function updateUserPartialBalance(
+    updateUserPaymentOption: async function updateUserPaymentOption(
         userId: string,
         balance: number,
         res: Response,
@@ -277,6 +278,10 @@ const userModel = {
         try {
             const sql = `CALL update_user_partial_payment(?, ?)`;
             const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId, balance]);
+            
+            if (!balance) {
+                throw Error();
+            }
 
             return res
                 .status(201)

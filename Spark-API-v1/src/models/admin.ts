@@ -64,7 +64,8 @@ const adminModel = {
                 return adminModel.comparePasswords(res, admin[0], password);
             }
 
-            return res.send(dbRes[0][0]);
+            return res.status(400).send({ success: false, msg: 'Missing credentials' });
+            
         } catch (error: any) {
             next(res.status(404).send(error));
         } finally {

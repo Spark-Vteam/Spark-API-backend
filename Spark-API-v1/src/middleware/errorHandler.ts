@@ -27,7 +27,7 @@ export function errorHandler(error: any, req: Request, res: Response, next: Next
     console.log('ERRORHANDLER');
     console.log(error);
 
-    if (error instanceof CustomError) {
+    if (error instanceof CustomError) {    
         return res.status(400).json({ status: 400,  error });
     }
     return res.status(500).json({ status: 500, msg: { error } });
