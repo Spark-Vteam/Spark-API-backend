@@ -17,8 +17,8 @@ interface RentInfo {
  * Rent ROUTE
  * /:
  *   get:
- *     summary: Display rent data
- *     description: Render rent table
+ *     summary: Display all rents
+ *     description: Render all rent in database
  * @param {Request}  req  The incoming request.
  * @param {Response} res  The outgoing response.
  * @param {Function} next Next to call in chain of middleware.
@@ -26,9 +26,11 @@ interface RentInfo {
  * @returns {Response}
  */
 router.get('/rent', async (req: Request, res: Response, next: NextFunction) => {
-    const allRents = await rentModel.showAllRents(res, next);
-
-    return res.status(200).send({ success: true, data: allRents });
+    try {
+        return await rentModel.showAllRents(res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 /**
@@ -45,8 +47,12 @@ router.get('/rent', async (req: Request, res: Response, next: NextFunction) => {
  */
 router.get('/rent/:id', async (req: Request, res: Response, next: NextFunction) => {
     const rentId = req.params.id;
-    const oneRent = await rentModel.getOneRent(rentId, res, next);
-    return res.status(200).send({ success: true, data: oneRent });
+
+    try {
+        return await rentModel.getOneRent(rentId, res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 /**
@@ -63,17 +69,18 @@ router.get('/rent/:id', async (req: Request, res: Response, next: NextFunction) 
  */
 router.get('/rent/active/:id', async (req: Request, res: Response, next: NextFunction) => {
     const userId = req.params.id;
-
-    const activeRents = await rentModel.getActiveRents(userId, res, next);
-
-    return res.status(200).send({ success: true, data: activeRents });
+    try {
+        return await rentModel.getActiveRents(userId, res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 /**
  * Rent ROUTE
  *  /rent/bike/:id:
  *   get:
- *     summary: BikeLog from rent
+ *     summary: BikeLog for a rent
  *     description: Render bikeLog for a rent
  *  @param {Request}  req  The incoming request.
  *  @param {Response} res  The outgoing response.
@@ -83,16 +90,18 @@ router.get('/rent/active/:id', async (req: Request, res: Response, next: NextFun
  */
 router.get('/rent/bike/:id', async (req: Request, res: Response, next: NextFunction) => {
     const rentId = req.params.id;
-
-    const bikeLog = await rentModel.getActiveRents(rentId, res, next);
-
-    return res.status(200).send({ success: true, data: bikeLog });
+    try {
+        return await rentModel.getBikeLogs(rentId, res, next);
+    } catch (error) {
+        next(error);
+    }
 });
+
 /**
  * Rent ROUTE
  *  /rent/user/:id:
  *   get:
- *     summary: All rents by user
+ *     summary: All rents for one user
  *     description: Render rent by userId
  *  @param {Request}  req  The incoming request.
  *  @param {Response} res  The outgoing response.
@@ -102,9 +111,11 @@ router.get('/rent/bike/:id', async (req: Request, res: Response, next: NextFunct
  */
 router.get('/rent/user/:id', async (req: Request, res: Response, next: NextFunction) => {
     const userId = req.params.id;
-    const rentByUserId = await rentModel.getRentsByUserId(userId, res, next);
-
-    return res.status(200).send(rentByUserId);
+    try {
+        return await rentModel.getRentsByUserId(userId, res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 /**
@@ -122,10 +133,11 @@ router.get('/rent/user/:id', async (req: Request, res: Response, next: NextFunct
 router.post('/rent/user/:id', async (req: Request, res: Response, next: NextFunction) => {
     const bikeId = req.body.bikeId;
     const userId = req.params.id;
-
-    await rentModel.createOneRent(userId, bikeId, res, next);
-
-    return res.status(200).send({ success: true, msg: `New rent created for user ${userId}` });
+    try {
+        return await rentModel.createOneRent(userId, bikeId, res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 /**
@@ -143,9 +155,11 @@ router.post('/rent/user/:id', async (req: Request, res: Response, next: NextFunc
 router.put('/rent/:id', async (req: Request, res: Response, next: NextFunction) => {
     const rentId = req.params.id;
 
-    await rentModel.updateOneRent(rentId, res, next);
-
-    return res.status(200).send({ success: true, msg: `Rent with id ${rentId} has been updated` });
+    try {
+        return await rentModel.updateOneRent(rentId, res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 module.exports = router;
