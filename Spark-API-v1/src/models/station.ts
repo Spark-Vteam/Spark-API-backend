@@ -12,11 +12,12 @@ const stationModel = {
         const db = await database.getDb();
         try {
             const sql = `CALL get_stations();`;
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql);
 
-            return res[0][0];
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql);
+
+            return res.send({ success: true, data: dbRes[0][0] });
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(error);
         } finally {
             await db.end();
         }
@@ -31,10 +32,11 @@ const stationModel = {
         try {
             const sql = `CALL get_station(?)`;
 
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [stationId]);
-            return res[0][0];
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [stationId]);
+
+            return res.send({ success: true, data: dbRes[0][0] });
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(error);
         } finally {
             await db.end();
         }
