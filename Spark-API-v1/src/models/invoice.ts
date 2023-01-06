@@ -149,6 +149,9 @@ const invoiceModel = {
         try {
             const sql = `CALL pay_monthly_invoice(?, ?)`;
             const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [invoiceId, expireDate]);
+
+            console.log(res[0][0]);
+            
             return res[0][0];
         } catch (error: any) {
             next(res.status(404).send(error));

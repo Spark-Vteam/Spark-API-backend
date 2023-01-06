@@ -50,7 +50,9 @@ const apiKeyModel = {
      */
     createOneApiKey: async function createOneApiKey(apiKeyInfo: any, res: Response, next: NextFunction) {
         const db = await database.getDb();
+        
         const apiKey = uuid();
+
         try {
             const sql = `CALL create_key(?, ?, ?)`;
             const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [
