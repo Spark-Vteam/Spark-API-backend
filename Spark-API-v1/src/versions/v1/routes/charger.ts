@@ -16,9 +16,11 @@ const router = Router();
  * @returns {void}
  */
 router.get('/charger', async (req: Request, res: Response, next: NextFunction) => {
-    const allChargers = await chargerModel.showAllChargers(res, next);
-
-    return res.status(200).send({ success: true, data: allChargers });
+    try {
+        return await chargerModel.showAllChargers(res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 /**
@@ -36,9 +38,11 @@ router.get('/charger', async (req: Request, res: Response, next: NextFunction) =
 router.get('/charger/:id', async (req: Request, res: Response, next: NextFunction) => {
     let chargerId = req.params.id;
 
-    const oneCharger = await chargerModel.getOneCharger(chargerId, res, next);
-
-    return res.status(200).send({ success: true, data: oneCharger });
+    try {
+        return await chargerModel.getOneCharger(chargerId, res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 /**
@@ -59,11 +63,12 @@ router.put('/charger/:id', async (req: Request, res: Response, next: NextFunctio
         status: req.body.status,
     };
 
-    await chargerModel.updateStatus(chargerInfo, res, next);
+    try {
+        return await chargerModel.updateStatus(chargerInfo, res, next);
+    } catch (error) {
+        next(error);
+    }
 
-    return res
-        .status(200)
-        .send({ success: true, msg: `Charger with id ${chargerInfo.id} has changed status to ${chargerInfo.status} ` });
 });
 
 module.exports = router;
