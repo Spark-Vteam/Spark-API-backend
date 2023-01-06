@@ -1,4 +1,4 @@
-USE mydb
+USE spark
 INSERT INTO Admins
     ( FirstName, LastName, PhoneNumber, EmailAdress, Authority, Password )
 VALUES

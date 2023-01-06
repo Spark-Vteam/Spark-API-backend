@@ -1,4 +1,4 @@
-USE mydb
+USE spark
 INSERT INTO Users
     ( FirstName, LastName, PhoneNumber, EmailAdress, Balance, Password )
 VALUES

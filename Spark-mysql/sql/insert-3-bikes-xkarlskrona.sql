@@ -1,4 +1,4 @@
-USE mydb
+USE spark
 INSERT INTO Bikes
     ( Position, Battery, Status, Speed, City )
 VALUES

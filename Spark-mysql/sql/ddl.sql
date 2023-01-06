@@ -8,24 +8,24 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema spark
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `mydb` ;
+DROP SCHEMA IF EXISTS `spark` ;
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema spark
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ;
+CREATE SCHEMA IF NOT EXISTS `spark` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ;
 SHOW WARNINGS;
-USE `mydb` ;
+USE `spark` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Users`
+-- Table `spark`.`Users`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Users` ;
+DROP TABLE IF EXISTS `spark`.`Users` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`Users` (
+CREATE TABLE IF NOT EXISTS `spark`.`Users` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `FirstName` VARCHAR(45) NOT NULL,
   `LastName` VARCHAR(45) NOT NULL,
@@ -43,12 +43,12 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Bikes`
+-- Table `spark`.`Bikes`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Bikes` ;
+DROP TABLE IF EXISTS `spark`.`Bikes` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`Bikes` (
+CREATE TABLE IF NOT EXISTS `spark`.`Bikes` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Position` VARCHAR(45) NULL,
   `Battery` INT NULL,
@@ -61,12 +61,12 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Stations`
+-- Table `spark`.`Stations`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Stations` ;
+DROP TABLE IF EXISTS `spark`.`Stations` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`Stations` (
+CREATE TABLE IF NOT EXISTS `spark`.`Stations` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Name` VARCHAR(45),
   `City` VARCHAR(45) NOT NULL,
@@ -77,12 +77,12 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Chargers`
+-- Table `spark`.`Chargers`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Chargers` ;
+DROP TABLE IF EXISTS `spark`.`Chargers` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`Chargers` (
+CREATE TABLE IF NOT EXISTS `spark`.`Chargers` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Stations_id` INT NOT NULL,
   `Status` TINYINT NULL,
@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Chargers` (
   INDEX `fk_Chargers_Stations_idx` (`Stations_id` ASC) VISIBLE,
   CONSTRAINT `fk_Chargers_Stations`
     FOREIGN KEY (`Stations_id`)
-    REFERENCES `mydb`.`Stations` (`id`)
+    REFERENCES `spark`.`Stations` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -98,12 +98,12 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Admins`
+-- Table `spark`.`Admins`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Admins` ;
+DROP TABLE IF EXISTS `spark`.`Admins` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`Admins` (
+CREATE TABLE IF NOT EXISTS `spark`.`Admins` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `FirstName` VARCHAR(45) NOT NULL,
   `LastName` VARCHAR(45) NOT NULL,
@@ -119,12 +119,12 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Rents`
+-- Table `spark`.`Rents`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Rents` ;
+DROP TABLE IF EXISTS `spark`.`Rents` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`Rents` (
+CREATE TABLE IF NOT EXISTS `spark`.`Rents` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Users_id` INT NOT NULL,
   `Bikes_id`INT NOT NULL,
@@ -139,12 +139,12 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Rents` (
   INDEX `fk_Rents_Bikes1_idx` (`Bikes_id` ASC) VISIBLE,
   CONSTRAINT `fk_Rents_Users1`
     FOREIGN KEY (`Users_id`)
-    REFERENCES `mydb`.`Users` (`id`)
+    REFERENCES `spark`.`Users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Rents_Bikes1`
     FOREIGN KEY (`Bikes_id`)
-    REFERENCES `mydb`.`Bikes` (`id`)
+    REFERENCES `spark`.`Bikes` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -152,12 +152,12 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Invoices`
+-- Table `spark`.`Invoices`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Invoices` ;
+DROP TABLE IF EXISTS `spark`.`Invoices` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`Invoices` (
+CREATE TABLE IF NOT EXISTS `spark`.`Invoices` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Users_id` INT NOT NULL,
   `Amount` INT NULL,
@@ -171,12 +171,12 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Invoices` (
   INDEX `fk_Transactions_Rents1_idx` (`Rents_id` ASC) VISIBLE,
   CONSTRAINT `fk_Transactions_Users1`
     FOREIGN KEY (`Users_id`)
-    REFERENCES `mydb`.`Users` (`id`)
+    REFERENCES `spark`.`Users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Transactions_Rents1`
     FOREIGN KEY (`Rents_id`)
-    REFERENCES `mydb`.`Rents` (`id`)
+    REFERENCES `spark`.`Rents` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -184,12 +184,12 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`UsersLog`
+-- Table `spark`.`UsersLog`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`UsersLog` ;
+DROP TABLE IF EXISTS `spark`.`UsersLog` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`UsersLog` (
+CREATE TABLE IF NOT EXISTS `spark`.`UsersLog` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Users_id` INT NOT NULL,
   `Event` VARCHAR(45) NOT NULL,
@@ -199,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`UsersLog` (
   INDEX `fk_UsersLog_Users1_idx` (`Users_id` ASC) VISIBLE,
   CONSTRAINT `fk_UsersLog_Users1`
     FOREIGN KEY (`Users_id`)
-    REFERENCES `mydb`.`Users` (`id`)
+    REFERENCES `spark`.`Users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -207,12 +207,12 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`AdminsLog`
+-- Table `spark`.`AdminsLog`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`AdminsLog` ;
+DROP TABLE IF EXISTS `spark`.`AdminsLog` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`AdminsLog` (
+CREATE TABLE IF NOT EXISTS `spark`.`AdminsLog` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Admins_id` INT NOT NULL,
   `Event` VARCHAR(45) NOT NULL,
@@ -222,7 +222,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`AdminsLog` (
   INDEX `fk_AdminsLog_Admins1_idx` (`Admins_id` ASC) VISIBLE,
   CONSTRAINT `fk_AdminsLog_Admins1`
     FOREIGN KEY (`Admins_id`)
-    REFERENCES `mydb`.`Admins` (`id`)
+    REFERENCES `spark`.`Admins` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -230,12 +230,12 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`ChargersLog`
+-- Table `spark`.`ChargersLog`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`ChargersLog` ;
+DROP TABLE IF EXISTS `spark`.`ChargersLog` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`ChargersLog` (
+CREATE TABLE IF NOT EXISTS `spark`.`ChargersLog` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Chargers_id` INT NOT NULL,
   `Event` VARCHAR(45) NOT NULL,
@@ -245,7 +245,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`ChargersLog` (
   INDEX `fk_ChargersLog_Chargers1_idx` (`Chargers_id` ASC) VISIBLE,
   CONSTRAINT `fk_ChargersLog_Chargers1`
     FOREIGN KEY (`Chargers_id`)
-    REFERENCES `mydb`.`Chargers` (`id`)
+    REFERENCES `spark`.`Chargers` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -253,12 +253,12 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`RentsLog`
+-- Table `spark`.`RentsLog`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`RentsLog` ;
+DROP TABLE IF EXISTS `spark`.`RentsLog` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`RentsLog` (
+CREATE TABLE IF NOT EXISTS `spark`.`RentsLog` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Rents_id` INT NOT NULL,
   `Event` VARCHAR(45) NOT NULL,
@@ -268,7 +268,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`RentsLog` (
   INDEX `fk_RentsLog_Rents1_idx` (`Rents_id` ASC) VISIBLE,
   CONSTRAINT `fk_RentsLog_Rents1`
     FOREIGN KEY (`Rents_id`)
-    REFERENCES `mydb`.`Rents` (`id`)
+    REFERENCES `spark`.`Rents` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -276,12 +276,12 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`InvoicesLog`
+-- Table `spark`.`InvoicesLog`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`InvoicesLog` ;
+DROP TABLE IF EXISTS `spark`.`InvoicesLog` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`InvoicesLog` (
+CREATE TABLE IF NOT EXISTS `spark`.`InvoicesLog` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Invoices_id` INT NOT NULL,
   `Event` VARCHAR(45) NOT NULL,
@@ -291,7 +291,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`InvoicesLog` (
   INDEX `fk_InvoicesLog_Invoices1_idx` (`Invoices_id` ASC) VISIBLE,
   CONSTRAINT `fk_InvoicesLog_Invoices1`
     FOREIGN KEY (`Invoices_id`)
-    REFERENCES `mydb`.`Invoices` (`id`)
+    REFERENCES `spark`.`Invoices` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -299,12 +299,12 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`StationsLog`
+-- Table `spark`.`StationsLog`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`StationsLog` ;
+DROP TABLE IF EXISTS `spark`.`StationsLog` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`StationsLog` (
+CREATE TABLE IF NOT EXISTS `spark`.`StationsLog` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Stations_id` INT NOT NULL,
   `Event` VARCHAR(45) NOT NULL,
@@ -314,7 +314,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`StationsLog` (
   INDEX `fk_StationsLog_Stations1_idx` (`Stations_id` ASC) VISIBLE,
   CONSTRAINT `fk_StationsLog_Stations1`
     FOREIGN KEY (`Stations_id`)
-    REFERENCES `mydb`.`Stations` (`id`)
+    REFERENCES `spark`.`Stations` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -322,12 +322,12 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`BikesLog`
+-- Table `spark`.`BikesLog`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`BikesLog` ;
+DROP TABLE IF EXISTS `spark`.`BikesLog` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`BikesLog` (
+CREATE TABLE IF NOT EXISTS `spark`.`BikesLog` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Bikes_id` INT NOT NULL,
   `Event` VARCHAR(45) NOT NULL,
@@ -338,7 +338,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`BikesLog` (
   INDEX `fk_BikesLog_Bikes1_idx` (`Bikes_id` ASC) VISIBLE,
   CONSTRAINT `fk_BikesLog_Bikes1`
     FOREIGN KEY (`Bikes_id`)
-    REFERENCES `mydb`.`Bikes` (`id`)
+    REFERENCES `spark`.`Bikes` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -346,12 +346,12 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Geofences`
+-- Table `spark`.`Geofences`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Geofences` ;
+DROP TABLE IF EXISTS `spark`.`Geofences` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`Geofences` (
+CREATE TABLE IF NOT EXISTS `spark`.`Geofences` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Coordinates` TEXT NOT NULL,
   `Info` VARCHAR(255) NULL,
@@ -363,12 +363,12 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`GeofencesLog`
+-- Table `spark`.`GeofencesLog`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`GeofencesLog` ;
+DROP TABLE IF EXISTS `spark`.`GeofencesLog` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`GeofencesLog` (
+CREATE TABLE IF NOT EXISTS `spark`.`GeofencesLog` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Geofences_id` INT NOT NULL,
   `Event` VARCHAR(45) NOT NULL,
@@ -378,7 +378,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`GeofencesLog` (
   INDEX `fk_GeofencesLog_Geofences1_idx` (`Geofences_id` ASC) VISIBLE,
   CONSTRAINT `fk_GeofencesLog_Geofences1`
     FOREIGN KEY (`Geofences_id`)
-    REFERENCES `mydb`.`Geofences` (`id`)
+    REFERENCES `spark`.`Geofences` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -386,12 +386,12 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Pricings`
+-- Table `spark`.`Pricings`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Pricings` ;
+DROP TABLE IF EXISTS `spark`.`Pricings` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`Pricings` (
+CREATE TABLE IF NOT EXISTS `spark`.`Pricings` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Type` VARCHAR(45) NOT NULL,
   `Description` TEXT NOT NULL,
@@ -405,12 +405,12 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Pricings` (
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `mydb`.`ApiKeys`
+-- Table `spark`.`ApiKeys`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`ApiKeys` ;
+DROP TABLE IF EXISTS `spark`.`ApiKeys` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`ApiKeys` (
+CREATE TABLE IF NOT EXISTS `spark`.`ApiKeys` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Email` VARCHAR(45) NOT NULL,
   `Organization` VARCHAR(45) NOT NULL,
@@ -425,12 +425,12 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`CreditCards`
+-- Table `spark`.`CreditCards`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`CreditCards` ;
+DROP TABLE IF EXISTS `spark`.`CreditCards` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`CreditCards` (
+CREATE TABLE IF NOT EXISTS `spark`.`CreditCards` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Users_id` INT NOT NULL,
   `Pan` VARCHAR(255) NOT NULL,
@@ -442,7 +442,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`CreditCards` (
   INDEX `fk_CreditCards_Users1_idx` (`Users_id` ASC) VISIBLE,
   CONSTRAINT `fk_CreditCards_Users1`
     FOREIGN KEY (`Users_id`)
-    REFERENCES `mydb`.`Users` (`id`)
+    REFERENCES `spark`.`Users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
