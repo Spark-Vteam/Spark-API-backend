@@ -355,6 +355,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Geofences` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Coordinates` TEXT NOT NULL,
   `Info` VARCHAR(255) NULL,
+  `City` VARCHAR(45) NOT NULL,
   `Type` TINYINT NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -1320,11 +1321,12 @@ DELIMITER ;;
 CREATE PROCEDURE create_geofence(
   a_Coordinates TEXT,
   a_Info VARCHAR(255),
+  a_City VARCHAR(45),
   a_Type TINYINT
 )
 	BEGIN
-		INSERT INTO Geofences (Coordinates, Info, Type)
-    VALUES (a_Coordinates, a_Info, a_Type);
+		INSERT INTO Geofences (Coordinates, Info, City, Type)
+    VALUES (a_Coordinates, a_Info, a_City, a_Type);
 	END
 ;;
 DELIMITER ;
