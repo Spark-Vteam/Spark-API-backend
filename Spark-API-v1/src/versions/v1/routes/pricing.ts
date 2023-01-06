@@ -16,9 +16,11 @@ const router = Router();
  * @returns {void}
  */
 router.get('/pricing', async (req: Request, res: Response, next: NextFunction) => {
-    const allPricings = await pricingModel.showAllPricings(res, next);
-
-    return res.status(200).send({ success: true, data: allPricings });
+    try {
+        return await pricingModel.showAllPricings(res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 /**
@@ -34,20 +36,13 @@ router.get('/pricing', async (req: Request, res: Response, next: NextFunction) =
  * @returns {Response}
  */
 router.post('/pricing', async (req: Request, res: Response, next: NextFunction) => {
-    const pricingInfo: PricingInfo = {
-        type: req.body.type,
-        description: req.body.description,
-        start: req.body.start,
-        minute: req.body.minute,
-        parking: req.body.parking,
-        discountStartFree: req.body.discountStartFree,
-        discountEndParkingZone: req.body.discountEndParkingZone,
-        discountEndCharging: req.body.discountEndCharging,
-    };
+    const pricingInfo: PricingInfo = req.body;
 
-    await pricingModel.createOnePricing(pricingInfo, res, next);
-
-    return res.status(200).send({ success: true, msg: `Pricing has been created` });
+    try {
+        return await pricingModel.createOnePricing(pricingInfo, res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 /**
@@ -64,22 +59,13 @@ router.post('/pricing', async (req: Request, res: Response, next: NextFunction) 
  */
 router.put('/pricing/:id', async (req: Request, res: Response, next: NextFunction) => {
     const pricingId = req.params.id;
-    const pricingInfo = {
-        type: req.body.type,
-        description: req.body.description,
-        start: req.body.start,
-        minute: req.body.minute,
-        parking: req.body.parking,
-        discountStartFree: req.body.discountStartFree,
-        discountEndParkingZone: req.body.discountEndParkingZone,
-        discountEndCharging: req.body.discountEndCharging,
-    };
+    const pricingInfo = req.body;
 
-    console.log(pricingId, pricingInfo);
-
-    await pricingModel.updateOnePricing(pricingId, pricingInfo, res, next);
-
-    return res.status(200).send({ success: true, msg: `Pricing has been updated` });
+    try {
+        return await pricingModel.updateOnePricing(pricingId, pricingInfo, res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 module.exports = router;
