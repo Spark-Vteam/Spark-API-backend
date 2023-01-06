@@ -30,7 +30,6 @@ router.post('/apiKey', async (req: Request, res: Response, next: NextFunction) =
     try {
         return await apiKeyModel.createOneApiKey(apiKeyInfo, res, next);
     } catch (error) {
-        // Pass the error to the error handler middleware
         next(error);
     }
 });
@@ -52,7 +51,6 @@ router.get('/apiKey/key', async (req: Request, res: Response, next: NextFunction
     try {
         return await apiKeyModel.getKeyByKey(apiKey, res, next);
     } catch (error) {
-        // Pass the error to the error handler middleware
         next(error);
     }
 });
@@ -73,7 +71,6 @@ router.get('/apiKey/owner', async (req: Request, res: Response, next: NextFuncti
     try {
         return await apiKeyModel.getKeyOwners(res, next);
     } catch (error) {
-        // Pass the error to the error handler middleware
         next(error);
     }
 });
@@ -95,7 +92,6 @@ router.delete('/apiKey/:id', async (req: Request, res: Response, next: NextFunct
     try {
         return await apiKeyModel.deleteKeyById(id, res, next);
     } catch (error) {
-        // Pass the error to the error handler middleware
         next(error);
     }
 });

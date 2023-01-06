@@ -90,6 +90,7 @@ router.post('/creditCard/:id', async (req: Request, res: Response, next: NextFun
  */
 router.delete('/creditCard/:id', async (req: Request, res: Response, next: NextFunction) => {
     let userId = req.params.id;
+    
     try {
         return creditCardModel.deleteCard(userId, res, next);
     } catch (error) {
