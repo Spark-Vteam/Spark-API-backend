@@ -1263,7 +1263,7 @@ CREATE PROCEDURE pay_invoice(
         END;
 
     START TRANSACTION;
-      SET var_sum = (SELECT Amount FROM Invoices WHERE id = a_id);
+      SET var_sum = IFNULL((SELECT Amount FROM Invoices WHERE id = a_id),0);
 
       UPDATE Users
       SET Balance = Balance - var_sum
@@ -1303,7 +1303,7 @@ CREATE PROCEDURE pay_monthly_invoice(
       WHERE id = a_Users_id;
 
       UPDATE Invoices
-      SET Status = 20
+      SET Status = 20, Paid = NOW()
       WHERE Users_id = a_Users_id AND Expires = a_Expires;
 
     COMMIT;

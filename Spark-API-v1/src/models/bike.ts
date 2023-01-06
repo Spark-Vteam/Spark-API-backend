@@ -4,7 +4,7 @@ import { FieldPacket, RowDataPacket } from 'mysql2/promise';
 
 const bikeModel = {
     /**
-     * Function to show all stations
+     * Function to show all bikes
      * @async
      * @returns {RowDataPacket} Resultset from the query.
      */
@@ -13,11 +13,11 @@ const bikeModel = {
         try {
             const sql = `CALL get_bikes();`;
 
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql);
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql);
 
-            return res[0][0];
+            return res.status(200).send({ success: true, data: dbRes[0][0] });
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(error);
         } finally {
             await db.end();
         }
@@ -32,14 +32,15 @@ const bikeModel = {
         try {
             const sql = `CALL get_bikes_in_radius(?,?,?)`;
 
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [
                 radiusInfo.latitude,
                 radiusInfo.longitude,
                 radiusInfo.radius,
             ]);
-            return res[0][0];
+
+            res.status(200).send({ success: true, data: dbRes[0][0] });
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(error);
         } finally {
             await db.end();
         }
@@ -54,14 +55,20 @@ const bikeModel = {
         try {
             const sql = `CALL get_charging_bikes_location()`;
 
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql);
-            return res[0][0];
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql);
+
+            res.status(200).send({ success: true, data: dbRes[0][0] });
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(error);
         } finally {
             await db.end();
         }
     },
+    /**
+     * Function to get all charging bikes at specific station
+     * @async
+     * @returns {RowDataPacket} Resultset from the query.
+     */
     getChargingBikesAtStation: async function getChargingBikesAtStation(
         stationId: string,
         res: Response,
@@ -71,52 +78,71 @@ const bikeModel = {
         try {
             const sql = `CALL get_charging_bikes_by_location(?)`;
 
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [stationId]);
-            return res[0][0];
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [stationId]);
+
+            res.status(200).send({ success: true, data: dbRes[0][0] });
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(error);
         } finally {
             await db.end();
         }
     },
+    /**
+     * Function to get one bike by id
+     * @async
+     * @returns {RowDataPacket} Resultset from the query.
+     */
     getOneBike: async function getOneBike(bikeId: string, res: Response, next: NextFunction) {
         const db = await database.getDb();
         try {
             const sql = `CALL get_bike(?)`;
 
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [bikeId]);
-            return res[0][0];
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [bikeId]);
+
+            res.status(200).send({ success: true, data: dbRes[0][0] });
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(error);
         } finally {
             await db.end();
         }
     },
+    /**
+     * Function to get bikes within a city
+     * @async
+     * @returns {RowDataPacket} Resultset from the query.
+     */
     getBikesByCity: async function getBikesByCity(city: string, res: Response, next: NextFunction) {
         const db = await database.getDb();
         try {
             const sql = `CALL get_bikes_by_city(?)`;
 
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [city]);
-            return res[0][0];
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [city]);
+
+            return res.status(200).send({ success: true, data: dbRes[0][0] });
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(error);
         } finally {
             await db.end();
         }
     },
+    /**
+     * Function to update a bike
+     * @async
+     * @returns {RowDataPacket} Resultset from the query.
+     */
     updateOneBike: async function updateOneBike(bikeInfo: any, res: Response, next: NextFunction) {
         const db = await database.getDb();
         try {
             const sql = `CALL update_bike(?, ?, ?, ?, ?)`;
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [
                 bikeInfo.bikeId,
                 bikeInfo.position,
                 bikeInfo.battery,
                 bikeInfo.status,
                 bikeInfo.speed,
             ]);
-            return res[0][0];
+
+            res.status(200).send({ success: true, msg: `Bike with id ${bikeInfo.bikeId} has been updated` });
         } catch (error: any) {
             next(res.status(404).send(error));
         } finally {

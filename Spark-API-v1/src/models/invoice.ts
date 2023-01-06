@@ -1,6 +1,7 @@
 import { Response, NextFunction } from 'express';
 import database from '../db/db';
 import { FieldPacket, RowDataPacket } from 'mysql2/promise';
+import { CustomError } from '../middleware/errorHandler';
 
 const invoiceModel = {
     /**
@@ -12,11 +13,11 @@ const invoiceModel = {
         const db = await database.getDb();
         try {
             const sql = `CALL get_invoices();`;
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql);
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql);
 
-            return res[0][0];
+            return res.status(200).send({ success: true, data: dbRes[0][0] });
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(error);
         } finally {
             await db.end();
         }
@@ -26,14 +27,16 @@ const invoiceModel = {
      * @async
      * @returns {RowDataPacket} Resultset from the query.
      */
-    getOneInvoice: async function getOneInvoice(invoiceId: number, res: Response, next: NextFunction) {
+    getOneInvoice: async function getOneInvoice(invoiceId: string, res: Response, next: NextFunction) {
         const db = await database.getDb();
         try {
             const sql = `CALL get_invoice(?)`;
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [invoiceId]);
-            return res[0][0];
+
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [invoiceId]);
+
+            return res.status(200).send({ success: true, data: dbRes[0][0] });
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(error);
         } finally {
             await db.end();
         }
@@ -47,10 +50,11 @@ const invoiceModel = {
         const db = await database.getDb();
         try {
             const sql = `CALL get_invoices_by_user(?)`;
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId]);
-            return res[0][0];
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId]);
+
+            return res.status(200).send({ success: true, data: dbRes[0][0] });
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(error);
         } finally {
             await db.end();
         }
@@ -64,15 +68,24 @@ const invoiceModel = {
         const db = await database.getDb();
         try {
             const sql = `CALL create_invoice(?, ?, ?, ?)`;
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [
+
+            if (!invoiceInfo.amount || !invoiceInfo.status) {
+                throw new CustomError(false, 'Missing Credentials');
+            }
+
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [
                 invoiceInfo.rentId,
                 invoiceInfo.userId,
                 invoiceInfo.amount,
                 invoiceInfo.status,
             ]);
-            return res[0][0];
+
+            return res.status(201).send({
+                success: true,
+                msg: `New Invoice has been created for user: ${invoiceInfo.userId}`,
+            });
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(error);
         } finally {
             await db.end();
         }
@@ -86,13 +99,18 @@ const invoiceModel = {
         const db = await database.getDb();
         try {
             const sql = `CALL update_invoice_status(?, ?)`;
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [
+
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [
                 invoiceInfo.invoiceId,
                 invoiceInfo.status,
             ]);
-            return res[0][0];
+
+            return res.status(201).send({
+                success: true,
+                msg: `Invoice with id ${invoiceInfo.invoiceId} has changed status to ${invoiceInfo.status}`,
+            });
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(error);
         } finally {
             await db.end();
         }
@@ -106,13 +124,22 @@ const invoiceModel = {
         const db = await database.getDb();
         try {
             const sql = `CALL update_invoice_amount(?, ?)`;
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [
+
+            if (!invoiceInfo.amount) {
+                next(new CustomError(false, 'No amount was added'));
+            }
+
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [
                 invoiceInfo.invoiceId,
                 invoiceInfo.amount,
             ]);
-            return res[0][0];
+
+            return res.status(201).send({
+                success: true,
+                msg: `Invoice with id ${invoiceInfo.invoiceId} has changed amount to ${invoiceInfo.amount}`,
+            });
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(error);
         } finally {
             await db.end();
         }
@@ -122,14 +149,23 @@ const invoiceModel = {
      * @async
      * @returns {RowDataPacket} Resultset from the query.
      */
-    payOneInvoice: async function payOneInvoice(invoiceId: string, userId: string, res: Response, next: NextFunction) {
+    payOneInvoice: async function payOneInvoice(invoiceInfo: any, res: Response, next: NextFunction) {
         const db = await database.getDb();
         try {
             const sql = `CALL pay_invoice(?, ?)`;
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [invoiceId, userId]);
-            return res[0][0];
+
+            if (!invoiceInfo.userId) {
+                throw new CustomError(false, 'Missing userID');
+            }
+
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [invoiceInfo.id, invoiceInfo.userId]);
+
+            return res.status(201).send({
+                success: true,
+                msg: `Invoice with id ${invoiceInfo.id} has been paid`,
+            });
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(error);
         } finally {
             await db.end();
         }
@@ -140,7 +176,7 @@ const invoiceModel = {
      * @returns {RowDataPacket} Resultset from the query.
      */
     payMonthlyInvoice: async function payMonthlyInvoice(
-        invoiceId: string,
+        userId: string,
         expireDate: string,
         res: Response,
         next: NextFunction
@@ -148,13 +184,23 @@ const invoiceModel = {
         const db = await database.getDb();
         try {
             const sql = `CALL pay_monthly_invoice(?, ?)`;
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [invoiceId, expireDate]);
 
-            console.log(res[0][0]);
-            
-            return res[0][0];
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId, expireDate]);
+
+            if (!expireDate) {
+                throw new CustomError(false, 'No date was given');
+            }
+
+            console.log('AFFECTED ROWS');
+            console.log(dbRes);
+
+            return res.status(200).send({
+                success: true,
+                data: { dbRes },
+                // msg: `Monthly invoice for user with id ${userId} has been paid`,
+            });
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(error);
         } finally {
             await db.end();
         }

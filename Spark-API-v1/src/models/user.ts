@@ -98,6 +98,8 @@ const userModel = {
 
             if (user.length > 0) {
                 return userModel.comparePasswords(res, user[0], password);
+            } else if (user.length === 0) {
+                return res.status(400).json({ success: false, msg: 'No user found' });
             }
 
             return res.status(400).send({ success: false, msg: 'Missing credentials' });
@@ -278,7 +280,7 @@ const userModel = {
         try {
             const sql = `CALL update_user_partial_payment(?, ?)`;
             const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId, balance]);
-            
+
             if (!balance) {
                 throw Error();
             }
