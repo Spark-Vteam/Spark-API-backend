@@ -16,7 +16,6 @@ DROP SCHEMA IF EXISTS `spark` ;
 -- Schema spark
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `spark` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ;
-SHOW WARNINGS;
 USE `spark` ;
 
 -- -----------------------------------------------------
@@ -24,7 +23,6 @@ USE `spark` ;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `spark`.`Users` ;
 
-SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `spark`.`Users` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `FirstName` VARCHAR(45) NOT NULL,
@@ -40,14 +38,12 @@ CREATE TABLE IF NOT EXISTS `spark`.`Users` (
   UNIQUE INDEX `PhoneNumber_UNIQUE` (`PhoneNumber` ASC) VISIBLE)
 ENGINE = InnoDB;
 
-SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `spark`.`Bikes`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `spark`.`Bikes` ;
 
-SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `spark`.`Bikes` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Position` VARCHAR(45) NULL,
@@ -58,14 +54,12 @@ CREATE TABLE IF NOT EXISTS `spark`.`Bikes` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `spark`.`Stations`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `spark`.`Stations` ;
 
-SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `spark`.`Stations` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Name` VARCHAR(45),
@@ -74,14 +68,12 @@ CREATE TABLE IF NOT EXISTS `spark`.`Stations` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `spark`.`Chargers`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `spark`.`Chargers` ;
 
-SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `spark`.`Chargers` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Stations_id` INT NOT NULL,
@@ -95,14 +87,12 @@ CREATE TABLE IF NOT EXISTS `spark`.`Chargers` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `spark`.`Admins`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `spark`.`Admins` ;
 
-SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `spark`.`Admins` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `FirstName` VARCHAR(45) NOT NULL,
@@ -116,14 +106,12 @@ CREATE TABLE IF NOT EXISTS `spark`.`Admins` (
   UNIQUE INDEX `PhoneNumber_UNIQUE` (`PhoneNumber` ASC) VISIBLE)
 ENGINE = InnoDB;
 
-SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `spark`.`Rents`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `spark`.`Rents` ;
 
-SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `spark`.`Rents` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Users_id` INT NOT NULL,
@@ -149,14 +137,12 @@ CREATE TABLE IF NOT EXISTS `spark`.`Rents` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `spark`.`Invoices`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `spark`.`Invoices` ;
 
-SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `spark`.`Invoices` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Users_id` INT NOT NULL,
@@ -181,14 +167,12 @@ CREATE TABLE IF NOT EXISTS `spark`.`Invoices` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `spark`.`UsersLog`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `spark`.`UsersLog` ;
 
-SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `spark`.`UsersLog` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Users_id` INT NOT NULL,
@@ -204,14 +188,12 @@ CREATE TABLE IF NOT EXISTS `spark`.`UsersLog` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `spark`.`AdminsLog`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `spark`.`AdminsLog` ;
 
-SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `spark`.`AdminsLog` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Admins_id` INT NOT NULL,
@@ -227,14 +209,12 @@ CREATE TABLE IF NOT EXISTS `spark`.`AdminsLog` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `spark`.`ChargersLog`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `spark`.`ChargersLog` ;
 
-SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `spark`.`ChargersLog` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Chargers_id` INT NOT NULL,
@@ -250,14 +230,12 @@ CREATE TABLE IF NOT EXISTS `spark`.`ChargersLog` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `spark`.`RentsLog`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `spark`.`RentsLog` ;
 
-SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `spark`.`RentsLog` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Rents_id` INT NOT NULL,
@@ -273,14 +251,12 @@ CREATE TABLE IF NOT EXISTS `spark`.`RentsLog` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `spark`.`InvoicesLog`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `spark`.`InvoicesLog` ;
 
-SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `spark`.`InvoicesLog` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Invoices_id` INT NOT NULL,
@@ -296,14 +272,12 @@ CREATE TABLE IF NOT EXISTS `spark`.`InvoicesLog` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `spark`.`StationsLog`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `spark`.`StationsLog` ;
 
-SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `spark`.`StationsLog` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Stations_id` INT NOT NULL,
@@ -319,14 +293,12 @@ CREATE TABLE IF NOT EXISTS `spark`.`StationsLog` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `spark`.`BikesLog`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `spark`.`BikesLog` ;
 
-SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `spark`.`BikesLog` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Bikes_id` INT NOT NULL,
@@ -343,14 +315,12 @@ CREATE TABLE IF NOT EXISTS `spark`.`BikesLog` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `spark`.`Geofences`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `spark`.`Geofences` ;
 
-SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `spark`.`Geofences` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Coordinates` TEXT NOT NULL,
@@ -360,14 +330,12 @@ CREATE TABLE IF NOT EXISTS `spark`.`Geofences` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `spark`.`GeofencesLog`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `spark`.`GeofencesLog` ;
 
-SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `spark`.`GeofencesLog` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Geofences_id` INT NOT NULL,
@@ -383,14 +351,12 @@ CREATE TABLE IF NOT EXISTS `spark`.`GeofencesLog` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `spark`.`Pricings`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `spark`.`Pricings` ;
 
-SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `spark`.`Pricings` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Type` VARCHAR(45) NOT NULL,
@@ -409,7 +375,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `spark`.`ApiKeys` ;
 
-SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `spark`.`ApiKeys` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Email` VARCHAR(45) NOT NULL,
@@ -418,7 +383,6 @@ CREATE TABLE IF NOT EXISTS `spark`.`ApiKeys` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-SHOW WARNINGS;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
@@ -429,7 +393,6 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `spark`.`CreditCards` ;
 
-SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `spark`.`CreditCards` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Users_id` INT NOT NULL,
@@ -447,7 +410,6 @@ CREATE TABLE IF NOT EXISTS `spark`.`CreditCards` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- -----------------------------------------------------
@@ -1160,11 +1122,11 @@ DROP PROCEDURE IF EXISTS update_invoice_status;
 DELIMITER ;;
 CREATE PROCEDURE update_invoice_status(
   a_Invoices_id INT,
-  a_status TINYINT
+  a_Status TINYINT
 )
 	BEGIN
 		UPDATE Invoices
-    SET Status = a_status
+    SET Status = a_Status, Paid = CURRENT_TIMESTAMP()
     WHERE id = a_Invoices_id;
 	END
 ;;
@@ -1269,18 +1231,19 @@ CREATE PROCEDURE pay_monthly_invoice(
     START TRANSACTION;
       SET var_sum = (SELECT SUM(Amount) FROM Invoices WHERE Users_id = a_Users_id AND Expires = a_Expires);
 
-      CASE
-        WHEN
-          a_Method = 'card'
-        THEN
-          -- Add third pary payment service
-        ELSE
-          UPDATE Users
+      IF a_Method = 'card' THEN
+          -- Add third party payment service
+          DECLARE var_card INT;
+          SET var_card = (SELECT id FROM CreditCards WHERE Users_id = a_Users_id);
+      ELSE
+        UPDATE Users
           SET Balance = Balance - var_sum
           WHERE id = a_Users_id;
+      END IF;
 
       UPDATE Invoices
-      SET (Status = 20, Paid = TIMESTAMP())
+      SET Status = 20, Paid = CURRENT_TIMESTAMP()
+
       WHERE Users_id = a_Users_id AND Expires = a_Expires;
 
     COMMIT;
@@ -2124,7 +2087,7 @@ DETERMINISTIC
 DELIMITER ;
 
 --
--- Split string
+-- Calculate distance between points
 --
 DROP FUNCTION IF EXISTS calculate_distance;
 DELIMITER ;;
