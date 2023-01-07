@@ -1253,7 +1253,8 @@ DROP PROCEDURE IF EXISTS pay_monthly_invoice;
 DELIMITER ;;
 CREATE PROCEDURE pay_monthly_invoice(
   a_Users_id INT,
-  a_Expires DATETIME
+  a_Expires DATETIME,
+  a_Method VARCHAR(10) -- Payment method, either 'card' or 'balance'
 )
   BEGIN
 
@@ -1268,12 +1269,18 @@ CREATE PROCEDURE pay_monthly_invoice(
     START TRANSACTION;
       SET var_sum = (SELECT SUM(Amount) FROM Invoices WHERE Users_id = a_Users_id AND Expires = a_Expires);
 
-      UPDATE Users
-      SET Balance = Balance - var_sum
-      WHERE id = a_Users_id;
+      CASE
+        WHEN
+          a_Method = 'card'
+        THEN
+          -- Add third pary payment service
+        ELSE
+          UPDATE Users
+          SET Balance = Balance - var_sum
+          WHERE id = a_Users_id;
 
       UPDATE Invoices
-      SET Status = 20
+      SET (Status = 20, Paid = TIMESTAMP())
       WHERE Users_id = a_Users_id AND Expires = a_Expires;
 
     COMMIT;
