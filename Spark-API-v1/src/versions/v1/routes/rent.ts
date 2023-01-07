@@ -130,7 +130,7 @@ router.get('/rent/user/:id', async (req: Request, res: Response, next: NextFunct
  *
  * @returns {Response}
  */
-router.post('/rent/user/:id', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/rent/create/:id', async (req: Request, res: Response, next: NextFunction) => {
     const bikeId = req.body.bikeId;
     const userId = req.params.id;
     try {
@@ -153,8 +153,7 @@ router.post('/rent/user/:id', async (req: Request, res: Response, next: NextFunc
  * @returns {Response}
  */
 router.put('/rent/:id', async (req: Request, res: Response, next: NextFunction) => {
-    const rentId = req.params.id;
-
+    const rentId = req.params.id;    
     try {
         return await rentModel.updateOneRent(rentId, res, next);
     } catch (error) {
