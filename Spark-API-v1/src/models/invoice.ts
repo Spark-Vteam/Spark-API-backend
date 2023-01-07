@@ -140,15 +140,16 @@ const invoiceModel = {
      * @returns {RowDataPacket} Resultset from the query.
      */
     payMonthlyInvoice: async function payMonthlyInvoice(
-        invoiceId: string,
+        userId: string,
         expireDate: string,
+        method: string,
         res: Response,
         next: NextFunction
     ) {
         const db = await database.getDb();
         try {
-            const sql = `CALL pay_monthly_invoice(?, ?)`;
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [invoiceId, expireDate]);
+            const sql = `CALL pay_monthly_invoice(?, ?, ?)`;
+            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId, expireDate, method]);
             return res[0][0];
         } catch (error: any) {
             next(res.status(404).send(error));
