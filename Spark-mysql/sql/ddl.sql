@@ -1221,6 +1221,7 @@ CREATE PROCEDURE pay_monthly_invoice(
   BEGIN
 
     DECLARE var_sum INT;
+    DECLARE var_card INT;
 
     DECLARE EXIT HANDLER FOR SQLEXCEPTION 
         BEGIN
@@ -1228,24 +1229,23 @@ CREATE PROCEDURE pay_monthly_invoice(
             RESIGNAL;
         END;
 
-    START TRANSACTION;
-      SET var_sum = (SELECT SUM(Amount) FROM Invoices WHERE Users_id = a_Users_id AND Expires = a_Expires);
+    SET var_sum = (SELECT SUM(Amount) FROM Invoices WHERE Users_id = a_Users_id AND Expires = a_Expires);
 
-      IF a_Method = 'card' THEN
-          -- Add third party payment service
-          DECLARE var_card INT;
-          SET var_card = (SELECT id FROM CreditCards WHERE Users_id = a_Users_id);
-      ELSE
+    START TRANSACTION;
+      IF a_Method = "balance" THEN
         UPDATE Users
           SET Balance = Balance - var_sum
+          WHERE id = a_Users_id;
+      ELSEIF a_Method = "card" THEN
+        -- Add third party payment service
+        UPDATE Users
+          SET Balance = Balance - 0
           WHERE id = a_Users_id;
       END IF;
 
       UPDATE Invoices
-      SET Status = 20, Paid = CURRENT_TIMESTAMP()
-
-      WHERE Users_id = a_Users_id AND Expires = a_Expires;
-
+        SET Status = 20, Paid = CURRENT_TIMESTAMP()
+        WHERE Users_id = a_Users_id AND Expires = a_Expires;
     COMMIT;
   END
 ;;
