@@ -25,9 +25,9 @@ interface creditCardInfo {
  * @returns {void}
  */
 router.get('/creditCard/:id', async (req: Request, res: Response, next: NextFunction) => {
-    let userId = req.params.id;
+    const userId = req.params.id;
     try {
-        return creditCardModel.getCardsByUser(userId, res, next);
+        return await creditCardModel.getCardsByUser(userId, res, next);
     } catch (error) {
         next(error);
     }
@@ -46,9 +46,9 @@ router.get('/creditCard/:id', async (req: Request, res: Response, next: NextFunc
  * @returns {void}
  */
 router.get('/creditCard/card/:id', async (req: Request, res: Response, next: NextFunction) => {
-    let cardId = req.params.id;
+    const cardId = req.params.id;
     try {
-        return creditCardModel.getCard(cardId, res, next);
+        return await creditCardModel.getCard(cardId, res, next);
     } catch (error) {
         next(error);
     }
@@ -67,10 +67,10 @@ router.get('/creditCard/card/:id', async (req: Request, res: Response, next: Nex
  * @returns {void}
  */
 router.post('/creditCard/:id', async (req: Request, res: Response, next: NextFunction) => {
-    let userId = req.params.id;
+    const userId = req.params.id;
     const creditCardInfo = req.body;
     try {
-        return creditCardModel.saveCreditCard(userId, creditCardInfo, res, next);
+        return await creditCardModel.saveCreditCard(userId, creditCardInfo, res, next);
     } catch (error) {
         next(error);
     }
@@ -89,14 +89,13 @@ router.post('/creditCard/:id', async (req: Request, res: Response, next: NextFun
  * @returns {void}
  */
 router.delete('/creditCard/:id', async (req: Request, res: Response, next: NextFunction) => {
-    let userId = req.params.id;
-    
+    const userId = req.params.id;
+
     try {
-        return creditCardModel.deleteCard(userId, res, next);
+        return await creditCardModel.deleteCard(userId, res, next);
     } catch (error) {
         next(error);
     }
 });
-
 
 module.exports = router;

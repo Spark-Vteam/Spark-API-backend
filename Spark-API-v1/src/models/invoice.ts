@@ -1,6 +1,7 @@
 import { Response, NextFunction } from 'express';
-import database from '../db/db';
 import { FieldPacket, RowDataPacket } from 'mysql2/promise';
+
+import database from '../db/db';
 import { CustomError } from '../middleware/errorHandler';
 
 const invoiceModel = {

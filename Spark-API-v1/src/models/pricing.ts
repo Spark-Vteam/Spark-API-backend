@@ -1,6 +1,7 @@
 import { NextFunction, Response } from 'express';
-import database from '../db/db';
 import { FieldPacket, RowDataPacket } from 'mysql2/promise';
+
+import database from '../db/db';
 import PricingInfo from 'src/interfaces/pricingInfo';
 import { CustomError } from '../middleware/errorHandler';
 

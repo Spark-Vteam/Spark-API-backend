@@ -1,8 +1,9 @@
-import database from '../db/db';
 import { FieldPacket, RowDataPacket } from 'mysql2/promise';
 import { Response, NextFunction } from 'express';
-import { CustomError } from '../middleware/errorHandler';
 import { v4 as uuid } from 'uuid';
+
+import { CustomError } from '../middleware/errorHandler';
+import database from '../db/db';
 
 const apiKeyModel = {
     /**
@@ -50,7 +51,7 @@ const apiKeyModel = {
      */
     createOneApiKey: async function createOneApiKey(apiKeyInfo: any, res: Response, next: NextFunction) {
         const db = await database.getDb();
-        
+
         const apiKey = uuid();
 
         try {

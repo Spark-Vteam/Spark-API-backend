@@ -1,6 +1,7 @@
-import database from '../db/db';
 import { Response, NextFunction } from 'express';
 import { FieldPacket, RowDataPacket } from 'mysql2/promise';
+
+import database from '../db/db';
 
 const bikeModel = {
     /**

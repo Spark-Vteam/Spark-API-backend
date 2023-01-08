@@ -1,5 +1,6 @@
 import { NextFunction, Response } from 'express';
 import { FieldPacket, RowDataPacket } from 'mysql2/promise';
+
 import database from '../db/db';
 import { CustomError } from '../middleware/errorHandler';
 
@@ -50,7 +51,6 @@ const chargerModel = {
     updateStatus: async function updateStatus(chargerInfo: any, res: Response, next: NextFunction) {
         const db = await database.getDb();
         try {
-
             if (!chargerInfo.status) {
                 throw new CustomError(false, 'No status given');
             }

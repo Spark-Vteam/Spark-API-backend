@@ -3,7 +3,7 @@ import chaiHttp from 'chai-http';
 
 import 'mocha';
 
-import server from '../src/index';
+import server from '../src/app';
 
 chai.should();
 

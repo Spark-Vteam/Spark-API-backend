@@ -1,6 +1,7 @@
 import { NextFunction, Response } from 'express';
-import database from '../db/db';
 import { FieldPacket, RowDataPacket } from 'mysql2/promise';
+
+import database from '../db/db';
 
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
@@ -65,7 +66,7 @@ const adminModel = {
             console.log(admin);
 
             if (admin.length > 0) {
-                return adminModel.comparePasswords(res, admin[0], password);
+                return await adminModel.comparePasswords(res, admin[0], password);
             } else if (admin.length === 0) {
                 return res.status(400).json({ success: false, msg: 'No user found' });
             }
@@ -104,7 +105,7 @@ const adminModel = {
                 return res.status(201).json({
                     data: {
                         info: { admin },
-                        token: token,
+                        token,
                         msg: 'Admin logged in',
                     },
                 });

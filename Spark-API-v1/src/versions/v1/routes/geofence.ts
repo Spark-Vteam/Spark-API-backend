@@ -42,7 +42,7 @@ router.get('/geofence', async (req: Request, res: Response, next: NextFunction) 
  * @returns {void}
  */
 router.get('/geofence/:id', async (req: Request, res: Response, next: NextFunction) => {
-    let geofenceId = req.params.id;
+    const geofenceId = req.params.id;
 
     try {
         return await geofenceModel.getOneGeofence(geofenceId, res, next);
@@ -87,7 +87,7 @@ router.post('/geofence', async (req: Request, res: Response, next: NextFunction)
  * @returns {void}
  */
 router.put('/geofence/coordinates/:id', async (req: Request, res: Response, next: NextFunction) => {
-    let geofenceInfo = {
+    const geofenceInfo = {
         geofenceId: req.params.id,
         coordinates: req.body.coordinates,
     };

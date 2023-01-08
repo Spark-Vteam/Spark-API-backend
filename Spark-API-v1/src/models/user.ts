@@ -1,8 +1,9 @@
-import database from '../db/db';
 import { FieldPacket, RowDataPacket } from 'mysql2/promise';
 import { Response, NextFunction } from 'express';
-import { CustomError } from '../middleware/errorHandler';
 import { v4 as uuid } from 'uuid';
+
+import { CustomError } from '../middleware/errorHandler';
+import database from '../db/db';
 
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
@@ -97,7 +98,7 @@ const userModel = {
             const user = dbRes[0][0];
 
             if (user.length > 0) {
-                return userModel.comparePasswords(res, user[0], password);
+                return await userModel.comparePasswords(res, user[0], password);
             } else if (user.length === 0) {
                 return res.status(400).json({ success: false, msg: 'No user found' });
             }
@@ -133,7 +134,7 @@ const userModel = {
                 return res.status(201).json({
                     data: {
                         info: { user },
-                        token: token,
+                        token,
                         msg: 'User logged in',
                     },
                 });

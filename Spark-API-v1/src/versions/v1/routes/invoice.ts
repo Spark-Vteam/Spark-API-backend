@@ -159,7 +159,7 @@ router.put('/invoice/amount/:id', async (req: Request, res: Response, next: Next
  * @returns {void}
  */
 router.put('/invoice/pay/:id', async (req: Request, res: Response, next: NextFunction) => {
-    let invoiceInfo = {
+    const invoiceInfo = {
         id: req.params.id,
         userId: req.body.userId,
     };
@@ -184,8 +184,8 @@ router.put('/invoice/pay/:id', async (req: Request, res: Response, next: NextFun
  * @returns {void}
  */
 router.put('/invoice/pay_monthly/:id', async (req: Request, res: Response, next: NextFunction) => {
-    let userId = req.params.id;
-    let expireDate = req.body.expires;
+    const userId = req.params.id;
+    const expireDate = req.body.expires;
 
     try {
         return await invoiceModel.payMonthlyInvoice(userId, expireDate, res, next);

@@ -1,6 +1,7 @@
-import database from '../db/db';
 import { NextFunction, Response } from 'express';
 import { FieldPacket, RowDataPacket } from 'mysql2/promise';
+
+import database from '../db/db';
 
 const rentModel = {
     /**

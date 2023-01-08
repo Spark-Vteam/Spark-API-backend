@@ -1,4 +1,5 @@
 import { Request, Response, Router, NextFunction } from 'express';
+
 import PricingInfo from 'src/interfaces/pricingInfo';
 import pricingModel from '../../../models/pricing';
 const router = Router();

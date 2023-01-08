@@ -88,7 +88,7 @@ router.get('/apiKey/owner', async (req: Request, res: Response, next: NextFuncti
  * @returns {void}
  */
 router.delete('/apiKey/:id', async (req: Request, res: Response, next: NextFunction) => {
-    let id = req.params.id;
+    const id = req.params.id;
     try {
         return await apiKeyModel.deleteKeyById(id, res, next);
     } catch (error) {

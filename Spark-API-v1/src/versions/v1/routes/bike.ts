@@ -86,7 +86,7 @@ router.get('/bike/charging', async (req: Request, res: Response, next: NextFunct
  * @returns {void}
  */
 router.get('/bike/charging/:id', async (req: Request, res: Response, next: NextFunction) => {
-    let stationId = req.params.id;
+    const stationId = req.params.id;
 
     try {
         return await bikeModel.getChargingBikesAtStation(stationId, res, next);
@@ -159,7 +159,7 @@ router.put('/bike/:id', async (req: Request, res: Response, next: NextFunction) 
         status: req.body.status,
         speed: req.body.speed,
     };
-    
+
     try {
         return await bikeModel.updateOneBike(bikeInfo, res, next);
     } catch (error) {

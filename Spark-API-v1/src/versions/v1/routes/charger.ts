@@ -36,7 +36,7 @@ router.get('/charger', async (req: Request, res: Response, next: NextFunction) =
  * @returns {void}
  */
 router.get('/charger/:id', async (req: Request, res: Response, next: NextFunction) => {
-    let chargerId = req.params.id;
+    const chargerId = req.params.id;
 
     try {
         return await chargerModel.getOneCharger(chargerId, res, next);
@@ -68,7 +68,6 @@ router.put('/charger/:id', async (req: Request, res: Response, next: NextFunctio
     } catch (error) {
         next(error);
     }
-
 });
 
 module.exports = router;

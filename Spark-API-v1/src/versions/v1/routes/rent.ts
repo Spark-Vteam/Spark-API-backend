@@ -153,7 +153,7 @@ router.get('/rent/create/:id', async (req: Request, res: Response, next: NextFun
  * @returns {Response}
  */
 router.put('/rent/:id', async (req: Request, res: Response, next: NextFunction) => {
-    const rentId = req.params.id;    
+    const rentId = req.params.id;
     try {
         return await rentModel.updateOneRent(rentId, res, next);
     } catch (error) {

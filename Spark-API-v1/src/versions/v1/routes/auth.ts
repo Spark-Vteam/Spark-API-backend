@@ -14,8 +14,8 @@ router.get('/auth/getAccessToken', async function (req: Request, res: Response) 
             },
         }
     )
-        .then((response) => {
-            return response.json();
+        .then(async (response) => {
+            return await response.json();
         })
         .then((data) => {
             console.log(data);
@@ -30,8 +30,8 @@ router.get('/auth/getUserData', async function (req: Request, res: Response) {
             Authorization: req.get('Authorization')!,
         },
     })
-        .then((response) => {
-            return response.json();
+        .then(async (response) => {
+            return await response.json();
         })
         .then((data) => {
             console.log(data);
