@@ -9,11 +9,11 @@ chai.should();
 
 chai.use(chaiHttp);
 
-describe("Main", () => {
+describe("Main Route", () => {
     describe("GET /", () => {
         it("200 HAPPY PATH", (done) => {
             chai.request(server)
-                .get("/")
+                .get("/v1/")
                 .end((err, res) => {
                     res.should.have.status(200);
 

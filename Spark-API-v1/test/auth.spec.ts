@@ -9,13 +9,13 @@ chai.should();
 
 chai.use(chaiHttp);
 
-describe('Station Route', () => {
+describe('Auth Route', () => {
     describe('GET /', () => {
-        it('500 Not connected to DB', (done) => {
+        it('404 Not working', (done) => {
             chai.request(server)
-                .get('/v1/station')
+                .get('/v1/auth')
                 .end((err, res) => {
-                    res.should.have.status(500);
+                    res.should.have.status(404);
 
                     done();
                 });

@@ -9,11 +9,11 @@ chai.should();
 
 chai.use(chaiHttp);
 
-describe('Station Route', () => {
+describe('Pricing Route', () => {
     describe('GET /', () => {
         it('500 Not connected to DB', (done) => {
             chai.request(server)
-                .get('/v1/station')
+                .get('/v1/pricing')
                 .end((err, res) => {
                     res.should.have.status(500);
 
