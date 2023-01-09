@@ -13,8 +13,8 @@ interface apiKeyInfo {
  * apiKey ROUTE
  * /api_key:
  *   post:
- *     summary: Display list of users with apiKeys
- *     description: Render all users with apiKeys from database
+ *     summary: Create a ApiKey for a user
+ *     description: Create an ApiKey for a user
  * @param {Request}  req  The incoming request.
  * @param {Response} res  The outgoing response.
  * @param {Function} next Next to call in chain of middleware.

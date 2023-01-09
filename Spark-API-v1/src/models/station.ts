@@ -16,7 +16,7 @@ const stationModel = {
 
             const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql);
 
-            return res.send({ success: true, data: dbRes[0][0] });
+            return res.status(200).send({ success: true, data: dbRes[0][0] });
         } catch (error: any) {
             next(error);
         } finally {
@@ -35,7 +35,7 @@ const stationModel = {
 
             const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [stationId]);
 
-            return res.send({ success: true, data: dbRes[0][0] });
+            return res.status(200).send({ success: true, data: dbRes[0][0] });
         } catch (error: any) {
             next(error);
         } finally {

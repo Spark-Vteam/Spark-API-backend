@@ -1,24 +1,21 @@
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 
-import 'mocha';
-
-import server from '../src/app';
-// import database from '../src/db/db';
-chai.should();
+import sinon from 'sinon';
+import stationModel from '../src/models/station';
 
 chai.use(chaiHttp);
 
-describe('Station Route', () => {
-    describe('GET /', () => {
-        it('500 Not connected to DB', (done) => {
-            chai.request(server)
-                .get('/v1/station')
-                .end((err, res) => {
-                    res.should.have.status(500);
+describe('showAllStations', () => {
+    it('should return a list of all users', async () => {
+        const res = {
+            status: sinon.stub().returns({ send: sinon.stub() }),
+        };
 
-                    done();
-                });
-        });
+        const next = sinon.stub();
+
+        await stationModel.showAllStations(res as any, next as any);
+
+        expect(res.status.calledWith(200)).to.be.true;
     });
 });
