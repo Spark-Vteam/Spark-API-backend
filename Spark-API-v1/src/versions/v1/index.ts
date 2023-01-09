@@ -17,7 +17,6 @@ router.use('/', require('./routes/charger'));
 router.use('/', require('./routes/geofence'));
 router.use('/', require('./routes/invoice'));
 router.use('/', require('./routes/pricing'));
-router.use('/', require('./routes/apiKeys'));
 router.use('/', require('./routes/creditcard'));
 
 module.exports = router;

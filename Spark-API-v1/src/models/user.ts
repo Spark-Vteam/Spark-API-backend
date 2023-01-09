@@ -11,8 +11,6 @@ const saltRounds = 10;
 
 // generate a unique API key
 const apiKey = uuid();
-// save the API key to the .env file
-require('dotenv').config({ path: '.env', env: { API_KEY: apiKey } });
 
 const userModel = {
     /**
