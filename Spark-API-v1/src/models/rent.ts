@@ -1,6 +1,7 @@
-import database from '../db/db';
 import { NextFunction, Response } from 'express';
 import { FieldPacket, RowDataPacket } from 'mysql2/promise';
+
+import database from '../db/db';
 
 const rentModel = {
     /**
@@ -13,11 +14,11 @@ const rentModel = {
         try {
             const sql = `CALL get_rents()`;
 
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql);
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql);
 
-            return res[0][0];
+            return res.status(200).send({ success: true, data: dbRes[0][0] });
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(error);
         } finally {
             await db.end();
         }
@@ -32,28 +33,10 @@ const rentModel = {
         try {
             const sql = `CALL get_rent(?)`;
 
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [rentId]);
-
-            return res[0][0];
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [rentId]);
+            return res.status(200).send({ success: true, data: dbRes[0][0] });
         } catch (error: any) {
-            next(res.status(404).send(error));
-        } finally {
-            await db.end();
-        }
-    },
-    /**
-     * Function to show all rents for one User
-     * @async
-     * @returns {RowDataPacket} Resultset from the query.
-     */
-    getRentsByUserId: async function getRentsByUserId(userId: string, res: Response, next: NextFunction) {
-        const db = await database.getDb();
-        try {
-            const sql = `CALL get_rents_by_user(?)`;
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId]);
-            return res[0][0];
-        } catch (error: any) {
-            next(res.status(404).send(error));
+            next(error);
         } finally {
             await db.end();
         }
@@ -67,16 +50,37 @@ const rentModel = {
         const db = await database.getDb();
         try {
             const sql = `CALL get_active_rents_by_user(?)`;
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId]);
-            return res[0][0];
+
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId]);
+
+            return res.status(200).send({ success: true, data: dbRes[0][0] });
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(error);
         } finally {
             await db.end();
         }
     },
     /**
-     * Function to show all active rents for one User
+     * Function to show all rents for one User
+     * @async
+     * @returns {RowDataPacket} Resultset from the query.
+     */
+    getRentsByUserId: async function getRentsByUserId(userId: string, res: Response, next: NextFunction) {
+        const db = await database.getDb();
+        try {
+            const sql = `CALL get_rents_by_user(?)`;
+
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId]);
+
+            return res.status(200).send({ success: true, data: dbRes[0][0] });
+        } catch (error: any) {
+            next(error);
+        } finally {
+            await db.end();
+        }
+    },
+    /**
+     * Function to show bikesLogs
      * @async
      * @returns {RowDataPacket} Resultset from the query.
      */
@@ -84,10 +88,11 @@ const rentModel = {
         const db = await database.getDb();
         try {
             const sql = `CALL get_bikeslog_from_rent(?)`;
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [rentId]);
-            return res[0][0];
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [rentId]);
+
+            return res.status(200).send({ success: true, data: dbRes[0][0] });
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(error);
         } finally {
             await db.end();
         }
@@ -101,10 +106,12 @@ const rentModel = {
         const db = await database.getDb();
         try {
             const sql = `CALL create_rent(?, ?)`;
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId, bikeId]);
-            return res[0][0];
+
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId, bikeId]);
+
+            return res.status(200).send({ success: true, msg: `New rent created for user ${userId}` });
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(error);
         } finally {
             await db.end();
         }
@@ -118,10 +125,11 @@ const rentModel = {
         const db = await database.getDb();
         try {
             const sql = `CALL update_rent(?)`;
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [rentId]);
-            return res[0][0];
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [rentId]);
+
+            return res.status(200).send({ success: true, msg: `Rent with id ${rentId} has been updated` });
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(error);
         } finally {
             await db.end();
         }

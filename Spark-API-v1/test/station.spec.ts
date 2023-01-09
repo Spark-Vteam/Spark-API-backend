@@ -1,41 +1,21 @@
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 
-import 'mocha';
-
-import server from '../src/index';
-import database from '../src/db/db';
-chai.should();
+import sinon from 'sinon';
+import stationModel from '../src/models/station';
 
 chai.use(chaiHttp);
 
-describe('Database', () => {
-    before(async () => {
-        const db = await database.getDb();
-        console.log('HAAAAAALLLOOOOOO');
+describe('showAllStations', () => {
+    it('should return a list of all stations', async () => {
+        const res = {
+            status: sinon.stub().returns({ send: sinon.stub() }),
+        };
 
-        console.log('Db', db);
-        // db.connect() {
-        //     if (err) {
-        //         done(err);
-        //         return;
-        //     }
-        //     expect(result).to.equal('SQL CONNECT SUCCESSFUL.');
-        //     done();
-        // });
-    });
-});
+        const next = sinon.stub();
 
-describe('Station Route', () => {
-    describe('GET /', () => {
-        it('200 HAPPY PATH', (done) => {
-            chai.request(server)
-                .get('/station')
-                .end((err, res) => {
-                    // console.log(res);
+        await stationModel.showAllStations(res as any, next as any);
 
-                    done();
-                });
-        });
+        expect(res.status.calledWith(200)).to.be.true;
     });
 });

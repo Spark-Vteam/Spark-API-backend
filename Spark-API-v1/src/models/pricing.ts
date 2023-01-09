@@ -1,7 +1,9 @@
 import { NextFunction, Response } from 'express';
-import database from '../db/db';
 import { FieldPacket, RowDataPacket } from 'mysql2/promise';
+
+import database from '../db/db';
 import PricingInfo from 'src/interfaces/pricingInfo';
+import { CustomError } from '../middleware/errorHandler';
 
 const pricingModel = {
     /**
@@ -14,11 +16,11 @@ const pricingModel = {
         try {
             const sql = `CALL get_pricings()`;
 
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql);
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql);
 
-            return res[0][0];
+            return res.status(200).send({ success: true, data: dbRes[0][0] });
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(error);
         } finally {
             await db.end();
         }
@@ -33,7 +35,7 @@ const pricingModel = {
         try {
             const sql = `CALL create_pricing(?, ?, ?, ?, ?, ?, ?, ?)`;
 
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [
                 pricingInfo.type,
                 pricingInfo.description,
                 pricingInfo.start,
@@ -44,15 +46,15 @@ const pricingModel = {
                 pricingInfo.discountEndCharging,
             ]);
 
-            return res[0][0];
+            return res.status(200).send({ success: true, msg: `Pricing has been created` });
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(error);
         } finally {
             await db.end();
         }
     },
     /**
-     * Function to create a new pricing
+     * Function to update a pricing
      * @async
      * @returns {RowDataPacket} Resultset from the query.
      */
@@ -66,7 +68,7 @@ const pricingModel = {
         try {
             const sql = `CALL update_pricing(?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
-            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [
                 pricingId,
                 pricingInfo.type,
                 pricingInfo.description,
@@ -78,9 +80,9 @@ const pricingModel = {
                 pricingInfo.discountEndCharging,
             ]);
 
-            return res[0][0];
+            return res.status(200).send({ success: true, msg: `Pricing has been updated` });
         } catch (error: any) {
-            next(res.status(404).send(error));
+            next(error);
         } finally {
             await db.end();
         }
