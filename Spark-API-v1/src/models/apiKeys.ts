@@ -17,8 +17,8 @@ const apiKeyModel = {
             return next();
         }
 
-        const apiKey = req.get('key');
-        
+        const apiKey: any = req.get('key');
+
         const keyInDb: any = await apiKeyModel.getKeyByKey(apiKey, res, next);
         if (keyInDb !== undefined && keyInDb[0].hasOwnProperty('Email')) {
             return next();
