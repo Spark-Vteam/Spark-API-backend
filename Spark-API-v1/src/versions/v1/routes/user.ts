@@ -4,12 +4,13 @@ import userModel from '../../../models/user';
 const router = Router();
 
 interface UserInfo {
-    FirstName: string;
-    LastName: string;
-    PhoneNumber: string;
-    EmailAdress: string;
-    Balance: number;
-    Password: string;
+    [key: string]: string;
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+    emailAdress: string;
+    password: string;
+    oauth: string;
 }
 
 /**
@@ -25,9 +26,12 @@ interface UserInfo {
  * @returns {void}
  */
 router.get('/user', async (req: Request, res: Response, next: NextFunction) => {
-    const allUsers = await userModel.showAllUsers(res, next);
-
-    return res.status(200).send({ success: true, data: allUsers });
+    try {
+        return await userModel.showAllUsers(res, next);
+    } catch (error) {
+        // Pass the error to the error handler middleware
+        next(error);
+    }
 });
 
 /**
@@ -44,10 +48,13 @@ router.get('/user', async (req: Request, res: Response, next: NextFunction) => {
  */
 router.get('/user/:id', async (req: Request, res: Response, next: NextFunction) => {
     const userId = req.params.id;
-
-    const oneUser = await userModel.getOneUser(userId, res, next);
-
-    return res.status(200).send({ success: true, data: oneUser });
+    if (userId) {
+        try {
+            return await userModel.getOneUser(userId, res, next);
+        } catch (error) {
+            next(error);
+        }
+    }
 });
 
 /**
@@ -64,18 +71,40 @@ router.get('/user/:id', async (req: Request, res: Response, next: NextFunction) 
  * @returns {Response}
  */
 router.post('/user', async (req: Request, res: Response, next: NextFunction) => {
-    const userInfo = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        phoneNumber: req.body.phoneNumber,
-        emailAdress: req.body.emailAdress,
-        password: req.body.password,
-        oauth: req.body.oauth,
-    };
+    const userInfo: UserInfo = req.body;
 
-    await userModel.createOneUser(userInfo, res, next);
+    const requiredKeys = Object.keys(userInfo).filter((key) => key !== 'oauth');
+    const allRequiredKeysHaveValues = requiredKeys.every((key) => Boolean(userInfo[key]));
 
-    res.status(201).send({ success: true, msg: `User has been registered` });
+    try {
+        if (allRequiredKeysHaveValues) {
+            return await userModel.createOneUser(userInfo, res, next);
+        }
+    } catch (error) {
+        next(error);
+    }
+});
+
+/**
+ * User ROUTE
+ *  /user/login:
+ *   post:
+ *     summary: Login one user
+ *     description: Login user with information
+ *     { emailAdress, password }
+ *  @param {Request}  req  The incoming request.
+ *  @param {Response} res  The outgoing response.
+ *  @param {Function} next Next to call in chain of middleware.
+ *
+ * @returns {Response}
+ */
+router.post('/user/login', async (req: Request, res: Response, next: NextFunction) => {
+    const userInfo = req.body;
+    try {
+        return await userModel.userLogin(userInfo, res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 /**
@@ -93,23 +122,21 @@ router.post('/user', async (req: Request, res: Response, next: NextFunction) => 
 router.put('/user/:id', async (req: Request, res: Response, next: NextFunction) => {
     const userId = req.params.id;
 
-    const userInfo = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        phoneNumber: req.body.phoneNumber,
-        emailAdress: req.body.emailAdress,
-        oauth: req.body.oauth,
-    };
+    const userInfo = req.body;
 
-    const _newUserInfo = {
-        firstName: await userModel.updateUserFirstName(userId, userInfo.firstName, res, next),
-        lastName: await userModel.updateUserLastName(userId, userInfo.lastName, res, next),
-        phoneNumber: await userModel.updateUserPhoneNumber(userId, userInfo.phoneNumber, res, next),
-        emailAdress: await userModel.updateUserEmailAdress(userId, userInfo.emailAdress, res, next),
-        oauth: await userModel.updateUserOauth(userId, userInfo.oauth, res, next),
-    };
+    try {
+        const _newUserInfo = {
+            firstName: await userModel.updateUserFirstName(userId, userInfo.firstName, res, next),
+            lastName: await userModel.updateUserLastName(userId, userInfo.lastName, res, next),
+            phoneNumber: await userModel.updateUserPhoneNumber(userId, userInfo.phoneNumber, res, next),
+            emailAdress: await userModel.updateUserEmailAdress(userId, userInfo.emailAdress, res, next),
+            oauth: await userModel.updateUserOauth(userId, userInfo.oauth, res, next),
+        };
 
-    return res.status(201).send({ success: true, msg: `User with id ${userId} has been updated` });
+        return res.status(200).json({ success: true, msg: `User with id ${userId} was updated` });
+    } catch (error) {
+        next(error);
+    }
 });
 
 /**
@@ -128,9 +155,11 @@ router.put('/user/balance/:id', async (req: Request, res: Response, next: NextFu
     const balance = req.body.balance;
     const userID = req.params.id;
 
-    await userModel.updateUserBalance(userID, balance, res, next);
-
-    return res.status(201).send({ success: true, msg: `User with id ${userID} added ${balance} to its balance` });
+    try {
+        return await userModel.updateUserBalance(userID, balance, res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 /**
@@ -149,9 +178,11 @@ router.put('/user/partial_balance/:id', async (req: Request, res: Response, next
     const balance = req.body.balance;
     const userID = req.params.id;
 
-    await userModel.updateUserPartialBalance(userID, balance, res, next);
-
-    return res.status(201).send({ success: true, msg: `User with id ${userID} added ${balance} to its balance` });
+    try {
+        return await userModel.updateUserPaymentOption(userID, balance, res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 /**
@@ -170,9 +201,11 @@ router.put('/user/password/:id', async (req: Request, res: Response, next: NextF
     const password = req.body.password;
     const userID = req.params.id;
 
-    await userModel.updateUserPassword(userID, password, res, next);
-
-    return res.status(201).send({ success: true, msg: `User with id ${userID} has updated its password` });
+    try {
+        return await userModel.updateUserPassword(userID, password, res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 /**
@@ -189,9 +222,11 @@ router.put('/user/password/:id', async (req: Request, res: Response, next: NextF
  */
 router.delete('/user/:id', async (req: Request, res: Response, next: NextFunction) => {
     const userId = req.params.id;
-    await userModel.deleteOneUser(userId, res, next);
-
-    return res.status(200).send({ success: true, msg: `User with id ${userId} was deleted` });
+    try {
+        return await userModel.deleteOneUser(userId, res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 module.exports = router;

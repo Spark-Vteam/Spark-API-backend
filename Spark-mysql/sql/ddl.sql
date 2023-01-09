@@ -591,6 +591,21 @@ CREATE PROCEDURE get_user(
 DELIMITER ;
 
 --
+-- Procedure to fetch single User by email
+--
+DROP PROCEDURE IF EXISTS get_user_by_email;
+DELIMITER ;;
+CREATE PROCEDURE get_user_by_email(
+  a_Users_email VARCHAR(45)
+)
+	BEGIN
+		SELECT * FROM Users
+    WHERE EmailAdress = a_Users_email;
+	END
+;;
+DELIMITER ;
+
+--
 -- Procedure to create a User
 --
 DROP PROCEDURE IF EXISTS create_user;
@@ -825,12 +840,24 @@ CREATE PROCEDURE create_rent(
   a_Users_id INT,
   a_Bikes_id INT
 )
-	BEGIN
-    DECLARE var_bike_position VARCHAR(45);
+BEGIN
+  DECLARE var_bike_position VARCHAR(45);
+  DECLARE var_rent_exists INT DEFAULT 0;
+  
+  SELECT COUNT(*) INTO var_rent_exists
+  FROM Rents
+  WHERE Users_id = a_Users_id AND Bikes_id = a_Bikes_id AND Status = 10;
+
+  IF var_rent_exists = 0 THEN
     SET var_bike_position = (SELECT position FROM Bikes WHERE id = a_Bikes_id);
-		INSERT INTO Rents (Users_id, Bikes_id, Start, StartTimestamp, Status)
+
+    INSERT INTO Rents (Users_id, Bikes_id, Start, StartTimestamp, Status)
     VALUES (a_Users_id, a_Bikes_id, var_bike_position, CURRENT_TIMESTAMP(), 10);
-	END
+  ELSE
+    -- Raise error if a rent with the same userId and bikeId and a status of 10 already exists
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'A rent with the same userId and bikeId and a status of 10 already exists';
+  END IF;
+END
 ;;
 DELIMITER ;
 
@@ -963,6 +990,22 @@ CREATE PROCEDURE get_admin(
 	END
 ;;
 DELIMITER ;
+
+--
+-- Procedure to fetch single admin by email
+--
+DROP PROCEDURE IF EXISTS get_admin_by_email;
+DELIMITER ;;
+CREATE PROCEDURE get_admin_by_email(
+  a_Admins_email VARCHAR(45)
+)
+	BEGIN
+		SELECT * FROM Admins
+    WHERE EmailAdress = a_Admins_email;
+	END
+;;
+DELIMITER ;
+
 
 --
 -- Procedure to create a admin

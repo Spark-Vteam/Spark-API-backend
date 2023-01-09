@@ -16,9 +16,11 @@ const router = Router();
  * @returns {void}
  */
 router.get('/station', async (req: Request, res: Response, next: NextFunction) => {
-    const allStations = await stationModel.showAllStations(res, next);
-
-    return res.send({ success: true, data: allStations });
+    try {
+        return await stationModel.showAllStations(res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 /**
@@ -35,10 +37,11 @@ router.get('/station', async (req: Request, res: Response, next: NextFunction) =
  */
 router.get('/station/:id', async (req: Request, res: Response, next: NextFunction) => {
     const stationId = req.params.id;
-
-    const oneStation = await stationModel.getOneStation(stationId, res, next);
-
-    return res.send({ success: true, data: oneStation });
+    try {
+        return await stationModel.getOneStation(stationId, res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 module.exports = router;

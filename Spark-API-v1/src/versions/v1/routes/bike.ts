@@ -24,17 +24,19 @@ interface BikeInfo {
  * @returns {void}
  */
 router.get('/bike', async (req: Request, res: Response, next: NextFunction) => {
-    const allBikes = await bikeModel.showAllBikes(res, next);
-
-    return res.status(200).send({ success: true, data: allBikes });
+    try {
+        return await bikeModel.showAllBikes(res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 /**
  * Bike ROUTE
  * /:
  *   get:
- *     summary: Display list for bikes
- *     description: Render all bikes
+ *     summary: Display list for bikes within a radius
+ *     description: Render all bikes within a radius
  * @param {Request}  req  The incoming request.
  * @param {Response} res  The outgoing response.
  * @param {Function} next Next to call in chain of middleware.
@@ -42,14 +44,13 @@ router.get('/bike', async (req: Request, res: Response, next: NextFunction) => {
  * @returns {void}
  */
 router.get('/bike/:longitude/:latitude/:radius', async (req: Request, res: Response, next: NextFunction) => {
-    const radiusInfo = {
-        latitude: req.params.latitude,
-        longitude: req.params.longitude,
-        radius: req.params.radius,
-    };
+    const radiusInfo = req.params;
 
-    const bikeRadius = await bikeModel.getBikeRadius(radiusInfo, res, next);
-    return res.status(200).send({ success: true, data: bikeRadius });
+    try {
+        return await bikeModel.getBikeRadius(radiusInfo, res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 /**
@@ -65,9 +66,11 @@ router.get('/bike/:longitude/:latitude/:radius', async (req: Request, res: Respo
  * @returns {void}
  */
 router.get('/bike/charging', async (req: Request, res: Response, next: NextFunction) => {
-    const getAllChargingBikes = await bikeModel.getAllChargingBikes(res, next);
-
-    return res.status(200).send({ success: true, data: getAllChargingBikes });
+    try {
+        return await bikeModel.getAllChargingBikes(res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 /**
@@ -83,10 +86,13 @@ router.get('/bike/charging', async (req: Request, res: Response, next: NextFunct
  * @returns {void}
  */
 router.get('/bike/charging/:id', async (req: Request, res: Response, next: NextFunction) => {
-    let stationId = req.params.id;
-    const getChargingBikesAtStation = await bikeModel.getChargingBikesAtStation(stationId, res, next);
+    const stationId = req.params.id;
 
-    return res.status(200).send({ success: true, data: getChargingBikesAtStation });
+    try {
+        return await bikeModel.getChargingBikesAtStation(stationId, res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 /**
@@ -103,17 +109,20 @@ router.get('/bike/charging/:id', async (req: Request, res: Response, next: NextF
  */
 router.get('/bike/:id', async (req: Request, res: Response, next: NextFunction) => {
     const bikeId = req.params.id;
-    const oneBike = await bikeModel.getOneBike(bikeId, res, next);
 
-    return res.status(200).send({ success: true, data: oneBike });
+    try {
+        return await bikeModel.getOneBike(bikeId, res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 /**
  * Bike ROUTE
  * /:
  *   get:
- *     summary: Display information for one bike
- *     description: Render one bike
+ *     summary: Display bikes in a city
+ *     description: Render bikes in a city
  * @param {Request}  req  The incoming request.
  * @param {Response} res  The outgoing response.
  * @param {Function} next Next to call in chain of middleware.
@@ -123,9 +132,11 @@ router.get('/bike/:id', async (req: Request, res: Response, next: NextFunction) 
 router.get('/bike/city/:city', async (req: Request, res: Response, next: NextFunction) => {
     const city = req.params.city;
 
-    const oneBike = await bikeModel.getBikesByCity(city, res, next);
-
-    return res.status(200).send({ success: true, data: oneBike });
+    try {
+        return await bikeModel.getBikesByCity(city, res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 /**
@@ -148,9 +159,12 @@ router.put('/bike/:id', async (req: Request, res: Response, next: NextFunction) 
         status: req.body.status,
         speed: req.body.speed,
     };
-    await bikeModel.updateOneBike(bikeInfo, res, next);
 
-    return res.status(200).send({ success: true, msg: `Bike with id ${bikeInfo.bikeId} has been updated` });
+    try {
+        return await bikeModel.updateOneBike(bikeInfo, res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 module.exports = router;
