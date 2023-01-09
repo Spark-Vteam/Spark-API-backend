@@ -1,4 +1,4 @@
-USE mydb
+USE spark
 INSERT INTO Pricings
     ( Type, Description, Start, Minute, Parking, DiscountStartFree, DiscountEndParkingZone, DiscountEndCharging )
 VALUES

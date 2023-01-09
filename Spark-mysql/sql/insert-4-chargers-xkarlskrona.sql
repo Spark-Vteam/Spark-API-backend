@@ -1,4 +1,4 @@
-USE mydb
+USE spark
 INSERT INTO Chargers
     ( Stations_id, Status )
 VALUES

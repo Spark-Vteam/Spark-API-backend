@@ -1,4 +1,4 @@
-USE mydb
+USE spark
 INSERT INTO Rents
     ( Users_id, Bikes_id, Start, Destination, StartTimestamp, DestinationTimestamp, Price, Status )
 VALUES
