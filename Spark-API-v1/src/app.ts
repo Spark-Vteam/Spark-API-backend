@@ -5,6 +5,9 @@ import morgan from 'morgan';
 // Middleware
 import { logIncomingToConsole } from './middleware/index';
 import { invalidPathHandler, errorHandler } from './middleware/errorHandler';
+
+import apiKeyModel from './models/apiKeys';
+
 const port = process.env.PORT || 4000;
 
 const cors = require('cors');
@@ -28,6 +31,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(logIncomingToConsole);
 
+
+app.all('*', apiKeyModel.checkAPIKey);
+
+app.use('/', require('./versions/v1/routes/apiKeys'));
 app.use('/', require('./versions'));
 
 app.use(errorHandler);

@@ -1,8 +1,9 @@
-import database from '../db/db';
 import { FieldPacket, RowDataPacket } from 'mysql2/promise';
 import { Response, NextFunction } from 'express';
-import { CustomError } from '../middleware/errorHandler';
 import { v4 as uuid } from 'uuid';
+
+import { CustomError } from '../middleware/errorHandler';
+import database from '../db/db';
 
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
@@ -10,8 +11,6 @@ const saltRounds = 10;
 
 // generate a unique API key
 const apiKey = uuid();
-// save the API key to the .env file
-require('dotenv').config({ path: '.env', env: { API_KEY: apiKey } });
 
 const userModel = {
     /**
@@ -23,7 +22,9 @@ const userModel = {
         const db = await database.getDb();
         try {
             const sql = `CALL get_users();`;
+
             const allUsers: [RowDataPacket[], FieldPacket[]] = await db.query(sql);
+
             return res.status(200).send({ success: true, data: allUsers[0][0] });
         } catch (error: any) {
             next(error);
@@ -40,8 +41,9 @@ const userModel = {
         const db = await database.getDb();
         try {
             const sql = `CALL get_user(?)`;
-            const oneUser: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId]);
-            return res.status(200).send({ success: true, data: oneUser[0][0] });
+            const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId]);
+
+            return res.status(200).send({ success: true, data: dbRes[0][0] });
         } catch (error: any) {
             next(error);
         } finally {
@@ -58,10 +60,7 @@ const userModel = {
             const db = await database.getDb();
             try {
                 userInfo.password = hash;
-
-                console.log('USERMODEL');
-                console.log(apiKey);
-
+                
                 const sql_user = `CALL create_user(?, ?, ?, ?, ?,?)`;
                 const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql_user, [
                     userInfo.firstName,
@@ -97,9 +96,12 @@ const userModel = {
             const user = dbRes[0][0];
 
             if (user.length > 0) {
-                return userModel.comparePasswords(res, user[0], password);
+                return await userModel.comparePasswords(res, user[0], password);
+            } else if (user.length === 0) {
+                return res.status(400).json({ success: false, msg: 'No user found' });
             }
-            return res.status(200).send({ success: true, data: dbRes[0][0] });
+
+            return res.status(400).send({ success: false, msg: 'Missing credentials' });
         } catch (error) {
             next(error);
         }
@@ -130,7 +132,7 @@ const userModel = {
                 return res.status(201).json({
                     data: {
                         info: { user },
-                        token: token,
+                        token,
                         msg: 'User logged in',
                     },
                 });
@@ -263,11 +265,11 @@ const userModel = {
         }
     },
     /**
-     * Function to update a users monthly balance
+     * Function to update a users payment option
      * @async
      * @returns {RowDataPacket} Resultset from the query.
      */
-    updateUserPartialBalance: async function updateUserPartialBalance(
+    updateUserPaymentOption: async function updateUserPaymentOption(
         userId: string,
         balance: number,
         res: Response,
@@ -277,6 +279,10 @@ const userModel = {
         try {
             const sql = `CALL update_user_partial_payment(?, ?)`;
             const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId, balance]);
+
+            if (!balance) {
+                throw Error();
+            }
 
             return res
                 .status(201)

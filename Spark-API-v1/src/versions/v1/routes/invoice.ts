@@ -16,9 +16,11 @@ const router = Router();
  * @returns {void}
  */
 router.get('/invoice', async (req: Request, res: Response, next: NextFunction) => {
-    const allInvoices = await invoiceModel.showAllInvoices(res, next);
-
-    return res.status(200).send({ success: true, data: allInvoices });
+    try {
+        return await invoiceModel.showAllInvoices(res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 /**
@@ -34,10 +36,13 @@ router.get('/invoice', async (req: Request, res: Response, next: NextFunction) =
  * @returns {void}
  */
 router.get('/invoice/:id', async (req: Request, res: Response, next: NextFunction) => {
-    const invoiceId = parseInt(req.params.id);
-    const oneInvoice = await invoiceModel.getOneInvoice(invoiceId, res, next);
+    const invoiceId = req.params.id;
 
-    return res.status(200).send({ success: true, data: oneInvoice });
+    try {
+        return await invoiceModel.getOneInvoice(invoiceId, res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 /**
@@ -55,9 +60,11 @@ router.get('/invoice/:id', async (req: Request, res: Response, next: NextFunctio
 router.get('/invoice/user/:id', async (req: Request, res: Response, next: NextFunction) => {
     const userId = parseInt(req.params.id);
 
-    const userInvoices = await invoiceModel.getInvoicesByUserId(userId, res, next);
-
-    return res.status(200).send({ success: true, data: userInvoices });
+    try {
+        return await invoiceModel.getInvoicesByUserId(userId, res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 /**
@@ -65,7 +72,8 @@ router.get('/invoice/user/:id', async (req: Request, res: Response, next: NextFu
  * /:
  *   get:
  *     summary: Create a invoice for a user
- *     description: Create a invoice for a user with information
+ *     description: Create a invoice for a user
+ *     with information
  *     { Rent_id, User_id, PhoneNumber, Amount, Status }
  * @param {Request}  req  The incoming request.
  * @param {Response} res  The outgoing response.
@@ -81,12 +89,11 @@ router.post('/invoice/user/:id', async (req: Request, res: Response, next: NextF
         status: req.body.status,
     };
 
-    await invoiceModel.createOneInvoice(invoiceInfo, res, next);
-
-    res.status(201).send({
-        success: true,
-        msg: `New Invoice has been created with information for user: ${invoiceInfo.userId}`,
-    });
+    try {
+        return await invoiceModel.createOneInvoice(invoiceInfo, res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 /**
@@ -107,12 +114,11 @@ router.put('/invoice/status/:id', async (req: Request, res: Response, next: Next
         status: req.body.status,
     };
 
-    await invoiceModel.updateInvoiceStatus(invoiceInfo, res, next);
-
-    res.status(201).send({
-        success: true,
-        msg: `Invoice with id ${invoiceInfo.invoiceId} has changed status to ${invoiceInfo.status}`,
-    });
+    try {
+        return await invoiceModel.updateInvoiceStatus(invoiceInfo, res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 /**
@@ -133,12 +139,11 @@ router.put('/invoice/amount/:id', async (req: Request, res: Response, next: Next
         amount: req.body.amount,
     };
 
-    await invoiceModel.updateInvoiceAmount(invoiceInfo, res, next);
-
-    res.status(201).send({
-        success: true,
-        msg: `Invoice with id ${invoiceInfo.invoiceId} has changed amount to ${invoiceInfo.amount}`,
-    });
+    try {
+        return await invoiceModel.updateInvoiceAmount(invoiceInfo, res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 /**
@@ -154,15 +159,16 @@ router.put('/invoice/amount/:id', async (req: Request, res: Response, next: Next
  * @returns {void}
  */
 router.put('/invoice/pay/:id', async (req: Request, res: Response, next: NextFunction) => {
-    let invoiceId = req.params.id;
-    let userId = req.body.id;
+    const invoiceInfo = {
+        id: req.params.id,
+        userId: req.body.userId,
+    };
 
-    await invoiceModel.payOneInvoice(invoiceId, userId, res, next);
-
-    res.status(201).send({
-        success: true,
-        msg: `Invoice with id ${invoiceId} has been paid`,
-    });
+    try {
+        return await invoiceModel.payOneInvoice(invoiceInfo, res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 /**
@@ -178,15 +184,14 @@ router.put('/invoice/pay/:id', async (req: Request, res: Response, next: NextFun
  * @returns {void}
  */
 router.put('/invoice/pay_monthly/:id', async (req: Request, res: Response, next: NextFunction) => {
-    let invoiceId = req.params.id;
-    let expireDate = req.body.expires;
+    const userId = req.params.id;
+    const expireDate = req.body.expires;
 
-    await invoiceModel.payMonthlyInvoice(invoiceId, expireDate, res, next);
-
-    res.status(201).send({
-        success: true,
-        msg: `Monthly invoice with id ${invoiceId} has been paid`,
-    });
+    try {
+        return await invoiceModel.payMonthlyInvoice(userId, expireDate, res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 module.exports = router;

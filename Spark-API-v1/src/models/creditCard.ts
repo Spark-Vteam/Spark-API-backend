@@ -1,6 +1,7 @@
-import database from '../db/db';
 import { FieldPacket, RowDataPacket } from 'mysql2/promise';
 import { Response, NextFunction } from 'express';
+
+import database from '../db/db';
 
 const bcrypt = require('bcryptjs');
 const saltRounds = 10;
@@ -15,7 +16,9 @@ const creditCardModel = {
         const db = await database.getDb();
         try {
             const sql = `CALL get_card(?)`;
+
             const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [cardId]);
+
             return res.status(200).send({ success: true, data: dbRes[0][0] });
         } catch (error: any) {
             next(error);
@@ -32,7 +35,9 @@ const creditCardModel = {
         const db = await database.getDb();
         try {
             const sql = `CALL get_cards_by_user(?)`;
+
             const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId]);
+
             return res.status(200).send({ success: true, data: dbRes[0][0] });
         } catch (error: any) {
             next(error);
@@ -60,6 +65,7 @@ const creditCardModel = {
                 creditCardInfo.lastname = hash;
 
                 const sql_user = `CALL create_creditcard(?, ?, ?, ?, ?, ?)`;
+
                 const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql_user, [
                     userId,
                     creditCardInfo.pan,
@@ -68,6 +74,7 @@ const creditCardModel = {
                     creditCardInfo.lastname,
                     creditCardInfo.truncpan,
                 ]);
+
                 return res.status(200).send({ success: true, msg: creditCardInfo });
             } catch (error: any) {
                 next(error);
@@ -85,7 +92,9 @@ const creditCardModel = {
         const db = await database.getDb();
         try {
             const sql = `CALL delete_card(?)`;
+
             const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [cardId]);
+
             return res.status(200).send({ success: true, msg: `Card with id ${cardId} has been deleted` });
         } catch (error: any) {
             next(error);

@@ -25,14 +25,16 @@ interface AdminInfo {
  * @returns {void}
  */
 router.get('/admin', async (req: Request, res: Response, next: NextFunction) => {
-    const allAdmins = await adminModel.showAllAdmins(res, next);
-
-    return res.status(200).send({ success: true, data: allAdmins });
+    try {
+        return await adminModel.showAllAdmins(res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 /**
  * Admin ROUTE
- *  /admin/mail/:
+ *  /admin/login/:
  *   post:
  *     summary: Admin login
  *     description: Manual login for admin
@@ -43,7 +45,7 @@ router.get('/admin', async (req: Request, res: Response, next: NextFunction) => 
  * @returns {Response}
  */
 router.post('/admin/login', async (req: Request, res: Response, next: NextFunction) => {
-    const adminInfo = req.body;    
+    const adminInfo = req.body;
     try {
         return await adminModel.adminLogin(adminInfo, res, next);
     } catch (error) {
@@ -64,9 +66,12 @@ router.post('/admin/login', async (req: Request, res: Response, next: NextFuncti
  * @returns {Response}
  */
 router.get('/admin/:id', async (req: Request, res: Response, next: NextFunction) => {
-    const adminId = parseInt(req.params.id);
-    const oneAdmin = await adminModel.getOneAdmin(adminId, res, next);
-    return res.status(200).send({ success: true, data: oneAdmin });
+    const adminId = req.params.id;
+    try {
+        return await adminModel.getOneAdmin(adminId, res, next);
+    } catch (error) {
+        next(error);
+    }
 });
 
 /**
@@ -83,14 +88,7 @@ router.get('/admin/:id', async (req: Request, res: Response, next: NextFunction)
  * @returns {Response}
  */
 router.post('/admin', async (req: Request, res: Response, next: NextFunction) => {
-    const adminInfo = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        phoneNumber: req.body.phoneNumber,
-        emailAdress: req.body.emailAdress,
-        authority: req.body.authority,
-        password: req.body.password,
-    };
+    const adminInfo = req.body;
 
     try {
         return await adminModel.createOneAdmin(adminInfo, res, next);

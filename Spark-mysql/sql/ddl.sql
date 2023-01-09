@@ -878,14 +878,27 @@ CREATE PROCEDURE create_rent(
   a_Users_id INT,
   a_Bikes_id INT
 )
-	BEGIN
-    DECLARE var_bike_position VARCHAR(45);
+BEGIN
+  DECLARE var_bike_position VARCHAR(45);
+  DECLARE var_rent_exists INT DEFAULT 0;
+  
+  SELECT COUNT(*) INTO var_rent_exists
+  FROM Rents
+  WHERE Users_id = a_Users_id AND Bikes_id = a_Bikes_id AND Status = 10;
+
+  IF var_rent_exists = 0 THEN
     SET var_bike_position = (SELECT position FROM Bikes WHERE id = a_Bikes_id);
-		INSERT INTO Rents (Users_id, Bikes_id, Start, StartTimestamp, Status)
+
+    INSERT INTO Rents (Users_id, Bikes_id, Start, StartTimestamp, Status)
     VALUES (a_Users_id, a_Bikes_id, var_bike_position, CURRENT_TIMESTAMP(), 10);
-	END
+  ELSE
+    -- Raise error if a rent with the same userId and bikeId and a status of 10 already exists
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'A rent with the same userId and bikeId and a status of 10 already exists';
+  END IF;
+END
 ;;
 DELIMITER ;
+
 
 --
 -- Procedure to Update Rents
@@ -933,6 +946,7 @@ CREATE PROCEDURE get_active_rents_by_user(
 	END
 ;;
 DELIMITER ;
+
 --
 -- Procedure to fetch all Bikeslog from a specific rent
 --
@@ -1264,7 +1278,7 @@ CREATE PROCEDURE pay_invoice(
         END;
 
     START TRANSACTION;
-      SET var_sum = (SELECT Amount FROM Invoices WHERE id = a_id);
+      SET var_sum = IFNULL((SELECT Amount FROM Invoices WHERE id = a_id),0);
 
       UPDATE Users
       SET Balance = Balance - var_sum
@@ -1297,7 +1311,7 @@ CREATE PROCEDURE pay_monthly_invoice(
         END;
 
     START TRANSACTION;
-      SET var_sum = (SELECT SUM(Amount) FROM Invoices WHERE Users_id = a_Users_id AND Expires = a_Expires);
+      SET var_sum = IFNULL((SELECT SUM(Amount) FROM Invoices WHERE Users_id = a_Users_id AND Expires = a_Expires), 0);
 
       UPDATE Users
       SET Balance = Balance - var_sum

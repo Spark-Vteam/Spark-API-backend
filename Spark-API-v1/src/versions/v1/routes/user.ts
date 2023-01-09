@@ -52,7 +52,6 @@ router.get('/user/:id', async (req: Request, res: Response, next: NextFunction) 
         try {
             return await userModel.getOneUser(userId, res, next);
         } catch (error) {
-            // Pass the error to the error handler middleware
             next(error);
         }
     }
@@ -74,23 +73,15 @@ router.get('/user/:id', async (req: Request, res: Response, next: NextFunction) 
 router.post('/user', async (req: Request, res: Response, next: NextFunction) => {
     const userInfo: UserInfo = req.body;
 
-    // Check if all keys in the userInfo object have truthy values except oauth
     const requiredKeys = Object.keys(userInfo).filter((key) => key !== 'oauth');
     const allRequiredKeysHaveValues = requiredKeys.every((key) => Boolean(userInfo[key]));
 
-    if (allRequiredKeysHaveValues) {
-        try {
+    try {
+        if (allRequiredKeysHaveValues) {
             return await userModel.createOneUser(userInfo, res, next);
-        } catch (error) {
-            // Pass the error to the error handler middleware
-            next(error);
         }
-    } else {
-        return res.status(400).json({
-            errors: {
-                message: 'Some information is missing, please check your form and try again.',
-            },
-        });
+    } catch (error) {
+        next(error);
     }
 });
 
@@ -131,13 +122,7 @@ router.post('/user/login', async (req: Request, res: Response, next: NextFunctio
 router.put('/user/:id', async (req: Request, res: Response, next: NextFunction) => {
     const userId = req.params.id;
 
-    const userInfo = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        phoneNumber: req.body.phoneNumber,
-        emailAdress: req.body.emailAdress,
-        oauth: req.body.oauth,
-    };
+    const userInfo = req.body;
 
     try {
         const _newUserInfo = {
@@ -150,7 +135,6 @@ router.put('/user/:id', async (req: Request, res: Response, next: NextFunction) 
 
         return res.status(200).json({ success: true, msg: `User with id ${userId} was updated` });
     } catch (error) {
-        // Pass the error to the error handler middleware
         next(error);
     }
 });
@@ -174,7 +158,6 @@ router.put('/user/balance/:id', async (req: Request, res: Response, next: NextFu
     try {
         return await userModel.updateUserBalance(userID, balance, res, next);
     } catch (error) {
-        // Pass the error to the error handler middleware
         next(error);
     }
 });
@@ -196,9 +179,8 @@ router.put('/user/partial_balance/:id', async (req: Request, res: Response, next
     const userID = req.params.id;
 
     try {
-        return await userModel.updateUserPartialBalance(userID, balance, res, next);
+        return await userModel.updateUserPaymentOption(userID, balance, res, next);
     } catch (error) {
-        // Pass the error to the error handler middleware
         next(error);
     }
 });

@@ -13,8 +13,8 @@ interface apiKeyInfo {
  * apiKey ROUTE
  * /api_key:
  *   post:
- *     summary: Display list of users with apiKeys
- *     description: Render all users with apiKeys from database
+ *     summary: Create a ApiKey for a user
+ *     description: Create an ApiKey for a user
  * @param {Request}  req  The incoming request.
  * @param {Response} res  The outgoing response.
  * @param {Function} next Next to call in chain of middleware.
@@ -30,29 +30,6 @@ router.post('/apiKey', async (req: Request, res: Response, next: NextFunction) =
     try {
         return await apiKeyModel.createOneApiKey(apiKeyInfo, res, next);
     } catch (error) {
-        // Pass the error to the error handler middleware
-        next(error);
-    }
-});
-
-/**
- * apiKey ROUTE
- * /api_key/key:
- *   get:
- *     summary: Get apiKey with key
- *     description: Render apiKeys with key from database
- * @param {Request}  req  The incoming request.
- * @param {Response} res  The outgoing response.
- * @param {Function} next Next to call in chain of middleware.
- *
- * @returns {void}
- */
-router.get('/apiKey/key', async (req: Request, res: Response, next: NextFunction) => {
-    const apiKey = req.body.key;
-    try {
-        return await apiKeyModel.getKeyByKey(apiKey, res, next);
-    } catch (error) {
-        // Pass the error to the error handler middleware
         next(error);
     }
 });
@@ -73,7 +50,6 @@ router.get('/apiKey/owner', async (req: Request, res: Response, next: NextFuncti
     try {
         return await apiKeyModel.getKeyOwners(res, next);
     } catch (error) {
-        // Pass the error to the error handler middleware
         next(error);
     }
 });
@@ -91,11 +67,10 @@ router.get('/apiKey/owner', async (req: Request, res: Response, next: NextFuncti
  * @returns {void}
  */
 router.delete('/apiKey/:id', async (req: Request, res: Response, next: NextFunction) => {
-    let id = req.params.id;
+    const id = req.params.id;
     try {
         return await apiKeyModel.deleteKeyById(id, res, next);
     } catch (error) {
-        // Pass the error to the error handler middleware
         next(error);
     }
 });
