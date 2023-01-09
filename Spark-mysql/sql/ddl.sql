@@ -1182,11 +1182,13 @@ DROP PROCEDURE IF EXISTS pay_invoice;
 DELIMITER ;;
 CREATE PROCEDURE pay_invoice(
   a_id INT,
-  a_Users_id INT
+  a_Users_id INT,
+  a_Method VARCHAR(10) -- Payment method, either 'card' or 'balance'
 )
   BEGIN
 
     DECLARE var_sum INT;
+    DECLARE var_card INT;
 
     DECLARE EXIT HANDLER FOR SQLEXCEPTION 
         BEGIN
@@ -1196,10 +1198,16 @@ CREATE PROCEDURE pay_invoice(
 
     START TRANSACTION;
       SET var_sum = (SELECT Amount FROM Invoices WHERE id = a_id);
-
-      UPDATE Users
-      SET Balance = Balance - var_sum
-      WHERE id = a_Users_id;
+      IF a_Method = "balance" THEN
+        UPDATE Users
+          SET Balance = Balance - var_sum
+          WHERE id = a_Users_id;
+      ELSEIF a_Method = "card" THEN
+        -- Add third party payment service
+        UPDATE Users
+          SET Balance = Balance - 0
+          WHERE id = a_Users_id;
+      END IF;
 
       CALL update_invoice_status(a_id, 20);
 

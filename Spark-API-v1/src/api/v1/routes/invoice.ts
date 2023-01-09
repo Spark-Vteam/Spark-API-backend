@@ -156,8 +156,9 @@ router.put('/invoice/amount/:id', async (req: Request, res: Response, next: Next
 router.put('/invoice/pay/:id', async (req: Request, res: Response, next: NextFunction) => {
     let invoiceId = req.params.id;
     let userId = req.body.id;
+    let method = req.body.method;
 
-    await invoiceModel.payOneInvoice(invoiceId, userId, res, next);
+    await invoiceModel.payOneInvoice(invoiceId, userId, method,  res, next);
 
     res.status(201).send({
         success: true,
@@ -180,7 +181,7 @@ router.put('/invoice/pay/:id', async (req: Request, res: Response, next: NextFun
 router.put('/invoice/pay_monthly/:id', async (req: Request, res: Response, next: NextFunction) => {
     let userId = req.params.id;
     let expireDate = req.body.expires;
-    let method = req.body.expires;
+    let method = req.body.method;
 
     await invoiceModel.payMonthlyInvoice(userId, expireDate, method, res, next);
 
