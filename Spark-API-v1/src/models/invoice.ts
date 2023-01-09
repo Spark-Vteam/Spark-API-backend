@@ -150,6 +150,14 @@ const invoiceModel = {
      * @async
      * @returns {RowDataPacket} Resultset from the query.
      */
+<<<<<<< HEAD
+    payOneInvoice: async function payOneInvoice(invoiceId: string, userId: string, method: string, res: Response, next: NextFunction) {
+        const db = await database.getDb();
+        try {
+            const sql = `CALL pay_invoice(?, ?, ?)`;
+            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [invoiceId, userId, method]);
+            return res[0][0];
+=======
     payOneInvoice: async function payOneInvoice(invoiceInfo: any, res: Response, next: NextFunction) {
         const db = await database.getDb();
         try {
@@ -165,6 +173,7 @@ const invoiceModel = {
                 success: true,
                 msg: `Invoice with id ${invoiceInfo.id} has been paid`,
             });
+>>>>>>> dbHashing
         } catch (error: any) {
             next(error);
         } finally {
@@ -179,11 +188,17 @@ const invoiceModel = {
     payMonthlyInvoice: async function payMonthlyInvoice(
         userId: string,
         expireDate: string,
+        method: string,
         res: Response,
         next: NextFunction
     ) {
         const db = await database.getDb();
         try {
+<<<<<<< HEAD
+            const sql = `CALL pay_monthly_invoice(?, ?, ?)`;
+            const res: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId, expireDate, method]);
+            return res[0][0];
+=======
             const sql = `CALL pay_monthly_invoice(?, ?)`;
 
             const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [userId, expireDate]);
@@ -200,6 +215,7 @@ const invoiceModel = {
                 data: { dbRes },
                 // msg: `Monthly invoice for user with id ${userId} has been paid`,
             });
+>>>>>>> dbHashing
         } catch (error: any) {
             next(error);
         } finally {

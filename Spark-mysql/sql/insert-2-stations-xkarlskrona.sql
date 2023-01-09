@@ -1,4 +1,4 @@
-USE mydb;
+USE spark;
 SET NAMES 'utf8';
 INSERT INTO Stations
     ( Name, City, Position )

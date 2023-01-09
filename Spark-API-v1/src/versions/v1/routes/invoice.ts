@@ -159,6 +159,18 @@ router.put('/invoice/amount/:id', async (req: Request, res: Response, next: Next
  * @returns {void}
  */
 router.put('/invoice/pay/:id', async (req: Request, res: Response, next: NextFunction) => {
+<<<<<<< HEAD:Spark-API-v1/src/api/v1/routes/invoice.ts
+    let invoiceId = req.params.id;
+    let userId = req.body.id;
+    let method = req.body.method;
+
+    await invoiceModel.payOneInvoice(invoiceId, userId, method,  res, next);
+
+    res.status(201).send({
+        success: true,
+        msg: `Invoice with id ${invoiceId} has been paid`,
+    });
+=======
     const invoiceInfo = {
         id: req.params.id,
         userId: req.body.userId,
@@ -169,6 +181,7 @@ router.put('/invoice/pay/:id', async (req: Request, res: Response, next: NextFun
     } catch (error) {
         next(error);
     }
+>>>>>>> dbHashing:Spark-API-v1/src/versions/v1/routes/invoice.ts
 });
 
 /**
@@ -184,6 +197,18 @@ router.put('/invoice/pay/:id', async (req: Request, res: Response, next: NextFun
  * @returns {void}
  */
 router.put('/invoice/pay_monthly/:id', async (req: Request, res: Response, next: NextFunction) => {
+<<<<<<< HEAD:Spark-API-v1/src/api/v1/routes/invoice.ts
+    let userId = req.params.id;
+    let expireDate = req.body.expires;
+    let method = req.body.method;
+
+    await invoiceModel.payMonthlyInvoice(userId, expireDate, method, res, next);
+
+    res.status(201).send({
+        success: true,
+        msg: `Monthly invoice for user id ${userId} has been paid`,
+    });
+=======
     const userId = req.params.id;
     const expireDate = req.body.expires;
 
@@ -192,6 +217,7 @@ router.put('/invoice/pay_monthly/:id', async (req: Request, res: Response, next:
     } catch (error) {
         next(error);
     }
+>>>>>>> dbHashing:Spark-API-v1/src/versions/v1/routes/invoice.ts
 });
 
 module.exports = router;
