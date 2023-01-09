@@ -13,22 +13,18 @@ const apiKeyModel = {
      * @returns {RowDataPacket} Resultset from the query.
      */
     checkAPIKey: async function checkAPIKey(req: Request, res: Response, next: NextFunction) {
-        console.log('Check API_Key');
-
-        const apiKey = '67d077df-124d-4086-8b4b-4f0385d7f2ef';
-        const keyInDb: any = await apiKeyModel.getKeyByKey(apiKey, res, next);
-        console.log('keyInDb');
-        console.log(keyInDb);
-
-        if (keyInDb[0].hasOwnProperty('Email')) {
+        if (req.path === '/apiKey') {
             return next();
         }
-        return res.status(401).json({
-            errors: {
-                status: 401,
-                msg: 'Invalid API Key',
-            },
-        });
+
+        const apiKey = req.get('key');
+        
+        const keyInDb: any = await apiKeyModel.getKeyByKey(apiKey, res, next);
+        if (keyInDb !== undefined && keyInDb[0].hasOwnProperty('Email')) {
+            return next();
+        }
+
+        return next(new CustomError(false, 'No valid API Key'));
     },
     /**
      * Function to get a key with a key
@@ -39,22 +35,12 @@ const apiKeyModel = {
         const db = await database.getDb();
 
         try {
-            console.log('getKeyByKey');
-            console.log(apiKey);
-
             const sql = `CALL get_key_by_key(?)`;
 
             const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [apiKey]);
-            console.log('dbRes');
-            console.log(dbRes[0][0].length);
 
             if (dbRes[0][0].length == 0) {
-                return res.status(401).json({
-                    errors: {
-                        status: 401,
-                        msg: 'No API Key found in database',
-                    },
-                });
+                return next(new CustomError(false, 'No valid API Key in database'));
             }
             return dbRes[0][0];
             // return res.status(200).send({ success: true, data: dbRes[0][0] });

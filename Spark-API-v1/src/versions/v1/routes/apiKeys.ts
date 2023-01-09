@@ -36,27 +36,6 @@ router.post('/apiKey', async (req: Request, res: Response, next: NextFunction) =
 
 /**
  * apiKey ROUTE
- * /api_key/key:
- *   get:
- *     summary: Get apiKey with key
- *     description: Render apiKeys with key from database
- * @param {Request}  req  The incoming request.
- * @param {Response} res  The outgoing response.
- * @param {Function} next Next to call in chain of middleware.
- *
- * @returns {void}
- */
-router.get('/apiKey/key', async (req: Request, res: Response, next: NextFunction) => {
-    const apiKey = req.body.key;
-    try {
-        return await apiKeyModel.getKeyByKey(apiKey, res, next);
-    } catch (error) {
-        next(error);
-    }
-});
-
-/**
- * apiKey ROUTE
  * /api_key/owner:
  *   get:
  *     summary: Get all keys owner data
