@@ -1613,7 +1613,7 @@ DELIMITER ;;
 CREATE PROCEDURE create_key(
   a_Email VARCHAR(45),
   a_Organization VARCHAR(45),
-  a_ApiKey TEXT
+  a_Key TEXT
 )
   BEGIN
     INSERT INTO ApiKeys (Email, Organization, ApiKey)
