@@ -34,5 +34,5 @@
         "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
     },
     "exclude": ["node_modules", "dist", "coverage"],
-    "include": ["src", "src/versions"]
+    "include": ["src", "src/versions", "src/models/user.ts", "test/pricing.spec.ts"]
 }

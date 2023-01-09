@@ -62,7 +62,7 @@ const userModel = {
             const db = await database.getDb();
             try {
                 userInfo.password = hash;
-
+                
                 const sql_user = `CALL create_user(?, ?, ?, ?, ?,?)`;
                 const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql_user, [
                     userInfo.firstName,
