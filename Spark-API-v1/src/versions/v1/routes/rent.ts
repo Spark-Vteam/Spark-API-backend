@@ -130,7 +130,7 @@ router.get('/rent/user/:id', async (req: Request, res: Response, next: NextFunct
  *
  * @returns {Response}
  */
-router.get('/rent/create/:id', async (req: Request, res: Response, next: NextFunction) => {
+router.post('/rent/create/:id', async (req: Request, res: Response, next: NextFunction) => {
     const bikeId = req.body.bikeId;
     const userId = req.params.id;
     try {
