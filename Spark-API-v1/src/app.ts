@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(logIncomingToConsole);
 
 
-app.all('*', apiKeyModel.checkAPIKey);
+// app.all('*', apiKeyModel.checkAPIKey);
 
 app.use('/', require('./versions/v1/routes/apiKeys'));
 app.use('/', require('./versions'));

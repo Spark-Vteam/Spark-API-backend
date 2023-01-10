@@ -122,6 +122,7 @@ CREATE TABLE IF NOT EXISTS `spark`.`Rents` (
   `DestinationTimestamp` TIMESTAMP NULL,
   `Price` INT NULL,
   `Status` TINYINT NOT NULL,
+  `Bikes_status_start`TINYINT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Rents_Users1_idx` (`Users_id` ASC) VISIBLE,
   INDEX `fk_Rents_Bikes1_idx` (`Bikes_id` ASC) VISIBLE,
@@ -843,6 +844,9 @@ CREATE PROCEDURE create_rent(
 BEGIN
   DECLARE var_bike_position VARCHAR(45);
   DECLARE var_rent_exists INT DEFAULT 0;
+  DECLARE var_bike_status_start INT;
+
+  SET var_bike_status_start = (SELECT Status FROM Bikes WHERE id = a_Bikes_id);
   
   SELECT COUNT(*) INTO var_rent_exists
   FROM Rents
@@ -851,8 +855,8 @@ BEGIN
   IF var_rent_exists = 0 THEN
     SET var_bike_position = (SELECT position FROM Bikes WHERE id = a_Bikes_id);
 
-    INSERT INTO Rents (Users_id, Bikes_id, Start, StartTimestamp, Status)
-    VALUES (a_Users_id, a_Bikes_id, var_bike_position, CURRENT_TIMESTAMP(), 10);
+    INSERT INTO Rents (Users_id, Bikes_id, Start, StartTimestamp, Status, Bikes_status_start)
+    VALUES (a_Users_id, a_Bikes_id, var_bike_position, CURRENT_TIMESTAMP(), 10, var_bike_status_start);
   ELSE
     -- Raise error if a rent with the same userId and bikeId and a status of 10 already exists
     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'A rent with the same userId and bikeId and a status of 10 already exists';
@@ -875,16 +879,20 @@ CREATE PROCEDURE update_rent(
     DECLARE var_rent_start VARCHAR(45);
     DECLARE var_bike_position VARCHAR(45);
     DECLARE var_duration SMALLINT;
-    DECLARE var_status TINYINT(45);
-    DECLARE var_price INT(45);
+    DECLARE var_status TINYINT;
+    DECLARE var_price INT;
+    DECLARE var_bike_status_start INT;
+    DECLARE var_bike_status_end INT;
     
     SET var_bike_id = (SELECT Bikes_id FROM Rents WHERE id = a_Rents_id);
     SET var_rent_start_timestamp = (SELECT StartTimestamp FROM Rents WHERE id = a_Rents_id);
     SET var_rent_start = (SELECT Start FROM Rents WHERE id = a_Rents_id);
     SET var_bike_position = (SELECT position FROM Bikes WHERE id = var_bike_id);
     SET var_duration = Rents_Duration(var_rent_start_timestamp, CURRENT_TIMESTAMP());
+    SET var_bike_status_start = (SELECT Bikes_status_start FROM Rents WHERE id = a_Rents_id);
+    SET var_bike_status_end = (SELECT Status FROM Bikes WHERE id = var_bike_id);
     SET var_status = Rents_Status(var_duration, var_rent_start, var_bike_position);
-    SET var_price = Rents_Price(var_status, var_duration);
+    SET var_price = Rents_Price(var_status, var_duration, var_bike_status_start, var_bike_status_end);
 
 
 		UPDATE Rents
@@ -2062,21 +2070,65 @@ CREATE FUNCTION Rents_Status(
 DELIMITER ;
 
 --
+-- Calculate if a fee should be discounted
+--
+DROP FUNCTION IF EXISTS Rents_Price_Discount;
+DELIMITER ;;
+CREATE FUNCTION Rents_Price_Discount(
+  status_1 INT,
+  status_2 INT,
+  price INT,
+  discount INT,
+  bike_status INT
+)
+RETURNS SMALLINT
+DETERMINISTIC
+  BEGIN
+    IF bike_status = status_1 OR bike_status = status_2 THEN
+      RETURN price = price - (price * discount);
+    END IF;
+    RETURN price;
+  END
+;;
+DELIMITER ;
+
+--
 -- Calculate price of finished Rent
 --
 DROP FUNCTION IF EXISTS Rents_Price;
 DELIMITER ;;
 CREATE FUNCTION Rents_Price(
   Status TINYINT,
-  Duration SMALLINT
+  Duration SMALLINT,
+  bike_status_start INT,
+  bike_status_end INT
     )
     RETURNS SMALLINT
     DETERMINISTIC
+    
     BEGIN
+      DECLARE var_start_fee INT;
+      DECLARE var_minute_fee INT;
+      DECLARE var_parking_fee INT;
+      DECLARE var_start_free_discount INT;
+      DECLARE var_end_parking_discount INT;
+      DECLARE var_end_charging_discount INT;
+      DECLARE start_price INT;
+      DECLARE parking_price INT;
+
+      SELECT Start, Minute, Parking, DiscountStartFree, DiscountEndParkingZone, DiscountEndCharging
+      INTO var_start_fee, var_minute_fee, var_parking_fee, var_start_free_discount, var_end_parking_discount, var_end_charging_discount
+      FROM Pricings
+      WHERE id = 1;
+
+      SET start_price = Rents_Price_Discount(10, 20, var_start_fee, var_start_free_discount, bike_status_start);
+      SET parking_price = Rents_Price_Discount(11, 25, var_parking_fee, var_end_parking_discount, bike_status_end);
+
       IF Status = 30 THEN
         RETURN 0;
       END IF;
-          RETURN (3 * Duration + 15);
+
+      RETURN (start_price + (var_minute_fee * Duration) + parking_price);
     END
 ;;
 DELIMITER ;
