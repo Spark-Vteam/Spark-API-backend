@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [ "main" ]
 
+defaults:
+  run:
+    working-directory: Spark-API-v1
+
+
 jobs:
   build:
 
@@ -24,5 +29,4 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - run: cd Spark-API-v1/   
-    - run: ls -al
+    - run: npm install
