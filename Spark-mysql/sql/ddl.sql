@@ -1304,7 +1304,7 @@ CREATE PROCEDURE pay_monthly_invoice(
 
       UPDATE Invoices
         SET Status = 20, Paid = CURRENT_TIMESTAMP()
-        WHERE Users_id = a_Users_id AND Expires = a_Expires;
+        WHERE Users_id = a_Users_id AND Expires = a_Expires AND Status = 10;
     COMMIT;
   END
 ;;
