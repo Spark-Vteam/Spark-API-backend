@@ -186,11 +186,11 @@ router.put('/invoice/pay/:id', async (req: Request, res: Response, next: NextFun
  */
 router.put('/invoice/pay_monthly/:id', async (req: Request, res: Response, next: NextFunction) => {
     const userId = req.params.id;
-    const method = req.body.method;
     const expireDate = req.body.expires;
+    const method = req.body.method;
 
     try {
-        return await invoiceModel.payMonthlyInvoice(userId, method, expireDate, res, next);
+        return await invoiceModel.payMonthlyInvoice(userId, expireDate, method, res, next);
     } catch (error) {
         next(error);
     }
