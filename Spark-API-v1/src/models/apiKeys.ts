@@ -18,7 +18,7 @@ const apiKeyModel = {
         }
 
         const apiKey: any = req.get('key');
-
+        console.log(req.path);
         const keyInDb: any = await apiKeyModel.getKeyByKey(apiKey, res, next);
         if (keyInDb !== undefined && keyInDb[0].hasOwnProperty('Email')) {
             return next();
@@ -88,7 +88,7 @@ const apiKeyModel = {
             ]);
             return res
                 .status(200)
-                .send({ success: true, msg: `Api key created ${apiKey} for ${apiKeyInfo.emailAdress}` });
+                .send({ success: true, msg: `Api key created for ${apiKeyInfo.emailAdress}`, apiKey: `${apiKey}` });
         } catch (error: any) {
             next(error);
         } finally {

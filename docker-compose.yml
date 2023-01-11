@@ -9,11 +9,14 @@ services:
       dockerfile: Dockerfile
     container_name: mysql-db
     image: spark-backend-db:v1.0
+    environment:
+      LANG: C.UTF-8 
     restart: always
     ports:
       - 3308:3306
     networks:
       dbwebb:
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 
   server:
     build:
