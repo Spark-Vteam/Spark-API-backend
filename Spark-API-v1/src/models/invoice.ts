@@ -163,7 +163,7 @@ const invoiceModel = {
             const dbRes: [RowDataPacket[], FieldPacket[]] = await db.query(sql, [
                 invoiceInfo.id,
                 invoiceInfo.userId,
-                invoiceInfo.metod,
+                invoiceInfo.method,
             ]);
 
             return res.status(201).send({
