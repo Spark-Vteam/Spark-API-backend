@@ -850,7 +850,7 @@ BEGIN
   
   SELECT COUNT(*) INTO var_rent_exists
   FROM Rents
-  WHERE Users_id = a_Users_id AND Bikes_id = a_Bikes_id AND Status = 10;
+  WHERE Bikes_id = a_Bikes_id AND Status = 10;
 
   IF var_rent_exists = 0 THEN
     SET var_bike_position = (SELECT position FROM Bikes WHERE id = a_Bikes_id);
@@ -859,7 +859,7 @@ BEGIN
     VALUES (a_Users_id, a_Bikes_id, var_bike_position, CURRENT_TIMESTAMP(), 10, var_bike_status_start);
   ELSE
     -- Raise error if a rent with the same userId and bikeId and a status of 10 already exists
-    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'A rent with the same userId and bikeId and a status of 10 already exists';
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'A rent with bikeId and a status of 10 already exists';
   END IF;
 END
 ;;
